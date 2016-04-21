@@ -20,19 +20,32 @@ class FuncSign(object):
         sparams = str(tuple(sparams))
         sparams = sparams.replace("'", "")
         s = '%s %s%s' % (self.ret_type, self.name, sparams)
+        s = s.replace(',)', ')')
         return s
 
 class FuncDefVisitor(pycparser.c_ast.NodeVisitor):
     def __init__(self):
         self.functions = []
 
+    def _parse_param_signature(self, p):
+        name = getattr(p.type, 'declname', '')
+
+        suffix = ''
+        t = p.type.type
+        while not hasattr(t, 'names'):
+            t = t.type
+            suffix += '*'
+        typ = t.names[0]
+        return (name, typ+suffix)
+
     def visit_FuncDef(self, node):
         ret_type = node.decl.type.type.type.names[0]
         if len(node.decl.storage) == 0:
             fs = FuncSign(node.decl.name, ret_type)
             for p in node.param_decls:
-                fs.param_names.append(p.type.declname)
-                fs.param_types.append(p.type.type.names[0])
+                (name, typ) = self._parse_param_signature(p)
+                fs.param_names.append(name)
+                fs.param_types.append(typ)
             self.functions.append(fs)
 
 def fetch_func_decl(filename):
@@ -52,7 +65,11 @@ src_files.append(join('ncephes', 'cephes', 'cmath', 'isnan.c'))
 
 ffi = FFI()
 
-fs = fetch_func_decl(join('ncephes', 'cephes', 'cprob', 'incbet.c'))
+fs = []
+for fp in glob.glob(join('ncephes', 'cephes', 'cprob', '*.c')):
+    if not fp.endswith('mtherr.c'):
+        fs.extend(fetch_func_decl(fp))
+
 ffi.set_source('ncephes._cprob_ffi', ';'.join(fs)+';',
         include_dirs=include_dirs,
         sources=src_files,

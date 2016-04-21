@@ -9,7 +9,6 @@ page = urlopen(url).read()
 
 c = re.compile(r'"([^"]+\.tgz)"')
 pkgs = re.findall(c, page)
-pkgs = [pkg for pkg in pkgs if pkg != '128bit.tgz']
 
 curdir = os.path.abspath(os.path.dirname(__file__))
 
