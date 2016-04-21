@@ -16,6 +16,8 @@ def setup_package():
     os.chdir(src_path)
     sys.path.insert(0, src_path)
 
+    requires = ['numba', 'cffi>=1.0.0']
+
     metadata = dict(
         name=PKG_NAME,
         version=VERSION,
@@ -26,9 +28,9 @@ def setup_package():
         test_suite='setup.get_test_suite',
         packages=find_packages(),
         zip_safe=True,
-        setup_requires=["cffi>=1.0.0"],
+        setup_requires=requires,
         cffi_modules=["ncephes/cprob_build.py:ffi"],
-        install_requires=["cffi>=1.0.0"],
+        install_requires=requires,
     )
 
     try:
