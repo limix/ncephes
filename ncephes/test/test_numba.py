@@ -2,11 +2,11 @@ from ncephes import cprob
 from numba import jit
 import unittest
 
-@jit
+@jit(nogil=True)
 def incbet(a, b, x):
     return cprob.incbet(a, b, x)
 
-@jit
+@jit(nogil=True)
 def erf(x):
     return cprob.erf(x)
 
