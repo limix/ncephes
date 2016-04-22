@@ -1,0 +1,38 @@
+--- ncephes/cephes/cprob/incbet.c	2016-04-22 20:32:28.000000000 +0100
++++ ncephes/cephes/cprob/incbet.new.c	2016-04-22 20:39:47.000000000 +0100
+@@ -69,7 +69,7 @@
+ 
+ extern double MACHEP, MINLOG, MAXLOG;
+ #ifdef ANSIPROT
+-extern double gamma ( double );
++extern double cephes_gamma ( double );
+ extern double lgam ( double );
+ extern double exp ( double );
+ extern double log ( double );
+@@ -79,7 +79,7 @@
+ static double incbd(double, double, double);
+ static double pseries(double, double, double);
+ #else
+-double gamma(), lgam(), exp(), log(), pow(), fabs();
++double cephes_gamma(), lgam(), exp(), log(), pow(), fabs();
+ static double incbcf(), incbd(), pseries();
+ #endif
+ 
+@@ -158,7 +158,7 @@
+ 	t *= pow(x,a);
+ 	t /= a;
+ 	t *= w;
+-	t *= gamma(a+b) / (gamma(a) * gamma(b));
++	t *= cephes_gamma(a+b) / (cephes_gamma(a) * cephes_gamma(b));
+ 	goto done;
+ 	}
+ /* Resort to logarithms.  */
+@@ -394,7 +394,7 @@
+ u = a * log(x);
+ if( (a+b) < MAXGAM && fabs(u) < MAXLOG )
+ 	{
+-	t = gamma(a+b)/(gamma(a)*gamma(b));
++	t = cephes_gamma(a+b)/(cephes_gamma(a)*cephes_gamma(b));
+ 	s = s * t * pow(x,a);
+ 	}
+ else

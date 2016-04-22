@@ -66,6 +66,8 @@ def convert_old_style_proto():
 def apply_patch():
     cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.patch"
     subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/cprob/incbet.c ncephes/cephes/incbet.patch"
+    subprocess.check_call(cmd, shell=True)
 
 def update():
     src_path = os.path.dirname(os.path.abspath(sys.argv[0]))
