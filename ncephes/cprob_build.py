@@ -70,7 +70,8 @@ for fp in glob.glob(join('ncephes', 'cephes', 'cprob', '*.c')):
     if not fp.endswith('mtherr.c'):
         fs.extend(fetch_func_decl(fp))
 
-ffi.set_source('ncephes._cprob_ffi', ';'.join(fs)+';',
+ffi.set_source('ncephes._cprob_ffi',
+        ';\n'.join(['extern ' + s for s in fs])+';',
         include_dirs=include_dirs,
         sources=src_files,
         libraries=[])

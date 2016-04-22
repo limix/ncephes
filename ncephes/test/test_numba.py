@@ -2,9 +2,14 @@ from ncephes import cprob
 from numba import jit
 import unittest
 
-@jit(nogil=True)
-def incbet(a, b, x):
-    return cprob.incbet(a, b, x)
+numba_incbet = cprob.incbet
+
+@jit(nogil=True, nopython=True)
+def _incbet(a, b, x):
+    # return 0.657
+    # return cprob.incbet(a, b, x)
+    # return cprob.numba_incbet(a, b, x)
+    return numba_incbet(a, b, x)
 
 @jit(nogil=True)
 def erf(x):
@@ -12,7 +17,7 @@ def erf(x):
 
 class TestNumba(unittest.TestCase):
     def test_incbet(self):
-        self.assertAlmostEqual(incbet(1., 3., 0.3), 0.657)
+        self.assertAlmostEqual(_incbet(1., 3., 0.3), 0.657)
 
     def test_erf(self):
         self.assertAlmostEqual(cprob.erf(1.3), 0.9340079449406524)
