@@ -45,7 +45,7 @@
  * pow domain      x<0 and y noninteger  0.0
  *
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1995, 2000 by Stephen L. Moshier
@@ -363,8 +363,8 @@ extern double NAN;
 extern double NEGZERO;
 #endif
 
-double pow( x, y )
-double x, y;
+double 
+pow (double x, double y)
 {
 double w, z, W, Wa, Wb, ya, yb, u;
 /* double F, Fa, Fb, G, Ga, Gb, H, Ha, Hb */
@@ -744,8 +744,8 @@ return( z );
 
 
 /* Find a multiple of 1/16 that is within 1/16 of x. */
-static double reduc(x)
-double x;
+static double 
+reduc (double x)
 {
 double t;
 

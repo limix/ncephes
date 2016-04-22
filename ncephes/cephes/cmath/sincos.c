@@ -232,10 +232,8 @@ double floor ( double );
 double floor();
 #endif
 
-int sincos(x, s, c, flg)
-double x;
-double *s, *c;
-int flg;
+int 
+sincos (double x, double *s, double *c, int flg)
 {
 int ix, ssign, csign, xsign;
 double y, z, sx, sz, cx, cz;

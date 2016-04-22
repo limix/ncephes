@@ -35,7 +35,7 @@
  *    IEEE      0,30       200000       3.6e-14     2.9e-15
  *    IEEE      0,100      300000       9.9e-14     1.5e-14
  */
-/*							igamc()
+/*							igamc()
  *
  *	Complemented incomplete gamma integral
  *
@@ -76,7 +76,7 @@
  *    IEEE     0.5,100   0,100      200000       1.9e-14     1.7e-15
  *    IEEE     0.01,0.5  0,100      200000       1.4e-13     1.6e-15
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1985, 1987, 2000 by Stephen L. Moshier
@@ -98,8 +98,8 @@ extern double MACHEP, MAXLOG;
 static double big = 4.503599627370496e15;
 static double biginv =  2.22044604925031308085e-16;
 
-double igamc( a, x )
-double a, x;
+double 
+igamc (double a, double x)
 {
 double ans, ax, c, yc, r, t, y, z;
 double pk, pkm1, pkm2, qk, qkm1, qkm2;
@@ -173,8 +173,8 @@ return( ans * ax );
  *
  */
 
-double igam( a, x )
-double a, x;
+double 
+igam (double a, double x)
 {
 double ans, ax, c, r;
 

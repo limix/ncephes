@@ -40,7 +40,7 @@
  * acosh domain       |x| < 1            NAN
  *
  */
-
+
 /*							acosh.c	*/
 
 /*
@@ -134,8 +134,8 @@ double log(), sqrt(), polevl(), p1evl();
 #endif
 extern double LOGE2, INFINITY, NAN;
 
-double acosh(x)
-double x;
+double 
+acosh (double x)
 {
 double a, z;
 

@@ -38,7 +38,7 @@
  * sqrt domain        x < 0            0.0
  *
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1987, 1988, 2000 by Stephen L. Moshier
@@ -54,8 +54,8 @@ double frexp(), ldexp();
 #endif
 extern double SQRT2;  /*  SQRT2 = 1.41421356237309504880 */
 
-double sqrt(x)
-double x;
+double 
+sqrt (double x)
 {
 int e;
 #ifndef UNK

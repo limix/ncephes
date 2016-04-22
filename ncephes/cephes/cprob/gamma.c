@@ -40,7 +40,7 @@
  * Error for arguments outside the test range will be larger
  * owing to error amplification by the exponential function.
  *
- */
+ */
 /*							lgam()
  *
  *	Natural logarithm of gamma function
@@ -94,7 +94,7 @@
  *    IEEE    -200, -4             10000     4.8e-16     1.3e-16
  *
  */
-
+
 /*							gamma.c	*/
 /*	gamma function	*/
 
@@ -298,8 +298,8 @@ extern double NAN;
 /* Gamma function computed by Stirling's formula.
  * The polynomial STIR is valid for 33 <= x <= 172.
  */
-static double stirf(x)
-double x;
+static double 
+stirf (double x)
 {
 double y, w, v;
 
@@ -321,8 +321,8 @@ return( y );
 
 
 
-double gamma(x)
-double x;
+double 
+gamma (double x)
 {
 double p, q, z;
 int i;
@@ -574,8 +574,8 @@ static unsigned short LS2P[] = {
 /* Logarithm of gamma function */
 
 
-double lgam(x)
-double x;
+double 
+lgam (double x)
 {
 double p, q, u, w, z;
 int i;

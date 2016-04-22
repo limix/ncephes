@@ -56,7 +56,7 @@
  * in the arithmetic.  Some modifications will be required if
  * the arithmetic has abrupt rather than gradual underflow.
  */
-
+
 
 /*
 Cephes Math Library Release 2.8:  June, 2000
@@ -106,8 +106,8 @@ int isnan(), isfinite();
 double ldexp();
 #endif
 
-double ceil(x)
-double x;
+double 
+ceil (double x)
 {
 double y;
 
@@ -163,8 +163,8 @@ static unsigned short bmask[] = {
 
 
 
-double floor(x)
-double x;
+double 
+floor (double x)
 {
 union
 	{
@@ -249,9 +249,8 @@ return(u.y);
 
 
 
-double frexp( x, pw2 )
-double x;
-int *pw2;
+double 
+frexp (double x, int *pw2)
 {
 union
 	{
@@ -356,9 +355,8 @@ return( u.y );
 
 
 
-double ldexp( x, pw2 )
-double x;
-int pw2;
+double 
+ldexp (double x, int pw2)
 {
 union
 	{

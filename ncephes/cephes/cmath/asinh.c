@@ -32,7 +32,7 @@
  *    IEEE      1,3         30000       2.5e-16     6.7e-17
  *
  */
-
+
 /*						asinh.c	*/
 
 /*
@@ -120,8 +120,8 @@ double log(), sqrt(), polevl(), p1evl();
 #endif
 extern double LOGE2, INFINITY;
 
-double asinh(xx)
-double xx;
+double 
+asinh (double xx)
 {
 double a, z, x;
 int sign;

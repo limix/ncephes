@@ -37,7 +37,7 @@
  * asin domain        |x| > 1           NAN
  *
  */
-/*							acos()
+/*							acos()
  *
  *	Inverse circular cosine
  *
@@ -80,7 +80,7 @@
  *   message         condition      value returned
  * asin domain        |x| > 1           NAN
  */
-
+
 /*							asin.c	*/
 
 /*
@@ -252,8 +252,8 @@ double asin();
 #endif
 extern double PIO2, PIO4, NAN;
 
-double asin(x)
-double x;
+double 
+asin (double x)
 {
 double a, p, z, zz;
 short sign;
@@ -303,8 +303,8 @@ return(z);
 
 
 
-double acos(x)
-double x;
+double 
+acos (double x)
 {
 double z;
 

@@ -36,7 +36,7 @@
  *                    x > 1.0e14 (IEEE)
  * tandg singularity  x = 180 k  +  90     MAXNUM
  */
-/*							cotdg.c
+/*							cotdg.c
  *
  *	Circular cotangent of argument in degrees
  *
@@ -66,7 +66,7 @@
  *                    x > 1.0e14 (IEEE)
  * cotdg singularity  x = 180 k            MAXNUM
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1987, 2000 by Stephen L. Moshier
@@ -160,25 +160,24 @@ extern double MAXNUM;
 extern double PIO4;
 
 
-double tandg(x)
-double x;
+double 
+tandg (double x)
 {
 
 return( tancot(x,0) );
 }
 
 
-double cotdg(x)
-double x;
+double 
+cotdg (double x)
 {
 
 return( tancot(x,1) );
 }
 
 
-static double tancot( xx, cotflg )
-double xx;
-int cotflg;
+static double 
+tancot (double xx, int cotflg)
 {
 double x, y, z, zz;
 int j, sign;

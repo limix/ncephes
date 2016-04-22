@@ -38,7 +38,7 @@
  *                    x > 1.0e14 (IEEE)
  *
  */
-/*							cosdg.c
+/*							cosdg.c
  *
  *	Circular cosine of angle in degrees
  *
@@ -72,7 +72,7 @@
  *  See also sin().
  *
  */
-
+
 /* Cephes Math Library Release 2.0:  April, 1987
  * Copyright 1985, 1987 by Stephen L. Moshier
  * Direct inquiries to 30 Frost Street, Cambridge, MA 02140 */
@@ -183,8 +183,8 @@ double polevl(), floor(), ldexp();
 #endif
 extern double PIO4;
 
-double sindg(x)
-double x;
+double 
+sindg (double x)
 {
 double y, z, zz;
 int j, sign;
@@ -248,8 +248,8 @@ return(y);
 
 
 
-double cosdg(x)
-double x;
+double 
+cosdg (double x)
 {
 double y, z, zz;
 int j, sign;

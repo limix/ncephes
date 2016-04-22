@@ -26,7 +26,7 @@
  * representation is already an integer, so rounding does
  * not change it.
  */
-
+
 /*
 Cephes Math Library Release 2.1:  January, 1989
 Copyright 1984, 1987, 1989 by Stephen L. Moshier
@@ -39,8 +39,8 @@ double floor ( double );
 double floor();
 #endif
 
-double round(x)
-double x;
+double 
+round (double x)
 {
 double y, r;
 

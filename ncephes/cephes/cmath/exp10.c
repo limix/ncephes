@@ -45,7 +45,7 @@
  * IEEE arithmetic: MAXL10 = 308.2547155599167.
  *
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1991, 2000 by Stephen L. Moshier
@@ -170,8 +170,8 @@ extern double MAXNUM;
 extern double INFINITY;
 #endif
 
-double exp10(x)
-double x;
+double 
+exp10 (double x)
 {
 double px, xx;
 short n;

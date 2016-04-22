@@ -47,7 +47,7 @@
  * For DEC arithmetic, MAXL2 = 127.
  * For IEEE arithmetic, MAXL2 = 1024.
  */
-
+
 
 /*
 Cephes Math Library Release 2.8:  June, 2000
@@ -134,8 +134,8 @@ extern double INFINITY;
 #endif
 extern double MAXNUM;
 
-double exp2(x)
-double x;
+double 
+exp2 (double x)
 {
 double px, xx;
 short n;

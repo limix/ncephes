@@ -42,7 +42,7 @@
  * See also incbet.c.
  *
  */
-/*							nbdtr.c
+/*							nbdtr.c
  *
  *	Complemented negative binomial distribution
  *
@@ -82,7 +82,7 @@
  *    IEEE     0,100       100000      1.7e-13     8.8e-15
  * See also incbet.c.
  */
-/*							nbdtr.c
+/*							nbdtr.c
  *
  *	Functional inverse of negative binomial distribution
  *
@@ -108,7 +108,7 @@
  *    IEEE     0,100       100000      1.5e-14     8.5e-16
  * See also incbi.c.
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
@@ -122,9 +122,8 @@ extern double incbi ( double, double, double );
 double incbet(), incbi();
 #endif
 
-double nbdtrc( k, n, p )
-int k, n;
-double p;
+double 
+nbdtrc (int k, int n, double p)
 {
 double dk, dn;
 
@@ -144,9 +143,8 @@ return( incbet( dk, dn, 1.0 - p ) );
 
 
 
-double nbdtr( k, n, p )
-int k, n;
-double p;
+double 
+nbdtr (int k, int n, double p)
 {
 double dk, dn;
 
@@ -165,9 +163,8 @@ return( incbet( dn, dk, p ) );
 
 
 
-double nbdtri( k, n, p )
-int k, n;
-double p;
+double 
+nbdtri (int k, int n, double p)
 {
 double dk, dn, w;
 

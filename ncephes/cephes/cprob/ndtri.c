@@ -44,7 +44,7 @@
  * ndtri domain       x >= 1         MAXNUM
  *
  */
-
+
 
 /*
 Cephes Math Library Release 2.8:  June, 2000
@@ -369,8 +369,8 @@ extern double sqrt ( double );
 double polevl(), p1evl(), log(), sqrt();
 #endif
 
-double ndtri(y0)
-double y0;
+double 
+ndtri (double y0)
 {
 double x, y, z, y2, x0, x1;
 int code;

@@ -73,14 +73,19 @@
 #define EDOM		33
 #define ERANGE		34
 
-/* Long double complex numeral.  */
-/*
- * typedef struct
- * {
- * long double r;
- * long double i;
- * } cmplxl;
- */
+
+typedef struct
+{
+    long double r;
+    long double i;
+} cmplxl;
+
+
+typedef struct
+{
+    float r;
+    float i;
+} cmplxf;
 
 /* Type of computer arithmetic */
 

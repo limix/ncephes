@@ -35,7 +35,7 @@
  * Returns MAXNUM on overflow, zero on underflow.
  *
  */
-
+
 /*							powi.c	*/
 
 /*
@@ -54,9 +54,8 @@ int signbit();
 #endif
 extern double NEGZERO, INFINITY, MAXNUM, MAXLOG, MINLOG, LOGE2;
 
-double powi( x, nn )
-double x;
-int nn;
+double 
+powi (double x, int nn)
 {
 int n, e, sign, asign, lx;
 double w, y, s;

@@ -36,7 +36,7 @@
  * In IEEE arithmetic the peak absolute error is 5.2e-16, rms
  * absolute error 1.0e-16.
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1995, 2000 by Stephen L. Moshier
@@ -83,8 +83,8 @@ void clog(), casin(), cacos(), catan();
 
 extern double MAXNUM, MACHEP, PI, PIO2;
 
-void clog( z, w )
-register cmplx *z, *w;
+void 
+clog (register cmplx *z, register cmplx *w)
 {
 double p, rr;
 
@@ -101,7 +101,7 @@ if( rr > PI )
 w->i = rr;
 w->r = p;
 }
-/*							cexp()
+/*							cexp()
  *
  *	Complex exponential function
  *
@@ -138,9 +138,9 @@ w->r = p;
  *    IEEE      -10,+10     30000       3.0e-16     8.7e-17
  *
  */
-
-void cexp( z, w )
-register cmplx *z, *w;
+
+void 
+cexp (register cmplx *z, register cmplx *w)
 {
 double r;
 
@@ -148,7 +148,7 @@ r = exp( z->r );
 w->r = r * cos( z->i );
 w->i = r * sin( z->i );
 }
-/*							csin()
+/*							csin()
  *
  *	Complex circular sine
  *
@@ -183,9 +183,9 @@ w->i = r * sin( z->i );
  * Also tested by csin(casin(z)) = z.
  *
  */
-
-void csin( z, w )
-register cmplx *z, *w;
+
+void 
+csin (register cmplx *z, register cmplx *w)
 {
 double ch, sh;
 
@@ -198,8 +198,8 @@ w->i = cos( z->r ) * sh;
 
 /* calculate cosh and sinh */
 
-static void cchsh( x, c, s )
-double x, *c, *s;
+static void 
+cchsh (double x, double *c, double *s)
 {
 double e, ei;
 
@@ -218,7 +218,7 @@ else
 	}
 }
 
-/*							ccos()
+/*							ccos()
  *
  *	Complex circular cosine
  *
@@ -251,9 +251,9 @@ else
  *    DEC       -10,+10      8400       4.5e-17     1.3e-17
  *    IEEE      -10,+10     30000       3.8e-16     1.0e-16
  */
-
-void ccos( z, w )
-register cmplx *z, *w;
+
+void 
+ccos (register cmplx *z, register cmplx *w)
 {
 double ch, sh;
 
@@ -261,7 +261,7 @@ cchsh( z->i, &ch, &sh );
 w->r = cos( z->r ) * ch;
 w->i = -sin( z->r ) * sh;
 }
-/*							ctan()
+/*							ctan()
  *
  *	Complex circular tangent
  *
@@ -300,9 +300,9 @@ w->i = -sin( z->r ) * sh;
  *    IEEE      -10,+10     30000       7.2e-16     1.2e-16
  * Also tested by ctan * ccot = 1 and catan(ctan(z))  =  z.
  */
-
-void ctan( z, w )
-register cmplx *z, *w;
+
+void 
+ctan (register cmplx *z, register cmplx *w)
 {
 double d;
 
@@ -322,7 +322,7 @@ if( d == 0.0 )
 w->r = sin( 2.0 * z->r ) / d;
 w->i = sinh( 2.0 * z->i ) / d;
 }
-/*							ccot()
+/*							ccot()
  *
  *	Complex circular cotangent
  *
@@ -361,9 +361,9 @@ w->i = sinh( 2.0 * z->i ) / d;
  *    IEEE      -10,+10     30000       9.2e-16     1.2e-16
  * Also tested by ctan * ccot = 1 + i0.
  */
-
-void ccot( z, w )
-register cmplx *z, *w;
+
+void 
+ccot (register cmplx *z, register cmplx *w)
 {
 double d;
 
@@ -383,7 +383,7 @@ if( d == 0.0 )
 w->r = sin( 2.0 * z->r ) / d;
 w->i = -sinh( 2.0 * z->i ) / d;
 }
-
+
 /* Program to subtract nearest integer multiple of PI */
 /* extended precision value of PI: */
 #ifdef UNK
@@ -425,8 +425,8 @@ static unsigned short P3[] = {
 #define DP3 *(double *)P3
 #endif
 
-static double redupi(x)
-double x;
+static double 
+redupi (double x)
 {
 double t;
 long i;
@@ -442,11 +442,11 @@ t = i;
 t = ((x - t * DP1) - t * DP2) - t * DP3;
 return(t);
 }
-
+
 /*  Taylor series expansion for cosh(2y) - cos(2x)	*/
 
-static double ctans(z)
-cmplx *z;
+static double 
+ctans (cmplx *z)
 {
 double f, x, x2, y, y2, rn, t;
 double d;
@@ -488,7 +488,7 @@ do
 while( fabs(t/d) > MACHEP );
 return(d);
 }
-/*							casin()
+/*							casin()
  *
  *	Complex circular arc sine
  *
@@ -520,9 +520,9 @@ return(d);
  * Larger relative error can be observed for z near zero.
  * Also tested by csin(casin(z)) = z.
  */
-
-void casin( z, w )
-cmplx *z, *w;
+
+void 
+casin (cmplx *z, cmplx *w)
 {
 static cmplx ca, ct, zz, z2;
 double x, y;
@@ -608,7 +608,7 @@ w->r = zz.i;	/* mult by 1/i = -i */
 w->i = -zz.r;
 return;
 }
-/*							cacos()
+/*							cacos()
  *
  *	Complex circular arc cosine
  *
@@ -638,16 +638,16 @@ return;
  *    DEC       -10,+10      5200      1.6e-15      2.8e-16
  *    IEEE      -10,+10     30000      1.8e-14      2.2e-15
  */
-
-void cacos( z, w )
-cmplx *z, *w;
+
+void 
+cacos (cmplx *z, cmplx *w)
 {
 
 casin( z, w );
 w->r = PIO2  -  w->r;
 w->i = -w->i;
 }
-/*							catan()
+/*							catan()
  *
  *	Complex circular arc tangent
  *
@@ -693,9 +693,9 @@ w->i = -w->i;
  * had peak relative error 1.5e-16, rms relative error
  * 2.9e-17.  See also clog().
  */
-
-void catan( z, w )
-cmplx *z, *w;
+
+void 
+catan (cmplx *z, cmplx *w)
 {
 double a, t, x, x2, y;
 
@@ -761,9 +761,8 @@ w->i = MAXNUM;
  *
  */
 
-void
-csinh (z, w)
-     cmplx *z, *w;
+void 
+csinh (cmplx *z, cmplx *w)
 {
   double x, y;
 
@@ -801,9 +800,8 @@ csinh (z, w)
  *
  */
 
-void
-casinh (z, w)
-     cmplx *z, *w;
+void 
+casinh (cmplx *z, cmplx *w)
 {
   cmplx u;
 
@@ -843,9 +841,8 @@ casinh (z, w)
  *
  */
 
-void
-ccosh (z, w)
-     cmplx *z, *w;
+void 
+ccosh (cmplx *z, cmplx *w)
 {
   double x, y;
 
@@ -883,9 +880,8 @@ ccosh (z, w)
  *
  */
 
-void
-cacosh (z, w)
-     cmplx *z, *w;
+void 
+cacosh (cmplx *z, cmplx *w)
 {
   cmplx u;
 
@@ -925,9 +921,8 @@ cacosh (z, w)
 
 /* 5.253E-02,1.550E+00 1.643E+01,6.553E+00 1.729E-14  21355  */
 
-void
-ctanh (z, w)
-     cmplx *z, *w;
+void 
+ctanh (cmplx *z, cmplx *w)
 {
   double x, y, d;
 
@@ -967,9 +962,8 @@ ctanh (z, w)
  *
  */
 
-void
-catanh (z, w)
-     cmplx *z, *w;
+void 
+catanh (cmplx *z, cmplx *w)
 {
   cmplx u;
 
@@ -1014,9 +1008,8 @@ catanh (z, w)
  */
 
 
-void
-cpow (a, z, w)
-     cmplx *a, *z, *w;
+void 
+cpow (cmplx *a, cmplx *z, cmplx *w)
 {
   double x, y, r, theta, absa, arga;
 

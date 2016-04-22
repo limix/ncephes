@@ -40,7 +40,7 @@
  *    d    =  a.r * a.r  +  a.i * a.i
  *    c.r  = (b.r * a.r  + b.i * a.i)/d
  *    c.i  = (b.i * a.r  -  b.r * a.i)/d
- * ACCURACY:
+ * ACCURACY:
  *
  * In DEC arithmetic, the test (1/z) * z = 1 had peak relative
  * error 3.1e-17, rms 1.2e-17.  The test (y/z) * (z/y) = 1 had
@@ -58,7 +58,7 @@
  *    DEC        cdiv       18000       4.9e-17     1.3e-17
  *    IEEE       cdiv      100000       3.7e-16     1.1e-16
  */
-/*				cmplx.c
+/*				cmplx.c
  * complex number arithmetic
  */
 
@@ -106,9 +106,8 @@ extern cmplx cone;
 
 /*	c = b + a	*/
 
-void cadd( a, b, c )
-register cmplx *a, *b;
-cmplx *c;
+void 
+cadd (register cmplx *a, register cmplx *b, cmplx *c)
 {
 
 c->r = b->r + a->r;
@@ -118,9 +117,8 @@ c->i = b->i + a->i;
 
 /*	c = b - a	*/
 
-void csub( a, b, c )
-register cmplx *a, *b;
-cmplx *c;
+void 
+csub (register cmplx *a, register cmplx *b, cmplx *c)
 {
 
 c->r = b->r - a->r;
@@ -129,9 +127,8 @@ c->i = b->i - a->i;
 
 /*	c = b * a */
 
-void cmul( a, b, c )
-register cmplx *a, *b;
-cmplx *c;
+void 
+cmul (register cmplx *a, register cmplx *b, cmplx *c)
 {
 double y;
 
@@ -144,9 +141,8 @@ c->r = y;
 
 /*	c = b / a */
 
-void cdiv( a, b, c )
-register cmplx *a, *b;
-cmplx *c;
+void 
+cdiv (register cmplx *a, register cmplx *b, cmplx *c)
 {
 double y, p, q, w;
 
@@ -174,8 +170,8 @@ c->i = q/y;
 /*	b = a
    Caution, a `short' is assumed to be 16 bits wide.  */
 
-void cmov( a, b )
-void *a, *b;
+void 
+cmov (void *a, void *b)
 {
 register short *pa, *pb;
 int i;
@@ -189,8 +185,8 @@ while( --i );
 }
 
 
-void cneg( a )
-register cmplx *a;
+void 
+cneg (register cmplx *a)
 {
 
 a->r = -a->r;
@@ -234,7 +230,7 @@ a->i = -a->i;
  *    DEC       -30,+30     30000       3.2e-17     9.2e-18
  *    IEEE      -10,+10    100000       2.7e-16     6.9e-17
  */
-
+
 
 /*
 Cephes Math Library Release 2.1:  January, 1989
@@ -273,8 +269,8 @@ typedef struct
 #endif
 
 
-double cabs( z )
-register cmplx *z;
+double 
+cabs (register cmplx *z)
 {
 double x, y, b, re, im;
 int ex, ey, e;
@@ -339,7 +335,7 @@ if( ey < MINEXP )
 b = ldexp( b, e );
 return( b );
 }
-/*							csqrt()
+/*							csqrt()
  *
  *	Complex square root
  *
@@ -385,10 +381,10 @@ return( b );
  * Also tested by csqrt( z ) = z, and tested by arguments
  * close to the real axis.
  */
-
 
-void csqrt( z, w )
-cmplx *z, *w;
+
+void 
+csqrt (cmplx *z, cmplx *w)
 {
 cmplx q, s;
 double x, y, r, t;
@@ -450,8 +446,8 @@ w->i *= 0.5;
 }
 
 
-double hypot( x, y )
-double x, y;
+double 
+hypot (double x, double y)
 {
 cmplx z;
 

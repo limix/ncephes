@@ -42,7 +42,7 @@
  * gdtr domain         x < 0            0.0
  *
  */
-/*							gdtrc.c
+/*							gdtrc.c
  *
  *	Complemented gamma distribution function
  *
@@ -86,7 +86,7 @@
  * gdtrc domain         x < 0            0.0
  *
  */
-
+
 /*							gdtr()  */
 
 
@@ -103,8 +103,8 @@ extern double igamc ( double, double );
 double igam(), igamc();
 #endif
 
-double gdtr( a, b, x )
-double a, b, x;
+double 
+gdtr (double a, double b, double x)
 {
 
 if( x < 0.0 )
@@ -117,8 +117,8 @@ return(  igam( b, a * x )  );
 
 
 
-double gdtrc( a, b, x )
-double a, b, x;
+double 
+gdtrc (double a, double b, double x)
 {
 
 if( x < 0.0 )

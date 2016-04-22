@@ -33,7 +33,7 @@
  *    IEEE       0,1e308     30000      1.5e-16     5.0e-17
  *
  */
-/*							cbrt.c  */
+/*							cbrt.c  */
 
 /*
 Cephes Math Library Release 2.8:  June, 2000
@@ -58,8 +58,8 @@ double frexp(), ldexp();
 int isnan(), isfinite();
 #endif
 
-double cbrt(x)
-double x;
+double 
+cbrt (double x)
 {
 int e, rem, sign;
 double z;

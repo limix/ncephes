@@ -48,7 +48,7 @@
  *   message         condition      value returned
  * chdtr domain   x < 0 or v < 1        0.0
  */
-/*							chdtrc()
+/*							chdtrc()
  *
  *	Complemented Chi-square distribution
  *
@@ -98,7 +98,7 @@
  *   message         condition      value returned
  * chdtrc domain  x < 0 or v < 1        0.0
  */
-/*							chdtri()
+/*							chdtri()
  *
  *	Inverse of complemented Chi-square distribution
  *
@@ -138,7 +138,7 @@
  *                     v < 1
  *
  */
-
+
 /*								chdtr() */
 
 
@@ -156,8 +156,8 @@ extern double igami ( double, double );
 double igamc(), igam(), igami();
 #endif
 
-double chdtrc(df,x)
-double df, x;
+double 
+chdtrc (double df, double x)
 {
 
 if( (x < 0.0) || (df < 1.0) )
@@ -170,8 +170,8 @@ return( igamc( df/2.0, x/2.0 ) );
 
 
 
-double chdtr(df,x)
-double df, x;
+double 
+chdtr (double df, double x)
 {
 
 if( (x < 0.0) || (df < 1.0) )
@@ -184,8 +184,8 @@ return( igam( df/2.0, x/2.0 ) );
 
 
 
-double chdtri( df, y )
-double df, y;
+double 
+chdtri (double df, double y)
 {
 double x;
 

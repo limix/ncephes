@@ -45,7 +45,7 @@
  * erfc underflow    x > 37.519379347       0.0
  *
  */
-/*							erf.c
+/*							erf.c
  *
  *	Error function
  *
@@ -87,7 +87,7 @@
  *    IEEE      0,1         30000       3.7e-16     1.0e-16
  *
  */
-/*							erfc.c
+/*							erfc.c
  *
  *	Complementary error function
  *
@@ -136,7 +136,7 @@
  *
  *
  */
-
+
 
 /*
 Cephes Math Library Release 2.9:  November, 2000
@@ -401,8 +401,8 @@ double erf(), erfc(), expx2(), sqrt();
 static double erfce();
 #endif
 
-double ndtr(a)
-double a;
+double 
+ndtr (double a)
 {
 double x, y, z;
 
@@ -432,8 +432,8 @@ return(y);
 }
 
 
-double erfc(a)
-double a;
+double 
+erfc (double a)
 {
 double p,q,x,y,z;
 
@@ -490,8 +490,8 @@ return(y);
    exp(x^2) erfc(x)
    valid for x > 1.
    Use with ndtr and expx2.  */
-static double erfce(x)
-double x;
+static double 
+erfce (double x)
 {
 double p,q;
 
@@ -510,8 +510,8 @@ return (p/q);
 
 
 
-double erf(x)
-double x;
+double 
+erf (double x)
 {
 double y, z;
 

@@ -373,9 +373,8 @@ static volatile double x2;
 static volatile double y;
 static volatile double answer;
 
-void
-pvec(x)
-double x;
+void 
+pvec (double x)
 {
   union
   {
@@ -391,8 +390,8 @@ double x;
 }
 
 
-int
-main ()
+int 
+main (void)
 {
   int i, nerrors, k, ianswer, ntests;
   double (*fun1) (double);

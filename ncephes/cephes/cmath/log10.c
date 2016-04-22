@@ -40,7 +40,7 @@
  * log10 singularity:  x = 0; returns -INFINITY
  * log10 domain:       x < 0; returns NAN
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1995, 2000 by Stephen L. Moshier
@@ -154,8 +154,8 @@ int isnan(), isfinite();
 #endif
 extern double LOGE2, SQRT2, INFINITY, NAN;
 
-double log10(x)
-double x;
+double 
+log10 (double x)
 {
 VOLATILE double z;
 double y;

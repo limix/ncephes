@@ -14,7 +14,8 @@ double floor(), ldexp(), sin();
 
 #define TPI 6.283185307179586476925
 
-main()
+int 
+main (void)
 {
 char s[40];
 double a, n, t, x, y, z;

@@ -31,7 +31,7 @@
  *    IEEE     +-MAXLOG     30000       2.6e-16     5.7e-17
  *
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1995, 2000 by Stephen L. Moshier
@@ -108,8 +108,8 @@ double fabs(), exp(), polevl(), p1evl();
 #endif
 extern double INFINITY, MINLOG, MAXLOG, LOGE2;
 
-double sinh(x)
-double x;
+double 
+sinh (double x)
 {
 double a;
 

@@ -40,19 +40,20 @@ class FuncDefVisitor(pycparser.c_ast.NodeVisitor):
 
     def visit_FuncDef(self, node):
         ret_type = node.decl.type.type.type.names[0]
+        node.decl.type.args.params[0]
         if len(node.decl.storage) == 0:
             fs = FuncSign(node.decl.name, ret_type)
-            for p in node.param_decls:
+            # if node.param_decls is None:
+            #     import ipdb; ipdb.set_trace()
+            # for p in node.param_decls:
+            for p in node.decl.type.args.params:
                 (name, typ) = self._parse_param_signature(p)
                 fs.param_names.append(name)
                 fs.param_types.append(typ)
             self.functions.append(fs)
 
 def fetch_func_decl(filename):
-    parser = pycparser.CParser()
-    text = pycparser.preprocess_file(filename, 'cpp', '')
-    text_clean = text.replace('\x0c', '')
-    ast = parser.parse(text_clean, filename)
+    ast = pycparser.parse_file(filename, use_cpp=True, cpp_path='cpp', cpp_args='')
 
     v = FuncDefVisitor()
     v.visit(ast)

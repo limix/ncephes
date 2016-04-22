@@ -35,7 +35,7 @@
  * tan total loss   x > 1.073741824e9     0.0
  *
  */
-/*							cot.c
+/*							cot.c
  *
  *	Circular cotangent
  *
@@ -73,7 +73,7 @@
  * cot singularity  x = 0                  INFINITY
  *
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 yright 1984, 1995, 2000 by Stephen L. Moshier
@@ -196,8 +196,8 @@ extern double PIO4;
 extern double INFINITY;
 extern double NAN;
 
-double tan(x)
-double x;
+double 
+tan (double x)
 {
 #ifdef MINUSZERO
 if( x == 0.0 )
@@ -216,8 +216,8 @@ return( tancot(x,0) );
 }
 
 
-double cot(x)
-double x;
+double 
+cot (double x)
 {
 
 if( x == 0.0 )
@@ -229,9 +229,8 @@ return( tancot(x,1) );
 }
 
 
-static double tancot( xx, cotflg )
-double xx;
-int cotflg;
+static double 
+tancot (double xx, int cotflg)
 {
 double x, y, z, zz;
 int j, sign;

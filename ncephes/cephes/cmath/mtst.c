@@ -117,14 +117,14 @@ int drand();
 
 
 /* Provide inverses for square root and cube root: */
-double square(x)
-double x;
+double 
+square (double x)
 {
 return( x * x );
 }
 
-double cube(x)
-double x;
+double 
+cube (double x)
 {
 return( x * x * x );
 }
@@ -256,7 +256,8 @@ static double rms = 0.0;
 static double ave = 0.0;
 
 
-int main()
+int 
+main (void)
 {
 double (*fun )();
 double (*ifun )();

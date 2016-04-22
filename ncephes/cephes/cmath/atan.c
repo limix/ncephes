@@ -32,7 +32,7 @@
  *    IEEE      -10, 10      10^6       1.8e-16     5.0e-17
  *
  */
-/*							atan2()
+/*							atan2()
  *
  *	Quadrant correct inverse circular tangent
  *
@@ -63,7 +63,7 @@
  * See atan.c.
  *
  */
-
+
 /*							atan.c */
 
 
@@ -188,8 +188,8 @@ extern double PI, PIO2, PIO4, INFINITY, NEGZERO, MAXNUM;
 #endif
 
 
-double atan(x)
-double x;
+double 
+atan (double x)
 {
 double y, z;
 short sign, flag;
@@ -241,7 +241,7 @@ if( sign < 0 )
 	y = -y;
 return(y);
 }
-
+
 /*							atan2	*/
 
 #ifdef ANSIC

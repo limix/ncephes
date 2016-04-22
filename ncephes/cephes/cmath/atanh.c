@@ -31,7 +31,7 @@
  *    IEEE      -1,1        30000       1.9e-16     5.2e-17
  *
  */
-
+
 /*						atanh.c	*/
 
 
@@ -122,8 +122,8 @@ double fabs(), log(), polevl(), p1evl();
 #endif
 extern double INFINITY, NAN;
 
-double atanh(x)
-double x;
+double 
+atanh (double x)
 {
 double s, z;
 

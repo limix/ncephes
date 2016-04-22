@@ -45,7 +45,7 @@
  * log singularity:  x = 0; returns -INFINITY
  * log domain:       x < 0; returns NAN
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1995, 2000 by Stephen L. Moshier
@@ -206,8 +206,8 @@ int isnan(), isfinite();
 #define SQRTH 0.70710678118654752440
 extern double INFINITY, NAN;
 
-double log(x)
-double x;
+double 
+log (double x)
 {
 int e;
 #ifdef DEC

@@ -17,7 +17,7 @@
  * Returns the absolute value of the argument.
  *
  */
-
+
 
 #include "mconf.h"
 /* Avoid using UNK if possible.  */
@@ -29,8 +29,8 @@
 #endif
 #endif
 
-double fabs(x)
-double x;
+double 
+fabs (double x)
 {
 union
   {

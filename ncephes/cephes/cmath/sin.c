@@ -43,7 +43,7 @@
  * x > 2**49 = 5.6e14.  The routine as implemented flags a
  * TLOSS error for x > 2**30 and returns 0.0.
  */
-/*							cos.c
+/*							cos.c
  *
  *	Circular cosine
  *
@@ -77,7 +77,7 @@
  *    IEEE -1.07e9,+1.07e9  130000       2.1e-16     5.4e-17
  *    DEC        0,+1.07e9   17000       3.0e-17     7.2e-18
  */
-
+
 /*							sin.c	*/
 
 /*
@@ -214,8 +214,8 @@ extern double INFINITY;
 #endif
 
 
-double sin(x)
-double x;
+double 
+sin (double x)
 {
 double y, z, zz;
 int j, sign;
@@ -294,8 +294,8 @@ return(y);
 
 
 
-double cos(x)
-double x;
+double 
+cos (double x)
 {
 double y, z, zz;
 long i;
@@ -379,8 +379,8 @@ static unsigned short P648[] = {034513,054170,0176773,0116043,};
 static double P64800 = 4.8481368110953599358991410e-5;
 #endif
 
-double radian(d,m,s)
-double d,m,s;
+double 
+radian (double d, double m, double s)
 {
 
 return( ((d*60.0 + m)*60.0 + s)*P64800 );

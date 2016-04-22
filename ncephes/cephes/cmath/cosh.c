@@ -36,7 +36,7 @@
  *
  *
  */
-
+
 /*							cosh.c */
 
 /*
@@ -55,8 +55,8 @@ int isnan(), isfinite();
 #endif
 extern double MAXLOG, INFINITY, LOGE2;
 
-double cosh(x)
-double x;
+double 
+cosh (double x)
 {
 double y;
 

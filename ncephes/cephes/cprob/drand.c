@@ -37,7 +37,7 @@
  * two but tends to overcome the problems mentioned.
  *
  */
-
+
 
 /*  Three-generator random number algorithm
  * of Brian Wichmann and David Hill
@@ -66,7 +66,8 @@ static union {
  * congruential generators.
  */
  
-static int ranwh()
+static int 
+ranwh (void)
 {
 int r, s;
 
@@ -94,7 +95,7 @@ if( sz < 0 )
 /* The results are in static sx, sy, sz. */
 return 0;
 }
-
+
 /*	drand.c
  *
  * Random double precision floating point number between 1 and 2.
@@ -103,8 +104,8 @@ return 0;
  *	drand( &x );
  */
 
-int drand( a )
-double *a;
+int 
+drand (double *a)
 {
 unsigned short r;
 #ifdef DEC

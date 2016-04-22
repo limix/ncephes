@@ -46,7 +46,7 @@
  *                     n < k
  *                     x < 0, x > 1
  */
-/*							bdtrc()
+/*							bdtrc()
  *
  *	Complemented binomial distribution
  *
@@ -93,7 +93,7 @@
  *   message         condition      value returned
  * bdtrc domain      x<0, x>1, n<k       0.0
  */
-/*							bdtri()
+/*							bdtri()
  *
  *	Inverse binomial distribution
  *
@@ -137,7 +137,7 @@
  * bdtri domain     k < 0, n <= k         0.0
  *                  x < 0, x > 1
  */
-
+
 /*								bdtr() */
 
 
@@ -157,9 +157,8 @@ extern double expm1 ( double );
 double incbet(), incbi(), pow(), log1p(), expm1();
 #endif
 
-double bdtrc( k, n, p )
-int k, n;
-double p;
+double 
+bdtrc (int k, int n, double p)
 {
 double dk, dn;
 
@@ -195,9 +194,8 @@ return( dk );
 
 
 
-double bdtr( k, n, p )
-int k, n;
-double p;
+double 
+bdtr (int k, int n, double p)
 {
 double dk, dn;
 
@@ -227,9 +225,8 @@ return( dk );
 }
 
 
-double bdtri( k, n, y )
-int k, n;
-double y;
+double 
+bdtri (int k, int n, double y)
 {
 double dk, dn, p;
 

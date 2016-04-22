@@ -42,7 +42,7 @@
  *    IEEE     0.01,0.5  0,0.5       100000       9.0e-14     3.4e-15
  *    IEEE    0.5,10000  0,0.5        20000       2.3e-13     3.8e-14
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
@@ -63,8 +63,8 @@ extern double lgam ( double );
 double igamc(), ndtri(), exp(), fabs(), log(), sqrt(), lgam();
 #endif
 
-double igami( a, y0 )
-double a, y0;
+double 
+igami (double a, double y0)
 {
 double x0, x1, x, yl, yh, y, d, lgm, dithresh;
 int i, dir;

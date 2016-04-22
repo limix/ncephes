@@ -37,7 +37,7 @@
  * With a = .5, b constrained to half-integer or integer values:
  *    IEEE      0,1    .5,10000   10000    8.3e-11   1.0e-11
  */
-
+
 
 /*
 Cephes Math Library Release 2.8:  June, 2000
@@ -59,8 +59,8 @@ extern double incbet ( double, double, double );
 double ndtri(), exp(), fabs(), log(), sqrt(), lgam(), incbet();
 #endif
 
-double incbi( aa, bb, yy0 )
-double aa, bb, yy0;
+double 
+incbi (double aa, double bb, double yy0)
 {
 double a, b, y0, d, y, x, x0, x1, lgm, yp, di, dithresh, yl, yh, xt;
 int i, rflg, dir, nflg;

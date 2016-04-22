@@ -37,10 +37,8 @@ double smirnov (), kolmogorov ();
 extern double MAXLOG;
 
 /* Exact Smirnov statistic, for one-sided test.  */
-double
-smirnov (n, e)
-     int n;
-     double e;
+double 
+smirnov (int n, double e)
 {
   int v, nn;
   double evn, omevn, p, t, c, lgamnp1;
@@ -89,9 +87,8 @@ smirnov (n, e)
    or that max deviation > y/sqrt(n).
    The approximation is useful for the tail of the distribution
    when n is large.  */
-double
-kolmogorov (y)
-     double y;
+double 
+kolmogorov (double y)
 {
   double p, t, r, sign, x;
 
@@ -114,10 +111,8 @@ kolmogorov (y)
 
 /* Functional inverse of Smirnov distribution
    finds e such that smirnov(n,e) = p.  */
-double
-smirnovi (n, p)
-     int n;
-     double p;
+double 
+smirnovi (int n, double p)
 {
   double e, t, dpde;
 
@@ -156,9 +151,8 @@ smirnovi (n, p)
    Finds y such that kolmogorov(y) = p.
    If e = smirnovi (n,p), then kolmogi(2 * p) / sqrt(n) should
    be close to e.  */
-double
-kolmogi (p)
-     double p;
+double 
+kolmogi (double p)
 {
   double y, t, dpdy;
 
@@ -190,10 +184,8 @@ kolmogi (p)
 
 #ifdef SALONE
 /* Type in a number.  */
-void
-getnum (s, px)
-     char *s;
-     double *px;
+void 
+getnum (char *s, double *px)
 {
   char str[30];
 
@@ -206,8 +198,8 @@ getnum (s, px)
 }
 
 /* Type in values, get answers.  */
-void
-main ()
+void 
+main (void)
 {
   int n;
   double e, p, ps, pk, ek, y;

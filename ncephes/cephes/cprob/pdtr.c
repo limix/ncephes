@@ -38,7 +38,7 @@
  * See igamc().
  *
  */
-/*							pdtrc()
+/*							pdtrc()
  *
  *	Complemented poisson distribution
  *
@@ -78,7 +78,7 @@
  * See igam.c.
  *
  */
-/*							pdtri()
+/*							pdtri()
  *
  *	Inverse Poisson distribution
  *
@@ -119,7 +119,7 @@
  *                     k < 0
  *
  */
-
+
 /*
 Cephes Math Library Release 2.8:  June, 2000
 Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
@@ -134,9 +134,8 @@ extern double igami ( double, double );
 double igam(), igamc(), igami();
 #endif
 
-double pdtrc( k, m )
-int k;
-double m;
+double 
+pdtrc (int k, double m)
 {
 double v;
 
@@ -151,9 +150,8 @@ return( igam( v, m ) );
 
 
 
-double pdtr( k, m )
-int k;
-double m;
+double 
+pdtr (int k, double m)
 {
 double v;
 
@@ -167,9 +165,8 @@ return( igamc( v, m ) );
 }
 
 
-double pdtri( k, y )
-int k;
-double y;
+double 
+pdtri (int k, double y)
 {
 double v;
 

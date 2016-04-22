@@ -48,7 +48,7 @@
  * fdtr domain     a<0, b<0, x<0         0.0
  *
  */
-/*							fdtrc()
+/*							fdtrc()
  *
  *	Complemented F distribution
  *
@@ -100,7 +100,7 @@
  * fdtrc domain    a<0, b<0, x<0         0.0
  *
  */
-/*							fdtri()
+/*							fdtri()
  *
  *	Inverse of complemented F distribution
  *
@@ -152,7 +152,7 @@
  *                     v < 1
  *
  */
-
+
 
 /*
 Cephes Math Library Release 2.8:  June, 2000
@@ -168,9 +168,8 @@ extern double incbi ( double, double, double );
 double incbet(), incbi();
 #endif
 
-double fdtrc( ia, ib, x )
-int ia, ib;
-double x;
+double 
+fdtrc (int ia, int ib, double x)
 {
 double a, b, w;
 
@@ -187,9 +186,8 @@ return( incbet( 0.5*b, 0.5*a, w ) );
 
 
 
-double fdtr( ia, ib, x )
-int ia, ib;
-double x;
+double 
+fdtr (int ia, int ib, double x)
 {
 double a, b, w;
 
@@ -206,9 +204,8 @@ return( incbet(0.5*a, 0.5*b, w) );
 }
 
 
-double fdtri( ia, ib, y )
-int ia, ib;
-double y;
+double 
+fdtri (int ia, int ib, double y)
 {
 double a, b, w, x;
 
