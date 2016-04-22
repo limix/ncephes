@@ -63,6 +63,10 @@ def convert_old_style_proto():
             cmd = "cproto -q -I%s -I%s -a %s" % (incl1, incl2, fp)
             subprocess.check_call(cmd, shell=True)
 
+def apply_patch():
+    cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.patch"
+    subprocess.check_call(cmd, shell=True)
+
 def update():
     src_path = os.path.dirname(os.path.abspath(sys.argv[0]))
     old_path = os.getcwd()
@@ -72,6 +76,7 @@ def update():
         download_extract()
         clear_code()
         convert_old_style_proto()
+        apply_patch()
 
     finally:
         os.chdir(old_path)

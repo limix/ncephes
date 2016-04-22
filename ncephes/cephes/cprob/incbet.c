@@ -69,7 +69,7 @@ Copyright 1984, 1995, 2000 by Stephen L. Moshier
 
 extern double MACHEP, MINLOG, MAXLOG;
 #ifdef ANSIPROT
-extern double cephes_gamma ( double );
+extern double gamma ( double );
 extern double lgam ( double );
 extern double exp ( double );
 extern double log ( double );
@@ -79,7 +79,7 @@ static double incbcf(double, double, double);
 static double incbd(double, double, double);
 static double pseries(double, double, double);
 #else
-double cephes_gamma(), lgam(), exp(), log(), pow(), fabs();
+double gamma(), lgam(), exp(), log(), pow(), fabs();
 static double incbcf(), incbd(), pseries();
 #endif
 
@@ -87,7 +87,7 @@ static double big = 4.503599627370496e15;
 static double biginv =  2.22044604925031308085e-16;
 
 
-double
+double 
 incbet (double aa, double bb, double xx)
 {
 double a, b, t, x, xc, w, y;
@@ -152,20 +152,18 @@ else
 
 y = a * log(x);
 t = b * log(xc);
-
 if( (a+b) < MAXGAM && fabs(y) < MAXLOG && fabs(t) < MAXLOG )
 	{
 	t = pow(xc,b);
 	t *= pow(x,a);
 	t /= a;
 	t *= w;
-	t *= cephes_gamma(a+b) / (cephes_gamma(a) * cephes_gamma(b));
+	t *= gamma(a+b) / (gamma(a) * gamma(b));
 	goto done;
 	}
 /* Resort to logarithms.  */
 y += t + lgam(a+b) - lgam(a) - lgam(b);
 y += log(w/a);
-
 if( y < MINLOG )
 	t = 0.0;
 else
@@ -175,10 +173,10 @@ done:
 
 if( flag == 1 )
 	{
-	if( t <= MACHEP ){
-		t = 1.0 - MACHEP;}
-	else {
-		t = 1.0 - t;}
+	if( t <= MACHEP )
+		t = 1.0 - MACHEP;
+	else
+		t = 1.0 - t;
 	}
 return( t );
 }
@@ -187,7 +185,7 @@ return( t );
  * for incomplete beta integral
  */
 
-static double
+static double 
 incbcf (double a, double b, double x)
 {
 double xk, pk, pkm1, pkm2, qk, qkm1, qkm2;
@@ -214,7 +212,7 @@ n = 0;
 thresh = 3.0 * MACHEP;
 do
 	{
-
+	
 	xk = -( x * k1 * k2 )/( k3 * k4 );
 	pk = pkm1 +  pkm2 * xk;
 	qk = qkm1 +  qkm2 * xk;
@@ -279,7 +277,7 @@ return(ans);
  * for incomplete beta integral
  */
 
-static double
+static double 
 incbd (double a, double b, double x)
 {
 double xk, pk, pkm1, pkm2, qk, qkm1, qkm2;
@@ -307,7 +305,7 @@ n = 0;
 thresh = 3.0 * MACHEP;
 do
 	{
-
+	
 	xk = -( z * k1 * k2 )/( k3 * k4 );
 	pk = pkm1 +  pkm2 * xk;
 	qk = qkm1 +  qkm2 * xk;
@@ -369,7 +367,7 @@ return(ans);
 /* Power series for incomplete beta integral.
    Use when b*x is small and x not too close to 1.  */
 
-static double
+static double 
 pseries (double a, double b, double x)
 {
 double s, t, u, v, n, t1, z, ai;
@@ -382,24 +380,21 @@ t = u;
 n = 2.0;
 s = 0.0;
 z = MACHEP * ai;
-
 while( fabs(v) > z )
 	{
 	u = (n - b) * x / n;
 	t *= u;
 	v = t / (a + n);
-	s += v;
+	s += v; 
 	n += 1.0;
 	}
 s += t1;
 s += ai;
 
-
 u = a * log(x);
-
 if( (a+b) < MAXGAM && fabs(u) < MAXLOG )
 	{
-	t = cephes_gamma(a+b)/(cephes_gamma(a)*cephes_gamma(b));
+	t = gamma(a+b)/(gamma(a)*gamma(b));
 	s = s * t * pow(x,a);
 	}
 else
