@@ -6,10 +6,10 @@
  *
  * SYNOPSIS:
  *
- * double x, y, gamma();
+ * double x, y, cephes_gamma();
  * extern int sgngam;
  *
- * y = gamma( x );
+ * y = cephes_gamma( x );
  *
  *
  *
@@ -25,7 +25,7 @@
  * approximated by a rational function of degree 6/7 in the
  * interval (2,3).  Large arguments are handled by Stirling's
  * formula. Large negative arguments are made positive using
- * a reflection formula.  
+ * a reflection formula.
  *
  *
  * ACCURACY:
@@ -96,7 +96,7 @@
  */
 
 /*							gamma.c	*/
-/*	gamma function	*/
+/*	cephes_gamma function	*/
 
 /*
 Cephes Math Library Release 2.8:  June, 2000
@@ -182,7 +182,7 @@ static unsigned short LPI[4] = {
 0xa1bd,0x48e7,0x50d0,0x3ff2,
 };
 #define LOGPI *(double *)LPI
-#endif 
+#endif
 
 #ifdef MIEEE
 static unsigned short P[] = {
@@ -209,7 +209,7 @@ static unsigned short LPI[4] = {
 0x3ff2,0x50d0,0x48e7,0xa1bd,
 };
 #define LOGPI *(double *)LPI
-#endif 
+#endif
 
 /* Stirling's formula for the gamma function */
 #if UNK
@@ -298,7 +298,7 @@ extern double NAN;
 /* Gamma function computed by Stirling's formula.
  * The polynomial STIR is valid for 33 <= x <= 172.
  */
-static double 
+static double
 stirf (double x)
 {
 double y, w, v;
@@ -321,8 +321,8 @@ return( y );
 
 
 
-double 
-gamma (double x)
+double
+cephes_gamma (double x)
 {
 double p, q, z;
 int i;
@@ -574,7 +574,7 @@ static unsigned short LS2P[] = {
 /* Logarithm of gamma function */
 
 
-double 
+double
 lgam (double x)
 {
 double p, q, u, w, z;

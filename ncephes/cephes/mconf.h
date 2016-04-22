@@ -58,6 +58,8 @@
 #ifndef CEPHES_MCONF_H
 #define CEPHES_MCONF_H
 
+#define ANSIPROT 1
+
 /* Constant definitions for math error conditions
  */
 
@@ -104,7 +106,5 @@ typedef struct
 
 /* Define to support tiny denormal numbers, else undefine. */
 #define DENORMAL 1
-
-#define gamma Gamma
 
 #endif				/* CEPHES_MCONF_H */

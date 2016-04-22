@@ -1,0 +1,33 @@
+--- gamma.c	2016-04-22 19:33:16.000000000 +0100
++++ gamma.new.c	2016-04-22 19:52:57.000000000 +0100
+@@ -6,10 +6,10 @@
+  *
+  * SYNOPSIS:
+  *
+- * double x, y, gamma();
++ * double x, y, cephes_gamma();
+  * extern int sgngam;
+  *
+- * y = gamma( x );
++ * y = cephes_gamma( x );
+  *
+  *
+  *
+@@ -96,7 +96,7 @@
+  */
+
+ /*							gamma.c	*/
+-/*	gamma function	*/
++/*	cephes_gamma function	*/
+
+ /*
+ Cephes Math Library Release 2.8:  June, 2000
+@@ -322,7 +322,7 @@
+
+
+ double
+-gamma (double x)
++cephes_gamma (double x)
+ {
+ double p, q, z;
+ int i;
