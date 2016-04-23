@@ -4,7 +4,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 PKG_NAME = 'ncephes'
-VERSION  = '0.0.3'
+VERSION  = '0.0.4'
 
 def get_test_suite():
     from unittest import TestLoader
