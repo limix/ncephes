@@ -1,0 +1,17 @@
+include *.md
+include *.py
+include *.txt
+recursive-include ncephes *.387
+recursive-include ncephes *.688
+recursive-include ncephes *.87
+recursive-include ncephes *.amd64
+recursive-include ncephes *.asm
+recursive-include ncephes *.c
+recursive-include ncephes *.h
+recursive-include ncephes *.mak
+recursive-include ncephes *.mms
+recursive-include ncephes *.opt
+recursive-include ncephes *.patch
+recursive-include ncephes *.rsp
+recursive-include ncephes *.txt
+include ncephes/cephes/cmath/README
