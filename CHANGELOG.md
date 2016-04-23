@@ -1,4 +1,4 @@
-0.0.6 (unreleased)
+0.0.6 (2016-04-23)
 ------------------
 
 - README containing explanation about Numba nopython mode.
