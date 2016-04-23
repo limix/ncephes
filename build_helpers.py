@@ -1,7 +1,3 @@
-from __future__ import absolute_import
-import glob
-from os.path import join
-from cffi import FFI
 import pycparser
 
 class FuncSign(object):
@@ -43,40 +39,27 @@ class FuncDefVisitor(pycparser.c_ast.NodeVisitor):
         node.decl.type.args.params[0]
         if len(node.decl.storage) == 0:
             fs = FuncSign(node.decl.name, ret_type)
-            # if node.param_decls is None:
-            #     import ipdb; ipdb.set_trace()
-            # for p in node.param_decls:
             for p in node.decl.type.args.params:
                 (name, typ) = self._parse_param_signature(p)
                 fs.param_names.append(name)
                 fs.param_types.append(typ)
             self.functions.append(fs)
 
+def read_export_file(fp):
+    lines = open(fp).read().split('\n')
+    lines = [l for l in lines if len(l.strip()) > 0]
+    d = dict()
+    for line in lines:
+        modname, funcnames = line.split(':')
+        modname = modname.strip()
+        d[modname] = [f.strip() for f in funcnames.split(',')]
+    return d
+
 def fetch_func_decl(filename):
-    ast = pycparser.parse_file(filename, use_cpp=True, cpp_path='cpp', cpp_args='')
+    ast = pycparser.parse_file(filename, use_cpp=True, cpp_path='cpp',
+                               cpp_args='')
 
     v = FuncDefVisitor()
     v.visit(ast)
 
     return [str(f) for f in v.functions]
-
-include_dirs = [join('ncephes', 'cephes', 'cprob')]
-src_files = glob.glob(join('ncephes', 'cephes', 'cprob', '*.c'))
-src_files.append(join('ncephes', 'cephes', 'cmath', 'isnan.c'))
-
-ffi = FFI()
-
-fs = []
-for fp in glob.glob(join('ncephes', 'cephes', 'cprob', '*.c')):
-    if not fp.endswith('mtherr.c'):
-        fs.extend(fetch_func_decl(fp))
-
-ffi.set_source('ncephes._cprob_ffi',
-        ';\n'.join(['extern ' + s for s in fs])+';',
-        include_dirs=include_dirs,
-        sources=src_files,
-        libraries=[])
-ffi.cdef(';'.join(fs)+';')
-
-if __name__ == '__main__':
-    ffi.compile(verbose=True)

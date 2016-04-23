@@ -33,7 +33,7 @@ def setup_package():
         packages=find_packages(),
         zip_safe=True,
         setup_requires=setup_requires,
-        cffi_modules=["ncephes/cprob_build.py:ffi"],
+        cffi_modules=["cprob_build.py:ffi"],
         install_requires=install_requires,
     )
 
