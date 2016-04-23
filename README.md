@@ -20,9 +20,9 @@ from numba import jit
 
 @jit
 def numba_incbet(a, b, x):
-    cprob.incbet(a, b, x)
+    return cprob.incbet(a, b, x)
 
-print(cprob.incbet(1., 3., 0.3))
+print(numba_incbet(1., 3., 0.3))
 # prints 0.657
 ```
 with nopython mode and nogil enabled
@@ -34,9 +34,9 @@ incbet = cprob.incbet
 
 @jit(nogil=True, nopython=True)
 def numba_incbet(a, b, x):
-    cprob.incbet(a, b, x)
+    return incbet(a, b, x)
 
-print(cprob.incbet(1., 3., 0.3))
+print(numba_incbet(1., 3., 0.3))
 # prints 0.657
 ```
 
