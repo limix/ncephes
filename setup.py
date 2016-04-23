@@ -22,12 +22,18 @@ def setup_package():
     setup_requires = requires + ['pycparser']
     install_requires = requires
 
+    long_description = ("Python interface for the Cephes library. "+
+                        "It also supports Numba.")
+
     metadata = dict(
         name=PKG_NAME,
         version=VERSION,
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
+        author="Danilo Horta",
+        author_email="danilo.horta@gmail.com",
         description="Python interface for the Cephes library.",
+        long_description=long_description,
         license="BSD",
         url='https://github.com/Horta/ncephes',
         test_suite='setup.get_test_suite',
@@ -36,6 +42,19 @@ def setup_package():
         setup_requires=setup_requires,
         cffi_modules=["cprob_build.py:ffi"],
         install_requires=install_requires,
+        classifiers=[
+            "Development Status :: 3 - Alpha",
+            "Environment :: Console",
+            "Intended Audience :: Science/Research",
+            "License :: OSI Approved :: BSD License",
+            "Natural Language :: English",
+            "Operating System :: OS Independent",
+            "Programming Language :: Python :: 2.7",
+            "Programming Language :: Python :: 3.4",
+            "Programming Language :: Python :: 3.5",
+            "Topic :: Scientific/Engineering"
+        ],
+        keywords=["cephes", "math", "numba"]
     )
 
     try:
