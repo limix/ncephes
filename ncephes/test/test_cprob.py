@@ -1,13 +1,6 @@
 from ncephes import cprob
 import unittest
 
-# ndtr: ndtr, erf, erfc
-# ndtri: ndtri
-# pdtr: pdtr, pdtrc, pdtri
-# polevl: p1evl
-# stdtr: stdtr, stdtri
-# unity: log1p, expm1, cosm1
-
 class TestCprob(unittest.TestCase):
     def test_bdtr(self):
         self.assertAlmostEqual(cprob.bdtr(4, 5, 0.25), 0.9990234375000000)
