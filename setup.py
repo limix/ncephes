@@ -3,12 +3,12 @@ import sys
 from setuptools import setup
 from setuptools import find_packages
 
-PKG_NAME = 'ncephes'
-VERSION  = '0.0.5.dev0'
+pkg_name = 'ncephes'
+version  = '0.0.5.dev0'
 
 def get_test_suite():
     from unittest import TestLoader
-    return TestLoader().discover(PKG_NAME)
+    return TestLoader().discover(pkg_name)
 
 def setup_package():
     src_path = os.path.dirname(os.path.abspath(sys.argv[0]))
@@ -26,8 +26,8 @@ def setup_package():
                         "It also supports Numba.")
 
     metadata = dict(
-        name=PKG_NAME,
-        version=VERSION,
+        name=pkg_name,
+        version=version,
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         author="Danilo Horta",
