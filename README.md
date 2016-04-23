@@ -18,9 +18,9 @@ Install
 
 It should be as simple as
 ```
-pip install ncehes
+pip install ncephes
 ```
-From source, you might want to do
+Alternatively, you might want to do
 ```
 python setup.py install
 ```
