@@ -1,76 +1,36 @@
-# Reference https://github.com/numba/numba/blob/master/.travis.yml
-
 dist: trusty
-
 matrix:
-    include:
-        - env: PYTHON=2.7 NUMPY="numpy=1.10"
-        - env: PYTHON=3.4 NUMPY="numpy=1.10"
-        - env: PYTHON=3.5 NUMPY="numpy=1.10"
-
+  include:
+  - env: PYTHON=2.7 NUMPY="numpy=1.10"
+  - env: PYTHON=3.4 NUMPY="numpy=1.10"
+  - env: PYTHON=3.5 NUMPY="numpy=1.10"
 branches:
-    only:
-        - master
-
+  only:
+  - master
 before_install:
-    # Install Miniconda
-    - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-    - chmod +x miniconda.sh
-    - ./miniconda.sh -b
-    - export PATH=$HOME/miniconda3/bin:$PATH
-    # Setup environment
-    - conda update --yes conda
-    # Scipy, CFFI and jinja2 are optional dependencies, but exercised in the test suite
-    - conda create -n travisci --yes python=$PYTHON $NUMPY cffi pip scipy jinja2 numba
-    - source activate travisci
-    - CONDA_INSTALL="conda install --yes -q"
-    - PIP_INSTALL="pip install -q"
-    # # Install llvmdev (separate channel, for now)
-    # - $CONDA_INSTALL -c numba llvmdev="3.7*"
-    # Install enum34 and singledispatch for Python < 3.4
-    # - if [ $PYTHON \< "3.4" ]; then $CONDA_INSTALL enum34; fi
-    # - if [ $PYTHON \< "3.4" ]; then $PIP_INSTALL singledispatch; fi
-    # Install funcsigs for Python < 3.3
-    # - if [ $PYTHON \< "3.3" ]; then $CONDA_INSTALL -c numba funcsigs; fi
-    # Install dependencies for building the documentation
-    # - if [ "$BUILD_DOC" == "yes" ]; then $CONDA_INSTALL sphinx pygments; fi
-    # - if [ "$BUILD_DOC" == "yes" ]; then $PIP_INSTALL sphinxjp.themecore sphinxjp.themes.basicstrap; fi
-    # Install dependencies for code coverage (codecov.io)
-    # - if [ "$RUN_COVERAGE" == "yes" ]; then $PIP_INSTALL codecov; fi
-
+- wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+- chmod +x miniconda.sh
+- ./miniconda.sh -b
+- export PATH=$HOME/miniconda3/bin:$PATH
+- conda update --yes conda
+- conda create -n travisci --yes python=$PYTHON $NUMPY cffi pip scipy jinja2 numba
+- source activate travisci
+- CONDA_INSTALL="conda install --yes -q"
+- PIP_INSTALL="pip install -q"
 install:
-    # Build and install llvmlite from source
-    # - git clone git://github.com/numba/llvmlite.git -q
-    # - cd llvmlite && python setup.py build && python setup.py install -q >/dev/null && cd ..
-    # Build ncephes extensions without silencing compile errors
-    - python setup.py build_ext -q --inplace
-    # Install ncephes
-    - python setup.py install -q >/dev/null
-
+- python setup.py build_ext -q --inplace
+- python setup.py install -q >/dev/null
 script:
-    # Ensure that the documentation builds without warnings
-    # - cd $TRAVIS_BUILD_DIR/docs
-    # - if [ "$BUILD_DOC" == "yes" ]; then make SPHINXOPTS=-W clean html; fi
-    # - cd ~
-    - python setup.py test
-    # Run the Numba test suite
-    # Note that coverage is run from the checkout dir to match the "source"
-    # directive in .coveragerc
-    # - if [ "$RUN_COVERAGE" == "yes" ]; then cd $TRAVIS_BUILD_DIR; coverage erase; coverage run runtests.py -b -m numba.tests; fi
-    # - if [ "$RUN_COVERAGE" != "yes" ]; then NUMBA_ENABLE_CUDASIM=1 python -m numba.runtests -b -m numba.tests; fi
-    # # Also run test_runtests individually, to make sure test discovery didn't break
-    # - python -m numba.tests.test_runtests
-
-# after_success:
-#     - if [ "$RUN_COVERAGE" == "yes" ]; then coverage combine; codecov; fi
-
+- python setup.py test
 notifications:
-    email: false
-    on_success: "change"
-    on_failure: "always" # "change"
-    # webhooks:
-    #     urls:
-    #         - https://webhooks.gitter.im/e/bd67cc227432d99bf1f1
-    #     on_success: change
-    #     on_failure: always
-    #     on_start: false
+  email: false
+  on_success: change
+  on_failure: always
+deploy:
+  provider: pypi
+  user: danilo.horta
+  on:
+    tags: true
+  skip_cleanup: true
+  password:
+    secure: gMlG6N23UCkxndWq9gItUF3XiKOQ0l5pZGEQEvjy5KHYA8py6jnjR03hu+36o23AQMLJaLbebJl0aoBinDbNhcSidHzzeWfvVAj9Z4AXZC2augLurgsRP+WJwafBBtKOMy1Wcyn+pwhFBlgXaHFbKax2EGKZ9mZPN1BeLbGwKCQx8GHH41tex1ZlacqiI3D2msQijN91jexaLmMP8rjch7xdLZOf2WjKEUaP/yb3ubNIv+XcA6ch4I0F04TKGsFaIVfAGW3gSPen4GKN+Bm84SBxdKOH0rWmxCqXAD49MNmBiow4jlmuM148X6LfZV3ob7n2NSPgMW4ZUHexWI14MPlT/tH9zPr33BJ9t+4h+Rik55cAAMRu/2jrLmSV0NLaG7nwPK0NjYxHkSK3z6PiAUW8n2m2o48Bdao0YrQurHEAz34cU+1hndAiHOP6AO1cjTahmDI67Jr0M7e70ggLNcmBNzM2vfq+K8duYc49ewlgIMT+hNR6HQFAX0D1FlyKbEwG1ZoC1EYp7t2KGDcSeWYUxXjqh1eJOm5XFlBl5OkBQALLd6SMAehaAAcXhWeu2prmqXQ0CKxpQUcEz/DYWpYls6+S3qa5THVSjvDpl92wB9kpPOsM6+TpVPBd2X+ExFAIn4TuIn6n+6R7js/qBBQZWjoHWP6xVBQUHT+3vMU=

@@ -4,7 +4,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 PKG_NAME = 'ncephes'
-VERSION  = '0.0.2'
+VERSION  = '0.0.3'
 
 def get_test_suite():
     from unittest import TestLoader
@@ -26,7 +26,8 @@ def setup_package():
         name=PKG_NAME,
         version=VERSION,
         maintainer="Danilo Horta",
-        maintainer_email = "danilo.horta@gmail.com",
+        maintainer_email="danilo.horta@gmail.com",
+        description="Python interface for the Cephes library.",
         license="BSD",
         url='https://github.com/Horta/ncephes',
         test_suite='setup.get_test_suite',
