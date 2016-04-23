@@ -16,7 +16,7 @@ class TestNumba(unittest.TestCase):
         self.assertAlmostEqual(_incbet(1., 3., 0.3), 0.657)
 
     def test_erf(self):
-        self.assertAlmostEqual(cprob.erf(1.3), 0.9340079449406524)
+        self.assertAlmostEqual(erf(1.3), 0.9340079449406524)
 
 if __name__ == '__main__':
     unittest.main()
