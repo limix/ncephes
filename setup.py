@@ -4,7 +4,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 PKG_NAME = 'ncephes'
-VERSION  = '0.0.1'
+VERSION  = '0.0.2'
 
 def get_test_suite():
     from unittest import TestLoader
@@ -25,10 +25,10 @@ def setup_package():
     metadata = dict(
         name=PKG_NAME,
         version=VERSION,
-        maintainer="Limix Developers",
-        maintainer_email = "horta@ebi.ac.uk",
+        maintainer="Danilo Horta",
+        maintainer_email = "danilo.horta@gmail.com",
         license="BSD",
-        url='http://pmbio.github.io/limix/',
+        url='https://github.com/Horta/ncephes',
         test_suite='setup.get_test_suite',
         packages=find_packages(),
         zip_safe=True,
