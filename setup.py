@@ -23,7 +23,7 @@ def setup_package():
     install_requires = requires
 
     long_description = ("Python interface for the Cephes library. "+
-                        "It also supports Numba.")
+                        "It also supports Numba and its nopython mode.")
 
     metadata = dict(
         name=pkg_name,
