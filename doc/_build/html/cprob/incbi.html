@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Incomplete beta function &mdash; nCephes 0.0.7 documentation</title>
+  <title>Inverse of incomplete beta function &mdash; nCephes 0.0.7 documentation</title>
   
 
   
@@ -32,8 +32,7 @@
   
     <link rel="top" title="nCephes 0.0.7 documentation" href="../index.html"/>
         <link rel="up" title="cprob module" href="../cprob.html"/>
-        <link rel="next" title="Inverse of incomplete beta function" href="incbi.html"/>
-        <link rel="prev" title="cprob module" href="../cprob.html"/> 
+        <link rel="prev" title="Incomplete beta function" href="incbet.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -84,13 +83,12 @@
             
                 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../cprob.html">cprob module</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Incomplete beta function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="incbet.html">Incomplete beta function</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Inverse of incomplete beta function</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#description">Description</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#accuracy">Accuracy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#error-messages">Error messages</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="incbi.html">Inverse of incomplete beta function</a></li>
 </ul>
 </li>
 </ul>
@@ -125,11 +123,11 @@
       
           <li><a href="../cprob.html">cprob module</a> &raquo;</li>
       
-    <li>Incomplete beta function</li>
+    <li>Inverse of incomplete beta function</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/cprob/incbet.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/cprob/incbi.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -139,13 +137,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="incomplete-beta-function">
-<h1>Incomplete beta function<a class="headerlink" href="#incomplete-beta-function" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="inverse-of-incomplete-beta-function">
+<h1>Inverse of incomplete beta function<a class="headerlink" href="#inverse-of-incomplete-beta-function" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="incbet">
-<code class="descname">incbet</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#incbet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns incomplete beta integral of the arguments, evaluated
-from zero to x. The function is defined as</p>
+<dt id="incbi">
+<code class="descname">incbi</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#incbi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given y, the function finds x such that <cite>incbet(a, b, y) = x</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -163,35 +160,36 @@ from zero to x. The function is defined as</p>
 
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="math">
-\[\frac{\Gamma(a+b)}{\Gamma(a)+\Gamma(b)} \int_0^xt^{a-1}(1-t)^{b-1} dt\]</div>
-<p>The domain of definition is 0 &lt;= x &lt;= 1.  In this
-implementation a and b are restricted to positive values.
-The integral from x to 1 may be obtained by the symmetry
-relation:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">-</span> <span class="n">incbet</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  <span class="o">=</span>  <span class="n">incbet</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span>
-</pre></div>
-</div>
-<p>The integral is evaluated by a continued fraction expansion
-or, when b*x is small, by a power series.</p>
+<p>The routine performs interval halving or Newton iterations to find the
+root of <cite>incbet(a,b,x) - y = 0</cite>.</p>
 </div>
 <div class="section" id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
-<p>Tested at uniformly distributed random points (a,b,x) with a and b
-in &#8220;domain&#8221; and x between 0 and 1.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="19%" />
-<col width="19%" />
-<col width="21%" />
-<col width="21%" />
-<col width="19%" />
+<col width="11%" />
+<col width="17%" />
+<col width="15%" />
+<col width="13%" />
+<col width="26%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head" colspan="3">&nbsp;</th>
-<th class="head" colspan="2">Relative error</th>
+<tr class="row-odd"><th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+<th class="head" colspan="2">relative error</th>
 </tr>
-<tr class="row-even"><th class="head">arithmetic</th>
+<tr class="row-even"><th class="head">&nbsp;</th>
+<th class="head">x</th>
+<th class="head">a, b</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+</tr>
+<tr class="row-odd"><th class="head">arithmetic</th>
+<th class="head">domain</th>
 <th class="head">domain</th>
 <th class="head"># trials</th>
 <th class="head">peak</th>
@@ -199,67 +197,62 @@ in &#8220;domain&#8221; and x between 0 and 1.</p>
 </tr>
 </thead>
 <tbody valign="top">
+<tr class="row-even"><td>IEEE</td>
+<td>0, 1</td>
+<td>.5, 10000</td>
+<td>50000</td>
+<td>5.8e-12</td>
+<td>1.3e-13</td>
+</tr>
 <tr class="row-odd"><td>IEEE</td>
-<td>0,5</td>
-<td>10000</td>
-<td>6.9e-15</td>
-<td>4.5e-16</td>
+<td>0, 1</td>
+<td>.25, 100</td>
+<td>100000</td>
+<td>1.8e-13</td>
+<td>3.9e-15</td>
 </tr>
 <tr class="row-even"><td>IEEE</td>
-<td>0,85</td>
-<td>250000</td>
-<td>2.2e-13</td>
+<td>0, 1</td>
+<td>0, 5</td>
+<td>50000</td>
+<td>1.1e-12</td>
+<td>5.5e-15</td>
+</tr>
+<tr class="row-odd"><td>VAX</td>
+<td>0, 1</td>
+<td>.5, 100</td>
+<td>25000</td>
+<td>3.5e-14</td>
+<td>1.1e-15</td>
+</tr>
+<tr class="row-even"><td colspan="6">With a and b constrained to half-integer or integer values</td>
+</tr>
+<tr class="row-odd"><td>IEEE</td>
+<td>0, 1</td>
+<td>.5, 10000</td>
+<td>50000</td>
+<td>5.8e-12</td>
+<td>1.1e-13</td>
+</tr>
+<tr class="row-even"><td>IEEE</td>
+<td>0, 1</td>
+<td>.5, 100</td>
+<td>100000</td>
 <td>1.7e-14</td>
+<td>7.9e-16</td>
 </tr>
-<tr class="row-odd"><td>IEEE</td>
-<td>0,1000</td>
-<td>30000</td>
-<td>5.3e-12</td>
-<td>6.3e-13</td>
+<tr class="row-odd"><td colspan="6">With a=.5, b constrained to half-integer or integer values</td>
 </tr>
 <tr class="row-even"><td>IEEE</td>
-<td>0,10000</td>
-<td>250000</td>
-<td>9.3e-11</td>
-<td>7.1e-12</td>
-</tr>
-<tr class="row-odd"><td>IEEE</td>
-<td>0,100000</td>
+<td>0, 1</td>
+<td>.5, 10000</td>
 <td>10000</td>
-<td>8.7e-10</td>
-<td>4.8e-11</td>
+<td>8.3e-11</td>
+<td>1.0e-11</td>
 </tr>
 </tbody>
 </table>
-<p>Outputs smaller than the IEEE gradual underflow threshold
-were excluded from these statistics.</p>
-</div>
-<div class="section" id="error-messages">
-<h2>Error messages<a class="headerlink" href="#error-messages" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="41%" />
-<col width="23%" />
-<col width="36%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">message</th>
-<th class="head">condition</th>
-<th class="head">value returned</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>incbet domain</td>
-<td>x&lt;0, x&gt;1</td>
-<td>0.0</td>
-</tr>
-<tr class="row-odd"><td>incbet underflow</td>
-<td>&nbsp;</td>
-<td>0.0</td>
-</tr>
-</tbody>
-</table>
-<p>Reference: <a class="reference external" href="http://www.netlib.org/cephes/ldoubdoc.html#incbet">http://www.netlib.org/cephes/ldoubdoc.html#incbet</a></p>
+<p>Reference: <a class="reference external" href="http://www.netlib.org/cephes/ldoubdoc.html#incbi">http://www.netlib.org/cephes/ldoubdoc.html#incbi</a></p>
 </div>
 </div>
 
@@ -270,10 +263,8 @@ were excluded from these statistics.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="incbi.html" class="btn btn-neutral float-right" title="Inverse of incomplete beta function" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="../cprob.html" class="btn btn-neutral" title="cprob module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="incbet.html" class="btn btn-neutral" title="Incomplete beta function" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

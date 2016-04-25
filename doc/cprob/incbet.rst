@@ -1,6 +1,5 @@
 Incomplete beta function
 ========================
-
 .. py:function:: incbet(a, b, x)
 
     Returns incomplete beta integral of the arguments, evaluated
@@ -21,7 +20,7 @@ implementation a and b are restricted to positive values.
 The integral from x to 1 may be obtained by the symmetry
 relation::
 
-    1 - incbet( a, b, x )  =  incbet( b, a, 1-x ).
+    1 - incbet(a, b, x)  =  incbet(b, a, 1 - x).
 
 The integral is evaluated by a continued fraction expansion
 or, when b*x is small, by a power series.
@@ -60,3 +59,5 @@ Error messages
 incbet domain      x<0, x>1          0.0
 incbet underflow                     0.0
 ================  =========      ==============
+
+Reference: http://www.netlib.org/cephes/ldoubdoc.html#incbet
