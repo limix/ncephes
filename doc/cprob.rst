@@ -9,5 +9,4 @@ Probability integrals and their inverses.
    cprob/incbet
    cprob/incbi
 
-References:
-    - http://www.netlib.org/cephes/cprob.tgz
+Reference: http://www.netlib.org/cephes/cprob.tgz
