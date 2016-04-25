@@ -1,3 +1,5 @@
+[![Travis branch](https://img.shields.io/travis/Horta/ncephes/master.svg?style=flat-square&label=build)](https://travis-ci.org/Horta/ncephes)  [![PyPI](https://img.shields.io/pypi/v/ncephes.svg?style=flat-square&label=release%20(pypi))](https://pypi.python.org/pypi/ncephes/) [![Documentation Status](https://readthedocs.org/projects/ncephes/badge/?version=latest&style=flat-square)](http://ncephes.readthedocs.org/en/latest/?badge=latest)
+
 nCephes
 =======
 
