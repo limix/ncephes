@@ -1,4 +1,4 @@
-0.0.7 (unreleased)
+0.0.7 (2016-05-02)
 ------------------
 
 - Initial documentation about cprob module.
