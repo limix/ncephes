@@ -1,7 +1,7 @@
 0.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Initial documentation about cprob module.
 
 
 0.0.6 (2016-04-23)
