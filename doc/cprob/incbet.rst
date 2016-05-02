@@ -9,6 +9,8 @@ Incomplete beta function
     :param float b: a positive number
     :param float x: any number within [0, 1]
 
+See also :py:func:`incbi`.
+
 Description
 -----------
 
@@ -20,7 +22,7 @@ implementation a and b are restricted to positive values.
 The integral from x to 1 may be obtained by the symmetry
 relation::
 
-    1 - incbet(a, b, x)  =  incbet(b, a, 1 - x).
+    1 - incbet(a, b, x)  =  incbet(b, a, 1 - x)
 
 The integral is evaluated by a continued fraction expansion
 or, when b*x is small, by a power series.
@@ -28,7 +30,7 @@ or, when b*x is small, by a power series.
 Accuracy
 --------
 
-Tested at uniformly distributed random points (a,b,x) with a and b
+Tested at uniformly distributed random points (a, b, x) with a and b
 in "domain" and x between 0 and 1.
 
 +-----------+-----------+------------+------------+-----------+
@@ -53,11 +55,12 @@ were excluded from these statistics.
 Error messages
 --------------
 
-================  =========      ==============
-  message         condition      value returned
-================  =========      ==============
-incbet domain      x<0, x>1          0.0
-incbet underflow                     0.0
-================  =========      ==============
++----------------+------------+--------------+
+|message         |condition   |value returned|
++================+============+==============+
+|incbet domain   |x < 0, x > 1|0.0           |
++----------------+            +--------------+
+|incbet underflow|            |0.0           |
++----------------+------------+--------------+
 
-Reference: http://www.netlib.org/cephes/ldoubdoc.html#incbet
+Reference: http://www.netlib.org/cephes/doubldoc.html#incbet

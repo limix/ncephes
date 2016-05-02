@@ -8,5 +8,8 @@ Probability integrals and their inverses.
 
    cprob/incbet
    cprob/incbi
+   cprob/bdtr
+   cprob/bdtrc
+   cprob/bdtri
 
 Reference: http://www.netlib.org/cephes/cprob.tgz

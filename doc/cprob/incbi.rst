@@ -8,6 +8,8 @@ Inverse of incomplete beta function
     :param float b: a positive number
     :param float x: any number within [0, 1]
 
+See also :py:func:`incbet`.
+
 Description
 -----------
 
@@ -43,4 +45,4 @@ Accuracy
 |IEEE      |0, 1  |.5, 10000|10000   |8.3e-11|1.0e-11       |
 +----------+------+---------+--------+-------+--------------+
 
-Reference: http://www.netlib.org/cephes/ldoubdoc.html#incbi
+Reference: http://www.netlib.org/cephes/doubldoc.html#incbi
