@@ -1,5 +1,5 @@
-Binomial distribution
-=====================
+Cumulative distribution function
+================================
 .. py:function:: bdtr(k, n, p)
 
     Returns the sum of the terms 0 through k of the Binomial

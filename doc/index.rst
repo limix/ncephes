@@ -9,7 +9,7 @@ nCephes's documentation
 .. toctree::
    :maxdepth: 2
 
-   cprob
+   cprob/index
 
 Indices and tables
 ==================

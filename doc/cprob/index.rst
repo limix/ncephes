@@ -6,10 +6,9 @@ Probability integrals and their inverses.
 .. toctree::
    :maxdepth: 2
 
-   cprob/incbet
-   cprob/incbi
-   cprob/bdtr
-   cprob/bdtrc
-   cprob/bdtri
+   beta/index
+   binomial/index
+   chisq/index
+   fdist/index
 
 Reference: http://www.netlib.org/cephes/cprob.tgz

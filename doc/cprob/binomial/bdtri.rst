@@ -1,5 +1,5 @@
-Inverse binomial distribution
-=============================
+Inverse of the cumulative distribution function
+===============================================
 .. py:function:: bdtri(k, n, y)
 
     Finds the event probability p such that the sum of the

@@ -1,5 +1,5 @@
-Complemented binomial distribution
-==================================
+Survival function
+=================
 .. py:function:: bdtrc(k, n, p)
 
     Returns the sum of the terms k + 1 through n of the Binomial
