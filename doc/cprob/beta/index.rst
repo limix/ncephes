@@ -1,10 +1,9 @@
-Beta integrals
-==============
-
-Incomplete beta integral and its inverse.
+Beta distribution
+=================
 
 .. toctree::
    :maxdepth: 2
 
+   btdtr
    incbet
    incbi
