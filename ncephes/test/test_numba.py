@@ -1,7 +1,9 @@
+from numpy.testing import assert_almost_equal
+
+from numba import jit
+
 from .. import cprob
 from ..cprob import incbet
-from numba import jit
-import unittest
 
 @jit(nogil=True, nopython=True)
 def _incbet(a, b, x):
@@ -11,12 +13,8 @@ def _incbet(a, b, x):
 def erf(x):
     return cprob.erf(x)
 
-class TestNumba(unittest.TestCase):
-    def test_incbet(self):
-        self.assertAlmostEqual(_incbet(1., 3., 0.3), 0.657)
+def test_incbet():
+    assert_almost_equal(_incbet(1., 3., 0.3), 0.657)
 
-    def test_erf(self):
-        self.assertAlmostEqual(erf(1.3), 0.9340079449406524)
-
-if __name__ == '__main__':
-    unittest.main()
+def test_erf():
+    assert_almost_equal(erf(1.3), 0.9340079449406524)

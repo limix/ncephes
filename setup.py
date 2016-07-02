@@ -4,11 +4,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 pkg_name = 'ncephes'
-version = '0.0.8.dev1'
-
-def get_test_suite():
-    from unittest import TestLoader
-    return TestLoader().discover(pkg_name)
+version = '0.0.8.dev2'
 
 def setup_package():
     src_path = os.path.dirname(os.path.abspath(sys.argv[0]))
@@ -36,7 +32,6 @@ def setup_package():
         long_description=long_description,
         license="BSD",
         url='https://github.com/Horta/ncephes',
-        test_suite='setup.get_test_suite',
         packages=find_packages(),
         zip_safe=True,
         setup_requires=setup_requires,
