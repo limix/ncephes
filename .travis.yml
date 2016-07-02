@@ -1,28 +1,26 @@
-dist: trusty
-matrix:
-  include:
-  - env: PYTHON=2.7 NUMPY="numpy=1.10"
-  - env: PYTHON=3.4 NUMPY="numpy=1.10"
-  - env: PYTHON=3.5 NUMPY="numpy=1.10"
-branches:
-  only:
-  - master
-before_install:
-- wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-- chmod +x miniconda.sh
-- ./miniconda.sh -b
-- export PATH=$HOME/miniconda3/bin:$PATH
-- conda update --yes conda
-- conda create -n travisci --yes python=$PYTHON $NUMPY cffi pip scipy jinja2 numba
-- source activate travisci
-- CONDA_INSTALL="conda install --yes -q"
-- pip install -q zest.releaser
-install:
-- python setup.py build_ext -q --inplace
-- python setup.py install -q >/dev/null
-script:
-- python setup.py test
-notifications:
-  email: true
-  on_success: change
-  on_failure: always
+language: python
+sudo: false
+
+cache:
+  - pip
+  - apt
+
+addons:
+  apt:
+    packages:
+      - build-essential
+      - python-dev
+      - libc6
+      - g++
+      - gfortran
+      - libhdf5-serial-dev
+
+python:
+  - 2.7
+  # - 3.3
+  # - 3.4
+  # - 3.5
+
+install: pip install -r requirements.txt
+
+script: py.test .

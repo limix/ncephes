@@ -1,0 +1,4 @@
+cffi
+jinja2
+numba
+pycparser

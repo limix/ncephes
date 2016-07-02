@@ -13,10 +13,8 @@ def setup_package():
     sys.path.insert(0, src_path)
 
 
-    requires = ['numba', 'cffi>=1.0.0']
-
-    setup_requires = requires + ['pycparser']
-    install_requires = requires
+    with open('requirements.txt') as f:
+        requires = [row.strip() for row in f.readlines()]
 
     long_description = ("Python interface for the Cephes library. "+
                         "It also supports Numba and its nopython mode.")
@@ -34,9 +32,9 @@ def setup_package():
         url='https://github.com/Horta/ncephes',
         packages=find_packages(),
         zip_safe=True,
-        setup_requires=setup_requires,
+        setup_requires=requires,
         cffi_modules=["cprob_build.py:ffi", "ellf_build.py:ffi"],
-        install_requires=install_requires,
+        install_requires=requires,
         classifiers=[
             "Development Status :: 3 - Alpha",
             "Environment :: Console",
