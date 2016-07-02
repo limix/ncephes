@@ -1,7 +1,7 @@
 0.0.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added support to Normal distribution.
 
 
 0.0.7 (2016-05-02)
