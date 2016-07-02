@@ -10,5 +10,6 @@ Probability integrals and their inverses.
    binomial/index
    chisq/index
    fdist/index
+   normal/index
 
 Reference: http://www.netlib.org/cephes/cprob.tgz
