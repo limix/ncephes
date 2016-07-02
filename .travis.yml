@@ -24,6 +24,8 @@ python:
 before_install:
     - pip install --upgrade pip
     - pip install --upgrade wheel
+    - sudo apt-get update -q
+    - ./llvm-install.sh
     - pip install enum34
 
 install: pip install -r requirements.txt
