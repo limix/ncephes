@@ -1,5 +1,5 @@
-from ncephes import cprob
-from ncephes.cprob import incbet
+from .. import cprob
+from ..cprob import incbet
 from numba import jit
 import unittest
 

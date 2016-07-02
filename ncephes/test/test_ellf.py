@@ -1,4 +1,4 @@
-from ncephes import ellf
+from .. import ellf
 import unittest
 
 class TestEllf(unittest.TestCase):

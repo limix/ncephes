@@ -1,4 +1,4 @@
-from ncephes import cprob
+from .. import cprob
 import unittest
 
 class TestCprob(unittest.TestCase):

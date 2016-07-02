@@ -1,6 +1,6 @@
 import os
 import unittest
-from ncephes import get_include
+from .. import get_include
 
 class TestLib(unittest.TestCase):
     def test_get_include(self):
