@@ -8,8 +8,9 @@ python:
 addons:
     apt:
         packages:
-            - clang-3.7
+            - build-essential
             - python-dev
+            - libc6
 
 env:
     global:
@@ -24,10 +25,11 @@ before_install:
     - pip install --upgrade pip
     - pip install --upgrade wheel
     - pip install enum34
+    - apt-get install libffi6 libffi-dev
 
 install:
     - export PATH=$HOME/clang+llvm/bin:$PATH
-    - export CXX="clang++-3.7"
+    - export CXX="clang++"
     - export CC="clang-3.7"
     - pip install -r requirements.txt
 
