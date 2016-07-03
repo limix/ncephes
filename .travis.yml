@@ -23,7 +23,7 @@ install:
     - if [ $PYTHON \< "3.4" ]; then $CONDA_INSTALL enum34; fi
     # Install dependencies for building the docs
     - $CONDA_INSTALL pip sphinx sphinx_rtd_theme pygments
-    - $CONDA_INSTALL numpy
+    - $CONDA_INSTALL numpy pytest
 
 script:
     # # Ensure that the documentation builds without warnings nor missing references
