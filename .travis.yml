@@ -24,7 +24,7 @@ install:
     # Install dependencies for building the docs
     - $CONDA_INSTALL pip sphinx sphinx_rtd_theme pygments
     - $CONDA_INSTALL numpy pytest
-    - python setup.py install
+    - python setup.py develop
 
 script:
     # # Ensure that the documentation builds without warnings nor missing references

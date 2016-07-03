@@ -1,4 +1,4 @@
-cffi
+cffi>=1.0.0
 jinja2
 numba
 pycparser
