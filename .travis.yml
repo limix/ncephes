@@ -1,32 +1,73 @@
 language: python
-sudo: false
-
-cache:
-  - pip
-  - apt
-
-addons:
-  apt:
-    packages:
-      - build-essential
-      - python-dev
-      - libc6
-      - g++
-      - gfortran
-      - llvm-dev
+sudo: required
+dist: trusty
 
 python:
-  - 2.7
-  # - 3.3
-  # - 3.4
-  # - 3.5
+    - 2.7
+
+addons:
+    apt:
+        packages:
+            - build-essential
+            - python-dev
+            - libc6
+            - g++
+            - gfortran
+
+env:
+    global:
+        - LLVM_VERSION=3.7.0
+        - LLVM_ARCHIVE_PATH=$HOME/clang+llvm.tar.xz
 
 before_install:
+    - wget http://llvm.org/releases/$LLVM_VERSION/clang+llvm-$LLVM_VERSION-x86_64-linux-gnu-ubuntu-14.04.tar.xz -O $LLVM_ARCHIVE_PATH
+    - mkdir $HOME/clang+llvm
+    - tar xf $LLVM_ARCHIVE_PATH -C $HOME/clang+llvm --strip-components 1
+    - export PATH=$HOME/clang+llvm/bin:$PATH
     - pip install --upgrade pip
     - pip install --upgrade wheel
-    - ./llvm-install.sh
     - pip install enum34
 
 install: pip install -r requirements.txt
 
 script: py.test .
+
+#
+#
+# language: python
+# sudo: false
+#
+# cache:
+#   - pip
+#   - apt
+#
+# addons:
+#   apt:
+#     packages:
+#       - build-essential
+#       - python-dev
+#       - libc6
+#       - g++
+#       - gfortran
+#       - llvm-dev
+#     sources:
+#       - llvm-toolchain-precise-3.7
+#
+# # deb http://llvm-apt.ecranbleu.org/apt/precise/ llvm-toolchain-precise-3.7 main
+# # deb-src http://llvm-apt.ecranbleu.org/apt/precise/ llvm-toolchain-precise-3.7 main
+#
+# python:
+#   - 2.7
+#   # - 3.3
+#   # - 3.4
+#   # - 3.5
+#
+# before_install:
+#     - pip install --upgrade pip
+#     - pip install --upgrade wheel
+#     - ./llvm-install.sh
+#     - pip install enum34
+#
+# install: pip install -r requirements.txt
+#
+# script: py.test .
