@@ -6,7 +6,7 @@ matrix:
         # - env: PYTHON=3.4
         - env: PYTHON=2.7
 
-before_install:
+install:
     # Install Miniconda
     - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
     - chmod +x miniconda.sh
@@ -18,15 +18,12 @@ before_install:
     - source activate travisci
     # Install llvmdev (separate channel, for now)
     - $CONDA_INSTALL -c numba llvmdev="3.7*"
+    - $CONDA_INSTALL numba
     # Install enum34 for Python < 3.4
     - if [ $PYTHON \< "3.4" ]; then $CONDA_INSTALL enum34; fi
     # Install dependencies for building the docs
     - $CONDA_INSTALL pip sphinx sphinx_rtd_theme pygments
     - $CONDA_INSTALL numpy
-
-install:
-    - CONDA_INSTALL="conda install --yes -q"
-    - $CONDA_INSTALL numba
 
 script:
     # # Ensure that the documentation builds without warnings nor missing references
@@ -36,6 +33,7 @@ script:
     # - cd $TRAVIS_BUILD_DIR
     # - python runtests.py -v
     # - if [ "$RUN_COVERAGE" == "yes" ]; then coverage run runtests.py; fi
+    - source activate travisci
     - py.test .
 #
 # after_success:
