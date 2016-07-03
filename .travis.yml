@@ -1,124 +1,22 @@
+language: python
 dist: trusty
+sudo: false
 
 matrix:
     include:
-        # - env: PYTHON=3.5
+        - env: PYTHON=3.5
         # - env: PYTHON=3.4
         - env: PYTHON=2.7
 
+before_install:
+    - wget https://raw.githubusercontent.com/Horta/travis-miniconda/master/install.sh -O install.sh
+    - chmod +x install.sh
+    - ./install.sh $PYTHON
+
 install:
-    # Install Miniconda
-    - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-    - chmod +x miniconda.sh
-    - ./miniconda.sh -b
-    - export PATH=$HOME/miniconda3/bin:$PATH
-    - CONDA_INSTALL="conda install --yes -q"
-    # Setup environment
-    - conda create -n travisci --yes python=$PYTHON
     - source activate travisci
-    # Install llvmdev (separate channel, for now)
-    - $CONDA_INSTALL -c numba llvmdev="3.7*"
-    - $CONDA_INSTALL numba
-    # Install enum34 for Python < 3.4
-    - if [ $PYTHON \< "3.4" ]; then $CONDA_INSTALL enum34; fi
-    # Install dependencies for building the docs
-    - $CONDA_INSTALL pip sphinx sphinx_rtd_theme pygments
-    - $CONDA_INSTALL numpy pytest
     - python setup.py develop
 
 script:
-    # # Ensure that the documentation builds without warnings nor missing references
-    # - cd $TRAVIS_BUILD_DIR/docs
-    # - make SPHINXOPTS=-Wn clean html
-    # # Run test suite
-    # - cd $TRAVIS_BUILD_DIR
-    # - python runtests.py -v
-    # - if [ "$RUN_COVERAGE" == "yes" ]; then coverage run runtests.py; fi
     - source activate travisci
     - py.test .
-#
-# after_success:
-#     - if [ "$RUN_COVERAGE" == "yes" ]; then codecov; fi
-
-# notifications:
-#     email: false
-#     flowdock: "cb7bc57e58b3d42f77685f93211c03ab"
-#     on_success: "change"
-#     on_failure: "always" # "change"
-
-# language: python
-# sudo: required
-# dist: trusty
-#
-# python:
-#     - 2.7
-#
-# addons:
-#     apt:
-#         packages:
-#             - build-essential
-#             - python-dev
-#             - libc6
-#
-# env:
-#     global:
-#         - LLVM_VERSION=3.7.0
-#         - LLVM_ARCHIVE_PATH=$HOME/clang+llvm.tar.xz
-#
-# before_install:
-#     - wget http://llvm.org/releases/$LLVM_VERSION/clang+llvm-$LLVM_VERSION-x86_64-linux-gnu-ubuntu-14.04.tar.xz -O $LLVM_ARCHIVE_PATH
-#     - mkdir $HOME/clang+llvm
-#     - tar xf $LLVM_ARCHIVE_PATH -C $HOME/clang+llvm --strip-components 1
-#     - export PATH=$HOME/clang+llvm/bin:$PATH
-#     - pip install --upgrade pip
-#     - pip install --upgrade wheel
-#     - pip install enum34
-#     - apt-get install libffi6 libffi-dev
-#
-# install:
-#     - export PATH=$HOME/clang+llvm/bin:$PATH
-#     - export CXX="clang++"
-#     - export CC="clang-3.7"
-#     - pip install -r requirements.txt
-#
-# script: py.test .
-#
-# #
-# #
-# # language: python
-# # sudo: false
-# #
-# # cache:
-# #   - pip
-# #   - apt
-# #
-# # addons:
-# #   apt:
-# #     packages:
-# #       - build-essential
-# #       - python-dev
-# #       - libc6
-# #       - g++
-# #       - gfortran
-# #       - llvm-dev
-# #     sources:
-# #       - llvm-toolchain-precise-3.7
-# #
-# # # deb http://llvm-apt.ecranbleu.org/apt/precise/ llvm-toolchain-precise-3.7 main
-# # # deb-src http://llvm-apt.ecranbleu.org/apt/precise/ llvm-toolchain-precise-3.7 main
-# #
-# # python:
-# #   - 2.7
-# #   # - 3.3
-# #   # - 3.4
-# #   # - 3.5
-# #
-# # before_install:
-# #     - pip install --upgrade pip
-# #     - pip install --upgrade wheel
-# #     - ./llvm-install.sh
-# #     - pip install enum34
-# #
-# # install: pip install -r requirements.txt
-# #
-# # script: py.test .
