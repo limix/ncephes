@@ -25,6 +25,7 @@ before_install:
     - $CONDA_INSTALL numpy
 
 install:
+    - CONDA_INSTALL="conda install --yes -q"
     - $CONDA_INSTALL numba
 
 script:
