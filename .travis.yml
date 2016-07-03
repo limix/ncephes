@@ -8,11 +8,8 @@ python:
 addons:
     apt:
         packages:
-            - build-essential
+            - clang-3.7
             - python-dev
-            - libc6
-            - g++
-            - gfortran
 
 env:
     global:
@@ -28,7 +25,11 @@ before_install:
     - pip install --upgrade wheel
     - pip install enum34
 
-install: pip install -r requirements.txt
+install:
+    - export PATH=$HOME/clang+llvm/bin:$PATH
+    - export CXX="clang++-3.7"
+    - export CC="clang-3.7"
+    - pip install -r requirements.txt
 
 script: py.test .
 
