@@ -57,4 +57,12 @@ def setup_package():
         os.chdir(old_path)
 
 if __name__ == '__main__':
+    try:
+        __import__("numpy")
+    except ImportError:
+        msg = "Error: numpy package couldn't be found."
+        msg += " Please, install it first so I can proceed."
+        print(msg)
+        sys.exit(1)
+
     setup_package()
