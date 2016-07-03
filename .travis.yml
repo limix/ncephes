@@ -2,21 +2,22 @@ language: python
 dist: trusty
 sudo: false
 
-matrix:
-    include:
-        - env: PYTHON=3.5
-        # - env: PYTHON=3.4
-        - env: PYTHON=2.7
+python:
+  - "2.7"
+  # - "3.3"
+  # - "3.4"
 
 before_install:
     - wget https://raw.githubusercontent.com/Horta/travis-miniconda/master/install.sh -O install.sh
     - chmod +x install.sh
-    - ./install.sh $PYTHON
+    - ./install.sh
 
 install:
     - source activate travisci
+    - conda info -a
     - python setup.py develop
 
 script:
     - source activate travisci
+    - conda info -a
     - py.test .
