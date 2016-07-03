@@ -25,7 +25,7 @@ before_install:
     - $CONDA_INSTALL numpy
 
 install:
-    - pip install -r requirements.txt
+    - $CONDA_INSTALL numba
 
 script:
     # # Ensure that the documentation builds without warnings nor missing references
