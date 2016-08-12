@@ -10,6 +10,10 @@ import re
 import tarfile
 import subprocess
 
+from build_helpers import read_export_file
+from build_helpers import forward_call
+
+
 SUPPORTED_MODULES = open('./supported_modules.txt').read().split("\n")[:-1]
 
 def download_extract():
@@ -69,6 +73,15 @@ def apply_patch():
     cmd = "patch ncephes/cephes/cprob/incbet.c ncephes/cephes/incbet.patch"
     subprocess.check_call(cmd, shell=True)
 
+def create_api():
+    guard_start = "#ifndef CPROB_H\n#define CPROB_H\n\n"
+    guard_end = "\n\n#endif\n"
+    import cprob_info
+    d = cprob_info.get_info()
+    apidecls = '\n'.join(['extern ' + f for f in d['apidecls']])
+    with open(join('ncephes', 'include', 'ncephes', 'cprob.h'), 'w') as f:
+        f.write(guard_start + apidecls + guard_end)
+
 def update():
     src_path = os.path.dirname(os.path.abspath(sys.argv[0]))
     old_path = os.getcwd()
@@ -79,7 +92,7 @@ def update():
         clear_code()
         convert_old_style_proto()
         apply_patch()
-
+        create_api()
     finally:
         os.chdir(old_path)
 
