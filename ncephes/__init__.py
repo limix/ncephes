@@ -6,6 +6,7 @@ try:
 except pkg_resources.DistributionNotFound:
     __version__ = 'unknown'
 
-from .lib import get_include
+from .api import get_include
+from .api import get_lib
 from . import cprob
 from . import ellf

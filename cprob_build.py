@@ -17,4 +17,4 @@ ffi.set_source('ncephes._cprob_ffi',
                libraries=[])
 ffi.cdef(fdecl_noextern)
 ffi.embedding_api('\n'.join(d['apidecls']))
-ffi.compile(target="libcprob-1.0.*", verbose=True)
+ffi.compile(target="libcprob", verbose=True)

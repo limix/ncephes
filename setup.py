@@ -55,7 +55,7 @@ def setup_package():
         data_files=[('ncephes/include/ncephes',
                      ['ncephes/include/ncephes/cprob.h']),
                     ('ncephes/lib',
-                     ['ncephes/libcprob-1.0.dylib'])]
+                     ['ncephes/libcprob.dylib'])]
     )
 
     try:
