@@ -16,7 +16,5 @@ ffi.set_source('ncephes._cprob_ffi',
                sources=d['src_files'],
                libraries=[])
 ffi.cdef(fdecl_noextern)
-# ffi.embedding_api("extern double ncephes_bdtrc(int k, int n, double p);")
-# import ipdb; ipdb.set_trace()
-# ffi.embedding_api(ffcalls)
-# ffi.compile(target="cprob-0.1.*", verbose=True)
+ffi.embedding_api('\n'.join(d['apidecls']))
+ffi.compile(target="libcprob-1.0.*", verbose=True)

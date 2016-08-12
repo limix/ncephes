@@ -51,7 +51,11 @@ def setup_package():
             "Programming Language :: Python :: 3.5",
             "Topic :: Scientific/Engineering"
         ],
-        keywords=["cephes", "math", "numba"]
+        keywords=["cephes", "math", "numba"],
+        data_files=[('ncephes/include/ncephes',
+                     ['ncephes/include/ncephes/cprob.h']),
+                    ('ncephes/lib',
+                     ['ncephes/libcprob-1.0.dylib'])]
     )
 
     try:

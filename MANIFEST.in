@@ -25,3 +25,4 @@ recursive-include doc *.bat
 recursive-include doc *.py
 recursive-include doc *.rst
 recursive-include doc Makefile
+include ncephes/include/ncephes/*.h
