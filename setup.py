@@ -6,17 +6,20 @@ from setuptools import find_packages
 pkg_name = 'ncephes'
 version = '0.0.8.dev2'
 
+
 def setup_package():
     src_path = os.path.dirname(os.path.abspath(sys.argv[0]))
     old_path = os.getcwd()
     os.chdir(src_path)
     sys.path.insert(0, src_path)
 
-
     with open('requirements.txt') as f:
         requires = [row.strip() for row in f.readlines()]
 
-    long_description = ("Python interface for the Cephes library. "+
+    setup_requires = requires + ['pytest-runner']
+    tests_require = ['pytest']
+
+    long_description = ("Python interface for the Cephes library. " +
                         "It also supports Numba and its nopython mode.")
 
     metadata = dict(
@@ -31,10 +34,11 @@ def setup_package():
         license="BSD",
         url='https://github.com/Horta/ncephes',
         packages=find_packages(),
-        zip_safe=True,
-        setup_requires=requires,
+        zip_safe=False,
+        setup_requires=setup_requires,
         cffi_modules=["cprob_build.py:ffi", "ellf_build.py:ffi"],
         install_requires=requires,
+        tests_require=tests_require,
         classifiers=[
             "Development Status :: 3 - Alpha",
             "Environment :: Console",
