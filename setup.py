@@ -36,7 +36,8 @@ def setup_package():
         packages=find_packages(),
         zip_safe=False,
         setup_requires=setup_requires,
-        cffi_modules=["cprob_build.py:ffi", "ellf_build.py:ffi"],
+        cffi_modules=["cprob_build.py:make_module",
+                      "ellf_build.py:ffi"],
         install_requires=requires,
         tests_require=tests_require,
         classifiers=[
@@ -55,7 +56,7 @@ def setup_package():
         data_files=[('ncephes/include/ncephes',
                      ['ncephes/include/ncephes/cprob.h']),
                     ('ncephes/lib',
-                     ['ncephes/libcprob.dylib'])]
+                     ['libcprob.dylib'])]
     )
 
     try:
