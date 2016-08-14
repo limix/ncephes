@@ -177,6 +177,8 @@ class build_capi(Command, object):
         return filenames
 
     def build_libraries(self, capi_libs):
+        import ipdb
+        ipdb.set_trace()
         from distutils.errors import DistutilsSetupError
         for (lib_name, build_info) in capi_libs:
             sources = build_info.get('sources')

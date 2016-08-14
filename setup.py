@@ -17,6 +17,8 @@ version = '0.0.8.dev4'
 class BuildExt(build_ext):
 
     def run(self):
+        import ipdb
+        ipdb.set_trace()
         self.run_command("build_capi")
         return build_ext.run(self)
 
