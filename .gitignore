@@ -3,4 +3,4 @@ dist/
 doc/_build
 .cache/
 *.dylib
-*.c
+*_ffi.c

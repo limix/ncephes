@@ -12,7 +12,7 @@ extern double ncephes_expx2(double x, int sign);
 extern double ncephes_fdtrc(int ia, int ib, double x);
 extern double ncephes_fdtr(int ia, int ib, double x);
 extern double ncephes_fdtri(int ia, int ib, double y);
-extern double ncephes_cephes_gamma(double x);
+extern double ncephes_gamma(double x);
 extern double ncephes_lgam(double x);
 extern double ncephes_gdtr(double a, double b, double x);
 extern double ncephes_gdtrc(double a, double b, double x);

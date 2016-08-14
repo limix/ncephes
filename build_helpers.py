@@ -79,6 +79,12 @@ def fetch_func_decl(filename):
     return [str(f) for f in v.functions]
 
 
+def _rcs(s):
+    if s.startswith('cephes_'):
+        return s[len('cephes_'):]
+    return s
+
+
 def api_decl(decl):
     parser = CParser()
     decl = parser.parse(decl + ';', filename='<stdin>').ext[0]
@@ -90,7 +96,7 @@ def api_decl(decl):
         ipdb.set_trace()
     else:
         rtype = decl.type.type.type.names[0]
-    ndecl = rtype + ' ncephes_' + name + '('
+    ndecl = rtype + ' ncephes_' + _rcs(name) + '('
     for param in args.params:
         if len(param.type.type.names) > 1:
             import ipdb
@@ -113,7 +119,7 @@ def forward_call(decl):
         ipdb.set_trace()
     else:
         rtype = decl.type.type.type.names[0]
-    ndecl = rtype + ' ncephes_' + name + '('
+    ndecl = rtype + ' ncephes_' + _rcs(name) + '('
     call_expr = name + '('
     for param in args.params:
         if len(param.type.type.names) > 1:
