@@ -1,8 +1,18 @@
+from os.path import splitext
+from os.path import basename
+from os.path import join
+
+from glob import glob
+
+import re
+
 from pycparser import parse_file
 from pycparser.c_parser import CParser
 from pycparser.c_ast import NodeVisitor
 
+
 class FuncSign(object):
+
     def __init__(self, name, ret_type):
         self.name = name
         self.ret_type = ret_type
@@ -23,6 +33,7 @@ class FuncSign(object):
 
 
 class FuncDefVisitor(NodeVisitor):
+
     def __init__(self):
         self.functions = []
 
@@ -35,7 +46,7 @@ class FuncDefVisitor(NodeVisitor):
             t = t.type
             suffix += '*'
         typ = t.names[0]
-        return (name, typ+suffix)
+        return (name, typ + suffix)
 
     def visit_FuncDef(self, node):
         ret_type = node.decl.type.type.type.names[0]
@@ -75,13 +86,15 @@ def api_decl(decl):
     args = decl.type.args
     nargs = len(args.params)
     if len(decl.type.type.type.names) > 1:
-        import ipdb; ipdb.set_trace()
+        import ipdb
+        ipdb.set_trace()
     else:
         rtype = decl.type.type.type.names[0]
     ndecl = rtype + ' ncephes_' + name + '('
     for param in args.params:
         if len(param.type.type.names) > 1:
-            import ipdb; ipdb.set_trace()
+            import ipdb
+            ipdb.set_trace()
         typ = param.type.type.names[0]
         ndecl += typ + ' ' + param.name + ', '
     if nargs > 0:
@@ -96,14 +109,16 @@ def forward_call(decl):
     args = decl.type.args
     nargs = len(args.params)
     if len(decl.type.type.type.names) > 1:
-        import ipdb; ipdb.set_trace()
+        import ipdb
+        ipdb.set_trace()
     else:
         rtype = decl.type.type.type.names[0]
     ndecl = rtype + ' ncephes_' + name + '('
     call_expr = name + '('
     for param in args.params:
         if len(param.type.type.names) > 1:
-            import ipdb; ipdb.set_trace()
+            import ipdb
+            ipdb.set_trace()
         typ = param.type.type.names[0]
         ndecl += typ + ' ' + param.name + ', '
         call_expr += param.name + ', '
@@ -114,3 +129,38 @@ def forward_call(decl):
     call_expr += ')'
     ndecl += " { return %s; }" % call_expr
     return ndecl
+
+
+def get_info(pkg):
+    if pkg == 'cprob':
+        return _get_cprob_info()
+    return {}
+
+
+def _get_cprob_info():
+    include_dirs = [join('ncephes', 'cephes', 'cprob')]
+    src_files = glob(join('ncephes', 'cephes', 'cprob', '*.c'))
+    src_files.append(join('ncephes', 'cephes', 'cmath', 'isnan.c'))
+    export_table = read_export_file(join('ncephes', 'cephes',
+                                         'cprob_export.txt'))
+
+    regex = re.compile(r'^.* (.+)\(.*\).*$')
+    fdecls = []
+    ffcalls = []
+    apidecls = []
+    for fp in glob(join('ncephes', 'cephes', 'cprob', '*.c')):
+        modname = splitext(basename(fp))[0]
+        if modname in export_table:
+            fnames = export_table[modname]
+            fs = []
+            for fd in fetch_func_decl(fp):
+                fdname = regex.match(fd).group(1)
+                for fn in fnames:
+                    if fn == fdname:
+                        fs.append(fd)
+                        ffcalls.append(forward_call(fd))
+                        apidecls.append(api_decl(fd))
+            fdecls.extend(fs)
+
+    return dict(include_dirs=include_dirs, src_files=src_files, fdecls=fdecls,
+                ffcalls=ffcalls, apidecls=apidecls)

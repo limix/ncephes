@@ -9,9 +9,7 @@ from os.path import splitext
 import re
 import tarfile
 import subprocess
-
-from build_helpers import read_export_file
-from build_helpers import forward_call
+from build_helpers import get_info
 
 
 SUPPORTED_MODULES = open('./supported_modules.txt').read().split("\n")[:-1]
@@ -78,39 +76,18 @@ def apply_patch():
     subprocess.check_call(cmd, shell=True)
 
 
-def _create_headers():
+def create_api():
+    d = get_info('cprob')
+
     guard_start = "#ifndef CPROB_H\n#define CPROB_H\n\n"
     guard_end = "\n\n#endif\n"
-    import cprob_info
-    d = cprob_info.get_info()
     apidecls = '\n'.join(['extern ' + f for f in d['apidecls']])
     with open(join('ncephes', 'include', 'ncephes', 'cprob.h'), 'w') as f:
         f.write(guard_start + apidecls + guard_end)
 
-
-def _create_cmakelists():
-    import cprob_info
-    d = cprob_info.get_info()
-    file_content = '''cmake_minimum_required(VERSION 2.8)
-
-project (ncephes)
-set(CMAKE_BUILD_TYPE Release)
-add_library(ncprob STATIC'''
-    for f in d['src_files']:
-        file_content += "\n" + ' ' * 12 + "${CMAKE_CURRENT_SOURCE_DIR}/" + f[8:]
-    file_content += '\n' + ' ' * 11 + ')\n'
-
-    file_content += "include_directories("
-    for f in d['include_dirs']:
-        file_content += "\n" + ' ' * 20 + "${CMAKE_CURRENT_SOURCE_DIR}/" + f[8:]
-    file_content += '\n' + ' ' * 19 + ')\n\n'
-    with open('ncephes/CMakeLists.txt', 'w') as f:
-        f.write(file_content)
-
-
-def create_api():
-    _create_headers()
-    # _create_cmakelists()
+    with open(join('ncephes', 'cephes', 'cprob_ffcall.c'), 'w') as f:
+        t = '#include "ncephes/cprob.h"\n\n' + '\n'.join(d['ffcalls']) + '\n\n'
+        f.write(t)
 
 
 def update():

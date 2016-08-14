@@ -1,21 +1,35 @@
 import os
+from os.path import join
 import sys
 from setuptools import setup
 from setuptools import find_packages
-# from distutils.command.build import build as _build
 from distutils.command.build_clib import build_clib
-from glob import glob
+
+from build_helpers import get_info
 
 pkg_name = 'ncephes'
-version = '0.0.8.dev2'
+version = '0.0.8.dev3'
 
-#
-# class BuildCommand(_build):
-#     pass
-#
-import cprob_info
-d = cprob_info.get_info()
-libncprob = ('ncprob', {'sources': d['src_files']})
+
+def _define_libraries():
+
+    supms = open('supported_modules.txt').read().split("\n")[:-1]
+    incl = join('ncephes', 'include')
+    lib = join('ncephes', 'lib')
+    libraries = []
+    hdr_files = []
+    lib_files = []
+
+    for supm in [s for s in supms if s == 'cprob']:
+        srcs = get_info(supm)['src_files']
+        srcs.append(join('ncephes', 'cephes', 'cprob_ffcall.c'))
+        v = ('n' + supm, {'sources': srcs, 'include_dirs': [incl]})
+        libraries.append(v)
+        hdr_files.append(join(incl, 'ncephes', supm + '.h'))
+        lib_files.append(join(lib, 'libn' + supm + '.a'))
+
+    data_files = [(join(incl, 'ncephes'), hdr_files), (lib, lib_files)]
+    return dict(libraries=libraries, data_files=data_files)
 
 
 def setup_package():
@@ -33,6 +47,8 @@ def setup_package():
     long_description = ("Python interface for the Cephes library. " +
                         "It also supports Numba and its nopython mode.")
 
+    dlib = _define_libraries()
+
     metadata = dict(
         name=pkg_name,
         version=version,
@@ -43,13 +59,13 @@ def setup_package():
         description="Python interface for the Cephes library.",
         long_description=long_description,
         license="BSD",
-        libraries=[libncprob],
+        libraries=dlib['libraries'],
         url='https://github.com/Horta/ncephes',
         packages=find_packages(),
         zip_safe=False,
         cmdclass={'build_clib': build_clib},
         setup_requires=setup_requires,
-        cffi_modules=["cprob_build.py:make_module",
+        cffi_modules=["cprob_build.py:make",
                       "ellf_build.py:ffi"],
         install_requires=requires,
         tests_require=tests_require,
@@ -66,14 +82,9 @@ def setup_package():
             "Topic :: Scientific/Engineering"
         ],
         keywords=["cephes", "math", "numba"],
-        data_files=[('ncephes/include/ncephes',
-                     ['ncephes/include/ncephes/cprob.h']),
-                    ('ncephes/lib',
-                     ['ncephes/lib/libncprob.a'])]
+        data_files=dlib['data_files'],
     )
-    # ,
-    # ('ncephes/lib',
-    # ['ncephes/buid/libncprob.a'])
+
     try:
         setup(**metadata)
     finally:
