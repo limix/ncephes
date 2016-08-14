@@ -1,5 +1,6 @@
 import os
 from setuptools import setup
+from setuptools.command.build_ext import build_ext
 from os.path import join
 import sys
 from setuptools import find_packages
@@ -11,6 +12,13 @@ from build_capi import build_capi
 
 pkg_name = 'ncephes'
 version = '0.0.8.dev4'
+
+
+class BuildExt(build_ext):
+
+    def run(self):
+        self.run_command("build_capi")
+        return build_ext.run(self)
 
 
 def _check_pycparser():
@@ -51,7 +59,6 @@ def setup_package():
         description="Python interface for the Cephes library.",
         long_description=long_description,
         license="BSD",
-        # capi_libs=dlib['libraries'],
         url='https://github.com/Horta/ncephes',
         packages=find_packages(),
         zip_safe=False,
@@ -71,7 +78,7 @@ def setup_package():
             "Programming Language :: Python :: 3.5",
             "Topic :: Scientific/Engineering"
         ],
-        cmdclass={'build_capi': build_capi},
+        cmdclass={'build_capi': build_capi, 'build_ext': BuildExt},
         keywords=["cephes", "math", "numba"],
         data_files=dlib['data_files'],
     )
