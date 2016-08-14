@@ -1,10 +1,10 @@
 from cffi import FFI
 
-from build_helpers import get_info
+from build_helpers import get_module_info
 
 
 def _make(module):
-    d = get_info(module)
+    d = get_module_info(module)
 
     fdecl_extern = ';\n'.join(['extern ' + f for f in d['fdecls']]) + ';'
     fdecl_noextern = ';'.join(d['fdecls']) + ';'

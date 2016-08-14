@@ -137,7 +137,7 @@ def forward_call(decl):
     return ndecl
 
 
-def get_info(module):
+def get_module_info(module):
     include_dirs = [join('ncephes', 'cephes', module)]
     src_files = glob(join('ncephes', 'cephes', module, '*.c'))
     src_files.append(join('ncephes', 'cephes', 'cmath', 'isnan.c'))
@@ -164,3 +164,35 @@ def get_info(module):
 
     return dict(include_dirs=include_dirs, src_files=src_files, fdecls=fdecls,
                 ffcalls=ffcalls, apidecls=apidecls)
+
+
+def get_libs_info():
+
+    if get_libs_info.return_ is None:
+
+        supms = open('supported_modules.txt').read().split("\n")[:-1]
+        incl = join('ncephes', 'include')
+        lib = join('ncephes', 'lib')
+        libraries = []
+        hdr_files = []
+        lib_files = []
+
+        for supm in [s for s in supms if s == 'cprob']:
+            srcs = get_module_info(supm)['src_files']
+            srcs.append(join('ncephes', 'cephes', supm + '_ffcall.c'))
+            v = ('n' + supm, {'sources': srcs, 'include_dirs': [incl]})
+            libraries.append(v)
+            hdr_files.append(join(incl, 'ncephes', supm + '.h'))
+            lib_files.append(join(lib, 'libn' + supm + '.a'))
+
+        cffi_modules = []
+        for supm in supms:
+            cffi_modules.append("module_build.py:" + supm)
+
+        data_files = [(join(incl, 'ncephes'), hdr_files), (lib, lib_files)]
+        get_libs_info.return_ = dict(libraries=libraries,
+                                     data_files=data_files,
+                                     cffi_modules=cffi_modules)
+
+    return get_libs_info.return_
+get_libs_info.return_ = None
