@@ -19,7 +19,7 @@ def _check_pycparser():
                    use_cpp=True, cpp_path='cpp', cpp_args='')
     except RuntimeError:
         print('Error: could not parse a C file. Do you have a working C/C++' +
-              'compiler system?')
+              ' compiler system?')
         sys.exit(1)
 
 
