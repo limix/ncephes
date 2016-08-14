@@ -19,5 +19,4 @@ def _make(module):
     return ffi
 
 cprob = _make('cprob')
-cmath = _make('cmath')
 ellf = _make('ellf')

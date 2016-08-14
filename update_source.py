@@ -76,18 +76,25 @@ def apply_patch():
     subprocess.check_call(cmd, shell=True)
 
 
-def create_api():
-    d = get_info('cprob')
+def _create_api(module):
+    d = get_info(module)
+    h = module.upper() + '_H'
 
-    guard_start = "#ifndef CPROB_H\n#define CPROB_H\n\n"
+    guard_start = "#ifndef %s\n#define %s\n\n" % (h, h)
     guard_end = "\n\n#endif\n"
     apidecls = '\n'.join(['extern ' + f for f in d['apidecls']])
-    with open(join('ncephes', 'include', 'ncephes', 'cprob.h'), 'w') as f:
+    with open(join('ncephes', 'include', 'ncephes', module + '.h'), 'w') as f:
         f.write(guard_start + apidecls + guard_end)
 
-    with open(join('ncephes', 'cephes', 'cprob_ffcall.c'), 'w') as f:
-        t = '#include "ncephes/cprob.h"\n\n' + '\n'.join(d['ffcalls']) + '\n\n'
+    with open(join('ncephes', 'cephes', module + '_ffcall.c'), 'w') as f:
+        t = ('#include "ncephes/' + module + '.h"\n\n'
+             + '\n'.join(d['ffcalls']) + '\n\n')
         f.write(t)
+
+
+def create_api():
+    _create_api('cprob')
+    _create_api('ellf')
 
 
 def update():
