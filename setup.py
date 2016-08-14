@@ -2,9 +2,20 @@ import os
 import sys
 from setuptools import setup
 from setuptools import find_packages
+# from distutils.command.build import build as _build
+from distutils.command.build_clib import build_clib
+from glob import glob
 
 pkg_name = 'ncephes'
 version = '0.0.8.dev2'
+
+#
+# class BuildCommand(_build):
+#     pass
+#
+import cprob_info
+d = cprob_info.get_info()
+libncprob = ('ncprob', {'sources': d['src_files']})
 
 
 def setup_package():
@@ -32,9 +43,11 @@ def setup_package():
         description="Python interface for the Cephes library.",
         long_description=long_description,
         license="BSD",
+        libraries=[libncprob],
         url='https://github.com/Horta/ncephes',
         packages=find_packages(),
         zip_safe=False,
+        cmdclass={'build_clib': build_clib},
         setup_requires=setup_requires,
         cffi_modules=["cprob_build.py:make_module",
                       "ellf_build.py:ffi"],
@@ -56,9 +69,11 @@ def setup_package():
         data_files=[('ncephes/include/ncephes',
                      ['ncephes/include/ncephes/cprob.h']),
                     ('ncephes/lib',
-                     ['libcprob.dylib'])]
+                     ['ncephes/lib/libncprob.a'])]
     )
-
+    # ,
+    # ('ncephes/lib',
+    # ['ncephes/buid/libncprob.a'])
     try:
         setup(**metadata)
     finally:

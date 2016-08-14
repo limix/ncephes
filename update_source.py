@@ -16,6 +16,7 @@ from build_helpers import forward_call
 
 SUPPORTED_MODULES = open('./supported_modules.txt').read().split("\n")[:-1]
 
+
 def download_extract():
     url = "http://www.netlib.org/cephes/"
     print("Downloading...")
@@ -41,6 +42,7 @@ def download_extract():
     subprocess.check_call('chmod -R u+rw ncephes/cephes/', shell=True)
     subprocess.check_call('chmod -R go+r ncephes/cephes/', shell=True)
 
+
 def clear_code():
     print("Cleaning files...")
     root = join('ncephes', 'cephes')
@@ -50,6 +52,7 @@ def clear_code():
             fp = join(root, d, f)
             cmd = "perl -i -pe 's/[\x0c]//g' %s" % fp
             subprocess.check_call(cmd, shell=True)
+
 
 def convert_old_style_proto():
     print("Converting K&R to ANSI style for function declaration...")
@@ -67,13 +70,15 @@ def convert_old_style_proto():
             cmd = "cproto -q -I%s -I%s -a %s" % (incl1, incl2, fp)
             subprocess.check_call(cmd, shell=True)
 
+
 def apply_patch():
     cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.patch"
     subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/cprob/incbet.c ncephes/cephes/incbet.patch"
     subprocess.check_call(cmd, shell=True)
 
-def create_api():
+
+def _create_headers():
     guard_start = "#ifndef CPROB_H\n#define CPROB_H\n\n"
     guard_end = "\n\n#endif\n"
     import cprob_info
@@ -81,6 +86,32 @@ def create_api():
     apidecls = '\n'.join(['extern ' + f for f in d['apidecls']])
     with open(join('ncephes', 'include', 'ncephes', 'cprob.h'), 'w') as f:
         f.write(guard_start + apidecls + guard_end)
+
+
+def _create_cmakelists():
+    import cprob_info
+    d = cprob_info.get_info()
+    file_content = '''cmake_minimum_required(VERSION 2.8)
+
+project (ncephes)
+set(CMAKE_BUILD_TYPE Release)
+add_library(ncprob STATIC'''
+    for f in d['src_files']:
+        file_content += "\n" + ' ' * 12 + "${CMAKE_CURRENT_SOURCE_DIR}/" + f[8:]
+    file_content += '\n' + ' ' * 11 + ')\n'
+
+    file_content += "include_directories("
+    for f in d['include_dirs']:
+        file_content += "\n" + ' ' * 20 + "${CMAKE_CURRENT_SOURCE_DIR}/" + f[8:]
+    file_content += '\n' + ' ' * 19 + ')\n\n'
+    with open('ncephes/CMakeLists.txt', 'w') as f:
+        f.write(file_content)
+
+
+def create_api():
+    _create_headers()
+    # _create_cmakelists()
+
 
 def update():
     src_path = os.path.dirname(os.path.abspath(sys.argv[0]))
