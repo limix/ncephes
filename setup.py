@@ -3,7 +3,6 @@ from os.path import join
 import sys
 from setuptools import setup
 from setuptools import find_packages
-from distutils.command.build_clib import build_clib
 
 from pycparser import parse_file
 
@@ -34,7 +33,7 @@ def _define_libraries():
 
     for supm in [s for s in supms if s == 'cprob']:
         srcs = get_info(supm)['src_files']
-        srcs.append(join('ncephes', 'cephes', 'cprob_ffcall.c'))
+        srcs.append(join('ncephes', 'cephes', supm + '_ffcall.c'))
         v = ('n' + supm, {'sources': srcs, 'include_dirs': [incl]})
         libraries.append(v)
         hdr_files.append(join(incl, 'ncephes', supm + '.h'))
@@ -77,11 +76,10 @@ def setup_package():
         description="Python interface for the Cephes library.",
         long_description=long_description,
         license="BSD",
-        libraries=dlib['libraries'],
+        # libraries=dlib['libraries'],
         url='https://github.com/Horta/ncephes',
         packages=find_packages(),
         zip_safe=False,
-        cmdclass={'build_clib': build_clib},
         setup_requires=setup_requires,
         cffi_modules=dlib['cffi_modules'],
         install_requires=requires,
