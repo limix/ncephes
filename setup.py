@@ -11,6 +11,18 @@ pkg_name = 'ncephes'
 version = '0.0.8.dev3'
 
 
+def _check_pycparser():
+    from pycparser import parse_file
+    # from pycparser.c_parser import CParser
+    # from pycparser.c_ast import NodeVisitor
+    ast = parse_file(join('ncephes', 'cephes', 'cmath', 'isnan.c'),
+                     use_cpp=True, cpp_path='cpp', cpp_args='')
+    # v = FuncDefVisitor()
+    # v.visit(ast)
+    #
+    # return [str(f) for f in v.functions]
+
+
 def _define_libraries():
 
     supms = open('supported_modules.txt').read().split("\n")[:-1]
@@ -53,6 +65,7 @@ def setup_package():
                         "It also supports Numba and its nopython mode.")
 
     dlib = _define_libraries()
+    _check_pycparser()
 
     metadata = dict(
         name=pkg_name,
