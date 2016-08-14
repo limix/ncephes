@@ -54,6 +54,7 @@ def setup_package():
     old_path = os.getcwd()
     os.chdir(src_path)
     sys.path.insert(0, src_path)
+    _check_pycparser()
 
     with open('requirements.txt') as f:
         requires = [row.strip() for row in f.readlines()]
@@ -65,7 +66,6 @@ def setup_package():
                         "It also supports Numba and its nopython mode.")
 
     dlib = _define_libraries()
-    _check_pycparser()
 
     metadata = dict(
         name=pkg_name,
