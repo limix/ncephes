@@ -131,24 +131,18 @@ def forward_call(decl):
     return ndecl
 
 
-def get_info(pkg):
-    if pkg == 'cprob':
-        return _get_cprob_info()
-    return {}
-
-
-def _get_cprob_info():
-    include_dirs = [join('ncephes', 'cephes', 'cprob')]
-    src_files = glob(join('ncephes', 'cephes', 'cprob', '*.c'))
+def get_info(module):
+    include_dirs = [join('ncephes', 'cephes', module)]
+    src_files = glob(join('ncephes', 'cephes', module, '*.c'))
     src_files.append(join('ncephes', 'cephes', 'cmath', 'isnan.c'))
     export_table = read_export_file(join('ncephes', 'cephes',
-                                         'cprob_export.txt'))
+                                         '%s_export.txt' % module))
 
     regex = re.compile(r'^.* (.+)\(.*\).*$')
     fdecls = []
     ffcalls = []
     apidecls = []
-    for fp in glob(join('ncephes', 'cephes', 'cprob', '*.c')):
+    for fp in glob(join('ncephes', 'cephes', module, '*.c')):
         modname = splitext(basename(fp))[0]
         if modname in export_table:
             fnames = export_table[modname]

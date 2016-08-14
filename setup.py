@@ -28,8 +28,13 @@ def _define_libraries():
         hdr_files.append(join(incl, 'ncephes', supm + '.h'))
         lib_files.append(join(lib, 'libn' + supm + '.a'))
 
+    cffi_modules = []
+    for supm in supms:
+        cffi_modules.append("module_build.py:" + supm)
+
     data_files = [(join(incl, 'ncephes'), hdr_files), (lib, lib_files)]
-    return dict(libraries=libraries, data_files=data_files)
+    return dict(libraries=libraries, data_files=data_files,
+                cffi_modules=cffi_modules)
 
 
 def setup_package():
@@ -65,8 +70,7 @@ def setup_package():
         zip_safe=False,
         cmdclass={'build_clib': build_clib},
         setup_requires=setup_requires,
-        cffi_modules=["cprob_build.py:make",
-                      "ellf_build.py:ffi"],
+        cffi_modules=dlib['cffi_modules'],
         install_requires=requires,
         tests_require=tests_require,
         classifiers=[
