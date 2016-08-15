@@ -21,28 +21,26 @@ def test_get_lib():
 
 
 def test_link_lib():
-    folder = mkdtemp()
-    try:
-        testc = join(folder, 'test.c')
-        with open(testc, 'w') as f:
-            f.write('''
-    #include <stdio.h>
-    #include "ncephes/cprob.h"
+    folder = mkdtemp(dir='.')
+    testc = join(folder, 'test.c')
+    with open(testc, 'w') as f:
+        f.write('''
+#include <stdio.h>
+#include "ncephes/cprob.h"
 
-    int main()
-    {
-      printf("incbet: %.3f", 0.657 - ncephes_incbet(1., 3., 0.3));
-      return 0;
-    }
-    ''')
-        from distutils.ccompiler import new_compiler
-        from distutils import log
-        compiler = new_compiler()
-        objs = compiler.compile([testc], include_dirs=[get_include()])
-        compiler.link_executable(objs, join(folder, 'test_link_lib'),
-                                 libraries=['ncprob'],
-                                 library_dirs=[get_lib()])
-        assert_equal(check_output(join(folder, 'test_link_lib'), shell=True),
-                     "incbet: 0.657")
-    finally:
-        rmtree(folder)
+int main()
+{
+  printf("incbet: %.3f", 0.657 - ncephes_incbet(1., 3., 0.3));
+  return 0;
+}
+''')
+    from distutils.ccompiler import new_compiler
+    from distutils import log
+    compiler = new_compiler()
+    objs = compiler.compile([testc], include_dirs=[get_include()])
+    compiler.link_executable(objs, join(folder, 'test_link_lib'),
+                             libraries=['ncprob'],
+                             library_dirs=[get_lib()])
+    assert_equal(check_output(join(folder, 'test_link_lib'), shell=True),
+                 "incbet: 0.657")
+    rmtree(folder)
