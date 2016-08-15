@@ -4,3 +4,4 @@ doc/_build
 .cache/
 *.dylib
 *_ffi.c
+*.a

@@ -1,4 +1,5 @@
 import os
+import string
 
 from setuptools import Command
 
@@ -23,9 +24,12 @@ class build_capi(Command, object):
          "forcibly build everything (ignore file timestamps)"),
         ('compiler=', 'c',
          "specify the compiler type"),
+        ('inplace', 'i',
+         "ignore build-lib and put compiled extensions into the source " +
+         "directory alongside your pure Python modules"),
     ]
 
-    boolean_options = ['debug', 'force']
+    boolean_options = ['inplace', 'debug', 'force']
 
     help_options = [
         ('help-compiler', None,
@@ -45,6 +49,7 @@ class build_capi(Command, object):
         self.undef = []
         self.debug = None
         self.force = 0
+        self.inplace = 0
         self.compiler = None
         super(build_capi, self).__init__(*args, **kwargs)
 
@@ -64,6 +69,7 @@ class build_capi(Command, object):
         self.undef = []
         self.debug = None
         self.force = 0
+        self.inplace = 0
         self.compiler = None
 
     def finalize_options(self):
@@ -177,8 +183,6 @@ class build_capi(Command, object):
         return filenames
 
     def build_libraries(self, capi_libs):
-        import ipdb
-        ipdb.set_trace()
         from distutils.errors import DistutilsSetupError
         for (lib_name, build_info) in capi_libs:
             sources = build_info.get('sources')
@@ -206,6 +210,63 @@ class build_capi(Command, object):
             # Now "link" the object files together into a static library.
             # (On Unix at least, this isn't really linking -- it just
             # builds an archive.  Whatever.)
+            lib_name = self.get_ext_fullpath(lib_name)
             self.compiler.create_static_lib(objects, lib_name,
                                             output_dir=self.build_clib,
                                             debug=self.debug)
+
+    def get_ext_fullpath(self, ext_name):
+        """Returns the path of the filename for a given extension.
+
+        The file is located in `build_lib` or directly in the package
+        (inplace option).
+        """
+        # makes sure the extension name is only using dots
+        all_dots = string.maketrans('/' + os.sep, '..')
+        ext_name = ext_name.translate(all_dots)
+
+        fullname = self.get_ext_fullname(ext_name)
+        modpath = fullname.split('.')
+        filename = self.get_ext_filename(ext_name)
+        filename = os.path.split(filename)[-1]
+
+        if not self.inplace:
+            # no further work needed
+            # returning :
+            #   build_dir/package/path/filename
+            filename = os.path.join(*modpath[:-1] + [filename])
+            return os.path.join(self.build_clib, filename)
+
+        # the inplace option requires to find the package directory
+        # using the build_py command for that
+        package = '.'.join(modpath[0:-1])
+        build_py = self.get_finalized_command('build_py')
+        package_dir = os.path.abspath(build_py.get_package_dir(package))
+
+        # returning
+        #   package_dir/filename
+        return os.path.join(package_dir, filename)
+
+    def get_ext_fullname(self, ext_name):
+        """Returns the fullname of a given extension name.
+
+        Adds the `package.` prefix"""
+        if not hasattr(self, 'package') or self.package is None:
+            return ext_name
+        else:
+            return self.package + '.' + ext_name
+
+    def get_ext_filename(self, ext_name):
+        r"""Convert the name of an extension (eg. "foo.bar") into the name
+        of the file from which it will be loaded (eg. "foo/bar.so", or
+        "foo\bar.pyd").
+        """
+        ext_path = string.split(ext_name, '.')
+        # OS/2 has an 8 character module (extension) limit :-(
+        if os.name == "os2":
+            ext_path[len(ext_path) - 1] = ext_path[len(ext_path) - 1][:8]
+        # so_ext = self.compiler.static_lib_extension
+        so_ext = ''
+        if os.name == 'nt' and self.debug:
+            return os.path.join(*ext_path) + '_d' + so_ext
+        return os.path.join(*ext_path) + so_ext
