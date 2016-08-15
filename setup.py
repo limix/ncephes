@@ -6,7 +6,12 @@ from glob import glob
 import sys
 from setuptools import find_packages
 
-from pycparser import parse_file
+try:
+    from pycparser import parse_file
+except ImportError:
+    print('Error: could not import pycparser. Please, install it so I ' +
+          'can proceed.')
+    sys.exit(1)
 
 from build_helpers import get_supported_modules
 from build_capi import build_capi
