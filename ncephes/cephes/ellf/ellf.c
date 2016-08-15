@@ -107,13 +107,13 @@ extern double asin ( double );
 extern double atan ( double );
 extern double atan2 ( double, double );
 extern double pow ( double, double );
-extern double cabs ( cmplx *z );
+extern double ncephes_cabs ( cmplx *z );
 extern void cadd ( cmplx *a, cmplx *b, cmplx *c );
 extern void cdiv ( cmplx *a, cmplx *b, cmplx *c );
 extern void cmov ( void *a, void *b );
 extern void cmul ( cmplx *a, cmplx *b, cmplx *c );
 extern void cneg ( cmplx *a );
-extern void csqrt ( cmplx *z, cmplx *w );
+extern void ncephes_csqrt ( cmplx *z, cmplx *w );
 extern void csub ( cmplx *a, cmplx *b, cmplx *c );
 extern double ellie ( double phi, double m );
 extern double ellik ( double phi, double m );
@@ -133,7 +133,7 @@ double response ( double, double );
 #else
 double exp(), log(), cos(), sin(), sqrt();
 double ellpk(), ellik(), asin(), atan(), atan2(), pow();
-double cay(), cabs();
+double cay(), ncephes_cabs();
 double response();
 int lampln(), spln(), xfun(), zplna(), zplnb(), zplnc(), quadf();
 #define fabs(x) ( (x) < 0 ? -(x) : (x) )
@@ -780,7 +780,7 @@ do
 		cb.i = 0.0;
 		cmul( &cb, &cb, &cnum );     /* b^2 */
 		csub( &b4ac, &cnum, &b4ac ); /* b^2 - 4 ac */
-		csqrt( &b4ac, &b4ac );
+		ncephes_csqrt( &b4ac, &b4ac );
 		cb.r = -cb.r;  /* -b */
 		cb.i = -cb.i;
 		ca.r *= 2.0; /* 2a */
@@ -1110,7 +1110,7 @@ for( j=0; j<zord; j++ )
 cdiv( &den, &num, &w );
 w.r *= amp;
 w.i *= amp;
-u = cabs( &w );
+u = ncephes_cabs( &w );
 return(u);
 }
 

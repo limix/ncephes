@@ -38,5 +38,4 @@ def get_fdecls(module):
 
 
 def get_extra_compile_args():
-    # return ['-fno-builtin-cabs']
-    return ['-Wno-incompatible-library-redeclaration']
+    return []

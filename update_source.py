@@ -53,6 +53,11 @@ def clear_code():
             fp = join(root, d, f)
             cmd = "perl -i -pe 's/[\x0c]//g' %s" % fp
             subprocess.check_call(cmd, shell=True)
+            if fp.endswith('.c') or fp.endswith('.h'):
+                cmd = "perl -i -pe 's/cabs/ncephes_cabs/g' %s" % fp
+                subprocess.check_call(cmd, shell=True)
+                cmd = "perl -i -pe 's/csqrt/ncephes_csqrt/g' %s" % fp
+                subprocess.check_call(cmd, shell=True)
 
 
 def convert_old_style_proto():

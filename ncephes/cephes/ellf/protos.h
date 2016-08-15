@@ -7,14 +7,14 @@
 #ifndef __CEXTRACT__
 #if __STDC__
 
-extern double cabs ( cmplx *z );
+extern double ncephes_cabs ( cmplx *z );
 extern void cadd ( cmplx *a, cmplx *b, cmplx *c );
 extern double cay ( double q );
 extern void cdiv ( cmplx *a, cmplx *b, cmplx *c );
 extern void cmov ( short *a, short *b );
 extern void cmul ( cmplx *a, cmplx *b, cmplx *c );
 extern void cneg ( cmplx *a );
-extern void csqrt ( cmplx *z, cmplx *w );
+extern void ncephes_csqrt ( cmplx *z, cmplx *w );
 extern void csub ( cmplx *a, cmplx *b, cmplx *c );
 extern double ellie ( double phi, double m );
 extern double ellik ( double phi, double m );
@@ -37,14 +37,14 @@ extern int zplnc ( void );
 
 #else /* __STDC__ */
 
-extern double cabs (/* cmplx *z */);
+extern double ncephes_cabs (/* cmplx *z */);
 extern void cadd (/* cmplx *a, cmplx *b, cmplx *c */);
 extern double cay (/* double q */);
 extern void cdiv (/* cmplx *a, cmplx *b, cmplx *c */);
 extern void cmov (/* short *a, short *b */);
 extern void cmul (/* cmplx *a, cmplx *b, cmplx *c */);
 extern void cneg (/* cmplx *a */);
-extern void csqrt (/* cmplx *z, cmplx *w */);
+extern void ncephes_csqrt (/* cmplx *z, cmplx *w */);
 extern void csub (/* cmplx *a, cmplx *b, cmplx *c */);
 extern double ellie (/* double phi, double m */);
 extern double ellik (/* double phi, double m */);
