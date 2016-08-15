@@ -79,3 +79,4 @@ double ncephes_stdtri(int k, double p) { return stdtri(k, p); }
 double ncephes_log1p(double x) { return log1p(x); }
 double ncephes_expm1(double x) { return expm1(x); }
 double ncephes_cosm1(double x) { return cosm1(x); }
+
