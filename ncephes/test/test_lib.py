@@ -1,4 +1,5 @@
 import os
+import six
 from os.path import join
 from tempfile import mkdtemp
 from shutil import rmtree
@@ -42,5 +43,5 @@ int main()
                              libraries=['ncprob', 'm'],
                              library_dirs=[get_lib()])
     assert_equal(check_output(join(folder, 'test_link_lib'), shell=True),
-                 "incbet: 0.657")
+                 six.b("incbet: 0.657"))
     rmtree(folder)
