@@ -143,30 +143,30 @@ class build_capi(Command, object):
         """
         from distutils.errors import DistutilsSetupError
         if not isinstance(capi_libs, list):
-            raise DistutilsSetupError, \
-                "'libraries' option must be a list of tuples"
+            raise DistutilsSetupError("'libraries' option must" +
+                                      " be a list of tuples")
 
         for lib in capi_libs:
             if not isinstance(lib, tuple) and len(lib) != 2:
-                raise DistutilsSetupError, \
-                    "each element of 'libraries' must a 2-tuple"
+                raise DistutilsSetupError("each element of 'libraries' " +
+                                          "must a 2-tuple")
 
             name, build_info = lib
 
             if not isinstance(name, str):
-                raise DistutilsSetupError, \
-                    "first element of each tuple in 'libraries' " + \
-                    "must be a string (the library name)"
+                raise DistutilsSetupError(
+                    "first element of each tuple in 'libraries' " +
+                    "must be a string (the library name)")
             if '/' in name or (os.sep != '/' and os.sep in name):
-                raise DistutilsSetupError, \
+                raise DistutilsSetupError(
                     ("bad library name '%s': " +
-                     "may not contain directory separators") % \
-                    lib[0]
+                     "may not contain directory separators") %
+                    lib[0])
 
             if not isinstance(build_info, dict):
-                raise DistutilsSetupError, \
-                    "second element of each tuple in 'libraries' " + \
-                    "must be a dictionary (build info)"
+                raise DistutilsSetupError(
+                    "second element of each tuple in 'libraries' " +
+                    "must be a dictionary (build info)")
 
     def get_library_names(self):
         # Assume the library list is valid -- 'check_library_list()' is
@@ -186,10 +186,10 @@ class build_capi(Command, object):
         for (lib_name, build_info) in self.capi_libs:
             sources = build_info.get('sources')
             if sources is None or not isinstance(sources, (list, tuple)):
-                raise DistutilsSetupError, \
+                raise DistutilsSetupError(
                     ("in 'libraries' option (library '%s'), "
                      "'sources' must be present and must be "
-                     "a list of source filenames") % lib_name
+                     "a list of source filenames") % lib_name)
 
             filenames.extend(sources)
         return filenames
@@ -199,10 +199,10 @@ class build_capi(Command, object):
         for (lib_name, build_info) in capi_libs:
             sources = build_info.get('sources')
             if sources is None or not isinstance(sources, (list, tuple)):
-                raise DistutilsSetupError, \
+                raise DistutilsSetupError(
                     ("in 'libraries' option (library '%s'), " +
                      "'sources' must be present and must be " +
-                     "a list of source filenames") % lib_name
+                     "a list of source filenames") % lib_name)
             sources = list(sources)
 
             from distutils import log
