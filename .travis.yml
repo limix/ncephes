@@ -14,8 +14,8 @@ before_install:
 
 install:
     - export PATH="$HOME/miniconda/bin:$PATH"
+    - conda install pycparser -y --name travisci
     - source activate travisci
-    - pip install pycparser
     - python setup.py develop
 
 script:
