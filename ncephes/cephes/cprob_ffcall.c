@@ -1,5 +1,45 @@
 #include "ncephes/cprob.h"
 
+extern double bdtrc(int k, int n, double p);
+extern double bdtr(int k, int n, double p);
+extern double bdtri(int k, int n, double y);
+extern double btdtr(double a, double b, double x);
+extern double chdtrc(double df, double x);
+extern double chdtr(double df, double x);
+extern double chdtri(double df, double y);
+extern double expx2(double x, int sign);
+extern double fdtrc(int ia, int ib, double x);
+extern double fdtr(int ia, int ib, double x);
+extern double fdtri(int ia, int ib, double y);
+extern double cephes_gamma(double x);
+extern double lgam(double x);
+extern double gdtr(double a, double b, double x);
+extern double gdtrc(double a, double b, double x);
+extern double igamc(double a, double x);
+extern double igam(double a, double x);
+extern double igami(double a, double y0);
+extern double incbet(double aa, double bb, double xx);
+extern double incbi(double aa, double bb, double yy0);
+extern double smirnov(int n, double e);
+extern double kolmogorov(double y);
+extern double smirnovi(int n, double p);
+extern double kolmogi(double p);
+extern double nbdtrc(int k, int n, double p);
+extern double nbdtr(int k, int n, double p);
+extern double nbdtri(int k, int n, double p);
+extern double ndtr(double a);
+extern double erfc(double a);
+extern double erf(double x);
+extern double ndtri(double y0);
+extern double pdtrc(int k, double m);
+extern double pdtr(int k, double m);
+extern double pdtri(int k, double y);
+extern double stdtr(int k, double t);
+extern double stdtri(int k, double p);
+extern double log1p(double x);
+extern double expm1(double x);
+extern double cosm1(double x);
+
 double ncephes_bdtrc(int k, int n, double p) { return bdtrc(k, n, p); }
 double ncephes_bdtr(int k, int n, double p) { return bdtr(k, n, p); }
 double ncephes_bdtri(int k, int n, double y) { return bdtri(k, n, y); }

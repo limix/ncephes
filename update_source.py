@@ -91,10 +91,11 @@ def _create_api(module):
     with open(join('ncephes', 'include', 'ncephes', module + '.h'), 'w') as f:
         f.write(guard_start + apidecls + guard_end)
 
+    fdecl_extern = ['extern ' + f for f in fdecls]
     with open(join('ncephes', 'cephes', module + '_ffcall.c'), 'w') as f:
-        t = ('#include "ncephes/' + module + '.h"\n\n'
-             + '\n'.join(ffcalls) + '\n\n')
-        f.write(t)
+        f.write('#include "ncephes/' + module + '.h"\n\n')
+        f.write('\n'.join(fdecl_extern) + '\n\n')
+        f.write('\n'.join(ffcalls) + '\n\n')
 
 
 def create_api():
