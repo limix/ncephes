@@ -1,15 +1,21 @@
-os:
-  - linux
-  - osx
-  
 language: python
-dist: trusty
-sudo: false
 
-python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
+matrix:
+    include:
+        # - os: linux
+        #   sudo: false
+        #   dist: trusty
+        #   python: 2.7
+        # - os: linux
+        #   sudo: false
+        #   dist: trusty
+        #   python: 3.4
+        # - os: linux
+        #   sudo: false
+        #   dist: trusty
+        #   python: 3.5
+        - os: osx
+          language: generic
 
 before_install:
     - wget https://raw.githubusercontent.com/Horta/travis-miniconda/master/install.sh -O install.sh
