@@ -39,7 +39,7 @@ int main()
     compiler = new_compiler()
     objs = compiler.compile([testc], include_dirs=[get_include()])
     compiler.link_executable(objs, join(folder, 'test_link_lib'),
-                             libraries=['ncprob'],
+                             libraries=['ncprob', 'm'],
                              library_dirs=[get_lib()])
     assert_equal(check_output(join(folder, 'test_link_lib'), shell=True),
                  "incbet: 0.657")
