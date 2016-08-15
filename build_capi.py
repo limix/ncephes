@@ -9,6 +9,11 @@ from capi_info import get_sources
 from module_info import get_extra_compile_args
 from capi_info import get_include_dirs
 
+if hasattr(bytes, 'maketrans'):
+    maketrans = bytes.maketrans
+else:
+    maketrans = string.maketrans
+
 
 def _show_compilers():
     from distutils.ccompiler import show_compilers as sc
@@ -236,7 +241,7 @@ class build_capi(Command, object):
         (inplace option).
         """
         # makes sure the extension name is only using dots
-        all_dots = string.maketrans('/' + os.sep, '..')
+        all_dots = maketrans('/' + os.sep, '..')
         ext_name = ext_name.translate(all_dots)
 
         fullname = self.get_ext_fullname(ext_name)
