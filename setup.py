@@ -18,6 +18,7 @@ version = '0.0.8.dev4'
 class _build_ext(build_ext):
 
     def run(self):
+        self.reinitialize_command('build_capi', inplace=1)
         self.run_command("build_capi")
         return build_ext.run(self)
 
