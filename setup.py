@@ -2,6 +2,7 @@ import os
 from setuptools import setup
 from setuptools.command.build_ext import build_ext
 from os.path import join
+from glob import glob
 import sys
 from setuptools import find_packages
 
@@ -52,9 +53,11 @@ def setup_package():
     modules = get_supported_modules()
     cffi_modules = ['module_build.py:%s' % m for m in modules]
 
-    data_files = []
-    data_files += [(join('ncephes', 'include', 'ncephes'),
-                    [get_header(m) for m in modules])]
+    capi_hdr_files = (join('ncephes', 'include', 'ncephes'),
+                      [get_header(module) for module in modules])
+
+    files = glob(join('ncephes', 'lib', '*.*'))
+    capi_lib_files = (join('ncephes', 'lib'), files)
 
     metadata = dict(
         name=pkg_name,
@@ -87,8 +90,8 @@ def setup_package():
         ],
         cmdclass={'build_capi': build_capi, 'build_ext': _build_ext},
         keywords=["cephes", "math", "numba"],
-        data_files=[(join('ncephes', 'include', 'ncephes'),
-                     [get_header(module) for module in modules])],
+        include_package_data=True,
+        data_files=[capi_hdr_files, capi_lib_files],
     )
 
     try:
