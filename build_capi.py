@@ -6,6 +6,7 @@ from setuptools import Command
 from build_helpers import get_supported_modules
 from capi_info import get_capi_module_name
 from capi_info import get_sources
+from module_info import get_extra_compile_args
 from capi_info import get_include_dirs
 
 
@@ -68,9 +69,11 @@ class build_capi(Command, object):
         for module in modules:
             sources = get_sources(module)
             incl = get_include_dirs(module)
+            eca = get_extra_compile_args()
             m = get_capi_module_name(module)
             self.capi_libs.append((m, {'sources': sources,
-                                       'include_dirs': incl}))
+                                       'include_dirs': incl,
+                                       'extra_compile_args': eca}))
 
         # Compilation options for all libraries
         self.include_dirs = None
@@ -210,11 +213,13 @@ class build_capi(Command, object):
             # files in a temporary build directory.)
             macros = build_info.get('macros')
             include_dirs = build_info.get('include_dirs')
+            eca = build_info.get('extra_compile_args')
             objects = self.compiler.compile(sources,
                                             output_dir=self.build_temp,
                                             macros=macros,
                                             include_dirs=include_dirs,
-                                            debug=self.debug)
+                                            debug=self.debug,
+                                            extra_preargs=eca)
 
             # Now "link" the object files together into a static library.
             # (On Unix at least, this isn't really linking -- it just

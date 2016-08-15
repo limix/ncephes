@@ -3,6 +3,7 @@ from cffi import FFI
 from module_info import get_fdecls
 from module_info import get_include_dirs
 from module_info import get_sources
+from module_info import get_extra_compile_args
 
 
 def _make(module):
@@ -16,7 +17,9 @@ def _make(module):
                    fdecl_extern,
                    include_dirs=get_include_dirs(module),
                    sources=get_sources(module),
-                   libraries=[])
+                   libraries=[],
+                   extra_compile_args=get_extra_compile_args(),
+                   language='c')
     ffi.cdef(fdecl_noextern)
     return ffi
 

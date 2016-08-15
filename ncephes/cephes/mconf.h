@@ -89,6 +89,12 @@ typedef struct
     float i;
 } cmplxf;
 
+typedef struct
+{
+    double r;
+    double i;
+} cmplx;
+
 /* Type of computer arithmetic */
 
 /* UNKnown arithmetic, invokes coefficients given in
