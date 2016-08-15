@@ -30,7 +30,7 @@ def test_link_lib():
 
 int main()
 {
-  printf("incbet: %.3f", 0.657 - ncephes_incbet(1., 3., 0.3));
+  printf("incbet: %.3f", ncephes_incbet(1., 3., 0.3));
   return 0;
 }
 ''')
