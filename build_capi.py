@@ -1,4 +1,5 @@
 import os
+import six
 import string
 
 from setuptools import Command
@@ -241,7 +242,7 @@ class build_capi(Command, object):
         (inplace option).
         """
         # makes sure the extension name is only using dots
-        all_dots = maketrans('/' + os.sep, '..')
+        all_dots = maketrans(six.b('/' + os.sep), six.b('..'))
         ext_name = ext_name.translate(all_dots)
 
         fullname = self.get_ext_fullname(ext_name)
