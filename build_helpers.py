@@ -1,14 +1,10 @@
-from os.path import splitext
-from os.path import basename
-from os.path import join
-
-from glob import glob
-
-import re
-
 from pycparser import parse_file
 from pycparser.c_parser import CParser
 from pycparser.c_ast import NodeVisitor
+
+
+def get_supported_modules():
+    return open('supported_modules.txt').read().split("\n")[:-1]
 
 
 class FuncSign(object):
@@ -85,22 +81,20 @@ def _rcs(s):
     return s
 
 
-def api_decl(decl):
+def api_fdecls(decl):
     parser = CParser()
-    decl = parser.parse(decl + ';', filename='<stdin>').ext[0]
+    decl = parser.parse(decl, filename='<stdin>').ext[0]
     name = decl.name
     args = decl.type.args
     nargs = len(args.params)
     if len(decl.type.type.type.names) > 1:
-        import ipdb
-        ipdb.set_trace()
+        assert False
     else:
         rtype = decl.type.type.type.names[0]
     ndecl = rtype + ' ncephes_' + _rcs(name) + '('
     for param in args.params:
         if len(param.type.type.names) > 1:
-            import ipdb
-            ipdb.set_trace()
+            assert False
         typ = param.type.type.names[0]
         ndecl += typ + ' ' + param.name + ', '
     if nargs > 0:
@@ -110,21 +104,19 @@ def api_decl(decl):
 
 def forward_call(decl):
     parser = CParser()
-    decl = parser.parse(decl + ';', filename='<stdin>').ext[0]
+    decl = parser.parse(decl, filename='<stdin>').ext[0]
     name = decl.name
     args = decl.type.args
     nargs = len(args.params)
     if len(decl.type.type.type.names) > 1:
-        import ipdb
-        ipdb.set_trace()
+        assert False
     else:
         rtype = decl.type.type.type.names[0]
     ndecl = rtype + ' ncephes_' + _rcs(name) + '('
     call_expr = name + '('
     for param in args.params:
         if len(param.type.type.names) > 1:
-            import ipdb
-            ipdb.set_trace()
+            assert False
         typ = param.type.type.names[0]
         ndecl += typ + ' ' + param.name + ', '
         call_expr += param.name + ', '
@@ -137,62 +129,39 @@ def forward_call(decl):
     return ndecl
 
 
-def get_module_info(module):
-    include_dirs = [join('ncephes', 'cephes', module)]
-    src_files = glob(join('ncephes', 'cephes', module, '*.c'))
-    src_files.append(join('ncephes', 'cephes', 'cmath', 'isnan.c'))
-    export_table = read_export_file(join('ncephes', 'cephes',
-                                         '%s_export.txt' % module))
+# def get_libs_info():
+#
+#     if get_libs_info.return_ is None:
+#
+#         supms = open('supported_modules.txt').read().split("\n")[:-1]
+#         incl = join('ncephes', 'include')
+#         lib = join('ncephes', 'lib')
+#         libraries = []
+#         hdr_files = []
+#         lib_files = []
+#
+#         for supm in [s for s in supms if s == 'cprob']:
+#             srcs = get_module_info(supm)['src_files']
+#             srcs.append(join('ncephes', 'cephes', supm + '_ffcall.c'))
+#             v = ('n' + supm, {'sources': srcs, 'include_dirs': [incl]})
+#             libraries.append(v)
+#             hdr_files.append(join(incl, 'ncephes', supm + '.h'))
+#             lib_files.append(join(lib, 'libn' + supm + '.a'))
+#
+#         cffi_modules = []
+#         for supm in supms:
+#             cffi_modules.append("module_build.py:" + supm)
+#
+#         data_files = [(join(incl, 'ncephes'), hdr_files), (lib, lib_files)]
+#         get_libs_info.return_ = dict(libraries=libraries,
+#                                      data_files=data_files,
+#                                      cffi_modules=cffi_modules)
+#
+#     return get_libs_info.return_
+# get_libs_info.return_ = None
 
-    regex = re.compile(r'^.* (.+)\(.*\).*$')
-    fdecls = []
-    ffcalls = []
-    apidecls = []
-    for fp in glob(join('ncephes', 'cephes', module, '*.c')):
-        modname = splitext(basename(fp))[0]
-        if modname in export_table:
-            fnames = export_table[modname]
-            fs = []
-            for fd in fetch_func_decl(fp):
-                fdname = regex.match(fd).group(1)
-                for fn in fnames:
-                    if fn == fdname:
-                        fs.append(fd)
-                        ffcalls.append(forward_call(fd))
-                        apidecls.append(api_decl(fd))
-            fdecls.extend(fs)
-
-    return dict(include_dirs=include_dirs, src_files=src_files, fdecls=fdecls,
-                ffcalls=ffcalls, apidecls=apidecls)
-
-
-def get_libs_info():
-
-    if get_libs_info.return_ is None:
-
-        supms = open('supported_modules.txt').read().split("\n")[:-1]
-        incl = join('ncephes', 'include')
-        lib = join('ncephes', 'lib')
-        libraries = []
-        hdr_files = []
-        lib_files = []
-
-        for supm in [s for s in supms if s == 'cprob']:
-            srcs = get_module_info(supm)['src_files']
-            srcs.append(join('ncephes', 'cephes', supm + '_ffcall.c'))
-            v = ('n' + supm, {'sources': srcs, 'include_dirs': [incl]})
-            libraries.append(v)
-            hdr_files.append(join(incl, 'ncephes', supm + '.h'))
-            lib_files.append(join(lib, 'libn' + supm + '.a'))
-
-        cffi_modules = []
-        for supm in supms:
-            cffi_modules.append("module_build.py:" + supm)
-
-        data_files = [(join(incl, 'ncephes'), hdr_files), (lib, lib_files)]
-        get_libs_info.return_ = dict(libraries=libraries,
-                                     data_files=data_files,
-                                     cffi_modules=cffi_modules)
-
-    return get_libs_info.return_
-get_libs_info.return_ = None
+#
+# def get_capi_sources(module):
+#     sources = get_module_info(module)['src_files']
+#     sources += [join('ncephes', 'cephes', module + '_ffcall.c')]
+#     return sources

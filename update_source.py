@@ -9,7 +9,10 @@ from os.path import splitext
 import re
 import tarfile
 import subprocess
-from build_helpers import get_info
+from build_helpers import get_supported_modules
+from build_helpers import api_fdecls
+from build_helpers import forward_call
+from module_info import get_fdecls
 
 
 SUPPORTED_MODULES = open('./supported_modules.txt').read().split("\n")[:-1]
@@ -77,24 +80,27 @@ def apply_patch():
 
 
 def _create_api(module):
-    d = get_info(module)
     h = module.upper() + '_H'
+    fdecls = get_fdecls(module)
+    apidecls = [api_fdecls(f) for f in fdecls]
+    ffcalls = [forward_call(f) for f in fdecls]
 
     guard_start = "#ifndef %s\n#define %s\n\n" % (h, h)
     guard_end = "\n\n#endif\n"
-    apidecls = '\n'.join(['extern ' + f for f in d['apidecls']])
+    apidecls = '\n'.join(['extern ' + f for f in apidecls])
     with open(join('ncephes', 'include', 'ncephes', module + '.h'), 'w') as f:
         f.write(guard_start + apidecls + guard_end)
 
     with open(join('ncephes', 'cephes', module + '_ffcall.c'), 'w') as f:
         t = ('#include "ncephes/' + module + '.h"\n\n'
-             + '\n'.join(d['ffcalls']) + '\n\n')
+             + '\n'.join(ffcalls) + '\n\n')
         f.write(t)
 
 
 def create_api():
-    _create_api('cprob')
-    _create_api('ellf')
+    modules = get_supported_modules()
+    for module in modules:
+        _create_api(module)
 
 
 def update():

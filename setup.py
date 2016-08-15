@@ -7,18 +7,17 @@ from setuptools import find_packages
 
 from pycparser import parse_file
 
-from build_helpers import get_libs_info
+from build_helpers import get_supported_modules
 from build_capi import build_capi
+from capi_info import get_header
 
 pkg_name = 'ncephes'
 version = '0.0.8.dev4'
 
 
-class BuildExt(build_ext):
+class _build_ext(build_ext):
 
     def run(self):
-        import ipdb
-        ipdb.set_trace()
         self.run_command("build_capi")
         return build_ext.run(self)
 
@@ -49,7 +48,12 @@ def setup_package():
     long_description = ("Python interface for the Cephes library. " +
                         "It also supports Numba and its nopython mode.")
 
-    dlib = get_libs_info()
+    modules = get_supported_modules()
+    cffi_modules = ['module_build.py:%s' % m for m in modules]
+
+    data_files = []
+    data_files += [(join('ncephes', 'include', 'ncephes'),
+                    [get_header(m) for m in modules])]
 
     metadata = dict(
         name=pkg_name,
@@ -65,7 +69,7 @@ def setup_package():
         packages=find_packages(),
         zip_safe=False,
         setup_requires=setup_requires,
-        cffi_modules=dlib['cffi_modules'],
+        cffi_modules=cffi_modules,
         install_requires=requires,
         tests_require=tests_require,
         classifiers=[
@@ -80,9 +84,10 @@ def setup_package():
             "Programming Language :: Python :: 3.5",
             "Topic :: Scientific/Engineering"
         ],
-        cmdclass={'build_capi': build_capi, 'build_ext': BuildExt},
+        cmdclass={'build_capi': build_capi, 'build_ext': _build_ext},
         keywords=["cephes", "math", "numba"],
-        data_files=dlib['data_files'],
+        data_files=[(join('ncephes', 'include', 'ncephes'),
+                     [get_header(module) for module in modules])],
     )
 
     try:

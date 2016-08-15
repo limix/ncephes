@@ -3,6 +3,11 @@ import string
 
 from setuptools import Command
 
+from build_helpers import get_supported_modules
+from capi_info import get_capi_module_name
+from capi_info import get_sources
+from capi_info import get_include_dirs
+
 
 def _show_compilers():
     from distutils.ccompiler import show_compilers as sc
@@ -54,14 +59,18 @@ class build_capi(Command, object):
         super(build_capi, self).__init__(*args, **kwargs)
 
     def initialize_options(self):
-        from build_helpers import get_libs_info
-        dlib = get_libs_info()
 
         self.build_clib = None
         self.build_temp = None
+        self.capi_libs = []
 
-        # List of libraries to build
-        self.capi_libs = dlib['libraries']
+        modules = get_supported_modules()
+        for module in modules:
+            sources = get_sources(module)
+            incl = get_include_dirs(module)
+            m = get_capi_module_name(module)
+            self.capi_libs.append((m, {'sources': sources,
+                                       'include_dirs': incl}))
 
         # Compilation options for all libraries
         self.include_dirs = None

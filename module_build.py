@@ -1,19 +1,21 @@
 from cffi import FFI
 
-from build_helpers import get_module_info
+from module_info import get_fdecls
+from module_info import get_include_dirs
+from module_info import get_sources
 
 
 def _make(module):
-    d = get_module_info(module)
+    fdecls = get_fdecls(module)
 
-    fdecl_extern = ';\n'.join(['extern ' + f for f in d['fdecls']]) + ';'
-    fdecl_noextern = ';'.join(d['fdecls']) + ';'
+    fdecl_extern = '\n'.join(['extern ' + f for f in fdecls])
+    fdecl_noextern = '\n'.join(fdecls)
 
     ffi = FFI()
     ffi.set_source('ncephes._%s_ffi' % module,
                    fdecl_extern,
-                   include_dirs=d['include_dirs'],
-                   sources=d['src_files'],
+                   include_dirs=get_include_dirs(module),
+                   sources=get_sources(module),
                    libraries=[])
     ffi.cdef(fdecl_noextern)
     return ffi
