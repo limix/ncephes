@@ -107,7 +107,7 @@ class build_capi(Command, object):
             self.include_dirs = self.include_dirs.split(os.pathsep)
 
     def run(self):
-        from distutils.ccompiler import customize_compiler
+        from distutils.sysconfig import customize_compiler
         if not self.capi_libs:
             return
 
