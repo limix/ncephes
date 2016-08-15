@@ -4,7 +4,7 @@ import module_info
 
 
 def get_capi_module_name(module):
-    return 'n' + module
+    return 'ncephes.lib.' + 'n' + module
 
 
 def get_sources(module):
