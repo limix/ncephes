@@ -5,6 +5,7 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
 
 /* size of arrays: */
 #define ARRSIZ 50
