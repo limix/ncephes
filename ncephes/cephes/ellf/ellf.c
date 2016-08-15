@@ -549,10 +549,6 @@ return 0;
 int 
 zplnb (void)
 {
-cmplx lin[2];
-
-lin[1].r = 1.0;
-lin[1].i = 0.0;
 
 if( kind != 3 )
 	{ /* Butterworth or Chebyshev */

@@ -73,7 +73,7 @@ Copyright 1984, 1995, 2000 by Stephen L. Moshier
 
 #ifdef ANSIPROT
 extern double fabs ( double );
-extern double ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs ( cmplx * );
+extern double ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs ( cmplx * );
 extern double sqrt ( double );
 extern double atan2 ( double, double );
 extern double cos ( double );
@@ -85,7 +85,7 @@ int isnan ( double );
 void cdiv ( cmplx *, cmplx *, cmplx * );
 void cadd ( cmplx *, cmplx *, cmplx * );
 #else
-double fabs(), ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(), sqrt(), atan2(), cos(), sin();
+double fabs(), ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(), sqrt(), atan2(), cos(), sin();
 double sqrt(), frexp(), ldexp();
 int isnan();
 void cdiv(), cadd();
@@ -193,7 +193,7 @@ a->r = -a->r;
 a->i = -a->i;
 }
 
-/*							ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs()
+/*							ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs()
  *
  *	Complex absolute value
  *
@@ -201,11 +201,11 @@ a->i = -a->i;
  *
  * SYNOPSIS:
  *
- * double ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs();
+ * double ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs();
  * cmplx z;
  * double a;
  *
- * a = ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs( &z );
+ * a = ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs( &z );
  *
  *
  *
@@ -270,13 +270,13 @@ typedef struct
 
 
 double 
-ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs (register cmplx *z)
+ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs (register cmplx *z)
 {
 double x, y, b, re, im;
 int ex, ey, e;
 
 #ifdef INFINITIES
-/* Note, ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(INFINITY,NAN) = INFINITY. */
+/* Note, ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(INFINITY,NAN) = INFINITY. */
 if( z->r == INFINITY || z->i == INFINITY
    || z->r == -INFINITY || z->i == -INFINITY )
   return( INFINITY );
@@ -325,7 +325,7 @@ ey = e + ey;
 /* Check it for overflow and underflow. */
 if( ey > MAXEXP )
 	{
-	mtherr( "ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs", OVERFLOW );
+	mtherr( "ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs", OVERFLOW );
 	return( INFINITY );
 	}
 if( ey < MINEXP )
@@ -335,7 +335,7 @@ if( ey < MINEXP )
 b = ldexp( b, e );
 return( b );
 }
-/*							ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt()
+/*							ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt()
  *
  *	Complex square root
  *
@@ -343,10 +343,10 @@ return( b );
  *
  * SYNOPSIS:
  *
- * void ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt();
+ * void ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt();
  * cmplx z, w;
  *
- * ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt( &z, &w );
+ * ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt( &z, &w );
  *
  *
  *
@@ -378,13 +378,13 @@ return( b );
  *    IEEE      -10,+10    100000       3.2e-16     7.7e-17
  *
  *                        2
- * Also tested by ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt( z ) = z, and tested by arguments
+ * Also tested by ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt( z ) = z, and tested by arguments
  * close to the real axis.
  */
 
 
 void 
-ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt (cmplx *z, cmplx *w)
+ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt (cmplx *z, cmplx *w)
 {
 cmplx q, s;
 double x, y, r, t;
@@ -431,7 +431,7 @@ if( (fabs(y) < 2.e-4 * fabs(x))
 	}
 else
 	{
-	r = ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(z);
+	r = ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(z);
 	t = 0.5*(r - x);
 	}
 
@@ -453,5 +453,5 @@ cmplx z;
 
 z.r = x;
 z.i = y;
-return( ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(&z) );
+return( ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(&z) );
 }

@@ -58,10 +58,10 @@ double sinh (double);
 double asin (double);
 double sin (double);
 double cos (double);
-double ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs (cmplx *);
+double ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs (cmplx *);
 void cadd ( cmplx *, cmplx *, cmplx * );
 void cmul ( cmplx *, cmplx *, cmplx * );
-void ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt ( cmplx *, cmplx * );
+void ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt ( cmplx *, cmplx * );
 static void cchsh ( double, double *, double * );
 static double redupi ( double );
 static double ctans ( cmplx * );
@@ -73,10 +73,10 @@ void catan ( cmplx *, cmplx * );
 static void cchsh();
 static double redupi();
 static double ctans();
-double ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(), fabs(), sqrt(), pow();
+double ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(), fabs(), sqrt(), pow();
 double log(), exp(), atan2(), cosh(), sinh();
 double asin(), sin(), cos();
-void cadd(), cmul(), ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt();
+void cadd(), cmul(), ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt();
 void clog(), casin(), cacos(), catan();
 #endif
 
@@ -89,7 +89,7 @@ clog (register cmplx *z, register cmplx *w)
 double p, rr;
 
 /*rr = sqrt( z->r * z->r  +  z->i * z->i );*/
-rr = ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(z);
+rr = ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(z);
 p = log(rr);
 #if ANSIC
 rr = atan2( z->i, z->r );
@@ -508,7 +508,7 @@ return(d);
  * Inverse complex sine:
  *
  *                               2
- * w = -i clog( iz + ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt( 1 - z ) ).
+ * w = -i clog( iz + ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt( 1 - z ) ).
  *
  *
  * ACCURACY:
@@ -548,7 +548,7 @@ if( y == 0.0 )
 
 /* Power series expansion */
 /*
-b = ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(z);
+b = ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs(z);
 if( b < 0.125 )
 {
 z2.r = (x - y) * (x + y);
@@ -600,7 +600,7 @@ zz.i = 2.0 * ca.r * ca.i;
 
 zz.r = 1.0 - zz.r;
 zz.i = -zz.i;
-ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt( &zz, &z2 );
+ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_csqrt( &zz, &z2 );
 
 cadd( &z2, &ct, &zz );
 clog( &zz, &zz );
@@ -1015,7 +1015,7 @@ cpow (cmplx *a, cmplx *z, cmplx *w)
 
   x = z->r;
   y = z->i;
-  absa = ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs (a);
+  absa = ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_ncephes_cabs (a);
   if (absa == 0.0)
     {
       w->r = 0.0;
