@@ -19,7 +19,7 @@ from install_capi import install_capi
 from capi_info import get_header
 
 pkg_name = 'ncephes'
-version = '0.0.8.dev4'
+version = '0.0.8'
 
 
 class _build_ext(build_ext):

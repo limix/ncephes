@@ -42,6 +42,10 @@ print(numba_incbet(1., 3., 0.3))
 # prints 0.657
 ```
 
+One can also statically link the compiled Cephes libraries `ncprob` and
+`ncellf`. Please, have a peek at the `examples/prj_name` for a minimalistic
+example.
+
 Install
 -------
 
