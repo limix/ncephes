@@ -30,12 +30,16 @@ before_install:
 - ./install.sh
 install:
 - source activate travisci
-- conda install pycparser -y
+- conda install pycparser -y --name travisci
 before_script:
 - source activate travisci
+- which python
+- python -c "import pycparser"
 - python setup.py test
 script:
 - source activate travisci
+- which python
+- python -c "import pycparser"
 - python setup.py sdist
 - pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`
 - cd /
