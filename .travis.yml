@@ -32,12 +32,18 @@ install:
 - source activate travisci
 - conda install pycparser -y --name travisci
 before_script:
+- echo $PATH
+- which python
 - source activate travisci
+- echo $PATH
 - which python
 - python -c "import pycparser"
 - python setup.py test
 script:
+- echo $PATH
+- which python
 - source activate travisci
+- echo $PATH
 - which python
 - python -c "import pycparser"
 - python setup.py sdist
