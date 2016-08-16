@@ -1,5 +1,4 @@
 language: python
-env: PATH="$HOME/miniconda/bin:$PATH"
 matrix:
   include:
   - os: linux
@@ -29,23 +28,16 @@ before_install:
 - chmod +x install.sh
 - ./install.sh
 install:
+- export PATH="$HOME/miniconda/bin:$PATH"
 - source activate travisci
 - conda install pycparser -y --name travisci
 before_script:
-- echo $PATH
-- which python
+- export PATH="$HOME/miniconda/bin:$PATH"
 - source activate travisci
-- echo $PATH
-- which python
-- python -c "import pycparser"
 - python setup.py test
 script:
-- echo $PATH
-- which python
+- export PATH="$HOME/miniconda/bin:$PATH"
 - source activate travisci
-- echo $PATH
-- which python
-- python -c "import pycparser"
 - python setup.py sdist
 - pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`
 - cd /
