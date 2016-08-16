@@ -20,7 +20,7 @@ def test():
     os.chdir(src_path)
 
     try:
-        return_code = __import__('pytest').main()
+        return_code = __import__('pytest').main([])
     finally:
         os.chdir(old_path)
 
