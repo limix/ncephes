@@ -40,8 +40,9 @@ script:
 - source activate travisci
 - python setup.py sdist
 - pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`
-- cd /
+- pushd /
 - python -c "import ncephes; ncephes.test()"
+- popd
 deploy:
   provider: pypi
   skip_cleanup: true
