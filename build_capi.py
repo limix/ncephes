@@ -232,7 +232,7 @@ class build_capi(Command, object):
             # builds an archive.  Whatever.)
             lib_name = self.get_ext_fullpath(lib_name)
             self.compiler.create_static_lib(objects, lib_name,
-                                            output_dir=self.build_clib,
+                                            output_dir='./',
                                             debug=self.debug)
 
     def get_ext_fullpath(self, ext_name):
@@ -281,11 +281,13 @@ class build_capi(Command, object):
         of the file from which it will be loaded (eg. "foo/bar.so", or
         "foo\bar.pyd").
         """
-        ext_path = ext_name.split('.')
+        # from distutils.sysconfig import get_config_var
+        ext_path = string.split(ext_name, '.')
         # OS/2 has an 8 character module (extension) limit :-(
         if os.name == "os2":
             ext_path[len(ext_path) - 1] = ext_path[len(ext_path) - 1][:8]
-        # so_ext = self.compiler.static_lib_extension
+        # extensions in debug_mode are named 'module_d.pyd' under windows
+        # so_ext = get_config_var('SO')
         so_ext = ''
         if os.name == 'nt' and self.debug:
             return os.path.join(*ext_path) + '_d' + so_ext
