@@ -1,41 +1,51 @@
 language: python
-
+env: PATH="$HOME/miniconda/bin:$PATH"
 matrix:
-    include:
-        - os: linux
-          sudo: false
-          dist: trusty
-          python: 2.7
-        - os: linux
-          sudo: false
-          dist: trusty
-          python: 3.4
-        - os: linux
-          sudo: false
-          dist: trusty
-          python: 3.5
-        - os: osx
-          language: generic
-          env: TRAVIS_PYTHON_VERSION=2.7
-        - os: osx
-          language: generic
-          env: TRAVIS_PYTHON_VERSION=3.4
-        - os: osx
-          language: generic
-          env: TRAVIS_PYTHON_VERSION=3.5
-
+  include:
+  - os: linux
+    sudo: false
+    dist: trusty
+    python: 2.7
+  - os: linux
+    sudo: false
+    dist: trusty
+    python: 3.4
+  - os: linux
+    sudo: false
+    dist: trusty
+    python: 3.5
+  - os: osx
+    language: generic
+    env: TRAVIS_PYTHON_VERSION=2.7
+  - os: osx
+    language: generic
+    env: TRAVIS_PYTHON_VERSION=3.4
+  - os: osx
+    language: generic
+    env: TRAVIS_PYTHON_VERSION=3.5
 before_install:
-    - wget https://raw.githubusercontent.com/Horta/travis-miniconda/master/install.sh -O install.sh
-    - chmod +x install.sh
-    - ./install.sh
-
+- wget https://raw.githubusercontent.com/Horta/travis-miniconda/master/install.sh
+  -O install.sh
+- chmod +x install.sh
+- ./install.sh
 install:
-    - export PATH="$HOME/miniconda/bin:$PATH"
-    - conda install pycparser -y --name travisci
-    - source activate travisci
-    - python setup.py develop
-
+- conda install pycparser -y --name travisci
+- source activate travisci
+- python setup.py develop
+before_script:
+- source activate travisci
+- python setup.py test
 script:
-    - export PATH="$HOME/miniconda/bin:$PATH"
-    - source activate travisci
-    - py.test .
+- source activate travisci
+- python setup.py sdist
+- pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`
+- cd /
+- python -c "import ncephes; ncephes.test()"
+deploy:
+  provider: pypi
+  skip_cleanup: true
+  user: danilo.horta
+  password:
+    secure: qwlVkWXGDbwo4/WNhmh1+5C9PYQBwhQyEfB1geGkKS/ohvAdz5kGz3Eui/6659h3LHFeozsz7QWRTY1FflCdVLa0hqloze3IgE+5QG+fyivB06/JyoH85ljZwuwAkKy8yGGXieEh7gp5x/9XQxxNZJAACDDRxq1iksBldemx1s7rJhWSlG6V/1oZS/iBIbaWxCeaqnx6VTcSLtxhB8IjYbsimPJWFbULyBRBAIOEyFcMzzbkohLV4VT0axG64EdCnExpbkn6fhKs6n5aJYnXf61+NiY3H9LgqESehpQQwcKnUCinD1PUiwUots2GF22TbHB1b7Lr9Ww79MIqtJbWPTq9kJmsDcJlfvKWI+Yz4vylhvl2glPvXjbVFxlQlKhH9Pp6cG8iWsGkWr8xoGgQNI1Gc+m0i3GRgZ5y74tFP+B+oek7qNUqtq34kLYeoMbikv65A+Elp5ERRsyJlGXpyS/VXvQaxOyNW//XHeO9+qgxR+t3uSihFAYwXCkgRVyc3fRH88k7A8KKrYyq5tIrQm7PDvgA138gBDzsQRnMIeQ3WMrwmrIyRHpXBHW+EkypuEyA1dGh5s3JFCDFoXDTHkIbZJs4TBuadu4xLLLpNGTmGfUvjrcUMXDPzgqhusRS9TO+/z9DnQAF0bNU40sTtO/BjJwII3Mwi0qn8IhlX+w=
+  on:
+    branch: master
