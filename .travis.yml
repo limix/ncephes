@@ -1,18 +1,19 @@
+language: python
 env: PATH="$HOME/miniconda/bin:$PATH"
 matrix:
   include:
   - os: linux
     sudo: false
     dist: trusty
-    python: 2.7
+    python: "2.7"
   - os: linux
     sudo: false
     dist: trusty
-    python: 3.4
+    python: "3.4"
   - os: linux
     sudo: false
     dist: trusty
-    python: 3.5
+    python: "3.5"
   - os: osx
     language: generic
     env: TRAVIS_PYTHON_VERSION=2.7
