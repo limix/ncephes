@@ -33,8 +33,6 @@ class _build_ext(build_ext):
 class _install_lib(install_lib):
 
     def run(self):
-        import ipdb
-        ipdb.set_trace()
         # self.reinitialize_command('install_capi')
         self.run_command("install_capi")
         return install_lib.run(self)

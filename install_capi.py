@@ -68,7 +68,7 @@ class install_capi(Command):
         # install (target) directory, and whether to compile .py files.
         self.set_undefined_options('install',
                                    ('build_lib', 'build_dir'),
-                                   ('install_capi', 'install_dir'),
+                                   ('install_lib', 'install_dir'),
                                    ('force', 'force'),
                                    ('compile', 'compile'),
                                    ('optimize', 'optimize'),
