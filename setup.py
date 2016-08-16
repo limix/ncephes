@@ -1,8 +1,8 @@
 import os
 from setuptools import setup
 from setuptools.command.build_ext import build_ext
+from setuptools.command.install_lib import install_lib
 from os.path import join
-from glob import glob
 import sys
 from setuptools import find_packages
 
@@ -15,6 +15,7 @@ except ImportError:
 
 from build_helpers import get_supported_modules
 from build_capi import build_capi
+from install_capi import install_capi
 from capi_info import get_header
 
 pkg_name = 'ncephes'
@@ -24,9 +25,19 @@ version = '0.0.8.dev4'
 class _build_ext(build_ext):
 
     def run(self):
-        self.reinitialize_command('build_capi', inplace=1)
+        self.reinitialize_command('build_capi', inplace=self.inplace)
         self.run_command("build_capi")
         return build_ext.run(self)
+
+
+class _install_lib(install_lib):
+
+    def run(self):
+        import ipdb
+        ipdb.set_trace()
+        # self.reinitialize_command('install_capi')
+        self.run_command("install_capi")
+        return install_lib.run(self)
 
 
 def _check_pycparser():
@@ -61,8 +72,7 @@ def setup_package():
     capi_hdr_files = (join('ncephes', 'include', 'ncephes'),
                       [get_header(module) for module in modules])
 
-    files = glob(join('ncephes', 'lib', '*.*'))
-    capi_lib_files = (join('ncephes', 'lib'), files)
+    capi_lib_folder = join('ncephes', 'lib')
 
     metadata = dict(
         name=pkg_name,
@@ -93,10 +103,12 @@ def setup_package():
             "Programming Language :: Python :: 3.5",
             "Topic :: Scientific/Engineering"
         ],
-        cmdclass={'build_capi': build_capi, 'build_ext': _build_ext},
+        cmdclass={'build_capi': build_capi, 'build_ext': _build_ext,
+                  'install_capi': install_capi, 'install_lib': _install_lib},
         keywords=["cephes", "math", "numba"],
         include_package_data=True,
-        data_files=[capi_hdr_files, capi_lib_files],
+        data_files=[capi_hdr_files],
+        package_data={'': [join(capi_lib_folder, '*.*')]},
     )
 
     try:

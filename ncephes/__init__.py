@@ -15,7 +15,6 @@ from . import ellf
 def test():
     import os
     p = __import__('ncephes').__path__[0]
-    # src_path = os.path.dirname(os.path.abspath(p))
     src_path = os.path.abspath(p)
     old_path = os.getcwd()
     os.chdir(src_path)
