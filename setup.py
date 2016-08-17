@@ -1,6 +1,7 @@
 import os
 import sys
 from setuptools import setup
+from setuptools import find_packages
 try:
     from build_capi import CApiLib
 except ImportError:
@@ -8,8 +9,9 @@ except ImportError:
           'can proceed.')
     sys.exit(1)
 
+from build_capi import add_capi_opts
+setup = add_capi_opts(setup)
 from os.path import join
-from setuptools import find_packages
 
 try:
     from pycparser import parse_file
@@ -26,7 +28,7 @@ from module_info import get_extra_compile_args
 from capi_info import get_include_dirs
 
 pkg_name = 'ncephes'
-version = '0.0.10dev1'
+version = '0.0.10.dev1'
 
 
 def _check_pycparser():
