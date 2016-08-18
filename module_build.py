@@ -25,3 +25,4 @@ def _make(module):
 
 cprob = _make('cprob')
 ellf = _make('ellf')
+misc = _make('misc')

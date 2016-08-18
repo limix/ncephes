@@ -1,0 +1,23 @@
+diff -u revers.new.c revers.new.c
+--- revers.new.c	2016-08-18 20:35:46.000000000 +0100
++++ revers.new.c	2016-08-18 20:40:00.000000000 +0100
+@@ -66,6 +66,7 @@
+ */
+ 
+ #include "mconf.h"
++#include <stdlib.h>
+ 
+ extern int MAXPOL; /* initialized by polini() */
+ 
+@@ -75,11 +76,9 @@
+ void polclr ( double *, int );
+ void poladd ( double *, int, double *, int, double * );
+ void polmul ( double *, int, double *, int, double * );
+-void * malloc ( long );
+ void free ( void * );
+ #else
+ void polmov(), polclr(), poladd(), polmul();
+-void * malloc();
+ void free ();
+ #endif
+ 

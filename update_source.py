@@ -84,6 +84,8 @@ def apply_patch():
     subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/ellf/ellf.c ncephes/cephes/ellf.patch"
     subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/misc/revers.c ncephes/cephes/revers.patch"
+    subprocess.check_call(cmd, shell=True)
 
 
 def _create_api(module):
