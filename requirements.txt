@@ -3,3 +3,4 @@ jinja2
 numba
 pycparser
 pytest
+build_capi

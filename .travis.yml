@@ -20,11 +20,12 @@ before_install:
 - wget https://raw.githubusercontent.com/Horta/travis-miniconda/master/install.sh
   -O install.sh
 - chmod +x install.sh
-- ./install.sh
+- travis_retry bash -x ./install.sh
 install:
 - export PATH="$HOME/miniconda/bin:$PATH"
 - source activate travisci
-- conda install pycparser -y --name travisci
+- travis_retry conda install pycparser -y --name travisci
+- pip install build_capi
 before_script:
 - export PATH="$HOME/miniconda/bin:$PATH"
 - source activate travisci

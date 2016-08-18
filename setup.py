@@ -28,7 +28,7 @@ from module_info import get_extra_compile_args
 from capi_info import get_include_dirs
 
 pkg_name = 'ncephes'
-version = '0.0.10.dev1'
+version = '0.0.10.dev2'
 
 
 def _check_pycparser():
