@@ -71,6 +71,7 @@ double THPIO4 = 2.35619449019234492885;	/* 3*pi/4 */
 #include <math.h>
 #include <float.h>
 double NCEPHES_INF = HUGE_VAL;
+double NCEPHES_NAN = NAN;
 double NCEPHES_MAXNUM = HUGE_VAL;
 
 #ifdef IBMPC
