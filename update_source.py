@@ -100,6 +100,10 @@ def _unlink(f):
 def apply_patch():
     cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.patch"
     subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.2.patch"
+    subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/misc/beta.c ncephes/cephes/beta.patch"
+    subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/cprob/incbet.c ncephes/cephes/incbet.patch"
     subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/ellf/ellf.c ncephes/cephes/ellf.patch"
