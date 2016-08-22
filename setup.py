@@ -1,3 +1,4 @@
+
 import os
 import sys
 from setuptools import setup
@@ -28,7 +29,7 @@ from module_info import get_extra_compile_args
 from capi_info import get_include_dirs
 
 pkg_name = 'ncephes'
-version = '0.0.14'
+version = '0.0.15'
 
 
 def _check_pycparser():
