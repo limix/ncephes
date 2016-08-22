@@ -74,8 +74,8 @@ const double NCEPHES_INF = HUGE_VAL;
 const double NCEPHES_NAN = NAN;
 const double NCEPHES_MAXNUM = HUGE_VAL;
 const double NCEPHES_PI = 3.14159265358979323846;
-const double NCEPHES_PIO2 = NCEPHES_PI/2;
-const double NCEPHES_PIO4 = NCEPHES_PI/4;
+const double NCEPHES_PIO2 = 3.14159265358979323846/2;
+const double NCEPHES_PIO4 = 3.14159265358979323846/4;
 const double SQRTH = 7.07106781186547524401E-1;    /* sqrt(2)/2 */
 
 #ifdef IBMPC
