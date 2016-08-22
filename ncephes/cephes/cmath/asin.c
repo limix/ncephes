@@ -234,7 +234,7 @@ static short S[16] = {
 };
 #endif
 
-/* pi/2 = PIO2 + MOREBITS.  */
+/* pi/2 = NCEPHES_PIO2 + MOREBITS.  */
 #ifdef DEC
 #define MOREBITS 5.721188726109831840122E-18
 #else
@@ -250,7 +250,7 @@ double asin ( double );
 double sqrt(), polevl(), p1evl();
 double asin();
 #endif
-extern double PIO2, PIO4, NCEPHES_NAN;
+extern double NCEPHES_PIO2, NCEPHES_PIO4, NCEPHES_NAN;
 
 double 
 asin (double x)
@@ -281,10 +281,10 @@ if( a > 0.625 )
 	zz = 1.0 - a;
 	p = zz * polevl( zz, R, 4)/p1evl( zz, S, 4);
 	zz = sqrt(zz+zz);
-	z = PIO4 - zz;
+	z = NCEPHES_PIO4 - zz;
 	zz = zz * p - MOREBITS;
 	z = z - zz;
-	z = z + PIO4;
+	z = z + NCEPHES_PIO4;
 	}
 else
 	{
@@ -317,8 +317,8 @@ if( x > 0.5 )
 	{
 	return( 2.0 * asin(  sqrt(0.5 - 0.5*x) ) );
 	}
-z = PIO4 - asin(x);
+z = NCEPHES_PIO4 - asin(x);
 z = z + MOREBITS;
-z = z + PIO4;
+z = z + NCEPHES_PIO4;
 return( z );
 }

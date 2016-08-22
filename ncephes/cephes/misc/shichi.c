@@ -508,7 +508,7 @@ extern double chbevl ( double, void *, int );
 double log(), exp(), fabs(), chbevl();
 #endif
 #define EUL 0.57721566490153286061
-extern double MACHEP, NCEPHES_MAXNUM, PIO2;
+extern double MACHEP, NCEPHES_MAXNUM, NCEPHES_PIO2;
 
 int 
 shichi (double x, double *si, double *ci)

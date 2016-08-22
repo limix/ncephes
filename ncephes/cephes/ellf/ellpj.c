@@ -78,7 +78,7 @@ extern double exp ( double );
 double sqrt(), fabs(), sin(), cos(), asin(), tanh();
 double sinh(), cosh(), atan(), exp();
 #endif
-extern double PIO2, MACHEP;
+extern double NCEPHES_PIO2, MACHEP;
 
 int 
 ellpj (double u, double m, double *sn, double *cn, double *dn, double *ph)
@@ -119,7 +119,7 @@ if( m >= 0.9999999999 )
 	phi = 1.0/b;
 	twon = b * sinh(u);
 	*sn = t + ai * (twon - u)/(b*b);
-	*ph = 2.0*atan(exp(u)) - PIO2 + ai*(twon - u)/b;
+	*ph = 2.0*atan(exp(u)) - NCEPHES_PIO2 + ai*(twon - u)/b;
 	ai *= t * phi;
 	*cn = phi - ai * (twon - u);
 	*dn = phi + ai * (twon + u);

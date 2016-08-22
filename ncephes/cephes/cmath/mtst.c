@@ -45,12 +45,12 @@ Copyright 1984, 1987, 1988, 2000 by Stephen L. Moshier
 #define WTRIALS (NTRIALS/5)
 
 #if GLIBC2
-double PI = 3.141592653589793238462643;
-double PIO2 = 3.141592653589793238462643 * 0.5;
+double NCEPHES_PI = 3.141592653589793238462643;
+double NCEPHES_PIO2 = 3.141592653589793238462643 * 0.5;
 double MAXLOG = 7.09782712893383996732224E2;
 #else
-extern double PI;
-extern double PIO2;
+extern double NCEPHES_PI;
+extern double NCEPHES_PIO2;
 extern double MAXLOG;
 #endif
 
@@ -58,8 +58,8 @@ extern double MINLOG;
 /*
 define MINLOG -170.0
 define MAXLOG +170.0
-define PI 3.14159265358979323846
-define PIO2 1.570796326794896619
+define NCEPHES_PI 3.14159265358979323846
+define NCEPHES_PIO2 1.570796326794896619
 */
 
 #ifdef ANSIPROT
@@ -274,8 +274,8 @@ printf( "Max and rms relative errors for %d random arguments.\n",
 	ntr );
 
 /* Initialize machine dependent parameters: */
-defs[1].arg1w = PI;
-defs[1].arg1l = -PI/2.0;
+defs[1].arg1w = NCEPHES_PI;
+defs[1].arg1l = -NCEPHES_PI/2.0;
 /* Microsoft C has trouble with denormal numbers. */
 #if 0
 defs[3].arg1w = MAXLOG;
@@ -443,7 +443,7 @@ illegn:
 switch( d->tstyp )
 	{
 	case WRONK1:
-	e = (y2*y3 - yy1*y4) - 2.0/(PI*x); /* Jn, Yn */
+	e = (y2*y3 - yy1*y4) - 2.0/(NCEPHES_PI*x); /* Jn, Yn */
 	break;
 
 	case WRONK2:
@@ -451,7 +451,7 @@ switch( d->tstyp )
 	break;
 	
 	case ELLIP:
-	e = (yy1-y3)*y4 + y3*y2 - PIO2;
+	e = (yy1-y3)*y4 + y3*y2 - NCEPHES_PIO2;
 	break;
 
 	default:

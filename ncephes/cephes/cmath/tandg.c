@@ -87,7 +87,7 @@ static double Q[] = {
  2.50083801823357915839E7,
 -5.38695755929454629881E7
 };
-static double PI180 = 1.74532925199432957692E-2;
+static double NCEPHES_PI180 = 1.74532925199432957692E-2;
 static double lossth = 1.0e14;
 #endif
 
@@ -105,7 +105,7 @@ static unsigned short Q[] = {
 0146515,0077401,0162762,0150607
 };
 static unsigned short P1[] = {0036616,0175065,0011224,0164711};
-#define PI180 *(double *)P1
+#define NCEPHES_PI180 *(double *)P1
 static double lossth = 8.0e14;
 #endif
 
@@ -123,7 +123,7 @@ static unsigned short Q[] = {
 0x5a31,0x3cbe,0xafe0,0xc189
 };
 static unsigned short P1[] = {0x9d39,0xa252,0xdf46,0x3f91};
-#define PI180 *(double *)P1
+#define NCEPHES_PI180 *(double *)P1
 static double lossth = 1.0e14;
 #endif
 
@@ -142,7 +142,7 @@ static unsigned short Q[] = {
 static unsigned short P1[] = {
 0x3f91,0xdf46,0xa252,0x9d39
 };
-#define PI180 *(double *)P1
+#define NCEPHES_PI180 *(double *)P1
 static double lossth = 1.0e14;
 #endif
 
@@ -157,7 +157,7 @@ double polevl(), p1evl(), floor(), ldexp();
 static double tancot();
 #endif
 extern double NCEPHES_MAXNUM;
-extern double PIO4;
+extern double NCEPHES_PIO4;
 
 
 double 
@@ -200,7 +200,7 @@ if( x > lossth )
 	return(0.0);
 	}
 
-/* compute x mod PIO4 */
+/* compute x mod NCEPHES_PIO4 */
 y = floor( x/45.0 );
 
 /* strip high bits of integer part */
@@ -219,7 +219,7 @@ if( j & 1 )
 	}
 
 z = x - y * 45.0;
-z *= PI180;
+z *= NCEPHES_PI180;
 
 zz = z * z;
 

@@ -192,7 +192,7 @@ double polevl(), p1evl(), floor(), ldexp();
 static double tancot();
 int isnan(), isfinite();
 #endif
-extern double PIO4;
+extern double NCEPHES_PIO4;
 extern double NCEPHES_INF;
 extern double NCEPHES_NAN;
 
@@ -256,8 +256,8 @@ if( x > lossth )
 	return(0.0);
 	}
 
-/* compute x mod PIO4 */
-y = floor( x/PIO4 );
+/* compute x mod NCEPHES_PIO4 */
+y = floor( x/NCEPHES_PIO4 );
 
 /* strip high bits of integer part */
 z = ldexp( y, -3 );

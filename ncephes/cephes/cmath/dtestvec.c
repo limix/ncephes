@@ -14,14 +14,14 @@ int isfinite (double);
 /* C9X spells lgam lgamma.  */
 #define GLIBC2 0
 
-extern double PI;
-static double MPI, PIO2, MPIO2, PIO4, MPIO4, THPIO4, MTHPIO4;
+extern double NCEPHES_PI;
+static double MNCEPHES_PI, NCEPHES_PIO2, MNCEPHES_PIO2, NCEPHES_PIO4, MNCEPHES_PIO4, THNCEPHES_PIO4, MTHNCEPHES_PIO4;
 
 #if 0
-#define PI 3.141592653589793238463E0
-#define PIO2 1.570796326794896619231E0
-#define PIO4 7.853981633974483096157E-1
-#define THPIO4 2.35619449019234492884698
+#define NCEPHES_PI 3.141592653589793238463E0
+#define NCEPHES_PIO2 1.570796326794896619231E0
+#define NCEPHES_PIO4 7.853981633974483096157E-1
+#define THNCEPHES_PIO4 2.35619449019234492884698
 #define SQRT2 1.414213562373095048802E0
 #define SQRTH 7.071067811865475244008E-1
 #define INF (1.0/0.0)
@@ -78,10 +78,10 @@ struct oneargument
 
 struct oneargument test1[] =
 {
-  {"atan", atan, &ONE, &PIO4, 0},
-  {"sin", sin, &PIO2, &ONE, 0},
+  {"atan", atan, &ONE, &NCEPHES_PIO4, 0},
+  {"sin", sin, &NCEPHES_PIO2, &ONE, 0},
 #if 0
-  {"cos", cos, &PIO4, &SQRTH, 0},
+  {"cos", cos, &NCEPHES_PIO4, &SQRTH, 0},
   {"sin", sin, 32767., 1.8750655394138942394239E-1, 0},
   {"cos", cos, 32767., 9.8226335176928229845654E-1, 0},
   {"tan", tan, 32767., 1.9089234430221485740826E-1, 0},
@@ -93,8 +93,8 @@ struct oneargument test1[] =
   {"cos", cos, 2147483647., -6.8883669187794383467976E-1, 0},
   {"tan", tan, 2147483647., 1.0523779637351339136698E0, 0},
   */
-  {"cos", cos, &PIO2, 6.1232339957367574e-17, 1},
-  {"sin", sin, &PIO4, &SQRTH, 1},
+  {"cos", cos, &NCEPHES_PIO2, 6.1232339957367574e-17, 1},
+  {"sin", sin, &NCEPHES_PIO4, &SQRTH, 1},
 #endif
   {"acos", acos, &NCEPHES_NAN, &NCEPHES_NAN, 0},
   {"acos", acos, &ONE, &ZERO, 0},
@@ -108,8 +108,8 @@ struct oneargument test1[] =
   {"atan", atan, &NCEPHES_NAN, &NCEPHES_NAN, 0},
   {"atan", atan, &ZERO, &ZERO, 0},
   {"atan", atan, &MZERO, &MZERO, 0},
-  {"atan", atan, &INF, &PIO2, 0},
-  {"atan", atan, &MINF, &MPIO2, 0},
+  {"atan", atan, &INF, &NCEPHES_PIO2, 0},
+  {"atan", atan, &MINF, &MNCEPHES_PIO2, 0},
   {"cos", cos, &NCEPHES_NAN, &NCEPHES_NAN, 0},
   {"cos", cos, &ZERO, &ONE, 0},
   {"cos", cos, &MZERO, &ONE, 0},
@@ -270,27 +270,27 @@ struct twoarguments test2[] =
   {"atan2", atan2, &MZERO, &ONE, &MZERO, 0},
   {"atan2", atan2, &ZERO, &ZERO, &ZERO, 0},
   {"atan2", atan2, &MZERO, &ZERO, &MZERO, 0},
-  {"atan2", atan2, &ZERO, &MONE, &PI, 0},
-  {"atan2", atan2, &MZERO, &MONE, &MPI, 0},
-  {"atan2", atan2, &ZERO, &MZERO, &PI, 0},
-  {"atan2", atan2, &MZERO, &MZERO, &MPI, 0},
-  {"atan2", atan2, &ONE, &ZERO, &PIO2, 0},
-  {"atan2", atan2, &ONE, &MZERO, &PIO2, 0},
-  {"atan2", atan2, &MONE, &ZERO, &MPIO2, 0},
-  {"atan2", atan2, &MONE, &MZERO, &MPIO2, 0},
+  {"atan2", atan2, &ZERO, &MONE, &NCEPHES_PI, 0},
+  {"atan2", atan2, &MZERO, &MONE, &MNCEPHES_PI, 0},
+  {"atan2", atan2, &ZERO, &MZERO, &NCEPHES_PI, 0},
+  {"atan2", atan2, &MZERO, &MZERO, &MNCEPHES_PI, 0},
+  {"atan2", atan2, &ONE, &ZERO, &NCEPHES_PIO2, 0},
+  {"atan2", atan2, &ONE, &MZERO, &NCEPHES_PIO2, 0},
+  {"atan2", atan2, &MONE, &ZERO, &MNCEPHES_PIO2, 0},
+  {"atan2", atan2, &MONE, &MZERO, &MNCEPHES_PIO2, 0},
   {"atan2", atan2, &ONE, &INF, &ZERO, 0},
   {"atan2", atan2, &MONE, &INF, &MZERO, 0},
-  {"atan2", atan2, &INF, &ONE, &PIO2, 0},
-  {"atan2", atan2, &INF, &MONE, &PIO2, 0},
-  {"atan2", atan2, &MINF, &ONE, &MPIO2, 0},
-  {"atan2", atan2, &MINF, &MONE, &MPIO2, 0},
-  {"atan2", atan2, &ONE, &MINF, &PI, 0},
-  {"atan2", atan2, &MONE, &MINF, &MPI, 0},
-  {"atan2", atan2, &INF, &INF, &PIO4, 0},
-  {"atan2", atan2, &MINF, &INF, &MPIO4, 0},
-  {"atan2", atan2, &INF, &MINF, &THPIO4, 0},
-  {"atan2", atan2, &MINF, &MINF, &MTHPIO4, 0},
-  {"atan2", atan2, &ONE, &ONE, &PIO4, 0},
+  {"atan2", atan2, &INF, &ONE, &NCEPHES_PIO2, 0},
+  {"atan2", atan2, &INF, &MONE, &NCEPHES_PIO2, 0},
+  {"atan2", atan2, &MINF, &ONE, &MNCEPHES_PIO2, 0},
+  {"atan2", atan2, &MINF, &MONE, &MNCEPHES_PIO2, 0},
+  {"atan2", atan2, &ONE, &MINF, &NCEPHES_PI, 0},
+  {"atan2", atan2, &MONE, &MINF, &MNCEPHES_PI, 0},
+  {"atan2", atan2, &INF, &INF, &NCEPHES_PIO4, 0},
+  {"atan2", atan2, &MINF, &INF, &MNCEPHES_PIO4, 0},
+  {"atan2", atan2, &INF, &MINF, &THNCEPHES_PIO4, 0},
+  {"atan2", atan2, &MINF, &MINF, &MTHNCEPHES_PIO4, 0},
+  {"atan2", atan2, &ONE, &ONE, &NCEPHES_PIO4, 0},
   {"atan2", atan2, &NCEPHES_NAN, &ONE, &NCEPHES_NAN, 0},
   {"atan2", atan2, &ONE, &NCEPHES_NAN, &NCEPHES_NAN, 0},
   {"atan2", atan2, &NCEPHES_NAN, &NCEPHES_NAN, &NCEPHES_NAN, 0},
@@ -416,13 +416,13 @@ main (void)
   MTHREE = -THREE;
   INF = NCEPHES_INF;
   MINF = -NCEPHES_INF;
-  MPI = -PI;
-  PIO2 = 0.5 * PI;
-  MPIO2 = -PIO2;
-  PIO4 = 0.5 * PIO2;
-  MPIO4 = -PIO4;
-  THPIO4 = 3.0 * PIO4;
-  MTHPIO4 = -THPIO4;
+  MNCEPHES_PI = -NCEPHES_PI;
+  NCEPHES_PIO2 = 0.5 * NCEPHES_PI;
+  MNCEPHES_PIO2 = -NCEPHES_PIO2;
+  NCEPHES_PIO4 = 0.5 * NCEPHES_PIO2;
+  MNCEPHES_PIO4 = -NCEPHES_PIO4;
+  THNCEPHES_PIO4 = 3.0 * NCEPHES_PIO4;
+  MTHNCEPHES_PIO4 = -THNCEPHES_PIO4;
 
   nerrors = 0;
   ntests = 0;

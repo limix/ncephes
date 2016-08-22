@@ -52,7 +52,7 @@ Copyright 1984, 1987, 1993, 2000 by Stephen L. Moshier
 
 /*	Incomplete elliptic integral of second kind	*/
 #include "mconf.h"
-extern double PI, PIO2, MACHEP;
+extern double NCEPHES_PI, NCEPHES_PIO2, MACHEP;
 #ifdef ANSIPROT
 extern double sqrt ( double );
 extern double fabs ( double );
@@ -79,10 +79,10 @@ int d, mod, npio2, sign;
 if( m == 0.0 )
 	return( phi );
 lphi = phi;
-npio2 = floor( lphi/PIO2 );
+npio2 = floor( lphi/NCEPHES_PIO2 );
 if( npio2 & 1 )
 	npio2 += 1;
-lphi = lphi - npio2 * PIO2;
+lphi = lphi - npio2 * NCEPHES_PIO2;
 if( lphi < 0.0 )
 	{
 	lphi = -lphi;
@@ -124,8 +124,8 @@ mod = 0;
 while( fabs(c/a) > MACHEP )
 	{
 	temp = b/a;
-	lphi = lphi + atan(t*temp) + mod * PI;
-	mod = (lphi + PIO2)/PI;
+	lphi = lphi + atan(t*temp) + mod * NCEPHES_PI;
+	mod = (lphi + NCEPHES_PIO2)/NCEPHES_PI;
 	t = t * ( 1.0 + temp )/( 1.0 - temp * t * t );
 	c = ( a - b )/2.0;
 	temp = sqrt( a * b );
@@ -136,7 +136,7 @@ while( fabs(c/a) > MACHEP )
 	}
 
 temp = E / ellpk( 1.0 - m );
-temp *= (atan(t) + mod * PI)/(d * a);
+temp *= (atan(t) + mod * NCEPHES_PI)/(d * a);
 temp += e;
 
 done:

@@ -91,7 +91,7 @@ int isnan();
 void cdiv(), cadd();
 #endif
 
-extern double NCEPHES_MAXNUM, MACHEP, PI, PIO2, NCEPHES_INF, NCEPHES_NAN;
+extern double NCEPHES_MAXNUM, MACHEP, NCEPHES_PI, NCEPHES_PIO2, NCEPHES_INF, NCEPHES_NAN;
 /*
 typedef struct
 	{

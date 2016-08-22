@@ -123,14 +123,14 @@ static double coscof[7] = {
  4.1666666666666666609054E-2,
 };
 
-extern double PIO4;
+extern double NCEPHES_PIO4;
 
 double 
 cosm1 (double x)
 {
 double xx;
 
-if( (x < -PIO4) || (x > PIO4) )
+if( (x < -NCEPHES_PIO4) || (x > NCEPHES_PIO4) )
 	return( cos(x) - 1.0 );
 xx = x * x;
 xx = -0.5*xx + xx * xx * polevl( xx, coscof, 6 );

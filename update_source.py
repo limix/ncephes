@@ -58,6 +58,15 @@ def clear_code():
                 subprocess.check_call(cmd, shell=True)
                 cmd = "perl -i -pe 's/(ncephes_)*csqrt/ncephes_csqrt/g' %s" % fp
                 subprocess.check_call(cmd, shell=True)
+
+def ncephes_consts():
+    print("Setting ncephes consts...")
+    root = join('ncephes', 'cephes')
+    dirs = [d for d in listdir(root) if isdir(join(root, d))]
+    for d in dirs:
+        for f in listdir(join(root, d)):
+            fp = join(root, d, f)
+            if fp.endswith('.c') or fp.endswith('.h'):
                 cmd = "perl -i -pe 's/(NCEPHES_)*INFINITY/NCEPHES_INF/g' %s" % fp
                 subprocess.check_call(cmd, shell=True)
                 cmd = "perl -i -pe 's/(NCEPHES_)*NAN/NCEPHES_NAN/g' %s" % fp
@@ -105,6 +114,11 @@ def apply_patch():
     _unlink('ncephes/cephes/ellf/const.c')
     _unlink('ncephes/cephes/cmath/const.c')
 
+    _unlink('ncephes/cephes/cprob/mconf.c')
+    _unlink('ncephes/cephes/ellf/mconf.c')
+    _unlink('ncephes/cephes/cmath/mconf.c')
+    _unlink('ncephes/cephes/eval/mconf.c')
+
 
 def _create_api(module):
     h = module.upper() + '_H'
@@ -140,6 +154,7 @@ def update():
         clear_code()
         convert_old_style_proto()
         apply_patch()
+        ncephes_consts()
         create_api()
     finally:
         os.chdir(old_path)

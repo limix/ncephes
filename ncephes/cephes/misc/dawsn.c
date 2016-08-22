@@ -350,7 +350,7 @@ extern double p1evl ( double, void *, int );
 #else
 double chbevl(), sqrt(), fabs(), polevl(), p1evl();
 #endif
-extern double PI, MACHEP;
+extern double NCEPHES_PI, MACHEP;
 
 double 
 dawsn (double xx)

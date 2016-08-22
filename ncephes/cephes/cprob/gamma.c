@@ -127,7 +127,7 @@ static double Q[] = {
  1.00000000000000000320E0
 };
 #define MAXGAM 171.624376956302725
-static double LOGPI = 1.14472988584940017414;
+static double LOGNCEPHES_PI = 1.14472988584940017414;
 #endif
 
 #ifdef DEC
@@ -151,10 +151,10 @@ static unsigned short Q[] = {
 0040200,0000000,0000000,0000000
 };
 #define MAXGAM 34.84425627277176174
-static unsigned short LPI[4] = {
+static unsigned short LNCEPHES_PI[4] = {
 0040222,0103202,0043475,0006750,
 };
-#define LOGPI *(double *)LPI
+#define LOGNCEPHES_PI *(double *)LNCEPHES_PI
 #endif
 
 #ifdef IBMPC
@@ -178,10 +178,10 @@ static unsigned short Q[] = {
 0x0000,0x0000,0x0000,0x3ff0
 };
 #define MAXGAM 171.624376956302725
-static unsigned short LPI[4] = {
+static unsigned short LNCEPHES_PI[4] = {
 0xa1bd,0x48e7,0x50d0,0x3ff2,
 };
-#define LOGPI *(double *)LPI
+#define LOGNCEPHES_PI *(double *)LNCEPHES_PI
 #endif 
 
 #ifdef MIEEE
@@ -205,10 +205,10 @@ static unsigned short Q[] = {
 0x3ff0,0x0000,0x0000,0x0000
 };
 #define MAXGAM 171.624376956302725
-static unsigned short LPI[4] = {
+static unsigned short LNCEPHES_PI[4] = {
 0x3ff2,0x50d0,0x48e7,0xa1bd,
 };
-#define LOGPI *(double *)LPI
+#define LOGNCEPHES_PI *(double *)LNCEPHES_PI
 #endif 
 
 /* Stirling's formula for the gamma function */
@@ -221,7 +221,7 @@ static double STIR[5] = {
  8.33333333333482257126E-2,
 };
 #define MAXSTIR 143.01608
-static double SQTPI = 2.50662827463100050242E0;
+static double SQTNCEPHES_PI = 2.50662827463100050242E0;
 #endif
 #if DEC
 static unsigned short STIR[20] = {
@@ -235,7 +235,7 @@ static unsigned short STIR[20] = {
 static unsigned short SQT[4] = {
 0040440,0066230,0177661,0034055,
 };
-#define SQTPI *(double *)SQT
+#define SQTNCEPHES_PI *(double *)SQT
 #endif
 #if IBMPC
 static unsigned short STIR[20] = {
@@ -249,7 +249,7 @@ static unsigned short STIR[20] = {
 static unsigned short SQT[4] = {
 0x2706,0x1ff6,0x0d93,0x4004,
 };
-#define SQTPI *(double *)SQT
+#define SQTNCEPHES_PI *(double *)SQT
 #endif
 #if MIEEE
 static unsigned short STIR[20] = {
@@ -263,12 +263,12 @@ static unsigned short STIR[20] = {
 static unsigned short SQT[4] = {
 0x4004,0x0d93,0x1ff6,0x2706,
 };
-#define SQTPI *(double *)SQT
+#define SQTNCEPHES_PI *(double *)SQT
 #endif
 
 int sgngam = 0;
 extern int sgngam;
-extern double MAXLOG, NCEPHES_MAXNUM, PI;
+extern double MAXLOG, NCEPHES_MAXNUM, NCEPHES_PI;
 #ifdef ANSIPROT
 extern double pow ( double, double );
 extern double log ( double );
@@ -315,7 +315,7 @@ else
 	{
 	y = pow( x, x - 0.5 ) / y;
 	}
-y = SQTPI * y * w;
+y = SQTNCEPHES_PI * y * w;
 return( y );
 }
 
@@ -369,7 +369,7 @@ gamnan:
 			p += 1.0;
 			z = q - p;
 			}
-		z = q * sin( PI * z );
+		z = q * sin( NCEPHES_PI * z );
 		if( z == 0.0 )
 			{
 #ifdef INFINITIES
@@ -381,7 +381,7 @@ goverf:
 #endif
 			}
 		z = fabs(z);
-		z = PI/(z * stirf(q) );
+		z = NCEPHES_PI/(z * stirf(q) );
 		}
 	else
 		{
@@ -470,7 +470,7 @@ static double C[] = {
 -2.01889141433532773231E6
 };
 /* log( sqrt( 2*pi ) ) */
-static double LS2PI  =  0.91893853320467274178;
+static double LS2NCEPHES_PI  =  0.91893853320467274178;
 #define MAXLGM 2.556348e305
 #endif
 
@@ -501,7 +501,7 @@ static unsigned short C[] = {
 };
 /* log( sqrt( 2*pi ) ) */
 static unsigned short LS2P[] = {040153,037616,041445,0172645,};
-#define LS2PI *(double *)LS2P
+#define LS2NCEPHES_PI *(double *)LS2P
 #define MAXLGM 2.035093e36
 #endif
 
@@ -534,7 +534,7 @@ static unsigned short C[] = {
 static unsigned short LS2P[] = {
 0xbeb5,0xc864,0x67f1,0x3fed
 };
-#define LS2PI *(double *)LS2P
+#define LS2NCEPHES_PI *(double *)LS2P
 #define MAXLGM 2.556348e305
 #endif
 
@@ -566,7 +566,7 @@ static unsigned short C[] = {
 static unsigned short LS2P[] = {
 0x3fed,0x67f1,0xc864,0xbeb5
 };
-#define LS2PI *(double *)LS2P
+#define LS2NCEPHES_PI *(double *)LS2P
 #define MAXLGM 2.556348e305
 #endif
 
@@ -617,11 +617,11 @@ lgsing:
 		p += 1.0;
 		z = p - q;
 		}
-	z = q * sin( PI * z );
+	z = q * sin( NCEPHES_PI * z );
 	if( z == 0.0 )
 		goto lgsing;
-/*	z = log(PI) - log( z ) - w;*/
-	z = LOGPI - log( z ) - w;
+/*	z = log(NCEPHES_PI) - log( z ) - w;*/
+	z = LOGNCEPHES_PI - log( z ) - w;
 	return( z );
 	}
 
@@ -670,7 +670,7 @@ loverf:
 #endif
 	}
 
-q = ( x - 0.5 ) * log(x) - x + LS2PI;
+q = ( x - 0.5 ) * log(x) - x + LS2NCEPHES_PI;
 if( x > 1.0e8 )
 	return( q );
 

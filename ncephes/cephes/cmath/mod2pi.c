@@ -12,7 +12,7 @@ extern double sin ( double );
 double floor(), ldexp(), sin();
 #endif
 
-#define TPI 6.283185307179586476925
+#define TNCEPHES_PI 6.283185307179586476925
 
 int 
 main (void)
@@ -21,7 +21,7 @@ char s[40];
 double a, n, t, x, y, z;
 int lflg;
 
-x = TPI/4.0;
+x = TNCEPHES_PI/4.0;
 t = 1.0;
 
 loop:
@@ -39,7 +39,7 @@ if( t > 1.0e16 )
 /* Adjust the following to choose a nontrivial x
  * where test function(x) has a slope of about 1 or more.
  */
-x = TPI * t  + 0.5;
+x = TNCEPHES_PI * t  + 0.5;
 
 z = x;
 lflg = 0;
@@ -47,12 +47,12 @@ lflg = 0;
 inlup:
 
 /* floor() returns the largest integer less than its argument.
- * If you do not have this, or AINT(), then you may convert x/TPI
+ * If you do not have this, or AINT(), then you may convert x/TNCEPHES_PI
  * to a long integer and then back to double; but in that case
  * x will be limited to the largest value that will fit into a
  * long integer.
  */
-n = floor( z/TPI );
+n = floor( z/TNCEPHES_PI );
 
 /* Carefully subtract 2 pi n from x.
  * This is done by subtracting n * 2**k in such a way that there
@@ -100,7 +100,7 @@ a -= 2.44929359829470635445e-16 * n;
  * to have chosen the wrong value of n.  The following
  * will fix that, but at some reduction in accuracy.
  */
-if( (a > TPI) || (a < -1e-11) )
+if( (a > TNCEPHES_PI) || (a < -1e-11) )
 	{
 	z = a;
 	lflg += 1;
@@ -110,7 +110,7 @@ if( (a > TPI) || (a < -1e-11) )
 if( a < 0.0 )
 	{
 	printf( "Warning! Reduced value < 0\n" );
-	a += TPI;
+	a += TNCEPHES_PI;
 	}
 
 /* Compute the test function at x and at a = x mod 2 pi.

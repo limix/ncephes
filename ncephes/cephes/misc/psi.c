@@ -116,7 +116,7 @@ extern double polevl ( double, void *, int );
 #else
 double floor(), log(), tan(), polevl();
 #endif
-extern double PI, NCEPHES_MAXNUM;
+extern double NCEPHES_PI, NCEPHES_MAXNUM;
 
 
 double 
@@ -138,7 +138,7 @@ if( x <= 0.0 )
 		mtherr( "psi", SING );
 		return( NCEPHES_MAXNUM );
 		}
-/* Remove the zeros of tan(PI x)
+/* Remove the zeros of tan(NCEPHES_PI x)
  * by subtracting the nearest integer from x
  */
 	nz = q - p;
@@ -149,7 +149,7 @@ if( x <= 0.0 )
 			p += 1.0;
 			nz = q - p;
 			}
-		nz = PI/tan(PI*nz);
+		nz = NCEPHES_PI/tan(NCEPHES_PI*nz);
 		}
 	else
 		{

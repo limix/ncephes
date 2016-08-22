@@ -71,7 +71,7 @@ Copyright 1999 by Stephen L. Moshier
 */
 
 #include "mconf.h"
-extern double PI;
+extern double NCEPHES_PI;
 
 /* polylog(4, 1-x) = zeta(4) - x zeta(3) + x^2 A4(x)/B4(x)
    0 <= x <= 0.125
@@ -352,7 +352,7 @@ polylog (int n, double x)
 	  s = u * u * u / 6.0;
 	  xc = 1.0 - x;
 	  s = s - 0.5 * u * u * log(xc);
-          s = s + PI * PI * u / 6.0;
+          s = s + NCEPHES_PI * NCEPHES_PI * u / 6.0;
           s = s - polylog (3, -xc/x);
 	  s = s - polylog (3, xc);
 	  s = s + zetac(3.0);

@@ -22,7 +22,7 @@
  * then
  *       w = log(r) + i arctan(y/x).
  * 
- * The arctangent ranges from -PI to +PI.
+ * The arctangent ranges from -NCEPHES_PI to +NCEPHES_PI.
  *
  *
  * ACCURACY:
@@ -81,7 +81,7 @@ void clog(), casin(), cacos(), catan();
 #endif
 
 
-extern double NCEPHES_MAXNUM, MACHEP, PI, PIO2;
+extern double NCEPHES_MAXNUM, MACHEP, NCEPHES_PI, NCEPHES_PIO2;
 
 void 
 clog (register cmplx *z, register cmplx *w)
@@ -95,8 +95,8 @@ p = log(rr);
 rr = atan2( z->i, z->r );
 #else
 rr = atan2( z->r, z->i );
-if( rr > PI )
-	rr -= PI + PI;
+if( rr > NCEPHES_PI )
+	rr -= NCEPHES_PI + NCEPHES_PI;
 #endif
 w->i = rr;
 w->r = p;
@@ -288,7 +288,7 @@ w->i = -sin( z->r ) * sh;
  *            cos 2x  +  cosh 2y
  *
  * On the real axis the denominator is zero at odd multiples
- * of PI/2.  The denominator is evaluated by its Taylor
+ * of NCEPHES_PI/2.  The denominator is evaluated by its Taylor
  * series near these points.
  *
  *
@@ -349,7 +349,7 @@ w->i = sinh( 2.0 * z->i ) / d;
  *            cosh 2y  -  cos 2x
  *
  * On the real axis, the denominator has zeros at even
- * multiples of PI/2.  Near these points it is evaluated
+ * multiples of NCEPHES_PI/2.  Near these points it is evaluated
  * by a Taylor series.
  *
  *
@@ -384,8 +384,8 @@ w->r = sin( 2.0 * z->r ) / d;
 w->i = -sinh( 2.0 * z->i ) / d;
 }
 
-/* Program to subtract nearest integer multiple of PI */
-/* extended precision value of PI: */
+/* Program to subtract nearest integer multiple of NCEPHES_PI */
+/* extended precision value of NCEPHES_PI: */
 #ifdef UNK
 static double DP1 = 3.14159265160560607910E0;
 static double DP2 = 1.98418714791870343106E-9;
@@ -431,7 +431,7 @@ redupi (double x)
 double t;
 long i;
 
-t = x/PI;
+t = x/NCEPHES_PI;
 if( t >= 0.0 )
 	t += 0.5;
 else
@@ -534,7 +534,7 @@ if( y == 0.0 )
 	{
 	if( fabs(x) > 1.0 )
 		{
-		w->r = PIO2;
+		w->r = NCEPHES_PIO2;
 		w->i = 0.0;
 		mtherr( "casin", DOMAIN );
 		}
@@ -626,7 +626,7 @@ return;
  * DESCRIPTION:
  *
  *
- * w = arccos z  =  PI/2 - arcsin z.
+ * w = arccos z  =  NCEPHES_PI/2 - arcsin z.
  *
  *
  *
@@ -644,7 +644,7 @@ cacos (cmplx *z, cmplx *w)
 {
 
 casin( z, w );
-w->r = PIO2  -  w->r;
+w->r = NCEPHES_PIO2  -  w->r;
 w->i = -w->i;
 }
 /*							catan()
@@ -669,7 +669,7 @@ w->i = -w->i;
  *
  * then
  *          1       (    2x     )
- * Re w  =  - arctan(-----------)  +  k PI
+ * Re w  =  - arctan(-----------)  +  k NCEPHES_PI
  *          2       (     2    2)
  *                  (1 - x  - y )
  *
@@ -689,7 +689,7 @@ w->i = -w->i;
  * arithmetic   domain     # trials      peak         rms
  *    DEC       -10,+10      5900       1.3e-16     7.8e-18
  *    IEEE      -10,+10     30000       2.3e-15     8.5e-17
- * The check catan( ctan(z) )  =  z, with |x| and |y| < PI/2,
+ * The check catan( ctan(z) )  =  z, with |x| and |y| < NCEPHES_PI/2,
  * had peak relative error 1.5e-16, rms relative error
  * 2.9e-17.  See also clog().
  */

@@ -146,7 +146,7 @@ extern double polevl ( double, void *, int );
 #else
 double fabs(), log(), polevl();
 #endif
-extern double PI, MACHEP;
+extern double NCEPHES_PI, MACHEP;
 
 double 
 spence (double x)
@@ -164,7 +164,7 @@ if( x == 1.0 )
 	return( 0.0 );
 
 if( x == 0.0 )
-	return( PI*PI/6.0 );
+	return( NCEPHES_PI*NCEPHES_PI/6.0 );
 
 flag = 0;
 
@@ -193,7 +193,7 @@ else
 y = -w * polevl( w, A, 7) / polevl( w, B, 7 );
 
 if( flag & 1 )
-	y = (PI * PI)/6.0  - log(x) * log(1.0-x) - y;
+	y = (NCEPHES_PI * NCEPHES_PI)/6.0  - log(x) * log(1.0-x) - y;
 
 if( flag & 2 )
 	{

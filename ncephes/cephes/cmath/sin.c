@@ -204,7 +204,7 @@ extern int isfinite ( double );
 double polevl(), floor(), ldexp();
 int isnan(), isfinite();
 #endif
-extern double PIO4;
+extern double NCEPHES_PIO4;
 static double lossth = 1.073741824e9;
 #ifdef NCEPHES_NANS
 extern double NCEPHES_NAN;
@@ -247,7 +247,7 @@ if( x > lossth )
 	return(0.0);
 	}
 
-y = floor( x/PIO4 ); /* integer part of x/PIO4 */
+y = floor( x/NCEPHES_PIO4 ); /* integer part of x/NCEPHES_PIO4 */
 
 /* strip high bits of integer part to prevent integer overflow */
 z = ldexp( y, -4 );
@@ -322,7 +322,7 @@ if( x > lossth )
 	return(0.0);
 	}
 
-y = floor( x/PIO4 );
+y = floor( x/NCEPHES_PIO4 );
 z = ldexp( y, -4 );
 z = floor(z);		/* integer part of y/8 */
 z = y - ldexp( z, 4 );  /* y - 16 * (y/16) */

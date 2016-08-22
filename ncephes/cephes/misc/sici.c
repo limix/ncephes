@@ -585,7 +585,7 @@ extern double p1evl ( double, void *, int );
 double log(), sin(), cos(), polevl(), p1evl();
 #endif
 #define EUL 0.57721566490153286061
-extern double NCEPHES_MAXNUM, PIO2, MACHEP;
+extern double NCEPHES_MAXNUM, NCEPHES_PIO2, MACHEP;
 
 
 int 
@@ -613,7 +613,7 @@ if( x == 0.0 )
 
 if( x > 1.0e9 )
 	{
-	*si = PIO2 - cos(x)/x;
+	*si = NCEPHES_PIO2 - cos(x)/x;
 	*ci = sin(x)/x;
 	return( 0 );
 	}
@@ -638,7 +638,7 @@ return(0);
 /* The auxiliary functions are:
  *
  *
- * *si = *si - PIO2;
+ * *si = *si - NCEPHES_PIO2;
  * c = cos(x);
  * s = sin(x);
  *
@@ -665,7 +665,7 @@ else
 	f = polevl( z, FN8, 8 ) / (x * p1evl( z, FD8, 8 ));
 	g = z * polevl( z, GN8, 8 ) / p1evl( z, GD8, 9 );
 	}
-*si = PIO2 - f * c - g * s;
+*si = NCEPHES_PIO2 - f * c - g * s;
 if( sign )
 	*si = -( *si );
 *ci = f * s - g * c;

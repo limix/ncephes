@@ -15,7 +15,7 @@
 #include "mconf.h"
 
 
-extern double PI, PIO2, MACHEP, NCEPHES_MAXNUM;
+extern double NCEPHES_PI, NCEPHES_PIO2, MACHEP, NCEPHES_MAXNUM;
 
 static double aa[ARRSIZ];
 static double pp[ARRSIZ];
@@ -134,14 +134,14 @@ k = wc/wr;
 m = k * k;
 Kk = ellpk( 1.0 - m );
 Kpk = ellpk( m );
-q = exp( -PI * rn * Kpk / Kk );	/* the nome of k1 */
+q = exp( -NCEPHES_PI * rn * Kpk / Kk );	/* the nome of k1 */
 m1 = cay(q); /* see below */
 /* Note m1 = eps / sqrt( A*A - 1.0 ) */
 a = eps/m1;
 a =  a * a + 1;
 a = 10.0 * log(a) / log(10.0);
 printf( "dbdown %.9E\n", a );
-a = 180.0 * asin( k ) / PI;
+a = 180.0 * asin( k ) / NCEPHES_PI;
 b = 1.0/(1.0 + eps*eps);
 b = sqrt( 1.0 - b );
 printf( "theta %.9E, rho %.9E\n", a, b );
@@ -184,13 +184,13 @@ if( kind == 1 )
 	if( n & 1 )
 		m = 0.0;
 	else
-		m = PI / (2.0*n);
+		m = NCEPHES_PI / (2.0*n);
 	for( i=0; i<np; i++ )
 		{	/* poles */
 		lr = i + i;
 		zs[lr] = -cos(m);
 		zs[lr+1] = sin(m);
-		m += PI / n;
+		m += NCEPHES_PI / n;
 		}	
 	/* high pass or band reject
 	 */
@@ -238,13 +238,13 @@ if( kind == 2 )
 	if( n & 1 )
 		m = 0.0;
 	else
-		m = PI / (2.0*n);
+		m = NCEPHES_PI / (2.0*n);
 	for( i=0; i<np; i++ )
 		{	/* poles */
 		lr = i + i;
 		zs[lr] = -a * cos(m);
 		zs[lr+1] = b * sin(m);
-		m += PI / n;
+		m += NCEPHES_PI / n;
 		}	
 	/* high pass or band reject
 	 */
@@ -639,7 +639,7 @@ switch( type )
 	break;
 
 	case 2:
-	gam = PI/2.0 - asin( cgam );  /* = acos( cgam ) */
+	gam = NCEPHES_PI/2.0 - asin( cgam );  /* = acos( cgam ) */
 	mh = zord/2;
 	pn = pp[mh];
 	an = aa[mh];
@@ -652,7 +652,7 @@ switch( type )
 		}
 	for( j=1; j<=mh; j++ )
 		{
-		a = gam * j - ai * PI / 2.0;
+		a = gam * j - ai * NCEPHES_PI / 2.0;
 		cng = cos(a);
 		jh = mh + j;
 		jl = mh - j;
@@ -733,8 +733,8 @@ if( b != 0.0 )
 	{
 /* resonant frequency */
 	r = sqrt(b);
-	f = PI/2.0 - asin( -a/(2.0*r) );
-	f = f * fs / (2.0 * PI );
+	f = NCEPHES_PI/2.0 - asin( -a/(2.0*r) );
+	f = f * fs / (2.0 * NCEPHES_PI );
 /* gain at resonance */
 	g = 1.0 + r;
 	g = g*g - (a*a/r);
@@ -803,7 +803,7 @@ double u;
 int j;
 
 /* exp( j omega T ) */
-u = 2.0 * PI * f /fs;
+u = 2.0 * NCEPHES_PI * f /fs;
 x.r = cos(u);
 x.i = sin(u);
 

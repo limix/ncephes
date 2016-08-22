@@ -86,7 +86,7 @@ Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
 
 #include "mconf.h"
 
-extern double PI, MACHEP, NCEPHES_MAXNUM;
+extern double NCEPHES_PI, MACHEP, NCEPHES_MAXNUM;
 #ifdef ANSIPROT
 extern double sqrt ( double );
 extern double atan ( double );
@@ -151,7 +151,7 @@ if( (k & 1) != 0)
 			}
 		p += f * xsqk/z;
 		}
-	p *= 2.0/PI;
+	p *= 2.0/NCEPHES_PI;
 	}
 
 

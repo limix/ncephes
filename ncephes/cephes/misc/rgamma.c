@@ -145,7 +145,7 @@ extern double lgam ( double );
 #else
 double chbevl(), exp(), log(), sin(), lgam();
 #endif
-extern double PI, MAXLOG, NCEPHES_MAXNUM;
+extern double NCEPHES_PI, MAXLOG, NCEPHES_MAXNUM;
 
 
 double 
@@ -162,7 +162,7 @@ if( x > 34.84425627277176174)
 if( x < -34.034 )
 	{
 	w = -x;
-	z = sin( PI*w );
+	z = sin( NCEPHES_PI*w );
 	if( z == 0.0 )
 		return(0.0);
 	if( z < 0.0 )
@@ -173,7 +173,7 @@ if( x < -34.034 )
 	else
 		sign = -1;
 
-	y = log( w * z ) - log(PI) + lgam(w);
+	y = log( w * z ) - log(NCEPHES_PI) + lgam(w);
 	if( y < -MAXLOG )
 		{
 		mtherr( name, UNDERFLOW );

@@ -97,7 +97,7 @@ static double coscof[] = {
 -4.16666666666666348141E-2,
  4.99999999999999999798E-1
 };
-static double PI180 = 1.74532925199432957692E-2; /* pi/180 */
+static double NCEPHES_PI180 = 1.74532925199432957692E-2; /* pi/180 */
 static double lossth = 1.0e14;
 #endif
 
@@ -120,7 +120,7 @@ static unsigned short coscof[] = {
 0040000,0000000,0000000,0000000
 };
 static unsigned short P1[] = {0036616,0175065,0011224,0164711};
-#define PI180 *(double *)P1
+#define NCEPHES_PI180 *(double *)P1
 static double lossth = 8.0e14;
 #endif
 
@@ -144,7 +144,7 @@ static unsigned short coscof[] = {
 };
 
 static unsigned short P1[] = {0x9d39,0xa252,0xdf46,0x3f91};
-#define PI180 *(double *)P1
+#define NCEPHES_PI180 *(double *)P1
 static double lossth = 1.0e14;
 #endif
 
@@ -170,7 +170,7 @@ static unsigned short coscof[] = {
 static unsigned short P1[] = {
 0x3f91,0xdf46,0xa252,0x9d39
 };
-#define PI180 *(double *)P1
+#define NCEPHES_PI180 *(double *)P1
 static double lossth = 1.0e14;
 #endif
 
@@ -181,7 +181,7 @@ extern double ldexp ( double, int );
 #else
 double polevl(), floor(), ldexp();
 #endif
-extern double PIO4;
+extern double NCEPHES_PIO4;
 
 double 
 sindg (double x)
@@ -203,7 +203,7 @@ if( x > lossth )
 	return(0.0);
 	}
 
-y = floor( x/45.0 ); /* integer part of x/PIO4 */
+y = floor( x/45.0 ); /* integer part of x/NCEPHES_PIO4 */
 
 /* strip high bits of integer part to prevent integer overflow */
 z = ldexp( y, -4 );
@@ -226,7 +226,7 @@ if( j > 3)
 	}
 
 z = x - y * 45.0; /* x mod 45 degrees */
-z *= PI180;	/* multiply by pi/180 to convert to radians */
+z *= NCEPHES_PI180;	/* multiply by pi/180 to convert to radians */
 zz = z * z;
 
 if( (j==1) || (j==2) )
@@ -288,7 +288,7 @@ if( j > 1 )
 	sign = -sign;
 
 z = x - y * 45.0; /* x mod 45 degrees */
-z *= PI180;	/* multiply by pi/180 to convert to radians */
+z *= NCEPHES_PI180;	/* multiply by pi/180 to convert to radians */
 
 zz = z * z;
 

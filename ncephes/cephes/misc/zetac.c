@@ -51,7 +51,7 @@ Copyright 1984, 1987, 1989, 2000 by Stephen L. Moshier
 
 #include "mconf.h"
 
-extern double NCEPHES_MAXNUM, PI;
+extern double NCEPHES_MAXNUM, NCEPHES_PI;
 
 /* Riemann zeta(x) - 1
  * for integer arguments between 0 and 30.
@@ -527,7 +527,7 @@ if( x < 0.0 )
 		}
 	s = 1.0 - x;
 	w = zetac( s );
-	b = sin(0.5*PI*x) * pow(2.0*PI, x) * gamma(s) * (1.0 + w) / PI;
+	b = sin(0.5*NCEPHES_PI*x) * pow(2.0*NCEPHES_PI, x) * gamma(s) * (1.0 + w) / NCEPHES_PI;
 	return(b - 1.0);
 	}
 

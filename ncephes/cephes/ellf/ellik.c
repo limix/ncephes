@@ -67,7 +67,7 @@ double ellik ( double, double );
 double sqrt(), fabs(), log(), tan(), atan(), floor(), ellpk();
 double ellik();
 #endif
-extern double PI, PIO2, MACHEP, NCEPHES_MAXNUM;
+extern double NCEPHES_PI, NCEPHES_PIO2, MACHEP, NCEPHES_MAXNUM;
 
 double 
 ellik (double phi, double m)
@@ -80,20 +80,20 @@ if( m == 0.0 )
 a = 1.0 - m;
 if( a == 0.0 )
 	{
-	if( fabs(phi) >= PIO2 )
+	if( fabs(phi) >= NCEPHES_PIO2 )
 		{
 		mtherr( "ellik", SING );
 		return( NCEPHES_MAXNUM );
 		}
-	return(  log(  tan( (PIO2 + phi)/2.0 )  )   );
+	return(  log(  tan( (NCEPHES_PIO2 + phi)/2.0 )  )   );
 	}
-npio2 = floor( phi/PIO2 );
+npio2 = floor( phi/NCEPHES_PIO2 );
 if( npio2 & 1 )
 	npio2 += 1;
 if( npio2 )
 	{
 	K = ellpk( a );
-	phi = phi - npio2 * PIO2;
+	phi = phi - npio2 * NCEPHES_PIO2;
 	}
 else
 	K = 0.0;
@@ -128,8 +128,8 @@ mod = 0;
 while( fabs(c/a) > MACHEP )
 	{
 	temp = b/a;
-	phi = phi + atan(t*temp) + mod * PI;
-	mod = (phi + PIO2)/PI;
+	phi = phi + atan(t*temp) + mod * NCEPHES_PI;
+	mod = (phi + NCEPHES_PIO2)/NCEPHES_PI;
 	t = t * ( 1.0 + temp )/( 1.0 - temp * t * t );
 	c = ( a - b )/2.0;
 	temp = sqrt( a * b );
@@ -138,7 +138,7 @@ while( fabs(c/a) > MACHEP )
 	d += d;
 	}
 
-temp = (atan(t) + mod * PI)/(d * a);
+temp = (atan(t) + mod * NCEPHES_PI)/(d * a);
 
 done:
 if( sign < 0 )
