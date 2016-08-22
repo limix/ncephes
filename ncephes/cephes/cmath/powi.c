@@ -32,7 +32,7 @@
  *    IEEE      .04,26     -26,26     50000       2.0e-15     3.8e-16
  *    IEEE        1,2    -1022,1023   50000       8.6e-14     1.6e-14
  *
- * Returns MAXNUM on overflow, zero on underflow.
+ * Returns NCEPHES_MAXNUM on overflow, zero on underflow.
  *
  */
 
@@ -52,7 +52,7 @@ extern int signbit ( double );
 double log(), frexp();
 int signbit();
 #endif
-extern double NEGZERO, NCEPHES_INF, MAXNUM, MAXLOG, MINLOG, LOGE2;
+extern double NEGZERO, NCEPHES_INF, NCEPHES_MAXNUM, MAXLOG, MINLOG, LOGE2;
 
 double 
 powi (double x, int nn)

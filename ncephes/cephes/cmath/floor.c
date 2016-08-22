@@ -94,7 +94,7 @@ Copyright 1984, 1995, 2000 by Stephen L. Moshier
 #define NBITS 53
 #endif
 
-extern double MAXNUM, NEGZERO;
+extern double NCEPHES_MAXNUM, NEGZERO;
 #ifdef ANSIPROT
 double floor ( double );
 int isnan ( double );
@@ -414,10 +414,10 @@ e += pw2;
 /* Handle overflow */
 #ifdef DEC
 if( e > MEXP )
-	return( MAXNUM );
+	return( NCEPHES_MAXNUM );
 #else
 if( e >= MEXP )
-	return( 2.0*MAXNUM );
+	return( 2.0*NCEPHES_MAXNUM );
 #endif
 
 /* Handle denormalized results */

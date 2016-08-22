@@ -19,14 +19,14 @@
  * The function is approximated by a Chebyshev expansion in
  * the interval [0,1].  Range reduction is by recurrence
  * for arguments between -34.034 and +34.84425627277176174.
- * 1/MAXNUM is returned for positive arguments outside this
+ * 1/NCEPHES_MAXNUM is returned for positive arguments outside this
  * range.  For arguments less than -34.034 the cosecant
  * reflection formula is applied; lograrithms are employed
  * to avoid unnecessary overflow.
  *
  * The reciprocal gamma function has no singularities,
  * but overflow and underflow may occur for large arguments.
- * These conditions return either MAXNUM or 1/MAXNUM with
+ * These conditions return either NCEPHES_MAXNUM or 1/NCEPHES_MAXNUM with
  * appropriate sign.
  *
  * ACCURACY:
@@ -145,7 +145,7 @@ extern double lgam ( double );
 #else
 double chbevl(), exp(), log(), sin(), lgam();
 #endif
-extern double PI, MAXLOG, MAXNUM;
+extern double PI, MAXLOG, NCEPHES_MAXNUM;
 
 
 double 
@@ -157,7 +157,7 @@ int sign;
 if( x > 34.84425627277176174)
 	{
 	mtherr( name, UNDERFLOW );
-	return(1.0/MAXNUM);
+	return(1.0/NCEPHES_MAXNUM);
 	}
 if( x < -34.034 )
 	{
@@ -177,12 +177,12 @@ if( x < -34.034 )
 	if( y < -MAXLOG )
 		{
 		mtherr( name, UNDERFLOW );
-		return( sign * 1.0 / MAXNUM );
+		return( sign * 1.0 / NCEPHES_MAXNUM );
 		}
 	if( y > MAXLOG )
 		{
 		mtherr( name, OVERFLOW );
-		return( sign * MAXNUM );
+		return( sign * NCEPHES_MAXNUM );
 		}
 	return( sign * exp(y));
 	}

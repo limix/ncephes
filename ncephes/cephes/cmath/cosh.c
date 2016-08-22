@@ -32,7 +32,7 @@
  * ERROR MESSAGES:
  *
  *   message         condition      value returned
- * cosh overflow    |x| > MAXLOG       MAXNUM
+ * cosh overflow    |x| > MAXLOG       NCEPHES_MAXNUM
  *
  *
  */

@@ -42,7 +42,7 @@
  *
  *   message         condition      value returned
  * exp underflow    x < -MAXL2        0.0
- * exp overflow     x > MAXL2         MAXNUM
+ * exp overflow     x > MAXL2         NCEPHES_MAXNUM
  *
  * For DEC arithmetic, MAXL2 = 127.
  * For IEEE arithmetic, MAXL2 = 1024.
@@ -132,7 +132,7 @@ int isnan(), isfinite();
 #ifdef INFINITIES
 extern double NCEPHES_INF;
 #endif
-extern double MAXNUM;
+extern double NCEPHES_MAXNUM;
 
 double 
 exp2 (double x)
@@ -150,7 +150,7 @@ if( x > MAXL2)
 	return( NCEPHES_INF );
 #else
 	mtherr( "exp2", OVERFLOW );
-	return( MAXNUM );
+	return( NCEPHES_MAXNUM );
 #endif
 	}
 

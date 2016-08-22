@@ -46,7 +46,7 @@ Copyright 1984, 1996, 2000 by Stephen L. Moshier
 
 #include "mconf.h"
 
-extern double MACHEP, MAXNUM, MAXLOG, MINLOG;
+extern double MACHEP, NCEPHES_MAXNUM, MAXLOG, MINLOG;
 #ifdef ANSIPROT
 extern double ndtri ( double );
 extern double exp ( double );

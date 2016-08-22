@@ -203,7 +203,7 @@ extern double log ( double );
 #else
 double polevl(), p1evl(), log();
 #endif
-extern double MACHEP, MAXNUM;
+extern double MACHEP, NCEPHES_MAXNUM;
 
 double 
 ellpk (double x)
@@ -224,7 +224,7 @@ else
 	if( x == 0.0 )
 		{
 		mtherr( "ellpk", SING );
-		return( MAXNUM );
+		return( NCEPHES_MAXNUM );
 		}
 	else
 		{

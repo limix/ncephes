@@ -585,7 +585,7 @@ extern double p1evl ( double, void *, int );
 double log(), sin(), cos(), polevl(), p1evl();
 #endif
 #define EUL 0.57721566490153286061
-extern double MAXNUM, PIO2, MACHEP;
+extern double NCEPHES_MAXNUM, PIO2, MACHEP;
 
 
 int 
@@ -606,7 +606,7 @@ else
 if( x == 0.0 )
 	{
 	*si = 0.0;
-	*ci = -MAXNUM;
+	*ci = -NCEPHES_MAXNUM;
 	return( 0 );
 	}
 

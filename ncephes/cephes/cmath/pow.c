@@ -40,8 +40,8 @@
  * ERROR MESSAGES:
  *
  *   message         condition      value returned
- * pow overflow     x**y > MAXNUM      NCEPHES_INF
- * pow underflow   x**y < 1/MAXNUM       0.0
+ * pow overflow     x**y > NCEPHES_MAXNUM      NCEPHES_INF
+ * pow underflow   x**y < 1/NCEPHES_MAXNUM       0.0
  * pow domain      x<0 and y noninteger  0.0
  *
  */
@@ -352,7 +352,7 @@ double polevl(), p1evl(), powi();
 int signbit(), isnan(), isfinite();
 static double reduc();
 #endif
-extern double MAXNUM;
+extern double NCEPHES_MAXNUM;
 #ifdef INFINITIES
 extern double NCEPHES_INF;
 #endif
@@ -398,14 +398,14 @@ if( !isfinite(y) && (x == 1.0 || x == -1.0) )
 if( x == 1.0 )
 	return( 1.0 );
 
-if( y >= MAXNUM )
+if( y >= NCEPHES_MAXNUM )
 	{
 #ifdef INFINITIES
 	if( x > 1.0 )
 		return( NCEPHES_INF );
 #else
 	if( x > 1.0 )
-		return( MAXNUM );
+		return( NCEPHES_MAXNUM );
 #endif
 	if( x > 0.0 && x < 1.0 )
 		return( 0.0);
@@ -414,13 +414,13 @@ if( y >= MAXNUM )
 #ifdef INFINITIES
 		return( NCEPHES_INF );
 #else
-		return( MAXNUM );
+		return( NCEPHES_MAXNUM );
 #endif
 		}
 	if( x > -1.0 && x < 0.0 )
 		return( 0.0 );
 	}
-if( y <= -MAXNUM )
+if( y <= -NCEPHES_MAXNUM )
 	{
 	if( x > 1.0 )
 		return( 0.0 );
@@ -429,7 +429,7 @@ if( y <= -MAXNUM )
 		return( NCEPHES_INF );
 #else
 	if( x > 0.0 && x < 1.0 )
-		return( MAXNUM );
+		return( NCEPHES_MAXNUM );
 #endif
 	if( x < -1.0 )
 		return( 0.0 );
@@ -438,17 +438,17 @@ if( y <= -MAXNUM )
 		return( NCEPHES_INF );
 #else
 	if( x > -1.0 && x < 0.0 )
-		return( MAXNUM );
+		return( NCEPHES_MAXNUM );
 #endif
 	}
-if( x >= MAXNUM )
+if( x >= NCEPHES_MAXNUM )
 	{
 #if INFINITIES
 	if( y > 0.0 )
 		return( NCEPHES_INF );
 #else
 	if( y > 0.0 )
-		return( MAXNUM );
+		return( NCEPHES_MAXNUM );
 #endif
 	return(0.0);
 	}
@@ -469,7 +469,7 @@ if( iyflg )
 		yoddint = 1;
 	}
 
-if( x <= -MAXNUM )
+if( x <= -NCEPHES_MAXNUM )
 	{
 	if( y > 0.0 )
 		{
@@ -479,8 +479,8 @@ if( x <= -MAXNUM )
 		return( NCEPHES_INF );
 #else
 		if( yoddint )
-			return( -MAXNUM );
-		return( MAXNUM );
+			return( -NCEPHES_MAXNUM );
+		return( NCEPHES_MAXNUM );
 #endif
 		}
 	if( y < 0.0 )
@@ -507,7 +507,7 @@ if( x <= 0.0 )
 #ifdef INFINITIES
 			return( NCEPHES_INF );
 #else
-			return( MAXNUM );
+			return( NCEPHES_MAXNUM );
 #endif
 			}
 		if( y > 0.0 )
@@ -681,8 +681,8 @@ if( w > MEXP )
 	return( NCEPHES_INF );
 #else
 	if( nflg && yoddint )
-	  return( -MAXNUM );
-	return( MAXNUM );
+	  return( -NCEPHES_MAXNUM );
+	return( NCEPHES_MAXNUM );
 #endif
 	}
 

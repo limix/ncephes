@@ -39,7 +39,7 @@
  *
  *   message         condition      value returned
  * exp10 underflow    x < -MAXL10        0.0
- * exp10 overflow     x > MAXL10       MAXNUM
+ * exp10 overflow     x > MAXL10       NCEPHES_MAXNUM
  *
  * DEC arithmetic: MAXL10 = 38.230809449325611792.
  * IEEE arithmetic: MAXL10 = 308.2547155599167.
@@ -165,7 +165,7 @@ extern int isfinite ( double );
 double floor(), ldexp(), polevl(), p1evl();
 int isnan(), isfinite();
 #endif
-extern double MAXNUM;
+extern double NCEPHES_MAXNUM;
 #ifdef INFINITIES
 extern double NCEPHES_INF;
 #endif
@@ -186,7 +186,7 @@ if( x > MAXL10 )
 	return( NCEPHES_INF );
 #else
 	mtherr( "exp10", OVERFLOW );
-	return( MAXNUM );
+	return( NCEPHES_MAXNUM );
 #endif
 	}
 

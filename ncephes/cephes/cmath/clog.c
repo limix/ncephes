@@ -81,7 +81,7 @@ void clog(), casin(), cacos(), catan();
 #endif
 
 
-extern double MAXNUM, MACHEP, PI, PIO2;
+extern double NCEPHES_MAXNUM, MACHEP, PI, PIO2;
 
 void 
 clog (register cmplx *z, register cmplx *w)
@@ -314,8 +314,8 @@ if( fabs(d) < 0.25 )
 if( d == 0.0 )
 	{
 	mtherr( "ctan", OVERFLOW );
-	w->r = MAXNUM;
-	w->i = MAXNUM;
+	w->r = NCEPHES_MAXNUM;
+	w->i = NCEPHES_MAXNUM;
 	return;
 	}
 
@@ -375,8 +375,8 @@ if( fabs(d) < 0.25 )
 if( d == 0.0 )
 	{
 	mtherr( "ccot", OVERFLOW );
-	w->r = MAXNUM;
-	w->i = MAXNUM;
+	w->r = NCEPHES_MAXNUM;
+	w->i = NCEPHES_MAXNUM;
 	return;
 	}
 
@@ -729,8 +729,8 @@ return;
 
 ovrf:
 mtherr( "catan", OVERFLOW );
-w->r = MAXNUM;
-w->i = MAXNUM;
+w->r = NCEPHES_MAXNUM;
+w->i = NCEPHES_MAXNUM;
 }
 
 

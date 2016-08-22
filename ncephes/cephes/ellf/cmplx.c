@@ -91,7 +91,7 @@ int isnan();
 void cdiv(), cadd();
 #endif
 
-extern double MAXNUM, MACHEP, PI, PIO2, NCEPHES_INF, NCEPHES_NAN;
+extern double NCEPHES_MAXNUM, MACHEP, PI, PIO2, NCEPHES_INF, NCEPHES_NAN;
 /*
 typedef struct
 	{
@@ -153,11 +153,11 @@ q = b->i * a->r  -  b->r * a->i;
 
 if( y < 1.0 )
 	{
-	w = MAXNUM * y;
+	w = NCEPHES_MAXNUM * y;
 	if( (fabs(p) > w) || (fabs(q) > w) || (y == 0.0) )
 		{
-		c->r = MAXNUM;
-		c->i = MAXNUM;
+		c->r = NCEPHES_MAXNUM;
+		c->i = NCEPHES_MAXNUM;
 		mtherr( "cdiv", OVERFLOW );
 		return;
 		}

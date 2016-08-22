@@ -21,7 +21,7 @@
  * Due to machine arithmetic bounds the largest value of
  * i accepted is 33 in DEC arithmetic or 170 in IEEE
  * arithmetic.  Greater values, or negative ones,
- * produce an error message and return MAXNUM.
+ * produce an error message and return NCEPHES_MAXNUM.
  *
  *
  *
@@ -211,7 +211,7 @@ double gamma ( double );
 #else
 double gamma();
 #endif
-extern double MAXNUM;
+extern double NCEPHES_MAXNUM;
 
 double 
 fac (int i)
@@ -222,13 +222,13 @@ int j;
 if( i < 0 )
 	{
 	mtherr( "fac", SING );
-	return( MAXNUM );
+	return( NCEPHES_MAXNUM );
 	}
 
 if( i > MAXFAC )
 	{
 	mtherr( "fac", OVERFLOW );
-	return( MAXNUM );
+	return( NCEPHES_MAXNUM );
 	}
 
 /* Get answer from table for small i. */

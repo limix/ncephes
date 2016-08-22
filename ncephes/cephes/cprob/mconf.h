@@ -47,7 +47,7 @@
  *
  * An important difference among these modes is a predefined
  * set of machine arithmetic constants for each.  The numbers
- * MACHEP (the machine roundoff error), MAXNUM (largest number
+ * MACHEP (the machine roundoff error), NCEPHES_MAXNUM (largest number
  * represented), and several other parameters are preset by
  * the configuration symbol.  Check the file const.c to
  * ensure that these values are correct for your computer.

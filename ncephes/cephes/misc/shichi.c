@@ -35,7 +35,7 @@
  * The integrals are evaluated by power series for x < 8
  * and by Chebyshev expansions for x between 8 and 88.
  * For large x, both functions approach exp(x)/2x.
- * Arguments greater than 88 in magnitude return MAXNUM.
+ * Arguments greater than 88 in magnitude return NCEPHES_MAXNUM.
  *
  *
  * ACCURACY:
@@ -508,7 +508,7 @@ extern double chbevl ( double, void *, int );
 double log(), exp(), fabs(), chbevl();
 #endif
 #define EUL 0.57721566490153286061
-extern double MACHEP, MAXNUM, PIO2;
+extern double MACHEP, NCEPHES_MAXNUM, PIO2;
 
 int 
 shichi (double x, double *si, double *ci)
@@ -528,7 +528,7 @@ else
 if( x == 0.0 )
 	{
 	*si = 0.0;
-	*ci = -MAXNUM;
+	*ci = -NCEPHES_MAXNUM;
 	return( 0 );
 	}
 
@@ -581,10 +581,10 @@ if( x <= 88.0 )
 else
 	{
 	if( sign )
-		*si = -MAXNUM;
+		*si = -NCEPHES_MAXNUM;
 	else
-		*si = MAXNUM;
-	*ci = MAXNUM;
+		*si = NCEPHES_MAXNUM;
+	*ci = NCEPHES_MAXNUM;
 	return(0);
 	}
 done:

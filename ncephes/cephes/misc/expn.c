@@ -60,7 +60,7 @@ double pow(), gamma(), log(), exp(), fabs();
 #endif
 #define EUL 0.57721566490153286060
 #define BIG  1.44115188075855872E+17
-extern double MAXNUM, MACHEP, MAXLOG;
+extern double NCEPHES_MAXNUM, MACHEP, MAXLOG;
 
 double 
 expn (int n, double x)
@@ -77,7 +77,7 @@ if( n < 0 )
 if( x < 0 )
 	{
 domerr:	mtherr( "expn", DOMAIN );
-	return( MAXNUM );
+	return( NCEPHES_MAXNUM );
 	}
 
 if( x > MAXLOG )
@@ -88,7 +88,7 @@ if( x == 0.0 )
 	if( n < 2 )
 		{
 		mtherr( "expn", SING );
-		return( MAXNUM );
+		return( NCEPHES_MAXNUM );
 		}
 	else
 		return( 1.0/(n-1.0) );

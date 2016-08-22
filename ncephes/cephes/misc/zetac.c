@@ -27,7 +27,7 @@
  *	Riemann zeta(x) = zetac(x) + 1.
  *
  * Extension of the function definition for x < 1 is implemented.
- * Zero is returned for x > log2(MAXNUM).
+ * Zero is returned for x > log2(NCEPHES_MAXNUM).
  *
  * An overflow error may occur for large negative x, due to the
  * gamma function in the reflection formula.
@@ -51,7 +51,7 @@ Copyright 1984, 1987, 1989, 2000 by Stephen L. Moshier
 
 #include "mconf.h"
 
-extern double MAXNUM, PI;
+extern double NCEPHES_MAXNUM, PI;
 
 /* Riemann zeta(x) - 1
  * for integer arguments between 0 and 30.
@@ -560,7 +560,7 @@ if( x < 1.0 )
 if( x == 1.0 )
 	{
 	mtherr( "zetac", SING );
-	return( MAXNUM );
+	return( NCEPHES_MAXNUM );
 	}
 
 if( x <= 10.0 )

@@ -48,7 +48,7 @@
  *
  * ERROR MESSAGES:
  *     message         condition      value returned
- * psi singularity    x integer <=0      MAXNUM
+ * psi singularity    x integer <=0      NCEPHES_MAXNUM
  */
 
 /*
@@ -116,7 +116,7 @@ extern double polevl ( double, void *, int );
 #else
 double floor(), log(), tan(), polevl();
 #endif
-extern double PI, MAXNUM;
+extern double PI, NCEPHES_MAXNUM;
 
 
 double 
@@ -136,7 +136,7 @@ if( x <= 0.0 )
 	if( p == q )
 		{
 		mtherr( "psi", SING );
-		return( MAXNUM );
+		return( NCEPHES_MAXNUM );
 		}
 /* Remove the zeros of tan(PI x)
  * by subtracting the nearest integer from x

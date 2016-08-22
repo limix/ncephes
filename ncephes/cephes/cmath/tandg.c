@@ -34,7 +34,7 @@
  *   message         condition          value returned
  * tandg total loss   x > 8.0e14 (DEC)      0.0
  *                    x > 1.0e14 (IEEE)
- * tandg singularity  x = 180 k  +  90     MAXNUM
+ * tandg singularity  x = 180 k  +  90     NCEPHES_MAXNUM
  */
 /*							cotdg.c
  *
@@ -64,7 +64,7 @@
  *   message         condition          value returned
  * cotdg total loss   x > 8.0e14 (DEC)      0.0
  *                    x > 1.0e14 (IEEE)
- * cotdg singularity  x = 180 k            MAXNUM
+ * cotdg singularity  x = 180 k            NCEPHES_MAXNUM
  */
 
 /*
@@ -156,7 +156,7 @@ static double tancot( double, int );
 double polevl(), p1evl(), floor(), ldexp();
 static double tancot();
 #endif
-extern double MAXNUM;
+extern double NCEPHES_MAXNUM;
 extern double PIO4;
 
 
@@ -241,7 +241,7 @@ if( j & 2 )
 		else
 			{
 			mtherr( "tandg", SING );
-			y = MAXNUM;
+			y = NCEPHES_MAXNUM;
 			}
 		}
 	}
@@ -254,7 +254,7 @@ else
 		else
 			{
 			mtherr( "cotdg", SING );
-			y = MAXNUM;
+			y = NCEPHES_MAXNUM;
 			}
 		}
 	}

@@ -71,7 +71,7 @@
  * The cosecant reflection formula is employed for arguments
  * less than -33.
  *
- * Arguments greater than MAXLGM return MAXNUM and an error
+ * Arguments greater than MAXLGM return NCEPHES_MAXNUM and an error
  * message.  MAXLGM = 2.035093e36 for DEC
  * arithmetic or 2.556348e305 for IEEE arithmetic.
  *
@@ -268,7 +268,7 @@ static unsigned short SQT[4] = {
 
 int sgngam = 0;
 extern int sgngam;
-extern double MAXLOG, MAXNUM, PI;
+extern double MAXLOG, NCEPHES_MAXNUM, PI;
 #ifdef ANSIPROT
 extern double pow ( double, double );
 extern double log ( double );
@@ -377,7 +377,7 @@ gamnan:
 #else
 goverf:
 			mtherr( "gamma", OVERFLOW );
-			return( sgngam * MAXNUM);
+			return( sgngam * NCEPHES_MAXNUM);
 #endif
 			}
 		z = fabs(z);
@@ -432,7 +432,7 @@ if( x == 0.0 )
 #endif
 #else
 	mtherr( "gamma", SING );
-	return( MAXNUM );
+	return( NCEPHES_MAXNUM );
 #endif
 	}
 else
@@ -666,7 +666,7 @@ if( x > MAXLGM )
 #else
 loverf:
 	mtherr( "lgam", OVERFLOW );
-	return( sgngam * MAXNUM );
+	return( sgngam * NCEPHES_MAXNUM );
 #endif
 	}
 

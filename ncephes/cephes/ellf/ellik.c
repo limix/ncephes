@@ -67,7 +67,7 @@ double ellik ( double, double );
 double sqrt(), fabs(), log(), tan(), atan(), floor(), ellpk();
 double ellik();
 #endif
-extern double PI, PIO2, MACHEP, MAXNUM;
+extern double PI, PIO2, MACHEP, NCEPHES_MAXNUM;
 
 double 
 ellik (double phi, double m)
@@ -83,7 +83,7 @@ if( a == 0.0 )
 	if( fabs(phi) >= PIO2 )
 		{
 		mtherr( "ellik", SING );
-		return( MAXNUM );
+		return( NCEPHES_MAXNUM );
 		}
 	return(  log(  tan( (PIO2 + phi)/2.0 )  )   );
 	}

@@ -40,8 +40,8 @@
  * ERROR MESSAGES:
  *
  *   message         condition    value returned
- * ndtri domain       x <= 0        -MAXNUM
- * ndtri domain       x >= 1         MAXNUM
+ * ndtri domain       x <= 0        -NCEPHES_MAXNUM
+ * ndtri domain       x >= 1         NCEPHES_MAXNUM
  *
  */
 
@@ -52,7 +52,7 @@ Copyright 1984, 1987, 1989, 2000 by Stephen L. Moshier
 */
 
 #include "mconf.h"
-extern double MAXNUM;
+extern double NCEPHES_MAXNUM;
 
 #ifdef UNK
 /* sqrt(2pi) */
@@ -378,12 +378,12 @@ int code;
 if( y0 <= 0.0 )
 	{
 	mtherr( "ndtri", DOMAIN );
-	return( -MAXNUM );
+	return( -NCEPHES_MAXNUM );
 	}
 if( y0 >= 1.0 )
 	{
 	mtherr( "ndtri", DOMAIN );
-	return( MAXNUM );
+	return( NCEPHES_MAXNUM );
 	}
 code = 1;
 y = y0;

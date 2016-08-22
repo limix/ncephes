@@ -15,7 +15,7 @@
 #include "mconf.h"
 
 
-extern double PI, PIO2, MACHEP, MAXNUM;
+extern double PI, PIO2, MACHEP, NCEPHES_MAXNUM;
 
 static double aa[ARRSIZ];
 static double pp[ARRSIZ];
@@ -756,11 +756,11 @@ if( pzflg )
 	if( g != 0.0 )
 		g = 1.0/g;
 	else
-		g = MAXNUM;
+		g = NCEPHES_MAXNUM;
 	if( g0 != 0.0 )
 		g0 = 1.0/g0;
 	else
-		g = MAXNUM;
+		g = NCEPHES_MAXNUM;
 	}
 printf( "f0 %16.8E  gain %12.4E  DC gain %12.4E\n\n", f, g, g0 );
 return 0;

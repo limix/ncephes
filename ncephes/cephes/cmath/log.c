@@ -33,10 +33,10 @@
  *                      Relative error:
  * arithmetic   domain     # trials      peak         rms
  *    IEEE      0.5, 2.0    150000      1.44e-16    5.06e-17
- *    IEEE      +-MAXNUM    30000       1.20e-16    4.78e-17
+ *    IEEE      +-NCEPHES_MAXNUM    30000       1.20e-16    4.78e-17
  *    DEC       0, 10       170000      1.8e-17     6.3e-18
  *
- * In the tests over the interval [+-MAXNUM], the logarithms
+ * In the tests over the interval [+-NCEPHES_MAXNUM], the logarithms
  * of the random arguments were uniformly distributed over
  * [0, MAXLOG].
  *

@@ -86,7 +86,7 @@ Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
 
 #include "mconf.h"
 
-extern double PI, MACHEP, MAXNUM;
+extern double PI, MACHEP, NCEPHES_MAXNUM;
 #ifdef ANSIPROT
 extern double sqrt ( double );
 extern double atan ( double );
@@ -216,8 +216,8 @@ if( p >= 0.5)
 	}
 z = incbi( 0.5*rk, 0.5, 2.0*p );
 
-if( MAXNUM * z < rk )
-	return(rflg* MAXNUM);
+if( NCEPHES_MAXNUM * z < rk )
+	return(rflg* NCEPHES_MAXNUM);
 t = sqrt( rk/z - rk );
 return( rflg * t );
 }

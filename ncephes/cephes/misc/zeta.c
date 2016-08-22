@@ -67,7 +67,7 @@ extern double floor ( double );
 #else
 double fabs(), pow(), floor();
 #endif
-extern double MAXNUM, MACHEP;
+extern double NCEPHES_MAXNUM, MACHEP;
 
 /* Expansion coefficients
  * for Euler-Maclaurin summation formula
@@ -113,7 +113,7 @@ if( q <= 0.0 )
 		{
 		mtherr( "zeta", SING );
 retinf:
-		return( MAXNUM );
+		return( NCEPHES_MAXNUM );
 		}
 	if( x != floor(x) )
 		goto domerr; /* because q^-x not defined */

@@ -50,7 +50,7 @@ Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
 
 #include "mconf.h"
 
-extern double MACHEP, MAXNUM, MAXLOG, MINLOG;
+extern double MACHEP, NCEPHES_MAXNUM, MAXLOG, MINLOG;
 #ifdef ANSIPROT
 extern double igamc ( double, double );
 extern double ndtri ( double );
@@ -70,7 +70,7 @@ double x0, x1, x, yl, yh, y, d, lgm, dithresh;
 int i, dir;
 
 /* bound the solution */
-x0 = MAXNUM;
+x0 = NCEPHES_MAXNUM;
 yl = 0;
 x1 = 0;
 yh = 1.0;
@@ -116,11 +116,11 @@ for( i=0; i<10; i++ )
 ihalve:
 
 d = 0.0625;
-if( x0 == MAXNUM )
+if( x0 == NCEPHES_MAXNUM )
 	{
 	if( x <= 0.0 )
 		x = 1.0;
-	while( x0 == MAXNUM )
+	while( x0 == NCEPHES_MAXNUM )
 		{
 		x = (1.0 + d) * x;
 		y = igamc( a, x );
