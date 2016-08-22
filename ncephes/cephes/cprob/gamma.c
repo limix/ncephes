@@ -280,11 +280,13 @@ extern int isnan ( double );
 extern int isfinite ( double );
 static double stirf ( double );
 double lgam ( double );
+double lgam_sgn ( double, double );
 #else
 double pow(), log(), exp(), sin(), polevl(), p1evl(), floor(), fabs();
 int isnan(), isfinite();
 static double stirf();
 double lgam();
+double lgam_sgn();
 #endif
 #ifdef INFINITIES
 extern double NCEPHES_INF;
