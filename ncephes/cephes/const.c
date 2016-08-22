@@ -70,12 +70,12 @@ double THPIO4 = 2.35619449019234492885;	/* 3*pi/4 */
 
 #include <math.h>
 #include <float.h>
-double NCEPHES_INF = HUGE_VAL;
-double NCEPHES_NAN = NAN;
-double NCEPHES_MAXNUM = HUGE_VAL;
-double PI = 3.14159265358979323846;
-double PIO2 = PI/2;
-double PIO4 = PI/4;
+const double NCEPHES_INF = HUGE_VAL;
+const double NCEPHES_NAN = NAN;
+const double NCEPHES_MAXNUM = HUGE_VAL;
+const double PI = 3.14159265358979323846;
+const double PIO2 = PI/2;
+const double PIO4 = PI/4;
 
 #ifdef IBMPC
 			/* 2**-53 =  1.11022302462515654042E-16 */
