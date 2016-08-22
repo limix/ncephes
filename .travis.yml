@@ -16,6 +16,9 @@ matrix:
   - os: osx
     language: generic
     env: TRAVIS_PYTHON_VERSION=3.5
+cache:
+  directories:
+  - $HOME/download
 before_install:
 - wget https://raw.githubusercontent.com/Horta/travis-miniconda/master/install.sh
   -O install.sh
