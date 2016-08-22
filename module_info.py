@@ -12,6 +12,7 @@ import re
 def get_sources(module):
     sources = glob(join('ncephes', 'cephes', module, '*.c'))
     sources += [join('ncephes', 'cephes', 'cmath', 'isnan.c')]
+    sources += [join('ncephes', 'cephes', 'cprob', 'gamma.c')]
     return sources
 
 
