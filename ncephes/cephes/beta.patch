@@ -5,7 +5,7 @@
  extern double fabs ( double );
  extern double gamma ( double );
 -extern double lgam ( double );
-+extern double lgam_sgn ( double, double );
++extern double lgam_sgn ( double, int * );
  extern double exp ( double );
  extern double log ( double );
  extern double floor ( double );
