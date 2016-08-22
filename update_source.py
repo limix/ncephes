@@ -54,9 +54,9 @@ def clear_code():
             cmd = "perl -i -pe 's/[\x0c]//g' %s" % fp
             subprocess.check_call(cmd, shell=True)
             if fp.endswith('.c') or fp.endswith('.h'):
-                cmd = "perl -i -pe 's/cabs/ncephes_cabs/g' %s" % fp
+                cmd = "perl -i -pe 's/(ncephes_)*cabs/ncephes_cabs/g' %s" % fp
                 subprocess.check_call(cmd, shell=True)
-                cmd = "perl -i -pe 's/csqrt/ncephes_csqrt/g' %s" % fp
+                cmd = "perl -i -pe 's/(ncephes_)*csqrt/ncephes_csqrt/g' %s" % fp
                 subprocess.check_call(cmd, shell=True)
 
 
@@ -92,6 +92,10 @@ def apply_patch():
     _unlink('ncephes/cephes/cmath/atan.c')
     _unlink('ncephes/cephes/cmath/exp.c')
     _unlink('ncephes/cephes/eval/protos.h')
+
+    _unlink('ncephes/cephes/cprob/const.c')
+    _unlink('ncephes/cephes/ellf/const.c')
+    _unlink('ncephes/cephes/cmath/const.c')
 
 
 def _create_api(module):
