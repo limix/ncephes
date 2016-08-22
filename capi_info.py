@@ -10,6 +10,7 @@ def get_capi_module_name(module):
 def get_sources(module):
     sources = module_info.get_sources(module)
     sources += [join('ncephes', 'cephes', module + '_ffcall.c')]
+    sources += [join('ncephes', 'cephes', 'const.c')]
     return sources
 
 
