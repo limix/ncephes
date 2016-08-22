@@ -599,7 +599,7 @@ if( !isfinite(x) )
 if( x < -34.0 )
 	{
 	q = -x;
-	w = lgam_sign(q, sign); /* note this modifies sgngam! */
+	w = lgam_sgn(q, sign); /* note this modifies sgngam! */
 	p = floor(q);
 	if( p == q )
 		{
