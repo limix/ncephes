@@ -67,7 +67,7 @@ Direct inquiries to 30 Frost Street, Cambridge, MA 02140
 #ifdef ANSIPROT
 extern double fabs ( double );
 extern double gamma ( double );
-extern double lgam ( double );
+extern double lgam_sgn ( double, double );
 extern double exp ( double );
 extern double log ( double );
 extern double floor ( double );
@@ -100,11 +100,12 @@ if( b <= 0.0 )
 y = a + b;
 if( fabs(y) > MAXGAM )
 	{
-	y = lgam(y);
+    int sgngam;
+	y = lgam_sgn(y, &sgngam);
 	sign *= sgngam; /* keep track of the sign */
-	y = lgam(b) - y;
+	y = lgam_sgn(b, &sgngam) - y;
 	sign *= sgngam;
-	y = lgam(a) + y;
+	y = lgam_sgn(a, &sgngam) + y;
 	sign *= sgngam;
 	if( y > MAXLOG )
 		{
@@ -160,11 +161,12 @@ if( b <= 0.0 )
 y = a + b;
 if( fabs(y) > MAXGAM )
 	{
-	y = lgam(y);
+    int sgngam;
+	y = lgam_sgn(y, &sgngam);
 	sign *= sgngam; /* keep track of the sign */
-	y = lgam(b) - y;
+	y = lgam_sgn(b, &sgngam) - y;
 	sign *= sgngam;
-	y = lgam(a) + y;
+	y = lgam_sgn(a, &sgngam) + y;
 	sign *= sgngam;
 	sgngam = sign;
 	return( y );

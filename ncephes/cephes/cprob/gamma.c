@@ -266,8 +266,6 @@ static unsigned short SQT[4] = {
 #define SQTNCEPHES_PI *(double *)SQT
 #endif
 
-int sgngam = 0;
-extern int sgngam;
 extern double MAXLOG, NCEPHES_MAXNUM, NCEPHES_PI;
 #ifdef ANSIPROT
 extern double pow ( double, double );
@@ -327,7 +325,7 @@ cephes_gamma (double x)
 double p, q, z;
 int i;
 
-sgngam = 1;
+int sgngam = 1;
 #ifdef NCEPHES_NANS
 if( isnan(x) )
 	return(x);
@@ -572,15 +570,20 @@ static unsigned short LS2P[] = {
 
 
 /* Logarithm of gamma function */
+double lgam(double x)
+{
+    int sign;
+    return lgam_sgn(x, &sign);
+}
 
 
 double 
-lgam (double x)
+lgam_sgn (double x, int *sign)
 {
 double p, q, u, w, z;
 int i;
+*sign = 1;
 
-sgngam = 1;
 #ifdef NCEPHES_NANS
 if( isnan(x) )
 	return(x);
@@ -594,7 +597,7 @@ if( !isfinite(x) )
 if( x < -34.0 )
 	{
 	q = -x;
-	w = lgam(q); /* note this modifies sgngam! */
+	w = lgam(q, sign); /* note this modifies sgngam! */
 	p = floor(q);
 	if( p == q )
 		{
@@ -608,9 +611,9 @@ lgsing:
 		}
 	i = p;
 	if( (i & 1) == 0 )
-		sgngam = -1;
+		*sign = -1;
 	else
-		sgngam = 1;
+		*sign = 1;
 	z = q - p;
 	if( z > 0.5 )
 		{
@@ -646,11 +649,11 @@ if( x < 13.0 )
 		}
 	if( z < 0.0 )
 		{
-		sgngam = -1;
+		*sign = -1;
 		z = -z;
 		}
 	else
-		sgngam = 1;
+		*sign = 1;
 	if( u == 2.0 )
 		return( log(z) );
 	p -= 2.0;
@@ -662,11 +665,11 @@ if( x < 13.0 )
 if( x > MAXLGM )
 	{
 #ifdef INFINITIES
-	return( sgngam * NCEPHES_INF );
+	return( *sign * NCEPHES_INF );
 #else
 loverf:
 	mtherr( "lgam", OVERFLOW );
-	return( sgngam * NCEPHES_MAXNUM );
+	return( *sign * NCEPHES_MAXNUM );
 #endif
 	}
 

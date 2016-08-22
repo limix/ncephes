@@ -1,12 +1,12 @@
 --- gamma.c	2016-08-22 16:09:05.000000000 +0100
 +++ gamma.new.c	2016-08-22 16:27:41.000000000 +0100
 @@ -266,8 +266,6 @@
- #define SQTNCEPHES_PI *(double *)SQT
+ #define SQTPI *(double *)SQT
  #endif
  
 -int sgngam = 0;
 -extern int sgngam;
- extern double MAXLOG, NCEPHES_MAXNUM, NCEPHES_PI;
+ extern double MAXLOG, MAXNUM, PI;
  #ifdef ANSIPROT
  extern double pow ( double, double );
 @@ -327,7 +325,7 @@
@@ -15,7 +15,7 @@
  
 -sgngam = 1;
 +int sgngam = 1;
- #ifdef NCEPHES_NANS
+ #ifdef NANS
  if( isnan(x) )
  	return(x);
 @@ -572,15 +570,20 @@
@@ -38,7 +38,7 @@
 +*sign = 1;
  
 -sgngam = 1;
- #ifdef NCEPHES_NANS
+ #ifdef NANS
  if( isnan(x) )
  	return(x);
 @@ -594,7 +597,7 @@
@@ -80,13 +80,13 @@
  if( x > MAXLGM )
  	{
  #ifdef INFINITIES
--	return( sgngam * NCEPHES_INF );
-+	return( *sign * NCEPHES_INF );
+-	return( sgngam * INFINITY );
++	return( *sign * INFINITY );
  #else
  loverf:
  	mtherr( "lgam", OVERFLOW );
--	return( sgngam * NCEPHES_MAXNUM );
-+	return( *sign * NCEPHES_MAXNUM );
+-	return( sgngam * MAXNUM );
++	return( *sign * MAXNUM );
  #endif
  	}
  
