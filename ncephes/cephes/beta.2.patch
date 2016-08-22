@@ -1,0 +1,10 @@
+--- beta.c	2016-08-22 16:57:07.000000000 +0100
++++ beta.c.new	2016-08-22 17:08:00.000000000 +0100
+@@ -75,7 +75,6 @@
+ double fabs(), gamma(), lgam(), exp(), log(), floor();
+ #endif
+ extern double MAXLOG, MAXNUM;
+-extern int sgngam;
+ 
+ double 
+ beta (double a, double b)

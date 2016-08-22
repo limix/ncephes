@@ -75,7 +75,6 @@ extern double floor ( double );
 double fabs(), gamma(), lgam(), exp(), log(), floor();
 #endif
 extern double MAXLOG, NCEPHES_MAXNUM;
-extern int sgngam;
 
 double 
 beta (double a, double b)
