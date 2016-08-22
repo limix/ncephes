@@ -191,12 +191,7 @@ else
 	}
 
 if( y < 0 )
-  {
-    sgngam = -1;
     y = -y;
-  }
-else
-  sgngam = 1;
 
 return( log(y) );
 }
