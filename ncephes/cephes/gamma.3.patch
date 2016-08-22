@@ -1,0 +1,16 @@
+--- gamma.c	2016-08-22 16:43:28.000000000 +0100
++++ gamma.new.c	2016-08-22 16:43:24.000000000 +0100
+@@ -280,11 +280,13 @@
+ extern int isfinite ( double );
+ static double stirf ( double );
+ double lgam ( double );
++double lgam_sgn ( double, double );
+ #else
+ double pow(), log(), exp(), sin(), polevl(), p1evl(), floor(), fabs();
+ int isnan(), isfinite();
+ static double stirf();
+ double lgam();
++double lgam_sgn();
+ #endif
+ #ifdef INFINITIES
+ extern double INFINITY;
