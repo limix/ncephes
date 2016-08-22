@@ -15,11 +15,6 @@ def _make(module):
     fdecl_noextern = '\n'.join(fdecls)
 
     cconst = join('ncephes', 'cephes', 'const.c')
-    if module == 'misc':
-        gamma = [join('ncephes', 'cephes', 'cprob', 'gamma.c')]
-    else:
-        gamma = []
-
 
     ffi = FFI()
     ffi.set_source('ncephes._%s_ffi' % module,
