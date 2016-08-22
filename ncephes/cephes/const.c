@@ -68,9 +68,10 @@ double THPIO4 = 2.35619449019234492885;	/* 3*pi/4 */
 
 #endif
 
-/*#include <float.h>*/
-/*double INFINITY = DBL_MAX;*/
-/*double MAXNUM = DBL_MAX;*/
+#include <math.h>
+#include <float.h>
+double NCEPHES_INF = HUGE_VAL;
+double NCEPHES_MAXNUM = HUGE_VAL;
 
 #ifdef IBMPC
 			/* 2**-53 =  1.11022302462515654042E-16 */
