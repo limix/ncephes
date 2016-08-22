@@ -67,7 +67,7 @@ Direct inquiries to 30 Frost Street, Cambridge, MA 02140
 #ifdef ANSIPROT
 extern double fabs ( double );
 extern double gamma ( double );
-extern double lgam_sgn ( double, double );
+extern double lgam_sgn ( double, int * );
 extern double exp ( double );
 extern double log ( double );
 extern double floor ( double );
