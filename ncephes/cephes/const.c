@@ -76,6 +76,7 @@ const double NCEPHES_MAXNUM = HUGE_VAL;
 const double PI = 3.14159265358979323846;
 const double PIO2 = PI/2;
 const double PIO4 = PI/4;
+const double SQRTH = 7.07106781186547524401E-1;    /* sqrt(2)/2 */
 
 #ifdef IBMPC
 			/* 2**-53 =  1.11022302462515654042E-16 */
