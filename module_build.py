@@ -15,13 +15,16 @@ def _make(module):
     fdecl_noextern = '\n'.join(fdecls)
 
     cconst = join('ncephes', 'cephes', 'const.c')
-    gamma = join('ncephes', 'cephes', 'cprob', 'gamma.c')
+    if module == 'cprob':
+        gamma = []
+    else:
+        gamma = [join('ncephes', 'cephes', 'cprob', 'gamma.c')]
 
     ffi = FFI()
     ffi.set_source('ncephes._%s_ffi' % module,
                    fdecl_extern,
                    include_dirs=get_include_dirs(module),
-                   sources=get_sources(module) + [cconst] + [gamma],
+                   sources=get_sources(module) + [cconst] + gamma,
                    libraries=[],
                    extra_compile_args=get_extra_compile_args(),
                    language='c')
