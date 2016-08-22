@@ -20,7 +20,7 @@ def _make(module):
     ffi.set_source('ncephes._%s_ffi' % module,
                    fdecl_extern,
                    include_dirs=get_include_dirs(module),
-                   sources=get_sources(module) + [cconst] + gamma,
+                   sources=get_sources(module) + [cconst],
                    libraries=[],
                    extra_compile_args=get_extra_compile_args(),
                    language='c')
