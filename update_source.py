@@ -76,6 +76,9 @@ def convert_old_style_proto():
             cmd = "cproto -q -I%s -I%s -a %s" % (incl1, incl2, fp)
             subprocess.check_call(cmd, shell=True)
 
+def _unlink(f):
+    if os.path.exists(f):
+        os.unlink(f)
 
 def apply_patch():
     cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.patch"
@@ -86,8 +89,9 @@ def apply_patch():
     subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/misc/revers.c ncephes/cephes/revers.patch"
     subprocess.check_call(cmd, shell=True)
-    os.unlink('ncephes/cephes/cmath/atan.c')
-    os.unlink('ncephes/cephes/cmath/exp.c')
+    _unlink('ncephes/cephes/cmath/atan.c')
+    _unlink('ncephes/cephes/cmath/exp.c')
+    _unlink('ncephes/cephes/eval/protos.h')
 
 
 def _create_api(module):
