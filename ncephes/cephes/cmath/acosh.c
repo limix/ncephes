@@ -37,7 +37,7 @@
  * ERROR MESSAGES:
  *
  *   message         condition      value returned
- * acosh domain       |x| < 1            NAN
+ * acosh domain       |x| < 1            NCEPHES_NAN
  *
  */
 
@@ -132,7 +132,7 @@ extern double sqrt ( double );
 #else
 double log(), sqrt(), polevl(), p1evl();
 #endif
-extern double LOGE2, INFINITY, NAN;
+extern double LOGE2, NCEPHES_INF, NCEPHES_NAN;
 
 double 
 acosh (double x)
@@ -142,14 +142,14 @@ double a, z;
 if( x < 1.0 )
 	{
 	mtherr( "acosh", DOMAIN );
-	return(NAN);
+	return(NCEPHES_NAN);
 	}
 
 if( x > 1.0e8 )
 	{
 #ifdef INFINITIES
-	if( x == INFINITY )
-		return( INFINITY );
+	if( x == NCEPHES_INF )
+		return( NCEPHES_INF );
 #endif
 	return( log(x) + LOGE2 );
 	}

@@ -53,14 +53,14 @@ extern int isfinite ( double );
 double exp();
 int isnan(), isfinite();
 #endif
-extern double MAXLOG, INFINITY, LOGE2;
+extern double MAXLOG, NCEPHES_INF, LOGE2;
 
 double 
 cosh (double x)
 {
 double y;
 
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
 	return(x);
 #endif
@@ -69,7 +69,7 @@ if( x < 0 )
 if( x > (MAXLOG + LOGE2) )
 	{
 	mtherr( "cosh", OVERFLOW );
-	return( INFINITY );
+	return( NCEPHES_INF );
 	}	
 if( x >= (MAXLOG - LOGE2) )
 	{

@@ -91,7 +91,7 @@ int isnan();
 void cdiv(), cadd();
 #endif
 
-extern double MAXNUM, MACHEP, PI, PIO2, INFINITY, NAN;
+extern double MAXNUM, MACHEP, PI, PIO2, NCEPHES_INF, NCEPHES_NAN;
 /*
 typedef struct
 	{
@@ -276,13 +276,13 @@ double x, y, b, re, im;
 int ex, ey, e;
 
 #ifdef INFINITIES
-/* Note, ncephes_cabs(INFINITY,NAN) = INFINITY. */
-if( z->r == INFINITY || z->i == INFINITY
-   || z->r == -INFINITY || z->i == -INFINITY )
-  return( INFINITY );
+/* Note, ncephes_cabs(NCEPHES_INF,NCEPHES_NAN) = NCEPHES_INF. */
+if( z->r == NCEPHES_INF || z->i == NCEPHES_INF
+   || z->r == -NCEPHES_INF || z->i == -NCEPHES_INF )
+  return( NCEPHES_INF );
 #endif
 
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(z->r) )
   return(z->r);
 if( isnan(z->i) )
@@ -326,7 +326,7 @@ ey = e + ey;
 if( ey > MAXEXP )
 	{
 	mtherr( "ncephes_cabs", OVERFLOW );
-	return( INFINITY );
+	return( NCEPHES_INF );
 	}
 if( ey < MINEXP )
 	return(0.0);

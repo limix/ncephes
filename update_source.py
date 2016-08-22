@@ -58,6 +58,10 @@ def clear_code():
                 subprocess.check_call(cmd, shell=True)
                 cmd = "perl -i -pe 's/(ncephes_)*csqrt/ncephes_csqrt/g' %s" % fp
                 subprocess.check_call(cmd, shell=True)
+                cmd = "perl -i -pe 's/(NCEPHES_)*INFINITY/NCEPHES_INF/g' %s" % fp
+                subprocess.check_call(cmd, shell=True)
+                cmd = "perl -i -pe 's/(NCEPHES_)*NAN/NCEPHES_NAN/g' %s" % fp
+                subprocess.check_call(cmd, shell=True)
 
 
 def convert_old_style_proto():

@@ -119,7 +119,7 @@ else
 int 
 isnan (double x)
 {
-#ifdef NANS
+#ifdef NCEPHES_NANS
 union
 	{
 	double d;
@@ -177,7 +177,7 @@ else
 	} /* size int not 4 */
 
 #else
-/* No NANS.  */
+/* No NCEPHES_NANS.  */
 return(0);
 #endif
 }
@@ -231,7 +231,7 @@ else
 	return(0);
 	}
 #else
-/* No INFINITY.  */
+/* No NCEPHES_INF.  */
 return(1);
 #endif
 }

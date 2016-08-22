@@ -40,8 +40,8 @@
  *
  * ERROR MESSAGES:
  *
- * log2 singularity:  x = 0; returns -INFINITY
- * log2 domain:       x < 0; returns NAN
+ * log2 singularity:  x = 0; returns -NCEPHES_INF
+ * log2 domain:       x < 0; returns NCEPHES_NAN
  */
 
 /*
@@ -213,7 +213,7 @@ double frexp(), ldexp(), polevl(), p1evl();
 int isnan(), isfinite();
 #endif
 #define SQRTH 0.70710678118654752440
-extern double LOGE2, INFINITY, NAN;
+extern double LOGE2, NCEPHES_INF, NCEPHES_NAN;
 
 double 
 log2 (double x)
@@ -225,12 +225,12 @@ VOLATILE double z;
 short *q;
 #endif
 
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
 	return(x);
 #endif
 #ifdef INFINITIES
-if( x == INFINITY )
+if( x == NCEPHES_INF )
 	return(x);
 #endif
 /* Test for domain */
@@ -239,12 +239,12 @@ if( x <= 0.0 )
 	if( x == 0.0 )
 	        {
 		mtherr( fname, SING );
-		return( -INFINITY );
+		return( -NCEPHES_INF );
 	        }
 	else
 	        {
 		mtherr( fname, DOMAIN );
-		return( NAN );
+		return( NCEPHES_NAN );
 	        }
 	}
 

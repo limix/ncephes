@@ -120,7 +120,7 @@ extern double p1evl ( double x, void *P, int N );
 #else
 double fabs(), log(), polevl(), p1evl();
 #endif
-extern double INFINITY, NAN;
+extern double NCEPHES_INF, NCEPHES_NAN;
 
 double 
 atanh (double x)
@@ -135,11 +135,11 @@ z = fabs(x);
 if( z >= 1.0 )
 	{
 	if( x == 1.0 )
-		return( INFINITY );
+		return( NCEPHES_INF );
 	if( x == -1.0 )
-		return( -INFINITY );
+		return( -NCEPHES_INF );
 	mtherr( "atanh", DOMAIN );
-	return( NAN );
+	return( NCEPHES_NAN );
 	}
 
 if( z < 1.0e-7 )

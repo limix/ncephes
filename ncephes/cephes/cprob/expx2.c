@@ -56,7 +56,7 @@ double exp();
 #endif
 
 extern double MAXLOG;
-extern double INFINITY;
+extern double NCEPHES_INF;
 
 double 
 expx2 (double x, int sign)
@@ -84,7 +84,7 @@ expx2 (double x, int sign)
     }
 
   if ((u+u1) > MAXLOG)
-    return (INFINITY);
+    return (NCEPHES_INF);
 
   /* u is exact, u1 is small.  */
   u = exp(u) * exp(u1);

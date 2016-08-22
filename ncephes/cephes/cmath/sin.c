@@ -206,11 +206,11 @@ int isnan(), isfinite();
 #endif
 extern double PIO4;
 static double lossth = 1.073741824e9;
-#ifdef NANS
-extern double NAN;
+#ifdef NCEPHES_NANS
+extern double NCEPHES_NAN;
 #endif
 #ifdef INFINITIES
-extern double INFINITY;
+extern double NCEPHES_INF;
 #endif
 
 
@@ -224,13 +224,13 @@ int j, sign;
 if( x == 0.0 )
 	return(x);
 #endif
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
 	return(x);
 if( !isfinite(x) )
 	{
 	mtherr( "sin", DOMAIN );
-	return(NAN);
+	return(NCEPHES_NAN);
 	}
 #endif
 /* make argument positive but save the sign */
@@ -301,13 +301,13 @@ double y, z, zz;
 long i;
 int j, sign;
 
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
 	return(x);
 if( !isfinite(x) )
 	{
 	mtherr( "cos", DOMAIN );
-	return(NAN);
+	return(NCEPHES_NAN);
 	}
 #endif
 

@@ -52,7 +52,7 @@
  * the configuration symbol.  Check the file const.c to
  * ensure that these values are correct for your computer.
  *
- * Configurations NANS, INFINITIES, MINUSZERO, and DENORMAL
+ * Configurations NCEPHES_NANS, INFINITIES, MINUSZERO, and DENORMAL
  * may fail on many systems.  Verify that they are supposed
  * to work on your computer.
  */
@@ -177,7 +177,7 @@ typedef struct
 
 /* Define to ask for support of numbers that are Not-a-Number,
    else undefine.  This may automatically define INFINITIES in some files. */
-#define NANS 1
+#define NCEPHES_NANS 1
 
 /* Define to distinguish between -0.0 and +0.0.  */
 #define MINUSZERO 1

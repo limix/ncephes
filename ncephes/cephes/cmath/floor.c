@@ -115,7 +115,7 @@ double y;
 mtherr( "ceil", DOMAIN );
 return(0.0);
 #endif
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
 	return( x );
 #endif
@@ -178,7 +178,7 @@ int e;
 mtherr( "floor", DOMAIN );
 return(0.0);
 #endif
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
 	return( x );
 #endif

@@ -118,7 +118,7 @@ extern double log ( double );
 #else
 double log(), sqrt(), polevl(), p1evl();
 #endif
-extern double LOGE2, INFINITY;
+extern double LOGE2, NCEPHES_INF;
 
 double 
 asinh (double xx)
@@ -144,7 +144,7 @@ else
 if( x > 1.0e8 )
 	{
 #ifdef INFINITIES
-	  if( x == INFINITY )
+	  if( x == NCEPHES_INF )
 	    return(xx);
 #endif
 	return( sign * (log(x) + LOGE2) );

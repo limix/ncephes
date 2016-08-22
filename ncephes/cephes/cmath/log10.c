@@ -37,8 +37,8 @@
  *
  * ERROR MESSAGES:
  *
- * log10 singularity:  x = 0; returns -INFINITY
- * log10 domain:       x < 0; returns NAN
+ * log10 singularity:  x = 0; returns -NCEPHES_INF
+ * log10 domain:       x < 0; returns NCEPHES_NAN
  */
 
 /*
@@ -152,7 +152,7 @@ extern int isfinite ( double );
 double frexp(), ldexp(), polevl(), p1evl();
 int isnan(), isfinite();
 #endif
-extern double LOGE2, SQRT2, INFINITY, NAN;
+extern double LOGE2, SQRT2, NCEPHES_INF, NCEPHES_NAN;
 
 double 
 log10 (double x)
@@ -164,12 +164,12 @@ short *q;
 #endif
 int e;
 
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
 	return(x);
 #endif
 #ifdef INFINITIES
-if( x == INFINITY )
+if( x == NCEPHES_INF )
 	return(x);
 #endif
 /* Test for domain */
@@ -178,12 +178,12 @@ if( x <= 0.0 )
 	if( x == 0.0 )
 	        {
 		mtherr( fname, SING );
-		return( -INFINITY );
+		return( -NCEPHES_INF );
 	        }
 	else
 	        {
 		mtherr( fname, DOMAIN );
-		return( NAN );
+		return( NCEPHES_NAN );
 	        }
 	}
 

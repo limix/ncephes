@@ -34,7 +34,7 @@
  * ERROR MESSAGES:
  *
  *   message         condition      value returned
- * asin domain        |x| > 1           NAN
+ * asin domain        |x| > 1           NCEPHES_NAN
  *
  */
 /*							acos()
@@ -78,7 +78,7 @@
  * ERROR MESSAGES:
  *
  *   message         condition      value returned
- * asin domain        |x| > 1           NAN
+ * asin domain        |x| > 1           NCEPHES_NAN
  */
 
 /*							asin.c	*/
@@ -250,7 +250,7 @@ double asin ( double );
 double sqrt(), polevl(), p1evl();
 double asin();
 #endif
-extern double PIO2, PIO4, NAN;
+extern double PIO2, PIO4, NCEPHES_NAN;
 
 double 
 asin (double x)
@@ -272,7 +272,7 @@ else
 if( a > 1.0 )
 	{
 	mtherr( "asin", DOMAIN );
-	return( NAN );
+	return( NCEPHES_NAN );
 	}
 
 if( a > 0.625 )
@@ -311,7 +311,7 @@ double z;
 if( (x < -1.0) || (x > 1.0) )
 	{
 	mtherr( "acos", DOMAIN );
-	return( NAN );
+	return( NCEPHES_NAN );
 	}
 if( x > 0.5 )
 	{

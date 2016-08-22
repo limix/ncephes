@@ -70,7 +70,7 @@
  *
  *   message         condition          value returned
  * cot total loss   x > 1.073741824e9       0.0
- * cot singularity  x = 0                  INFINITY
+ * cot singularity  x = 0                  NCEPHES_INF
  *
  */
 
@@ -193,8 +193,8 @@ static double tancot();
 int isnan(), isfinite();
 #endif
 extern double PIO4;
-extern double INFINITY;
-extern double NAN;
+extern double NCEPHES_INF;
+extern double NCEPHES_NAN;
 
 double 
 tan (double x)
@@ -203,13 +203,13 @@ tan (double x)
 if( x == 0.0 )
 	return(x);
 #endif
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
 	return(x);
 if( !isfinite(x) )
 	{
 	mtherr( "tan", DOMAIN );
-	return(NAN);
+	return(NCEPHES_NAN);
 	}
 #endif
 return( tancot(x,0) );
@@ -223,7 +223,7 @@ cot (double x)
 if( x == 0.0 )
 	{
 	mtherr( "cot", SING );
-	return( INFINITY );
+	return( NCEPHES_INF );
 	}
 return( tancot(x,1) );
 }

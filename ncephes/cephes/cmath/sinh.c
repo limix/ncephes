@@ -106,7 +106,7 @@ extern double p1evl ( double, void *, int );
 #else
 double fabs(), exp(), polevl(), p1evl();
 #endif
-extern double INFINITY, MINLOG, MAXLOG, LOGE2;
+extern double NCEPHES_INF, MINLOG, MAXLOG, LOGE2;
 
 double 
 sinh (double x)
@@ -122,9 +122,9 @@ if( (x > (MAXLOG + LOGE2)) || (x > -(MINLOG-LOGE2) ) )
 	{
 	mtherr( "sinh", DOMAIN );
 	if( x > 0 )
-		return( INFINITY );
+		return( NCEPHES_INF );
 	else
-		return( -INFINITY );
+		return( -NCEPHES_INF );
 	}
 if( a > 1.0 )
 	{

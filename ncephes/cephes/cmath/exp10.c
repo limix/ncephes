@@ -167,7 +167,7 @@ int isnan(), isfinite();
 #endif
 extern double MAXNUM;
 #ifdef INFINITIES
-extern double INFINITY;
+extern double NCEPHES_INF;
 #endif
 
 double 
@@ -176,14 +176,14 @@ exp10 (double x)
 double px, xx;
 short n;
 
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
 	return(x);
 #endif
 if( x > MAXL10 )
 	{
 #ifdef INFINITIES
-	return( INFINITY );
+	return( NCEPHES_INF );
 #else
 	mtherr( "exp10", OVERFLOW );
 	return( MAXNUM );

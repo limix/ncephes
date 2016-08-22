@@ -52,7 +52,7 @@ extern int signbit ( double );
 double log(), frexp();
 int signbit();
 #endif
-extern double NEGZERO, INFINITY, MAXNUM, MAXLOG, MINLOG, LOGE2;
+extern double NEGZERO, NCEPHES_INF, MAXNUM, MAXLOG, MINLOG, LOGE2;
 
 double 
 powi (double x, int nn)
@@ -66,7 +66,7 @@ if( x == 0.0 )
 	if( nn == 0 )
 		return( 1.0 );
 	else if( nn < 0 )
-	    return( INFINITY );
+	    return( NCEPHES_INF );
 	else
 	  {
 	    if( nn & 1 )
@@ -124,7 +124,7 @@ else
 if( s > MAXLOG )
 	{
 	mtherr( "powi", OVERFLOW );
-	y = INFINITY;
+	y = NCEPHES_INF;
 	goto done;
 	}
 

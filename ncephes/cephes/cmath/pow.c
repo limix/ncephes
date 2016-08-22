@@ -40,7 +40,7 @@
  * ERROR MESSAGES:
  *
  *   message         condition      value returned
- * pow overflow     x**y > MAXNUM      INFINITY
+ * pow overflow     x**y > MAXNUM      NCEPHES_INF
  * pow underflow   x**y < 1/MAXNUM       0.0
  * pow domain      x<0 and y noninteger  0.0
  *
@@ -354,10 +354,10 @@ static double reduc();
 #endif
 extern double MAXNUM;
 #ifdef INFINITIES
-extern double INFINITY;
+extern double NCEPHES_INF;
 #endif
-#ifdef NANS
-extern double NAN;
+#ifdef NCEPHES_NANS
+extern double NCEPHES_NAN;
 #endif
 #ifdef MINUSZERO
 extern double NEGZERO;
@@ -373,7 +373,7 @@ int e, i, nflg, iyflg, yoddint;
 
 if( y == 0.0 )
 	return( 1.0 );
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
 	return( x );
 if( isnan(y) )
@@ -387,10 +387,10 @@ if( y == 1.0 )
 if( !isfinite(y) && (x == 1.0 || x == -1.0) )
 	{
 	mtherr( "pow", DOMAIN );
-#ifdef NANS
-	return( NAN );
+#ifdef NCEPHES_NANS
+	return( NCEPHES_NAN );
 #else
-	return( INFINITY );
+	return( NCEPHES_INF );
 #endif
 	}
 #endif
@@ -402,7 +402,7 @@ if( y >= MAXNUM )
 	{
 #ifdef INFINITIES
 	if( x > 1.0 )
-		return( INFINITY );
+		return( NCEPHES_INF );
 #else
 	if( x > 1.0 )
 		return( MAXNUM );
@@ -412,7 +412,7 @@ if( y >= MAXNUM )
 	if( x < -1.0 )
 		{
 #ifdef INFINITIES
-		return( INFINITY );
+		return( NCEPHES_INF );
 #else
 		return( MAXNUM );
 #endif
@@ -426,7 +426,7 @@ if( y <= -MAXNUM )
 		return( 0.0 );
 #ifdef INFINITIES
 	if( x > 0.0 && x < 1.0 )
-		return( INFINITY );
+		return( NCEPHES_INF );
 #else
 	if( x > 0.0 && x < 1.0 )
 		return( MAXNUM );
@@ -435,7 +435,7 @@ if( y <= -MAXNUM )
 		return( 0.0 );
 #ifdef INFINITIES
 	if( x > -1.0 && x < 0.0 )
-		return( INFINITY );
+		return( NCEPHES_INF );
 #else
 	if( x > -1.0 && x < 0.0 )
 		return( MAXNUM );
@@ -445,7 +445,7 @@ if( x >= MAXNUM )
 	{
 #if INFINITIES
 	if( y > 0.0 )
-		return( INFINITY );
+		return( NCEPHES_INF );
 #else
 	if( y > 0.0 )
 		return( MAXNUM );
@@ -475,8 +475,8 @@ if( x <= -MAXNUM )
 		{
 #ifdef INFINITIES
 		if( yoddint )
-			return( -INFINITY );
-		return( INFINITY );
+			return( -NCEPHES_INF );
+		return( NCEPHES_INF );
 #else
 		if( yoddint )
 			return( -MAXNUM );
@@ -502,10 +502,10 @@ if( x <= 0.0 )
 			{
 #ifdef MINUSZERO
 			if( signbit(x) && yoddint )
-				return( -INFINITY );
+				return( -NCEPHES_INF );
 #endif
 #ifdef INFINITIES
-			return( INFINITY );
+			return( NCEPHES_INF );
 #else
 			return( MAXNUM );
 #endif
@@ -525,8 +525,8 @@ if( x <= 0.0 )
 		if( iyflg == 0 )
 			{ /* noninteger power of negative number */
 			mtherr( fname, DOMAIN );
-#ifdef NANS
-			return(NAN);
+#ifdef NCEPHES_NANS
+			return(NCEPHES_NAN);
 #else
 			return(0.0L);
 #endif
@@ -677,8 +677,8 @@ if( w > MEXP )
 #endif
 #ifdef INFINITIES
 	if( nflg && yoddint )
-	  return( -INFINITY );
-	return( INFINITY );
+	  return( -NCEPHES_INF );
+	return( NCEPHES_INF );
 #else
 	if( nflg && yoddint )
 	  return( -MAXNUM );

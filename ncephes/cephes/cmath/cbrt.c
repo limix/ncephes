@@ -64,7 +64,7 @@ cbrt (double x)
 int e, rem, sign;
 double z;
 
-#ifdef NANS
+#ifdef NCEPHES_NANS
 if( isnan(x) )
   return x;
 #endif
