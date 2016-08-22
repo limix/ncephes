@@ -280,7 +280,7 @@ extern int isnan ( double );
 extern int isfinite ( double );
 static double stirf ( double );
 double lgam ( double );
-double lgam_sgn ( double, double );
+double lgam_sgn ( double, int* );
 #else
 double pow(), log(), exp(), sin(), polevl(), p1evl(), floor(), fabs();
 int isnan(), isfinite();
@@ -599,7 +599,7 @@ if( !isfinite(x) )
 if( x < -34.0 )
 	{
 	q = -x;
-	w = lgam(q, sign); /* note this modifies sgngam! */
+	w = lgam_sign(q, sign); /* note this modifies sgngam! */
 	p = floor(q);
 	if( p == q )
 		{
