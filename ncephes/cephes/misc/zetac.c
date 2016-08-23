@@ -30,7 +30,7 @@
  * Zero is returned for x > log2(NCEPHES_MAXNUM).
  *
  * An overflow error may occur for large negative x, due to the
- * ncephes_gamma function in the reflection formula.
+ * cephes_gamma function in the reflection formula.
  *
  * ACCURACY:
  *
@@ -496,14 +496,14 @@ static unsigned short S[20] = {
 #ifdef ANSIPROT
 extern double sin ( double );
 extern double floor ( double );
-extern double ncephes_gamma ( double );
+extern double cephes_gamma ( double );
 extern double pow ( double, double );
 extern double exp ( double );
 extern double polevl ( double, void *, int );
 extern double p1evl ( double, void *, int );
 double zetac ( double );
 #else
-double sin(), floor(), ncephes_gamma(), pow(), exp();
+double sin(), floor(), cephes_gamma(), pow(), exp();
 double polevl(), p1evl(), zetac();
 #endif
 extern double MACHEP;
@@ -527,7 +527,7 @@ if( x < 0.0 )
 		}
 	s = 1.0 - x;
 	w = zetac( s );
-	b = sin(0.5*NCEPHES_PI*x) * pow(2.0*NCEPHES_PI, x) * ncephes_gamma(s) * (1.0 + w) / NCEPHES_PI;
+	b = sin(0.5*NCEPHES_PI*x) * pow(2.0*NCEPHES_PI, x) * cephes_gamma(s) * (1.0 + w) / NCEPHES_PI;
 	return(b - 1.0);
 	}
 

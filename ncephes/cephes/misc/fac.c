@@ -28,8 +28,8 @@
  * ACCURACY:
  *
  * For i < 34 the values are simply tabulated, and have
- * full machine accuracy.  If i > 55, fac(i) = ncephes_gamma(i+1);
- * see ncephes_gamma.c.
+ * full machine accuracy.  If i > 55, fac(i) = cephes_gamma(i+1);
+ * see cephes_gamma.c.
  *
  *                      Relative error:
  * arithmetic   domain      peak
@@ -207,9 +207,9 @@ static unsigned short factbl[] = {
 #endif
 
 #ifdef ANSIPROT
-double ncephes_gamma ( double );
+double cephes_gamma ( double );
 #else
-double ncephes_gamma();
+double cephes_gamma();
 #endif
 extern double NCEPHES_MAXNUM;
 
@@ -240,11 +240,11 @@ if( i < 34 )
 	return( *(double *)(&factbl[4*i]) );
 #endif
 	}
-/* Use ncephes_gamma function for large i. */
+/* Use cephes_gamma function for large i. */
 if( i > 55 )
 	{
 	x = i + 1;
-	return( ncephes_gamma(x) );
+	return( cephes_gamma(x) );
 	}
 /* Compute directly for intermediate i. */
 n = 34.0;

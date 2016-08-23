@@ -59,7 +59,7 @@ def clear_code():
                 cmd = "perl -i -pe 's/(ncephes_)*csqrt/ncephes_csqrt/g' %s" % fp
                 subprocess.check_call(cmd, shell=True)
                 if f != 'gamma.c' and f != 'incbet.c':
-                    cmd = "perl -i -pe 's/(ncephes_)*gamma/ncephes_gamma/g' %s" % fp
+                    cmd = "perl -i -pe 's/(cephes_)*gamma/cephes_gamma/g' %s" % fp
                     subprocess.check_call(cmd, shell=True)
 
 

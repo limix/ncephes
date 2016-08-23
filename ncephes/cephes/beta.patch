@@ -3,7 +3,7 @@
 @@ -67,7 +67,7 @@
  #ifdef ANSIPROT
  extern double fabs ( double );
- extern double ncephes_gamma ( double );
+ extern double cephes_gamma ( double );
 -extern double lgam ( double );
 +extern double lgam_sgn ( double, int * );
  extern double exp ( double );

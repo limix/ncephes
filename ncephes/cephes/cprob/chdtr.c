@@ -29,7 +29,7 @@
  *
  * where x is the Chi-square variable.
  *
- * The incomplete ncephes_gamma integral is used, according to the
+ * The incomplete cephes_gamma integral is used, according to the
  * formula
  *
  *	y = chdtr( v, x ) = igam( v/2.0, x/2.0 ).
@@ -79,7 +79,7 @@
  *
  * where x is the Chi-square variable.
  *
- * The incomplete ncephes_gamma integral is used, according to the
+ * The incomplete cephes_gamma integral is used, according to the
  * formula
  *
  *	y = chdtr( v, x ) = igamc( v/2.0, x/2.0 ).
@@ -119,7 +119,7 @@
  * from x to infinity of the Chi-square density is equal
  * to the given cumulative probability y.
  *
- * This is accomplished using the inverse ncephes_gamma integral
+ * This is accomplished using the inverse cephes_gamma integral
  * function and the relation
  *
  *    x/2 = igami( df/2, y );

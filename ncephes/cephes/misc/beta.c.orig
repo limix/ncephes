@@ -74,7 +74,8 @@ extern double floor ( double );
 #else
 double fabs(), cephes_gamma(), lgam(), exp(), log(), floor();
 #endif
-extern double MAXLOG, NCEPHES_MAXNUM;
+extern double MAXLOG, MAXNUM;
+extern int sgngam;
 
 double 
 beta (double a, double b)
@@ -110,7 +111,7 @@ if( fabs(y) > MAXGAM )
 		{
 over:
 		mtherr( "beta", OVERFLOW );
-		return( sign * NCEPHES_MAXNUM );
+		return( sign * MAXNUM );
 		}
 	return( sign * exp(y) );
 	}
@@ -176,7 +177,7 @@ if( y == 0.0 )
 	{
 over:
 	mtherr( "lbeta", OVERFLOW );
-	return( sign * NCEPHES_MAXNUM );
+	return( sign * MAXNUM );
 	}
 
 if( a > b )
@@ -191,7 +192,12 @@ else
 	}
 
 if( y < 0 )
+  {
+    sgngam = -1;
     y = -y;
+  }
+else
+  sgngam = 1;
 
 return( log(y) );
 }

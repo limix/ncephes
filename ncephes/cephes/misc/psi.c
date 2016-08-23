@@ -1,6 +1,6 @@
 /*							psi.c
  *
- *	Psi (dincephes_gamma) function
+ *	Psi (dicephes_gamma) function
  *
  *
  * SYNOPSIS:
@@ -16,7 +16,7 @@
  *   psi(x)  =  -- ln | (x)
  *              dx
  *
- * is the logarithmic derivative of the ncephes_gamma function.
+ * is the logarithmic derivative of the cephes_gamma function.
  * For integer x,
  *                   n-1
  *                    -
