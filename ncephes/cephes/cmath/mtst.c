@@ -35,7 +35,7 @@ Copyright 1984, 1987, 1988, 2000 by Stephen L. Moshier
 #define NTRIALS 10000
 #endif
 
-/* C9X spells lgam lgamma.  */
+/* C9X spells lgam lncephes_gamma.  */
 #define GLIBC2 0
 #define GLIBC2r1 0
 
@@ -83,7 +83,7 @@ extern double sinh ( double );
 extern double asinh ( double x );
 extern double cosh ( double );
 extern double acosh ( double );
-extern double gamma ( double );
+extern double ncephes_gamma ( double );
 extern double lgam ( double );
 extern double jn ( int, double );
 extern double yn ( int, double );
@@ -98,13 +98,13 @@ double fabs(), sqrt(), cbrt(), exp(), log();
 double exp10(), log10(), tan(), atan();
 double sin(), asin(), cos(), acos(), pow();
 double tanh(), atanh(), sinh(), asinh(), cosh(), acosh();
-double gamma(), lgam(), jn(), yn(), ndtrl(), ndtril();
+double ncephes_gamma(), lgam(), jn(), yn(), ndtrl(), ndtril();
 double stdtrl(), stdtril(), ellpel(), ellpkl();
 #endif
 
 #if GLIBC2
-extern double lgamma (double);
-extern double tgamma ( double );
+extern double lncephes_gamma (double);
+extern double tncephes_gamma ( double );
 #endif
 
 #if SETPREC
@@ -209,11 +209,11 @@ struct fundef defs[NTESTS] = {
 0.0, 0.0, 0},
 #if GLIBC2
 #if !GLIBC2r1
-{ "tgamma",  tgamma,  "lgamma", lgamma, 1, GAMMA, 0, 34.0, 0.0,   0,
+{ "tncephes_gamma",  tncephes_gamma,  "lncephes_gamma", lncephes_gamma, 1, GAMMA, 0, 34.0, 0.0,   0,
 0.0, 0.0, 0},
 #endif
 #else
-{ "gamma",  gamma,     "lgam",   lgam, 1, GAMMA, 0, 34.0, 0.0,   0,
+{ "ncephes_gamma",  ncephes_gamma,     "lgam",   lgam, 1, GAMMA, 0, 34.0, 0.0,   0,
 0.0, 0.0, 0},
 #endif
 { "  Jn",     jn,   "  Yn",     yn, 2, WRONK1, 0, 30.0,  0.1,  0,
@@ -234,7 +234,7 @@ static char *headrs[] = {
 "x = %s( %s(x) ): ",
 "x = %s( %s(x,a),1/a ): ",	/* power */
 "Legendre %s, %s: ",		/* ellip */
-"%s(x) = log(%s(x)): ",		/* gamma */
+"%s(x) = log(%s(x)): ",		/* ncephes_gamma */
 "Wronksian of %s, %s: ",
 "Wronksian of %s, %s: ",
 "Wronksian of %s, %s: ",
@@ -302,7 +302,7 @@ ave = 0.0;
 fun = d->name;
 ifun = d->inv;
 
-/* Absolute error criterion starts with gamma function
+/* Absolute error criterion starts with ncephes_gamma function
  * (put all such at end of table)
  */
 #if 0
@@ -380,11 +380,11 @@ switch( d->nargs )
 
 		case GAMMA:
 #if GLIBC2
-		y = lgamma(x);
-		x = log( tgamma(x) );
+		y = lncephes_gamma(x);
+		x = log( tncephes_gamma(x) );
 #else
 		y = lgam(x);
-		x = log( gamma(x) );
+		x = log( ncephes_gamma(x) );
 #endif
 		break;
 

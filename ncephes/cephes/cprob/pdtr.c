@@ -25,7 +25,7 @@
  *  j=0
  *
  * The terms are not summed directly; instead the incomplete
- * gamma integral is employed, according to the relation
+ * ncephes_gamma integral is employed, according to the relation
  *
  * y = pdtr( k, m ) = igamc( k+1, m ).
  *
@@ -65,7 +65,7 @@
  *  j=k+1
  *
  * The terms are not summed directly; instead the incomplete
- * gamma integral is employed, according to the formula
+ * ncephes_gamma integral is employed, according to the formula
  *
  * y = pdtrc( k, m ) = igam( k+1, m ).
  *
@@ -100,7 +100,7 @@
  * from 0 to x of the Poisson density is equal to the
  * given probability y.
  *
- * This is accomplished using the inverse gamma integral
+ * This is accomplished using the inverse ncephes_gamma integral
  * function and the relation
  *
  *    m = igami( k+1, y ).

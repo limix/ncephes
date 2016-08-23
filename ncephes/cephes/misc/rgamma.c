@@ -1,20 +1,20 @@
-/*						rgamma.c
+/*						rncephes_gamma.c
  *
- *	Reciprocal gamma function
+ *	Reciprocal ncephes_gamma function
  *
  *
  *
  * SYNOPSIS:
  *
- * double x, y, rgamma();
+ * double x, y, rncephes_gamma();
  *
- * y = rgamma( x );
+ * y = rncephes_gamma( x );
  *
  *
  *
  * DESCRIPTION:
  *
- * Returns one divided by the gamma function of the argument.
+ * Returns one divided by the ncephes_gamma function of the argument.
  *
  * The function is approximated by a Chebyshev expansion in
  * the interval [0,1].  Range reduction is by recurrence
@@ -24,7 +24,7 @@
  * reflection formula is applied; lograrithms are employed
  * to avoid unnecessary overflow.
  *
- * The reciprocal gamma function has no singularities,
+ * The reciprocal ncephes_gamma function has no singularities,
  * but overflow and underflow may occur for large arguments.
  * These conditions return either NCEPHES_MAXNUM or 1/NCEPHES_MAXNUM with
  * appropriate sign.
@@ -46,8 +46,8 @@ Copyright 1985, 1987, 2000 by Stephen L. Moshier
 
 #include "mconf.h"
 
-/* Chebyshev coefficients for reciprocal gamma function
- * in interval 0 to 1.  Function is 1/(x gamma(x)) - 1
+/* Chebyshev coefficients for reciprocal ncephes_gamma function
+ * in interval 0 to 1.  Function is 1/(x ncephes_gamma(x)) - 1
  */
 
 #ifdef UNK
@@ -134,7 +134,7 @@ static unsigned short R[] = {
 };
 #endif
 
-static char name[] = "rgamma";
+static char name[] = "rncephes_gamma";
 
 #ifdef ANSIPROT
 extern double chbevl ( double, void *, int );
@@ -149,7 +149,7 @@ extern double NCEPHES_PI, MAXLOG, NCEPHES_MAXNUM;
 
 
 double 
-rgamma (double x)
+rncephes_gamma (double x)
 {
 double w, y, z;
 int sign;

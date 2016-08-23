@@ -66,13 +66,13 @@ Direct inquiries to 30 Frost Street, Cambridge, MA 02140
 
 #ifdef ANSIPROT
 extern double fabs ( double );
-extern double gamma ( double );
+extern double ncephes_gamma ( double );
 extern double lgam_sgn ( double, int * );
 extern double exp ( double );
 extern double log ( double );
 extern double floor ( double );
 #else
-double fabs(), gamma(), lgam(), exp(), log(), floor();
+double fabs(), ncephes_gamma(), lgam(), exp(), log(), floor();
 #endif
 extern double MAXLOG, NCEPHES_MAXNUM;
 
@@ -115,19 +115,19 @@ over:
 	return( sign * exp(y) );
 	}
 
-y = gamma(y);
+y = ncephes_gamma(y);
 if( y == 0.0 )
 	goto over;
 
 if( a > b )
 	{
-	y = gamma(a)/y;
-	y *= gamma(b);
+	y = ncephes_gamma(a)/y;
+	y *= ncephes_gamma(b);
 	}
 else
 	{
-	y = gamma(b)/y;
-	y *= gamma(a);
+	y = ncephes_gamma(b)/y;
+	y *= ncephes_gamma(a);
 	}
 
 return(y);
@@ -171,7 +171,7 @@ if( fabs(y) > MAXGAM )
 	return( y );
 	}
 
-y = gamma(y);
+y = ncephes_gamma(y);
 if( y == 0.0 )
 	{
 over:
@@ -181,13 +181,13 @@ over:
 
 if( a > b )
 	{
-	y = gamma(a)/y;
-	y *= gamma(b);
+	y = ncephes_gamma(a)/y;
+	y *= ncephes_gamma(b);
 	}
 else
 	{
-	y = gamma(b)/y;
-	y *= gamma(a);
+	y = ncephes_gamma(b)/y;
+	y *= ncephes_gamma(a);
 	}
 
 if( y < 0 )

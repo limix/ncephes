@@ -1,6 +1,6 @@
 /*							igam.c
  *
- *	Incomplete gamma integral
+ *	Incomplete ncephes_gamma integral
  *
  *
  *
@@ -37,7 +37,7 @@
  */
 /*							igamc()
  *
- *	Complemented incomplete gamma integral
+ *	Complemented incomplete ncephes_gamma integral
  *
  *
  *
@@ -163,7 +163,7 @@ return( ans * ax );
 
 
 
-/* left tail of incomplete gamma function:
+/* left tail of incomplete ncephes_gamma function:
  *
  *          inf.      k
  *   a  -x   -       x
@@ -184,7 +184,7 @@ if( (x <= 0) || ( a <= 0) )
 if( (x > 1.0) && (x > a ) )
 	return( 1.0 - igamc(a,x) );
 
-/* Compute  x**a * exp(-x) / gamma(a)  */
+/* Compute  x**a * exp(-x) / ncephes_gamma(a)  */
 ax = a * log(x) - x - lgam(a);
 if( ax < -MAXLOG )
 	{

@@ -14,7 +14,7 @@
  *
  * DESCRIPTION:
  *
- * Returns the integral from zero to x of the gamma probability
+ * Returns the integral from zero to x of the ncephes_gamma probability
  * density function:
  *
  *
@@ -26,7 +26,7 @@
  *      | (b)   -
  *               0
  *
- *  The incomplete gamma integral is used, according to the
+ *  The incomplete ncephes_gamma integral is used, according to the
  * relation
  *
  * y = igam( b, ax ).
@@ -44,7 +44,7 @@
  */
 /*							gdtrc.c
  *
- *	Complemented gamma distribution function
+ *	Complemented ncephes_gamma distribution function
  *
  *
  *
@@ -58,7 +58,7 @@
  *
  * DESCRIPTION:
  *
- * Returns the integral from x to infinity of the gamma
+ * Returns the integral from x to infinity of the ncephes_gamma
  * probability density function:
  *
  *
@@ -70,7 +70,7 @@
  *      | (b)   -
  *               x
  *
- *  The incomplete gamma integral is used, according to the
+ *  The incomplete ncephes_gamma integral is used, according to the
  * relation
  *
  * y = igamc( b, ax ).

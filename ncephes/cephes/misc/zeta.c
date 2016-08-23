@@ -127,7 +127,7 @@ if( x < 25.0 )
 /* Permit negative q but continue sum until n+q > +9 .
  * This case should be handled by a reflection formula.
  * If q<0 and x is an integer, there is a relation to
- * the polygamma function.
+ * the polyncephes_gamma function.
  */
 s = pow( q, -x );
 a = q;

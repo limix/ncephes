@@ -11,7 +11,7 @@ Copyright 1998, 2000 by Stephen L. Moshier
 #include <string.h>
 int isfinite (double);
 
-/* C9X spells lgam lgamma.  */
+/* C9X spells lgam lncephes_gamma.  */
 #define GLIBC2 0
 
 extern double NCEPHES_PI;
@@ -57,12 +57,12 @@ double log2 (double);
 double fabs (double);
 double erf (double);
 double erfc (double);
-double gamma (double);
+double ncephes_gamma (double);
 double floor (double);
 double ceil (double);
 double cbrt (double);
 #if GLIBC2
-double lgamma (double);
+double lncephes_gamma (double);
 #else
 double lgam (double);
 #endif
@@ -219,17 +219,17 @@ struct oneargument test1[] =
   {"erfc", erfc, &NCEPHES_NAN, &NCEPHES_NAN, 0},
   {"erfc", erfc, &INF, &ZERO, 0},
   {"erfc", erfc, &MINF, &TWO, 0},
-  {"gamma", gamma, &NCEPHES_NAN, &NCEPHES_NAN, 0},
-  {"gamma", gamma, &INF, &INF, 0},
-  {"gamma", gamma, &MONE, &NCEPHES_NAN, 0},
-  {"gamma", gamma, &ZERO, &NCEPHES_NAN, 0},
-  {"gamma", gamma, &MINF, &NCEPHES_NAN, 0},
+  {"ncephes_gamma", ncephes_gamma, &NCEPHES_NAN, &NCEPHES_NAN, 0},
+  {"ncephes_gamma", ncephes_gamma, &INF, &INF, 0},
+  {"ncephes_gamma", ncephes_gamma, &MONE, &NCEPHES_NAN, 0},
+  {"ncephes_gamma", ncephes_gamma, &ZERO, &NCEPHES_NAN, 0},
+  {"ncephes_gamma", ncephes_gamma, &MINF, &NCEPHES_NAN, 0},
 #if GLIBC2
-  {"lgamma", lgamma, &NCEPHES_NAN, &NCEPHES_NAN, 0},
-  {"lgamma", lgamma, &INF, &INF, 0},
-  {"lgamma", lgamma, &MONE, &INF, 0},
-  {"lgamma", lgamma, &ZERO, &INF, 0},
-  {"lgamma", lgamma, &MINF, &INF, 0},
+  {"lncephes_gamma", lncephes_gamma, &NCEPHES_NAN, &NCEPHES_NAN, 0},
+  {"lncephes_gamma", lncephes_gamma, &INF, &INF, 0},
+  {"lncephes_gamma", lncephes_gamma, &MONE, &INF, 0},
+  {"lncephes_gamma", lncephes_gamma, &ZERO, &INF, 0},
+  {"lncephes_gamma", lncephes_gamma, &MINF, &INF, 0},
 #else
   {"lgam", lgam, &NCEPHES_NAN, &NCEPHES_NAN, 0},
   {"lgam", lgam, &INF, &INF, 0},

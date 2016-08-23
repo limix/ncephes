@@ -51,12 +51,12 @@
 #include "mconf.h"
 #ifdef ANSIPROT
 extern double pow ( double, double );
-extern double gamma ( double );
+extern double ncephes_gamma ( double );
 extern double log ( double );
 extern double exp ( double );
 extern double fabs ( double );
 #else
-double pow(), gamma(), log(), exp(), fabs();
+double pow(), ncephes_gamma(), log(), exp(), fabs();
 #endif
 #define EUL 0.57721566490153286060
 #define BIG  1.44115188075855872E+17
@@ -149,7 +149,7 @@ while( t > MACHEP );
 k = xk;
 t = n;
 r = n - 1;
-ans = (pow(z, r) * psi / gamma(t)) - ans;
+ans = (pow(z, r) * psi / ncephes_gamma(t)) - ans;
 goto done;
 
 /*							expn.c	*/
