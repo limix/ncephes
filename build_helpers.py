@@ -67,7 +67,8 @@ def read_export_file(fp):
 
 
 def fetch_func_decl(filename):
-    ast = parse_file(filename, use_cpp=True, cpp_path='cpp', cpp_args='')
+    ast = parse_file(filename, use_cpp=True, cpp_path='cpp',
+                     cpp_args='-Incephes/cephes')
 
     v = FuncDefVisitor()
     v.visit(ast)

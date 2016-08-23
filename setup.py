@@ -35,7 +35,7 @@ version = '0.0.20'
 def _check_pycparser():
     try:
         parse_file(join('ncephes', 'cephes', 'cmath', 'isnan.c'),
-                   use_cpp=True, cpp_path='cpp', cpp_args='')
+                   use_cpp=True, cpp_path='cpp', cpp_args='-Incephes/cephes')
     except RuntimeError:
         print('Error: could not parse a C file. Do you have a working C/C++' +
               ' compiler system?')

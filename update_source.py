@@ -126,10 +126,10 @@ def apply_patch():
     _unlink('ncephes/cephes/ellf/const.c')
     _unlink('ncephes/cephes/cmath/const.c')
 
-    _unlink('ncephes/cephes/cprob/mconf.c')
-    _unlink('ncephes/cephes/ellf/mconf.c')
-    _unlink('ncephes/cephes/cmath/mconf.c')
-    _unlink('ncephes/cephes/eval/mconf.c')
+    _unlink('ncephes/cephes/cprob/mconf.h')
+    _unlink('ncephes/cephes/ellf/mconf.h')
+    _unlink('ncephes/cephes/cmath/mconf.h')
+    _unlink('ncephes/cephes/eval/mconf.h')
 
 
 def _create_api(module):
