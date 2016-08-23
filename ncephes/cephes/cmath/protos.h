@@ -39,7 +39,7 @@ extern void cdiv ( cmplx *a, cmplx *b, cmplx *c );
 extern void cmov ( void *a, void *b );
 extern void cneg ( cmplx *a );
 extern double ncephes_cabs ( cmplx *z );
-extern void ncephes_csqrt ( cmplx *z, cmplx *w );
+extern void ncephes_gamma ( cmplx *z, cmplx *w );
 extern double hypot ( double, double );
 extern double cosh ( double );
 extern double dawsn ( double xx );

@@ -335,7 +335,7 @@ if( ey < MINEXP )
 b = ldexp( b, e );
 return( b );
 }
-/*							ncephes_csqrt()
+/*							ncephes_gamma()
  *
  *	Complex square root
  *
@@ -343,10 +343,10 @@ return( b );
  *
  * SYNOPSIS:
  *
- * void ncephes_csqrt();
+ * void ncephes_gamma();
  * cmplx z, w;
  *
- * ncephes_csqrt( &z, &w );
+ * ncephes_gamma( &z, &w );
  *
  *
  *
@@ -378,13 +378,13 @@ return( b );
  *    IEEE      -10,+10    100000       3.2e-16     7.7e-17
  *
  *                        2
- * Also tested by ncephes_csqrt( z ) = z, and tested by arguments
+ * Also tested by ncephes_gamma( z ) = z, and tested by arguments
  * close to the real axis.
  */
 
 
 void 
-ncephes_csqrt (cmplx *z, cmplx *w)
+ncephes_gamma (cmplx *z, cmplx *w)
 {
 cmplx q, s;
 double x, y, r, t;

@@ -61,7 +61,7 @@ double cos (double);
 double ncephes_cabs (cmplx *);
 void cadd ( cmplx *, cmplx *, cmplx * );
 void cmul ( cmplx *, cmplx *, cmplx * );
-void ncephes_csqrt ( cmplx *, cmplx * );
+void ncephes_gamma ( cmplx *, cmplx * );
 static void cchsh ( double, double *, double * );
 static double redupi ( double );
 static double ctans ( cmplx * );
@@ -76,7 +76,7 @@ static double ctans();
 double ncephes_cabs(), fabs(), sqrt(), pow();
 double log(), exp(), atan2(), cosh(), sinh();
 double asin(), sin(), cos();
-void cadd(), cmul(), ncephes_csqrt();
+void cadd(), cmul(), ncephes_gamma();
 void clog(), casin(), cacos(), catan();
 #endif
 
@@ -508,7 +508,7 @@ return(d);
  * Inverse complex sine:
  *
  *                               2
- * w = -i clog( iz + ncephes_csqrt( 1 - z ) ).
+ * w = -i clog( iz + ncephes_gamma( 1 - z ) ).
  *
  *
  * ACCURACY:
@@ -600,7 +600,7 @@ zz.i = 2.0 * ca.r * ca.i;
 
 zz.r = 1.0 - zz.r;
 zz.i = -zz.i;
-ncephes_csqrt( &zz, &z2 );
+ncephes_gamma( &zz, &z2 );
 
 cadd( &z2, &ct, &zz );
 clog( &zz, &zz );

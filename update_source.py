@@ -58,6 +58,8 @@ def clear_code():
                 subprocess.check_call(cmd, shell=True)
                 cmd = "perl -i -pe 's/(ncephes_)*csqrt/ncephes_csqrt/g' %s" % fp
                 subprocess.check_call(cmd, shell=True)
+                cmd = "perl -i -pe 's/(ncephes_)*csqrt/ncephes_gamma/g' %s" % fp
+                subprocess.check_call(cmd, shell=True)
 
 
 def ncephes_consts():
