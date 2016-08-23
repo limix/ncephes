@@ -1,0 +1,16 @@
+--- ./polmisc.c	2016-08-23 12:13:17.000000000 +0100
++++ ./polmisc.c.new	2016-08-23 12:15:48.000000000 +0100
+@@ -18,13 +18,11 @@
+ extern void polsub ( double a[], int na, double b[], int nb, double c[] );
+ extern int poldiv ( double a[], int na, double b[], int nb, double c[] );
+ extern void polsbt ( double a[], int na, double b[], int nb, double c[] );
+-extern void * malloc ( long );
+ extern void free ( void * );
+ #else
+ double atan2(), sqrt(), fabs(), sin(), cos();
+ void polclr(), polmov(), polsbt(), poladd(), polsub(), polmul();
+ int poldiv();
+-void * malloc();
+ void free ();
+ #endif
+ 

@@ -1,0 +1,10 @@
+--- ./revers.c	2016-08-23 12:20:03.000000000 +0100
++++ ./revers.new.c	2016-08-23 12:23:51.000000000 +0100
+@@ -66,6 +66,7 @@
+ */
+ 
+ #include "mconf.h"
++#include <stdlib.h>
+ 
+ extern int MAXPOL; /* initialized by polini() */
+ 

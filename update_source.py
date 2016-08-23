@@ -101,15 +101,11 @@ def _unlink(f):
 def apply_patch():
     cmd = "patch ncephes/cephes/polyn/polyn.c ncephes/cephes/polyn.patch"
     subprocess.check_call(cmd, shell=True)
-    cmd = "patch ncephes/cephes/polyn/polyr.c ncephes/cephes/polyr.patch"
+    cmd = "patch ncephes/cephes/polyn/polyn.c ncephes/cephes/polyn.2.patch"
     subprocess.check_call(cmd, shell=True)
-    cmd = "patch ncephes/cephes/polyn/polyr.c ncephes/cephes/polyr.2.patch"
+    cmd = "patch ncephes/cephes/polyn/polmisc.c ncephes/cephes/polmisc.patch"
     subprocess.check_call(cmd, shell=True)
-    cmd = "patch ncephes/cephes/polyn/polyr.c ncephes/cephes/polyr.3.patch"
-    subprocess.check_call(cmd, shell=True)
-    cmd = "patch ncephes/cephes/polyn/polyr.c ncephes/cephes/polyr.4.patch"
-    subprocess.check_call(cmd, shell=True)
-    cmd = "patch ncephes/cephes/polyn/polyr.c ncephes/cephes/polyr.5.patch"
+    cmd = "patch ncephes/cephes/polyn/polmisc.c ncephes/cephes/polmisc.2.patch"
     subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.patch"
     subprocess.check_call(cmd, shell=True)
@@ -131,6 +127,10 @@ def apply_patch():
     subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/misc/revers.c ncephes/cephes/revers.patch"
     subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/polyn/revers.c ncephes/cephes/revers.2.patch"
+    subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/polyn/revers.c ncephes/cephes/revers.3.patch"
+    subprocess.check_call(cmd, shell=True)
     _unlink('ncephes/cephes/cmath/atan.c')
     _unlink('ncephes/cephes/cmath/exp.c')
     _unlink('ncephes/cephes/eval/protos.h')
@@ -143,6 +143,14 @@ def apply_patch():
     _unlink('ncephes/cephes/ellf/mconf.h')
     _unlink('ncephes/cephes/cmath/mconf.h')
     _unlink('ncephes/cephes/eval/mconf.h')
+
+    _unlink('ncephes/cephes/polyn/polyr.c')
+
+    _unlink('ncephes/cephes/cprob/mtherr.c')
+    _unlink('ncephes/cephes/ellf/mtherr.c')
+    _unlink('ncephes/cephes/cmath/mtherr.c')
+    _unlink('ncephes/cephes/eval/mtherr.c')
+    _unlink('ncephes/cephes/misc/mtherr.c')
 
 
 def _create_api(module):

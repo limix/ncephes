@@ -1,0 +1,10 @@
+--- polyn.c	2016-08-23 15:57:26.000000000 +0100
++++ polyn.c.new	2016-08-23 15:58:09.000000000 +0100
+@@ -60,6 +60,7 @@
+  */
+ 
+ #include <stdio.h>
++#include <stdlib.h>
+ #include "mconf.h"
+ #if ANSIPROT
+ void exit (int);

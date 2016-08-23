@@ -1,0 +1,11 @@
+--- mconf.h	2016-08-23 10:41:40.000000000 +0100
++++ mconf.h.new	2016-08-23 12:26:57.000000000 +0100
+@@ -113,4 +113,8 @@
+ /* Define to support tiny denormal numbers, else undefine. */
+ #define DENORMAL 1
+ 
++int
++mtherr(char *name, int code);
++
++
+ #endif				/* CEPHES_MCONF_H */

@@ -113,4 +113,8 @@ typedef struct
 /* Define to support tiny denormal numbers, else undefine. */
 #define DENORMAL 1
 
+int
+mtherr(char *name, int code);
+
+
 #endif				/* CEPHES_MCONF_H */

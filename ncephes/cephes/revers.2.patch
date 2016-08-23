@@ -1,0 +1,14 @@
+--- ./revers.c	2016-08-23 12:13:17.000000000 +0100
++++ ./revers.c.new	2016-08-23 12:16:13.000000000 +0100
+@@ -75,11 +75,9 @@
+ void polclr ( double *, int );
+ void poladd ( double *, int, double *, int, double * );
+ void polmul ( double *, int, double *, int, double * );
+-void * malloc ( long );
+ void free ( void * );
+ #else
+ void polmov(), polclr(), poladd(), polmul();
+-void * malloc();
+ void free ();
+ #endif
+ 
