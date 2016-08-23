@@ -14,11 +14,13 @@ def get_sources(module):
     sources += [join('ncephes', 'cephes', 'cmath', 'isnan.c')]
     if module == 'misc':
         sources += [join('ncephes', 'cephes', 'cprob', 'gamma.c')]
+        sources += [join('ncephes', 'cephes', 'polyn', 'polyn.c')]
+        sources += [join('ncephes', 'cephes', 'cmath', 'powi.c')]
     return sources
 
 
 def get_include_dirs(module):
-    return [join('ncephes', 'cephes', module)]
+    return [join('ncephes', 'cephes', module), join('ncephes', 'cephes')]
 
 
 def get_fdecls(module):

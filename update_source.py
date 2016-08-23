@@ -59,6 +59,7 @@ def clear_code():
                 cmd = "perl -i -pe 's/(ncephes_)*csqrt/ncephes_csqrt/g' %s" % fp
                 subprocess.check_call(cmd, shell=True)
 
+
 def ncephes_consts():
     print("Setting ncephes consts...")
     root = join('ncephes', 'cephes')
@@ -98,6 +99,18 @@ def _unlink(f):
         os.unlink(f)
 
 def apply_patch():
+    cmd = "patch ncephes/cephes/polyn/polyn.c ncephes/cephes/polyn.patch"
+    subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/polyn/polyr.c ncephes/cephes/polyr.patch"
+    subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/polyn/polyr.c ncephes/cephes/polyr.2.patch"
+    subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/polyn/polyr.c ncephes/cephes/polyr.3.patch"
+    subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/polyn/polyr.c ncephes/cephes/polyr.4.patch"
+    subprocess.check_call(cmd, shell=True)
+    cmd = "patch ncephes/cephes/polyn/polyr.c ncephes/cephes/polyr.5.patch"
+    subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.patch"
     subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.2.patch"

@@ -16,7 +16,8 @@ def get_sources(module):
 
 def get_include_dirs(module):
     from module_info import get_include_dirs as gid
-    return gid(module) + [join('ncephes', 'include')]
+    return (gid(module) + [join('ncephes', 'include')] +
+            [join('ncephes', 'cephes')])
 
 
 def get_header(module):

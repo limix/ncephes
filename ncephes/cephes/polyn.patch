@@ -1,0 +1,18 @@
+--- polyn.c	2016-08-23 11:22:56.000000000 +0100
++++ polyn.c.new	2016-08-23 11:28:06.000000000 +0100
+@@ -63,7 +63,6 @@
+ #include "mconf.h"
+ #if ANSIPROT
+ void exit (int);
+-extern void * malloc ( long );
+ extern void free ( void * );
+ void polclr ( double *, int );
+ void polmov ( double *, int, double * );
+@@ -71,7 +70,6 @@
+ int poldiv ( double *, int, double *, int, double * );
+ #else
+ void exit();
+-void * malloc();
+ void free ();
+ void polclr(), polmov(), poldiv(), polmul();
+ #endif

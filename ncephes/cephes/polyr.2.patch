@@ -1,0 +1,19 @@
+--- polyr.c	2016-08-23 11:07:16.000000000 +0100
++++ polyr.c.new	2016-08-23 11:08:43.000000000 +0100
+@@ -74,14 +74,14 @@
+ extern void rsub ( fract *, fract *, fract * );
+ extern void rmul ( fract *, fract *, fract * );
+ extern void rdiv ( fract *, fract *, fract * );
+-void polmov ( fract *, int, fract * );
++static void polmov ( fract *, int, fract * );
+ void polmul ( fract *, int, fract *, int, fract * );
+ int poldiv ( fract *, int, fract *, int, fract * );
+ void * malloc ( long );
+ void free ( void * );
+ #else
+ void radd(), rsub(), rmul(), rdiv();
+-void polmov(), polmul();
++static void polmov(), polmul();
+ int poldiv();
+ void * malloc();
+ void free ();
