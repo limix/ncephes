@@ -98,8 +98,6 @@ def _unlink(f):
         os.unlink(f)
 
 def apply_patch():
-    cmd = "patch ncephes/cephes/mconf.h ncephes/cephes/mconf.patch"
-    subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.patch"
     subprocess.check_call(cmd, shell=True)
     cmd = "patch ncephes/cephes/cprob/gamma.c ncephes/cephes/gamma.2.patch"
