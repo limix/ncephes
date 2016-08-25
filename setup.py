@@ -4,40 +4,22 @@ import sys
 from setuptools import setup
 from setuptools import find_packages
 
-
-def make_sure_install(package):
+try:
+    __import__('build_capi')
+except ImportError:
     import pip
-    try:
-        __import__(package)
-    except ImportError:
-        pip.main(['install', package, '--upgrade'])
-
-make_sure_install('build_capi')
+    pip.main(['install', 'build_capi', '--upgrade'])
 
 from build_capi import CApiLib
 from build_capi import add_capi_opts
 setup = add_capi_opts(setup)
 
 from build_helpers import get_supported_modules
+from module_info import get_extra_compile_args
 from capi_info import get_header
 from capi_info import get_capi_module_name
 from capi_info import get_sources
-from module_info import get_extra_compile_args
 from capi_info import get_include_dirs
-
-pkg_name = 'ncephes'
-version = '0.0.24'
-
-
-# def _check_pycparser():
-#     from pycparser import parse_file
-#     try:
-#         parse_file(join('ncephes', 'cephes', 'cmath', 'isnan.c'),
-#                    use_cpp=True, cpp_path='cpp', cpp_args='-Incephes/cephes')
-#     except RuntimeError:
-#         print('Error: could not parse a C file. Do you have a working C/C++' +
-#               ' compiler system?')
-#         sys.exit(1)
 
 
 def create_capi_libs():
@@ -57,11 +39,9 @@ def setup_package():
     old_path = os.getcwd()
     os.chdir(src_path)
     sys.path.insert(0, src_path)
-    # _check_pycparser()
 
-    setup_requires = ['pycparser', 'pytest-runner', 'build_capi',
-                      'cffi']
-    install_requires = ['pytest', 'pycparser', 'cffi', 'numba']
+    setup_requires = ['pytest-runner', 'build_capi>=0.0.1', 'cffi>=1.6']
+    install_requires = ['pytest', 'cffi>=1.6', 'numba>=0.0.27']
     tests_require = ['pytest']
 
     long_description = ("Python interface for the Cephes library. " +
@@ -76,8 +56,8 @@ def setup_package():
     capi_lib_folder = join('ncephes', 'lib')
 
     metadata = dict(
-        name=pkg_name,
-        version=version,
+        name='ncephes',
+        version='0.0.27',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         author="Danilo Horta",
@@ -118,12 +98,4 @@ def setup_package():
         os.chdir(old_path)
 
 if __name__ == '__main__':
-    try:
-        __import__("numpy")
-    except ImportError:
-        msg = "Error: numpy package couldn't be found."
-        msg += " Please, install it first so I can proceed."
-        print(msg)
-        sys.exit(1)
-
     setup_package()
