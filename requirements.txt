@@ -1,6 +1,0 @@
-cffi>=1.0.0
-jinja2
-numba
-pycparser
-pytest
-build_capi

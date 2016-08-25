@@ -1,25 +1,22 @@
-
 import os
+from os.path import join
 import sys
 from setuptools import setup
 from setuptools import find_packages
-try:
-    from build_capi import CApiLib
-except ImportError:
-    print('Error: could not import build_capi. Please, install it so I ' +
-          'can proceed.')
-    sys.exit(1)
 
+
+def make_sure_install(package):
+    import pip
+    try:
+        __import__(package)
+    except ImportError:
+        pip.main(['install', package, '--upgrade'])
+
+make_sure_install('build_capi')
+
+from build_capi import CApiLib
 from build_capi import add_capi_opts
 setup = add_capi_opts(setup)
-from os.path import join
-
-try:
-    from pycparser import parse_file
-except ImportError:
-    print('Error: could not import pycparser. Please, install it so I ' +
-          'can proceed.')
-    sys.exit(1)
 
 from build_helpers import get_supported_modules
 from capi_info import get_header
@@ -29,17 +26,19 @@ from module_info import get_extra_compile_args
 from capi_info import get_include_dirs
 
 pkg_name = 'ncephes'
-version = '0.0.23'
+version = '0.0.24'
 
 
-def _check_pycparser():
-    try:
-        parse_file(join('ncephes', 'cephes', 'cmath', 'isnan.c'),
-                   use_cpp=True, cpp_path='cpp', cpp_args='-Incephes/cephes')
-    except RuntimeError:
-        print('Error: could not parse a C file. Do you have a working C/C++' +
-              ' compiler system?')
-        sys.exit(1)
+# def _check_pycparser():
+#     from pycparser import parse_file
+#     try:
+#         parse_file(join('ncephes', 'cephes', 'cmath', 'isnan.c'),
+#                    use_cpp=True, cpp_path='cpp', cpp_args='-Incephes/cephes')
+#     except RuntimeError:
+#         print('Error: could not parse a C file. Do you have a working C/C++' +
+#               ' compiler system?')
+#         sys.exit(1)
+
 
 def create_capi_libs():
     modules = get_supported_modules()
@@ -58,12 +57,11 @@ def setup_package():
     old_path = os.getcwd()
     os.chdir(src_path)
     sys.path.insert(0, src_path)
-    _check_pycparser()
+    # _check_pycparser()
 
-    with open('requirements.txt') as f:
-        requires = [row.strip() for row in f.readlines()]
-
-    setup_requires = requires + ['pytest-runner'] + ['build_capi']
+    setup_requires = ['pycparser', 'pytest-runner', 'build_capi',
+                      'cffi']
+    install_requires = ['pytest', 'pycparser', 'cffi', 'numba']
     tests_require = ['pytest']
 
     long_description = ("Python interface for the Cephes library. " +
@@ -92,7 +90,7 @@ def setup_package():
         zip_safe=False,
         setup_requires=setup_requires,
         cffi_modules=cffi_modules,
-        install_requires=requires,
+        install_requires=install_requires,
         tests_require=tests_require,
         classifiers=[
             "Development Status :: 3 - Alpha",
