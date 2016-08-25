@@ -57,7 +57,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='0.0.27',
+        version='0.0.28',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         author="Danilo Horta",
@@ -90,6 +90,13 @@ def setup_package():
         data_files=[capi_hdr_files],
         package_data={'': [join(capi_lib_folder, '*.*')]},
     )
+
+    try:
+        from distutils.command.bdist_conda import CondaDistribution
+    except ImportError:
+        metadata['distclass'] = CondaDistribution
+        metadata['conda_buildnum'] = 1
+        metadata['conda_features'] = ['mkl']
 
     try:
         setup(**metadata)
