@@ -94,6 +94,8 @@ def setup_package():
     try:
         from distutils.command.bdist_conda import CondaDistribution
     except ImportError:
+        pass
+    else:
         metadata['distclass'] = CondaDistribution
         metadata['conda_buildnum'] = 1
         metadata['conda_features'] = ['mkl']
