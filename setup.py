@@ -57,7 +57,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='0.0.28',
+        version='0.0.29',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         author="Danilo Horta",
