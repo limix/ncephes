@@ -6,6 +6,7 @@ from setuptools import find_packages
 
 
 def make_sure_install(package):
+    import pip
     try:
         __import__(package)
     except ImportError:
@@ -60,7 +61,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='0.0.32',
+        version='0.0.33',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         author="Danilo Horta",
