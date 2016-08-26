@@ -4,11 +4,14 @@ import sys
 from setuptools import setup
 from setuptools import find_packages
 
-try:
-    __import__('build_capi')
-except ImportError:
-    import pip
-    pip.main(['install', 'build_capi', '--upgrade'])
+
+def make_sure_install(package):
+    try:
+        __import__(package)
+    except ImportError:
+        pip.main(['install', package, '--upgrade'])
+make_sure_install('build_capi')
+make_sure_install('pycparser')
 
 from build_capi import CApiLib
 from build_capi import add_capi_opts
@@ -57,7 +60,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='0.0.31',
+        version='0.0.32',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         author="Danilo Horta",
