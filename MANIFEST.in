@@ -1,29 +1,18 @@
-include *.md
-include *.py
-include *.txt
-recursive-include ncephes *.387
-recursive-include ncephes *.688
-recursive-include ncephes *.87
-recursive-include ncephes *.amd64
-recursive-include ncephes *.asm
+exclude .gitignore .travis.yml
+include README.md
+include setup.cfg
+include build_helpers.py
+include capi_info.py
+include module_build.py
+include module_info.py
+include update_source.py
+include supported_modules.txt
+
 recursive-include ncephes *.c
 recursive-include ncephes *.h
-recursive-include ncephes *.mak
-recursive-include ncephes *.mms
-recursive-include ncephes *.opt
-recursive-include ncephes *.patch
-recursive-include ncephes *.rsp
+recursive-include ncephes *.py
 recursive-include ncephes *.txt
-include ncephes/cephes/cmath/README
-recursive-include ncephes *.EXE
-recursive-include ncephes *.MAK
-recursive-include ncephes *.ans
-recursive-include ncephes *.bat
-recursive-include ncephes *.doc
-recursive-include ncephes *.que
-recursive-include doc *.bat
-recursive-include doc *.py
-recursive-include doc *.rst
-recursive-include doc Makefile
-include ncephes/include/ncephes/*.h
-include ncephes/test/*.py
+recursive-include ncephes *.patch
+
+prune doc
+prune examples
