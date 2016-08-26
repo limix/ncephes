@@ -40,7 +40,7 @@ def setup_package():
     os.chdir(src_path)
     sys.path.insert(0, src_path)
 
-    setup_requires = ['pytest-runner', 'build_capi>=0.0.1', 'cffi>=1.6']
+    setup_requires = ['pytest-runner', 'build_capi>=0.0.4', 'cffi>=1.6']
     install_requires = ['pytest', 'cffi>=1.6', 'numba>=0.0.27']
     tests_require = ['pytest']
 
@@ -57,7 +57,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='0.0.29',
+        version='0.0.30',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         author="Danilo Horta",
