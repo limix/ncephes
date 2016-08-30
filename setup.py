@@ -48,7 +48,7 @@ def setup_package():
     pytest_runner = ['pytest-runner'] if needs_pytest else []
 
     setup_requires = ['build_capi>=0.0.5', 'cffi>=1.6'] + pytest_runner
-    install_requires = ['pytest>=2.9,<3', 'cffi>=1.6', 'numba>=0.0.27']
+    install_requires = ['pytest>=2.9,<3', 'cffi>=1.6', 'numba>=0.27']
     tests_require = ['pytest>=2.9,<3']
 
     long_description = ("Python interface for the Cephes library. " +
@@ -64,7 +64,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='0.0.36',
+        version='0.0.37',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         author="Danilo Horta",
