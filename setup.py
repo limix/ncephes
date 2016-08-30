@@ -4,15 +4,6 @@ import sys
 from setuptools import setup
 from setuptools import find_packages
 
-# def make_sure_install(package):
-#     import pip
-#     try:
-#         __import__(package)
-#     except ImportError:
-#         pip.main(['install', package, '--upgrade'])
-# make_sure_install('build_capi')
-# make_sure_install('pycparser')
-
 
 def get_sources(module):
     from module_info import get_sources
@@ -28,21 +19,22 @@ def get_include_dirs(module):
             [join('ncephes', 'cephes')])
 
 
+class GetApi(object):
+
+    def __init__(self, module):
+        self._module = module
+
+    def __call__(self):
+        from build_capi import CApiLib
+        module = self._module
+        return CApiLib(name='ncephes.lib.' + 'n' + module,
+                       sources=get_sources(module),
+                       include_dirs=get_include_dirs(module))
+
+
 def create_capi_libs():
     modules = open('supported_modules.txt').read().split("\n")[:-1]
-
-    capi_libs = []
-    for module in modules:
-        def get_lib():
-            from build_capi import CApiLib
-
-            return CApiLib(name='ncephes.lib.' + 'n' + module,
-                           sources=get_sources(module),
-                           include_dirs=get_include_dirs(module))
-
-        capi_libs.append(get_lib)
-
-    return capi_libs
+    return [GetApi(module) for module in modules]
 
 
 def setup_package():

@@ -97,9 +97,11 @@ def convert_old_style_proto():
             cmd = "cproto -q -I%s -I%s -a %s" % (incl1, incl2, fp)
             subprocess.check_call(cmd, shell=True)
 
+
 def _unlink(f):
     if os.path.exists(f):
         os.unlink(f)
+
 
 def apply_patch():
     cmd = "patch ncephes/cephes/polyn/polyn.c ncephes/cephes/polyn.patch"
@@ -170,8 +172,11 @@ def _create_api(module):
 
     with open(join('ncephes', 'cephes', module + '_ffcall.c'), 'w') as f:
         f.write('#include "ncephes/' + module + '.h"\n\n')
-        f.write('\n'.join(fdecls) + '\n\n')
-        f.write('\n'.join(ffcalls) + '\n\n')
+        if len(apidecls) == 0:
+            f.write('int _do_nothing_%s() { return 0; }' % module)
+        else:
+            f.write('\n'.join(fdecls) + '\n\n')
+            f.write('\n'.join(ffcalls) + '\n\n')
 
 
 def create_api():
