@@ -44,9 +44,12 @@ def setup_package():
     os.chdir(src_path)
     sys.path.insert(0, src_path)
 
-    setup_requires = ['build_capi>=0.0.5', 'cffi>=1.6']
-    install_requires = ['pytest', 'cffi>=1.6', 'numba>=0.0.27']
-    tests_require = ['pytest']
+    needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
+    pytest_runner = ['pytest-runner'] if needs_pytest else []
+
+    setup_requires = ['build_capi>=0.0.5', 'cffi>=1.6'] + pytest_runner
+    install_requires = ['pytest>=2.9,<3', 'cffi>=1.6', 'numba>=0.0.27']
+    tests_require = ['pytest>=2.9,<3']
 
     long_description = ("Python interface for the Cephes library. " +
                         "It also supports Numba and its nopython mode.")
@@ -61,7 +64,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='0.0.34',
+        version='0.0.36',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         author="Danilo Horta",
