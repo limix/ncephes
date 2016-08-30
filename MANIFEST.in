@@ -2,7 +2,6 @@ exclude .gitignore .travis.yml
 include README.md
 include setup.cfg
 include build_helpers.py
-include capi_info.py
 include module_build.py
 include module_info.py
 include update_source.py

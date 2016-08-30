@@ -4,37 +4,44 @@ import sys
 from setuptools import setup
 from setuptools import find_packages
 
+# def make_sure_install(package):
+#     import pip
+#     try:
+#         __import__(package)
+#     except ImportError:
+#         pip.main(['install', package, '--upgrade'])
+# make_sure_install('build_capi')
+# make_sure_install('pycparser')
 
-def make_sure_install(package):
-    import pip
-    try:
-        __import__(package)
-    except ImportError:
-        pip.main(['install', package, '--upgrade'])
-make_sure_install('build_capi')
-make_sure_install('pycparser')
 
-from build_capi import CApiLib
-from build_capi import add_capi_opts
-setup = add_capi_opts(setup)
+def get_sources(module):
+    from module_info import get_sources
+    sources = get_sources(module)
+    sources += [join('ncephes', 'cephes', module + '_ffcall.c')]
+    sources += [join('ncephes', 'cephes', 'const.c')]
+    return sources
 
-from build_helpers import get_supported_modules
-from module_info import get_extra_compile_args
-from capi_info import get_header
-from capi_info import get_capi_module_name
-from capi_info import get_sources
-from capi_info import get_include_dirs
+
+def get_include_dirs(module):
+    from module_info import get_include_dirs as gid
+    return (gid(module) + [join('ncephes', 'include')] +
+            [join('ncephes', 'cephes')])
 
 
 def create_capi_libs():
-    modules = get_supported_modules()
+    modules = open('supported_modules.txt').read().split("\n")[:-1]
+
     capi_libs = []
     for module in modules:
-        capi_libs.append(CApiLib(name=get_capi_module_name(module),
-                                 sources=get_sources(module),
-                                 include_dirs=get_include_dirs(module),
-                                 extra_compile_args=get_extra_compile_args())
-                         )
+        def get_lib():
+            from build_capi import CApiLib
+
+            return CApiLib(name='ncephes.lib.' + 'n' + module,
+                           sources=get_sources(module),
+                           include_dirs=get_include_dirs(module))
+
+        capi_libs.append(get_lib)
+
     return capi_libs
 
 
@@ -47,24 +54,23 @@ def setup_package():
     needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
     pytest_runner = ['pytest-runner'] if needs_pytest else []
 
-    setup_requires = ['build_capi>=0.0.5', 'cffi>=1.6'] + pytest_runner
+    setup_requires = ['build_capi>=0.0.8', 'cffi>=1.6',
+                      'pycparser'] + pytest_runner
     install_requires = ['pytest>=2.9,<3', 'cffi>=1.6', 'numba>=0.27']
-    tests_require = ['pytest>=2.9,<3']
+    tests_require = install_requires
 
     long_description = ("Python interface for the Cephes library. " +
                         "It also supports Numba and its nopython mode.")
 
-    modules = get_supported_modules()
+    modules = open('supported_modules.txt').read().split("\n")[:-1]
     cffi_modules = ['module_build.py:%s' % m for m in modules]
 
-    capi_hdr_files = (join('ncephes', 'include', 'ncephes'),
-                      [get_header(module) for module in modules])
-
-    capi_lib_folder = join('ncephes', 'lib')
+    hdr_dir = join('ncephes', 'include', 'ncephes')
+    hdr_files = [join(hdr_dir, m + '.h') for m in modules]
 
     metadata = dict(
         name='ncephes',
-        version='0.0.37',
+        version='0.1.0',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         author="Danilo Horta",
@@ -75,8 +81,8 @@ def setup_package():
         url='https://github.com/Horta/ncephes',
         packages=find_packages(),
         zip_safe=False,
-        setup_requires=setup_requires,
         cffi_modules=cffi_modules,
+        setup_requires=setup_requires,
         install_requires=install_requires,
         tests_require=tests_require,
         classifiers=[
@@ -94,8 +100,8 @@ def setup_package():
         capi_libs=create_capi_libs(),
         keywords=["cephes", "math", "numba"],
         include_package_data=True,
-        data_files=[capi_hdr_files],
-        package_data={'': [join(capi_lib_folder, '*.*')]},
+        data_files=[(hdr_dir, hdr_files)],
+        package_data={'': [join('ncephes', 'lib', '*.*')]},
     )
 
     try:

@@ -1,8 +1,6 @@
 from os.path import splitext
 from os.path import basename
 from os.path import join
-from build_helpers import read_export_file
-from build_helpers import fetch_func_decl
 
 from glob import glob
 
@@ -25,6 +23,9 @@ def get_include_dirs(module):
 
 
 def get_fdecls(module):
+    from build_helpers import read_export_file
+    from build_helpers import fetch_func_decl
+
     regex = re.compile(r'^.* (.+)\(.*\).*$')
     fdecls = []
     export_table = read_export_file(join('ncephes', 'cephes',
@@ -40,7 +41,3 @@ def get_fdecls(module):
                         fdecls.append(fd + ';')
 
     return fdecls
-
-
-def get_extra_compile_args():
-    return []
