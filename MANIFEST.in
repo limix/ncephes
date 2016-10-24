@@ -1,5 +1,6 @@
 exclude .gitignore .travis.yml
 include README.md
+include LICENSE
 include setup.cfg
 include build_helpers.py
 include module_build.py

@@ -46,7 +46,7 @@ def setup_package():
     needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
     pytest_runner = ['pytest-runner'] if needs_pytest else []
 
-    setup_requires = ['build_capi>=0.0.8', 'cffi>=1.6',
+    setup_requires = ['build_capi>=1.0.0', 'cffi>=1.6',
                       'pycparser'] + pytest_runner
     install_requires = ['pytest', 'cffi>=1.6', 'numba>=0.27']
     tests_require = install_requires + ['six']
@@ -62,14 +62,12 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='0.1.2',
+        version='1.0.0',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
-        author="Danilo Horta",
-        author_email="danilo.horta@gmail.com",
         description="Python interface for the Cephes library.",
         long_description=long_description,
-        license="BSD",
+        license="MIT",
         url='https://github.com/Horta/ncephes',
         packages=find_packages(),
         zip_safe=False,
@@ -78,16 +76,14 @@ def setup_package():
         install_requires=install_requires,
         tests_require=tests_require,
         classifiers=[
-            "Development Status :: 3 - Alpha",
-            "Environment :: Console",
-            "Intended Audience :: Science/Research",
-            "License :: OSI Approved :: BSD License",
-            "Natural Language :: English",
-            "Operating System :: OS Independent",
+            "Development Status :: 5 - Production/Stable",
+            "Intended Audience :: Developers",
+            "License :: OSI Approved :: MIT License",
             "Programming Language :: Python :: 2.7",
             "Programming Language :: Python :: 3.4",
             "Programming Language :: Python :: 3.5",
-            "Topic :: Scientific/Engineering"
+            "Operating System :: OS Independent",
+            "Framework :: Pytest",
         ],
         capi_libs=create_capi_libs(),
         keywords=["cephes", "math", "numba"],
