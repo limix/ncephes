@@ -187,4 +187,5 @@ dependencies:
   - nb-conda-kernels==2.0.0
   - prompt-toolkit==1.0.3
   - rope-py3k==0.9.4.post1
+  - sphinxcontrib-programoutput==0.8
   - tables==3.2.3.1
