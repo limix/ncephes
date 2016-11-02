@@ -64,7 +64,7 @@ author = u'Danilo Horta'
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 
-from ..ncephes import __version__
+from ncephes import __version__
 
 version = __version__
 release = __version__
