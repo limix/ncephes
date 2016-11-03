@@ -21,6 +21,7 @@ def _make(module):
                    include_dirs=get_include_dirs(module),
                    sources=get_sources(module) + [cconst],
                    libraries=[],
+                   extra_compile_args=['-Ofast'],
                    language='c')
     ffi.cdef(fdecl_noextern)
     return ffi
