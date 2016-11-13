@@ -22,11 +22,9 @@ class FuncSign(object):
         pnames = self.param_names
         ptypes = self.param_types
 
-        sparams = ('%s %s' % (ptypes[i], pnames[i]) for i in range(n))
-        sparams = str(tuple(sparams))
-        sparams = sparams.replace("'", "")
-        s = '%s %s%s' % (self.ret_type, self.name, sparams)
-        s = s.replace(',)', ')')
+        sparams = [('%s %s' % (ptypes[i], pnames[i])) for i in range(n)]
+        sparams = ', '.join(sparams)
+        s = '%s %s(%s)' % (self.ret_type, self.name, sparams)
         return s
 
 
