@@ -66,9 +66,17 @@ def read_export_file(fp):
     return d
 
 
+    # RuntimeError
+
 def fetch_func_decl(filename):
-    ast = parse_file(filename, use_cpp=True, cpp_path='cpp',
-                     cpp_args='-Incephes/cephes')
+    def _parse_it(cpp_path):
+        return parse_file(filename, use_cpp=True, cpp_path=cpp_path,
+                          cpp_args='-Incephes/cephes')
+
+    try:
+        ast = _parse_it('cpp')
+    except RuntimeError:
+        ast = _parse_it('vs')
 
     v = FuncDefVisitor()
     v.visit(ast)
