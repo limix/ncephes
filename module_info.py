@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from os.path import splitext
 from os.path import basename
 from os.path import join

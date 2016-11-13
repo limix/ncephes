@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from pycparser import parse_file
 from pycparser.c_parser import CParser
 from pycparser.c_ast import NodeVisitor

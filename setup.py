@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import os
 from os.path import join
 import sys
