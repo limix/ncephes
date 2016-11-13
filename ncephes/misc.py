@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from . import _misc_ffi
 from ._misc_ffi.lib import *
 

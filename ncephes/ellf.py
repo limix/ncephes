@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from . import _ellf_ffi
 from ._ellf_ffi.lib import *
 
