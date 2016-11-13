@@ -66,8 +66,6 @@ def read_export_file(fp):
     return d
 
 
-    # RuntimeError
-
 def fetch_func_decl(filename):
     def _parse_it(cpp_path):
         return parse_file(filename, use_cpp=True, cpp_path=cpp_path,
