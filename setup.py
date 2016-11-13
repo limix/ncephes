@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import os
 from os.path import join
 import sys
+PY3 = sys.version_info > (3,)
 from setuptools import setup
 from setuptools import find_packages
 
@@ -64,6 +65,11 @@ def setup_package():
     hdr_dir = join('ncephes', 'include', 'ncephes')
     hdr_files = [join(hdr_dir, m + '.h') for m in modules]
 
+    if PY3:
+        package_data={'': [join('ncephes', 'lib', '*.*')]}
+    else:
+        package_data={b'': [join(b'ncephes', b'lib', b'*.*')]}
+
     metadata = dict(
         name='ncephes',
         version='1.0.6.dev1',
@@ -92,7 +98,7 @@ def setup_package():
         keywords=["cephes", "math", "numba"],
         include_package_data=True,
         data_files=[(hdr_dir, hdr_files)],
-        package_data={b'': [join(b'ncephes', b'lib', b'*.*')]},
+        package_data=package_data,
     )
 
     try:
