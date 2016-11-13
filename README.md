@@ -1,19 +1,21 @@
-[![Travis branch](https://img.shields.io/travis/Horta/ncephes/master.svg?style=flat-square&label=build)](https://travis-ci.org/Horta/ncephes)  [![PyPI](https://img.shields.io/pypi/v/ncephes.svg?style=flat-square&label=release%20(pypi))](https://pypi.python.org/pypi/ncephes/) [![Documentation Status](https://readthedocs.org/projects/ncephes/badge/?version=latest&style=flat-square)](http://ncephes.readthedocs.org/en/latest/?badge=latest)
+# nCephes
 
-nCephes
-=======
+[![PyPIl](https://img.shields.io/pypi/l/ncephes.svg?style=flat-square)](https://pypi.python.org/pypi/ncephes/)
+[![PyPIv](https://img.shields.io/pypi/v/ncephes.svg?style=flat-square)](https://pypi.python.org/pypi/ncephes/)
+[![Anaconda-Server Badge](https://anaconda.org/conda-forge/ncephes/badges/version.svg)](https://anaconda.org/conda-forge/ncephes)
+[![Documentation Status](https://readthedocs.org/projects/ncephes/badge/?style=flat-square&version=latest)](http://ncephes.readthedocs.io/en/latest/?badge=latest)
 
 This package provides a python interface for the
-[Cephes library](http://www.netlib.org/cephes/).
+[Cephes](http://www.netlib.org/cephes/) library.
+It also supports [Numba](http://numba.pydata.org) and its ``nopython`` mode.
 
-Usage
------
+## Usage
 
 ```python
 from ncephes import cprob
 print(cprob.incbet(1., 3., 0.3))
-# prints 0.657
 ```
+prints ``0.657``.
 
 You can also call them inside a numba function
 ```python
@@ -25,9 +27,8 @@ def numba_incbet(a, b, x):
     return cprob.incbet(a, b, x)
 
 print(numba_incbet(1., 3., 0.3))
-# prints 0.657
 ```
-with nopython mode and nogil enabled
+and with nopython mode and nogil enabled
 ```python
 from ncephes import cprob
 from numba import jit
@@ -39,22 +40,38 @@ def numba_incbet(a, b, x):
     return incbet(a, b, x)
 
 print(numba_incbet(1., 3., 0.3))
-# prints 0.657
 ```
 
 One can also statically link the compiled Cephes libraries `ncprob` and
 `ncellf`. Please, have a peek at the `examples/prj_name` for a minimalistic
 example.
 
-Install
--------
+## Install
 
-It should be as simple as
+The recommended way of installing it is via
+[conda](http://conda.pydata.org/docs/index.html)
+```bash
+conda install -c conda-forge ncephes
 ```
+
+An alternative way would be via pip
+```bash
 pip install ncephes
 ```
-Alternatively, you might want to do
+
+## Running the tests
+
+After installation, you can test it
 ```
-python setup.py install
+python -c "import ncephes; ncephes.test()"
 ```
-from the package's root folder.
+as long as you have [pytest](http://docs.pytest.org/en/latest/).
+
+## Authors
+
+* **Danilo Horta** - [https://github.com/Horta](https://github.com/Horta)
+
+## License
+
+This project is licensed under the MIT License - see the
+[LICENSE](LICENSE) file for details

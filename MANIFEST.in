@@ -1,4 +1,3 @@
-exclude .gitignore .travis.yml
 include README.md
 include LICENSE
 include setup.cfg
@@ -13,6 +12,3 @@ recursive-include ncephes *.h
 recursive-include ncephes *.py
 recursive-include ncephes *.txt
 recursive-include ncephes *.patch
-
-prune doc
-prune examples

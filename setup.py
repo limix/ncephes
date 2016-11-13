@@ -4,6 +4,11 @@ import sys
 from setuptools import setup
 from setuptools import find_packages
 
+try:
+    import pypandoc
+    long_description = pypandoc.convert('README.md', 'rst')
+except(IOError, ImportError):
+    long_description = open('README.md').read()
 
 def get_sources(module):
     from module_info import get_sources
@@ -46,13 +51,10 @@ def setup_package():
     needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
     pytest_runner = ['pytest-runner'] if needs_pytest else []
 
-    setup_requires = ['build_capi>=1.0.0', 'cffi>=1.7',
+    setup_requires = ['build_capi>=1.1.0', 'cffi>=1.7',
                       'pycparser'] + pytest_runner
-    install_requires = ['pytest', 'cffi>=1.7', 'numba>=0.28']
-    tests_require = install_requires + ['six']
-
-    long_description = ("Python interface for the Cephes library. " +
-                        "It also supports Numba and its nopython mode.")
+    install_requires = ['cffi>=1.7']
+    tests_require = []
 
     modules = open('supported_modules.txt').read().split("\n")[:-1]
     cffi_modules = ['module_build.py:%s' % m for m in modules]
@@ -62,7 +64,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='1.0.5',
+        version='1.0.6.dev1',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         description="Python interface for the Cephes library.",
@@ -83,7 +85,6 @@ def setup_package():
             "Programming Language :: Python :: 3.4",
             "Programming Language :: Python :: 3.5",
             "Operating System :: OS Independent",
-            "Framework :: Pytest",
         ],
         capi_libs=create_capi_libs(),
         keywords=["cephes", "math", "numba"],
