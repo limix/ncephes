@@ -3,14 +3,34 @@ from __future__ import unicode_literals
 from pycparser import parse_file
 from pycparser.c_parser import CParser
 from pycparser.c_ast import NodeVisitor
-
+import subprocess
+import os
 
 def get_supported_modules():
     return open('supported_modules.txt').read().split("\n")[:-1]
 
+def _check_executable(executable):
+    try:
+        subprocess.call([executable, "--help"])
+    except OSError as e:
+        if e.errno == os.errno.ENOENT:
+            return False
+        else:
+            raise
+    return True
+
+def _cpp_executable():
+    if _check_executable('cpp'):
+        return 'cpp'
+    elif _check_executable('vs'):
+        return 'vs'
+    elif _check_executable('gcc'):
+        return 'gcc'
+    elif _check_executable('clang'):
+        return 'clang'
+    return 'VS'
 
 class FuncSign(object):
-
     def __init__(self, name, ret_type):
         self.name = name
         self.ret_type = ret_type
@@ -67,14 +87,8 @@ def read_export_file(fp):
 
 
 def fetch_func_decl(filename):
-    def _parse_it(cpp_path):
-        return parse_file(filename, use_cpp=True, cpp_path=cpp_path,
-                          cpp_args='-Incephes/cephes')
-
-    try:
-        ast = _parse_it('cpp')
-    except RuntimeError:
-        ast = _parse_it('vs')
+    ast = parse_file(filename, use_cpp=True, cpp_path=_cpp_executable(),
+                      cpp_args='-Incephes/cephes')
 
     v = FuncDefVisitor()
     v.visit(ast)
