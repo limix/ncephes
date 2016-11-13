@@ -53,7 +53,7 @@ def setup_package():
     needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
     pytest_runner = ['pytest-runner'] if needs_pytest else []
 
-    setup_requires = ['build_capi>=1.1.0', 'cffi>=1.7',
+    setup_requires = ['build_capi>=1.1.2', 'cffi>=1.7',
                       'pycparser'] + pytest_runner
     install_requires = ['cffi>=1.7']
     tests_require = []
@@ -92,7 +92,7 @@ def setup_package():
         keywords=["cephes", "math", "numba"],
         include_package_data=True,
         data_files=[(hdr_dir, hdr_files)],
-        package_data={'': [join('ncephes', 'lib', '*.*')]},
+        package_data={b'': [join(b'ncephes', b'lib', b'*.*')]},
     )
 
     try:
