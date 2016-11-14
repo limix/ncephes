@@ -3,21 +3,13 @@ from __future__ import unicode_literals
 from pycparser import parse_file
 from pycparser.c_parser import CParser
 from pycparser.c_ast import NodeVisitor
-import subprocess
-import os
 
 def get_supported_modules():
     return open('supported_modules.txt').read().split("\n")[:-1]
 
 def _check_executable(executable):
-    try:
-        subprocess.call([executable, "--help"])
-    except OSError as e:
-        if e.errno == os.errno.ENOENT:
-            return False
-        else:
-            raise
-    return True
+    from distutils.spawn import find_executable
+    return not(find_executable(executable) is None)
 
 def _cpp_executable():
     if _check_executable('cpp'):
