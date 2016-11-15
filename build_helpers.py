@@ -22,6 +22,12 @@ def _cpp_executable():
         return 'clang'
     return 'cpp'
 
+def _cpp_args():
+    args = ['-Incephes/cephes']
+    if _cpp_executable() == 'cl':
+        args += ['/nologo', '/EP']
+    return args
+
 class FuncSign(object):
     def __init__(self, name, ret_type):
         self.name = name
@@ -79,8 +85,10 @@ def read_export_file(fp):
 
 
 def fetch_func_decl(filename):
-    ast = parse_file(filename, use_cpp=True, cpp_path=_cpp_executable(),
-                      cpp_args='-Incephes/cephes')
+    cpp_path = _cpp_executable()
+    cpp_args = _cpp_args()
+    ast = parse_file(filename, use_cpp=True, cpp_path=cpp_path,
+                      cpp_args=cpp_args)
 
     v = FuncDefVisitor()
     v.visit(ast)
