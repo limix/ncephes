@@ -14,13 +14,13 @@ def _check_executable(executable):
 def _cpp_executable():
     if _check_executable('cpp'):
         return 'cpp'
-    elif _check_executable('vs'):
-        return 'vs'
+    elif _check_executable('cl'):
+        return 'cl'
     elif _check_executable('gcc'):
         return 'gcc'
     elif _check_executable('clang'):
         return 'clang'
-    return 'VS'
+    return 'cpp'
 
 class FuncSign(object):
     def __init__(self, name, ret_type):
