@@ -39,10 +39,14 @@ int main()
 ''')
     from distutils.ccompiler import new_compiler
     from distutils import log
+    from distutils._msvccompiler import MSVCCompiler
     compiler = new_compiler()
     objs = compiler.compile([testc], include_dirs=[get_include()])
+    libraries = ['ncprob']
+    if not isinstance(compiler, MSVCCompiler):
+        libraries += 'm'
     compiler.link_executable(objs, join(folder, 'test_link_lib'),
-                             libraries=['ncprob', 'm'],
+                             libraries=libraries,
                              library_dirs=[get_lib()])
     assert_equal(check_output(join(folder, 'test_link_lib'), shell=True),
                  six.b("incbet: 0.657"))
