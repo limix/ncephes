@@ -39,11 +39,10 @@ int main()
 ''')
     from distutils.ccompiler import new_compiler
     from distutils import log
-    from distutils._msvccompiler import MSVCCompiler
     compiler = new_compiler()
     objs = compiler.compile([testc], include_dirs=[get_include()])
     libraries = ['ncprob']
-    if not isinstance(compiler, MSVCCompiler):
+    if 'msv' not in compiler.__class__.__name__.lower():
         libraries += 'm'
     compiler.link_executable(objs, join(folder, 'test_link_lib'),
                              libraries=libraries,
