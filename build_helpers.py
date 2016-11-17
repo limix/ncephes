@@ -18,8 +18,8 @@ def _cpp_executable():
         return 'cl'
     elif _check_executable('gcc'):
         return 'gcc'
-    # elif _check_executable('clang'):
-    #     return 'clang'
+    elif _check_executable('clang'):
+        return 'clang'
     return 'cpp'
 
 def _cpp_args():
