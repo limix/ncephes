@@ -11,14 +11,6 @@ environment:
   # this is how to allow failing jobs in the matrix
   matrix:
     - TARGET_ARCH: "x64"
-      CONDA_PY: "27"
-      PY_CONDITION: "python >=2.7,<3"
-      CONDA_INSTALL_LOCN: "C:\\Miniconda-x64"
-    - TARGET_ARCH: "x64"
-      CONDA_PY: "34"
-      PY_CONDITION: "python >=3.4,<3.5"
-      CONDA_INSTALL_LOCN: "C:\\Miniconda3-x64"
-    - TARGET_ARCH: "x64"
       CONDA_PY: "35"
       PY_CONDITION: "python >=3.5"
       CONDA_INSTALL_LOCN: "C:\\Miniconda35-x64"
