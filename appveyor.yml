@@ -43,11 +43,10 @@ install:
   - cmd: conda config --set show_channel_urls true
   - cmd: conda update --yes --quiet conda
   - cmd: conda install --yes --quiet obvious-ci conda-build-all vc=14
-  - cmd: set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+  - cmd: conda install --yes --quiet conda-forge-build-setup
   - cmd: run_conda_forge_build_setup
 
 build: off
 
 test_script:
-  - cmd: set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
   - cmd: python setup.py test
