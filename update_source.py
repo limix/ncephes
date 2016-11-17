@@ -15,7 +15,7 @@ from build_helpers import forward_call
 from module_info import get_fdecls
 
 
-SUPPORTED_MODULES = open('./supported_modules.txt').read().split("\n")[:-1]
+SUPPORTED_MODULES = open('supported_modules.txt').read().split("\n")[:-1]
 
 
 def download_extract():
