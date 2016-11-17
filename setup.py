@@ -57,7 +57,7 @@ def setup_package():
     setup_requires = ['build_capi>=1.1.5', 'cffi>=1.7',
                       'pycparser'] + pytest_runner
     install_requires = ['cffi>=1.7']
-    tests_require = ['numpy']
+    tests_require = ['numpy', 'numba']
 
     modules = open('supported_modules.txt').read().split("\n")[:-1]
     cffi_modules = ['module_build.py:%s' % m for m in modules]
@@ -72,7 +72,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='1.0.13.dev1',
+        version='1.0.13.dev2',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         description="Python interface for the Cephes library.",

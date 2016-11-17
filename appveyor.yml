@@ -42,7 +42,7 @@ install:
   - cmd: conda config --add channels conda-forge
   - cmd: conda config --set show_channel_urls true
   - cmd: conda update --yes --quiet conda
-  - cmd: conda install --yes --quiet obvious-ci conda-build-all vc=14 numpy
+  - cmd: conda install --yes --quiet obvious-ci conda-build-all vc=14 numpy numba
   - cmd: conda install --yes --quiet conda-forge-build-setup
   - cmd: run_conda_forge_build_setup
 
