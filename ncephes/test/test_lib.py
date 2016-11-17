@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 import os
-import six
 from os.path import join
 from tempfile import mkdtemp
 from shutil import rmtree
@@ -48,5 +47,5 @@ int main()
                              libraries=libraries,
                              library_dirs=[get_lib()])
     assert_equal(check_output(join(folder, 'test_link_lib'), shell=True),
-                 six.b("incbet: 0.657"))
+                 b"incbet: 0.657")
     rmtree(folder)
