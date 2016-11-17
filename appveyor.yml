@@ -23,10 +23,6 @@ environment:
       PY_CONDITION: "python >=3.5"
       CONDA_INSTALL_LOCN: "C:\\Miniconda35-x64"
 
-artifacts:
-  # Store built conda packages as artifacts
-  - path: 'conda_packages\*.bz2'
-
 platform:
   - x64
 
@@ -47,7 +43,7 @@ install:
   - cmd: conda config --set show_channel_urls true
   - cmd: conda update --yes --quiet conda
 
-  - cmd: conda install --yes --quiet obvious-ci conda-build-all
+  - cmd: conda install --yes --quiet obvious-ci conda-build-all vc=14
 
 build: off
 
