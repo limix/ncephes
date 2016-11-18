@@ -39,6 +39,8 @@ script:
 branches:
   only:
   - master
+notifications:
+  email: false
 deploy:
   provider: pypi
   user: dhorta
