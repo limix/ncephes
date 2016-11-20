@@ -53,7 +53,9 @@ static double LQ[] = {
 #define SQRTH 0.70710678118654752440
 #define SQRT2 1.41421356237309504880
 
-double 
+#ifndef _MSC_BUILD
+
+double
 log1p (double x)
 {
 double z;
@@ -66,7 +68,7 @@ z = -0.5 * z + x * ( z * polevl( x, LP, 6 ) / p1evl( x, LQ, 6 ) );
 return (x + z);
 }
 
-
+#endif
 
 /* expm1(x) = exp(x) - 1  */
 
@@ -86,7 +88,7 @@ static double EQ[4] = {
  2.0000000000000000000897E0,
 };
 
-double 
+double
 expm1 (double x)
 {
 double r, xx;
@@ -125,7 +127,7 @@ static double coscof[7] = {
 
 extern double NCEPHES_PIO4;
 
-double 
+double
 cosm1 (double x)
 {
 double xx;
