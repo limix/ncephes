@@ -72,13 +72,13 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='1.0.14',
+        version='1.0.15rc0',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         description="Python interface for the Cephes library.",
         long_description=long_description,
         license="MIT",
-        url='https://github.com/Horta/ncephes',
+        url='https://github.com/glimix/ncephes',
         packages=find_packages(),
         zip_safe=False,
         cffi_modules=cffi_modules,
@@ -90,7 +90,6 @@ def setup_package():
             "Intended Audience :: Developers",
             "License :: OSI Approved :: MIT License",
             "Programming Language :: Python :: 2.7",
-            "Programming Language :: Python :: 3.4",
             "Programming Language :: Python :: 3.5",
             "Operating System :: OS Independent",
         ],

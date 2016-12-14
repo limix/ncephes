@@ -8,4 +8,4 @@ nCephes's documentation
 
   cprob/index
 
-.. _on Github.: https://github.com/Horta/ncephes
+.. _on Github.: https://github.com/glimix/ncephes
