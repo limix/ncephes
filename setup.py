@@ -9,7 +9,7 @@ from setuptools import find_packages
 
 try:
     import pypandoc
-    long_description = pypandoc.convert('README.md', 'rst')
+    long_description = pypandoc.convert_file('README.md', 'rst')
 except(OSError, IOError, ImportError):
     long_description = open('README.md').read()
 
@@ -72,7 +72,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='1.0.15rc1',
+        version='1.0.15',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         description="Python interface for the Cephes library.",
