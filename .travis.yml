@@ -8,23 +8,18 @@ before_install:
  - wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add - || true
  - sudo apt-get update -y || true
  - sudo apt-get install -qq -y clang-3.8 cmake cmake-data zlib1g-dev libbz2-dev || true
+
 matrix:
   include:
   - os: linux
     python: '2.7'
     compiler: clang-3.8
     env: LLVM_VERSION="3.8" CXX="clang++-3.8" LLVM_CONFIG="llvm-config-3.8"
-  # - os: linux
-  #   sudo: false
-  #   dist: trusty
-  #   python: '3.4'
-  # - os: linux
-  #   sudo: false
-  #   dist: trusty
-  #   python: '3.5'
-  # - os: osx
-  #   language: generic
-  #   env: TRAVIS_PYTHON_VERSION=3.5
+  - os: linux
+    python: '3.5'
+    compiler: clang-3.8
+    env: LLVM_VERSION="3.8" CXX="clang++-3.8" LLVM_CONFIG="llvm-config-3.8"
+
 script:
 - if [ "${TRAVIS_PYTHON_VERSION}" == "2.7" ]; then pip install enum34; fi
 - git clone https://github.com/numba/llvmlite.git --depth 1
@@ -36,13 +31,14 @@ script:
 - pushd /
 - python -c "import ncephes; ncephes.test()"
 - popd
+
 notifications:
   email: false
-# deploy:
-#   provider: pypi
-#   user: dhorta
-#   password:
-#     secure: j1p1tRRECv9zXMoaE3Z7wUOO8VG1XUM8q+9WkN0zopma0Gqy1wGg1uQUG8qj3fMlgzCyEuxk9JXVHzFob05c0CBvNcz5YS0f2q6T73W/OFx3BCzucxLudQkgldcp06w3ZDnFtcFVNOnO8j5nFjMjZFefA+Mf/mNWSIPyfm2CzXv4lRjN0rKBELB6w2pS2kU82RPh7DYjf0khHzarfmlC4HPiGHO78V8vFKG8g2fJpH1uGCxAiiue0bkfmkXoqn4AVQe3p/jMf++084QoZfWisOA0WqsR5wKqTU7UXS7Yi27MO34cq+IQ4l0JHJUZiPnThEyv1oyMTRUPfOCly828ogy/P+91jwsJ1zOqlFU/jyHcGaUsLzMp01vbTIBOcU6YCPOnnT3zdBuWkBljzA0ILHA9qOxhcLfGZKuCWHtmQqo7plXlTHxq+alkjWjUHdz8BTVPj8Xefiq3fAwaN/KEFtBF9PToNTXivRZFZkrRYH0CORIDaIAe8ssdaQUFrNdeqBObuow5EXXqnuMIhyNV+JS3ZKi1UegNZvK+Fea5MnJmcH6YL9nai765e1+j/8spiuB4VM5wM0nWZ94QgPfIXfNIkxVNHKltWMc6EJqIIGsfj5/WaKC2QT2pDFDTk6m57t+GDmEfywbqfbthsebDS34NyPht56G/Ajk3pDRbqDw=
-#   on:
-#     distributions: sdist bdist_wheel
-#     repo: Horta/ncephes
+deploy:
+  provider: pypi
+  user: dhorta
+  password:
+    secure: j1p1tRRECv9zXMoaE3Z7wUOO8VG1XUM8q+9WkN0zopma0Gqy1wGg1uQUG8qj3fMlgzCyEuxk9JXVHzFob05c0CBvNcz5YS0f2q6T73W/OFx3BCzucxLudQkgldcp06w3ZDnFtcFVNOnO8j5nFjMjZFefA+Mf/mNWSIPyfm2CzXv4lRjN0rKBELB6w2pS2kU82RPh7DYjf0khHzarfmlC4HPiGHO78V8vFKG8g2fJpH1uGCxAiiue0bkfmkXoqn4AVQe3p/jMf++084QoZfWisOA0WqsR5wKqTU7UXS7Yi27MO34cq+IQ4l0JHJUZiPnThEyv1oyMTRUPfOCly828ogy/P+91jwsJ1zOqlFU/jyHcGaUsLzMp01vbTIBOcU6YCPOnnT3zdBuWkBljzA0ILHA9qOxhcLfGZKuCWHtmQqo7plXlTHxq+alkjWjUHdz8BTVPj8Xefiq3fAwaN/KEFtBF9PToNTXivRZFZkrRYH0CORIDaIAe8ssdaQUFrNdeqBObuow5EXXqnuMIhyNV+JS3ZKi1UegNZvK+Fea5MnJmcH6YL9nai765e1+j/8spiuB4VM5wM0nWZ94QgPfIXfNIkxVNHKltWMc6EJqIIGsfj5/WaKC2QT2pDFDTk6m57t+GDmEfywbqfbthsebDS34NyPht56G/Ajk3pDRbqDw=
+  on:
+    distributions: sdist bdist_wheel
+    repo: glimix/ncephes
