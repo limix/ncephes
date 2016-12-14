@@ -10,7 +10,7 @@ from setuptools import find_packages
 try:
     import pypandoc
     long_description = pypandoc.convert('README.md', 'rst')
-except(IOError, ImportError):
+except(OSError, IOError, ImportError):
     long_description = open('README.md').read()
 
 def get_sources(module):
@@ -54,7 +54,7 @@ def setup_package():
     needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
     pytest_runner = ['pytest-runner'] if needs_pytest else []
 
-    setup_requires = ['build-capi>=1.1.5', 'cffi>=1.7',
+    setup_requires = ['build-capi', 'cffi>=1.7',
                       'pycparser'] + pytest_runner
     install_requires = ['cffi>=1.7', 'numba']
     tests_require = ['numpy']
