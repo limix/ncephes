@@ -29,7 +29,7 @@ script:
 - if [ "${TRAVIS_PYTHON_VERSION}" == "2.7" ]; then pip install enum34; fi
 - git clone https://github.com/numba/llvmlite.git --depth 1
 - pushd llvmlite
-- python setup.py install
+- CXX_FLTO_FLAGS= LD_FLTO_FLAGS= python setup.py install
 - popd
 - python setup.py sdist
 - pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`
