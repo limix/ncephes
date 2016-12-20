@@ -16,10 +16,11 @@ matrix:
     # compiler: clang-3.8
     # env: LLVM_VERSION="3.8" CXX="clang++-3.8" LLVM_CONFIG="llvm-config-3.8"
 before_install:
-  - if [ "${NUMBA}" == "true" ];
-    then;
-      travis/install_clang38.sh;
-      travis/install_llvmlite.sh;
+  - >
+    if [ "${NUMBA}" == "true" ]
+    then
+      travis/install_clang38.sh
+      travis/install_llvmlite.sh
     fi
   - travis/install_pandoc.sh
 script:
