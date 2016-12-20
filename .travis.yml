@@ -19,6 +19,7 @@ before_install:
   - if [ "${NUMBA}" == "true" ]; then travis/install_clang38.sh; fi
   - if [ "${NUMBA}" == "true" ]; then travis/install_llvmlite.sh; fi
   - travis/install_pandoc.sh
+install:
   - python setup.py sdist
   - pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`
 script:
