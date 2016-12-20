@@ -24,7 +24,12 @@ before_install:
   - travis/install_pandoc.sh
 script:
   - python setup.py sdist
-  - pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`
+  - >
+    if [ "${NUMBA}" == "true" ]; then
+      pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`[numba];
+    else
+      pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`;
+    fi
   - pushd /
   - python -c "import ncephes; ncephes.test()"
   - popd
