@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 sudo add-apt-repository -y 'deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.8 main' || true
 wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add - || true
