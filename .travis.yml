@@ -25,7 +25,7 @@ before_install:
 script:
   - python setup.py sdist
   - pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`
-  - cd / && python -c "import ncephes; ncephes.test()"
+  - pushd / || python -c "import ncephes; ncephes.test()" || popd
 notifications:
   email: false
 deploy:
