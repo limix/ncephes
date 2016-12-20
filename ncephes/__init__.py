@@ -1,12 +1,11 @@
 from __future__ import absolute_import as _absolute_import
 
-from pkg_resources import get_distribution as _get_distribution
+import _cffi_backend
 from pkg_resources import DistributionNotFound as _DistributionNotFound
+from pkg_resources import get_distribution as _get_distribution
 
-from .api import get_include
-from .api import get_lib
-from . import cprob
-from . import ellf
+from . import cprob, ellf
+from .api import get_include, get_lib
 
 try:
     __version__ = _get_distribution('ncephes').version
