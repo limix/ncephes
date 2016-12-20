@@ -21,7 +21,7 @@ before_install:
   - travis/install_pandoc.sh
 install:
   - python setup.py sdist
-  - pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`
+  - pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1` -vvv
 script:
   - python -c "import ncephes; ncephes.test()"
 notifications:
