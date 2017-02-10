@@ -1,9 +1,6 @@
 # nCephes
 
-[![PyPIl](https://img.shields.io/pypi/l/ncephes.svg?style=flat-square)](https://pypi.python.org/pypi/ncephes/)
-[![PyPIv](https://img.shields.io/pypi/v/ncephes.svg?style=flat-square)](https://pypi.python.org/pypi/ncephes/)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/ncephes/badges/version.svg)](https://anaconda.org/conda-forge/ncephes)
-[![Documentation Status](https://readthedocs.org/projects/ncephes/badge/?style=flat-square&version=latest)](https://ncephes.readthedocs.io/en/latest/)
+[![PyPI-License](https://img.shields.io/pypi/l/ncephes.svg?style=flat-square)](https://pypi.python.org/pypi/ncephes/) [![PyPI-Version](https://img.shields.io/pypi/v/ncephes.svg?style=flat-square)](https://pypi.python.org/pypi/ncephes/) [![Anaconda-Version](https://anaconda.org/conda-forge/ncephes/badges/version.svg)](https://anaconda.org/conda-forge/ncephes) [![Anaconda-Downloads Badge](https://anaconda.org/conda-forge/ncephes/badges/downloads.svg)](https://anaconda.org/conda-forge/ncephes) [![Documentation Status](https://readthedocs.org/projects/ncephes/badge/?style=flat-square&version=latest)](https://ncephes.readthedocs.io/en/latest/)
 
 This package provides a python interface for the
 [Cephes](http://www.netlib.org/cephes/) library.
