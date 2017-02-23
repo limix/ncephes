@@ -73,7 +73,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='1.0.17',
+        version='1.0.18',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         description="Python interface for the Cephes library.",
@@ -91,8 +91,6 @@ def setup_package():
             "Development Status :: 5 - Production/Stable",
             "Intended Audience :: Developers",
             "License :: OSI Approved :: MIT License",
-            "Programming Language :: Python :: 2.7",
-            "Programming Language :: Python :: 3.5",
             "Operating System :: OS Independent",
         ],
         capi_libs=create_capi_libs(),
