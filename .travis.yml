@@ -28,7 +28,7 @@ before_install:
     fi
   - travis/install_pandoc.sh
 script:
-  - python setup.py sdist
+  - python setup.py sdist bdist_wheel
   - >
     if [ "${NUMBA}" == "true" ]; then
       pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`[numba];
