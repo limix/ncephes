@@ -43,6 +43,7 @@ notifications:
 deploy:
   provider: pypi
   skip_upload_docs: true
+  skip_cleanup: true
   user: dhorta
   password:
     secure: O999CaZ56Sl1QiTObeGFVZaP0+VRDO/W2rbUXYNKgPFeMlYLtvyiNTOB/ZkBIR+sXtksDMPTGJikpP1SfgNKVB/5MZbSOLaEHKpnX6uOQ8sGcnTYJiNI+4d//nttJCuuOZdGFijT4+EkV/CGF4W+dJ2+6RoOalMWzr6qaswkxMQuNJPim4iWpUIuBozoKkqVjJlzBXV5Zlopami3AZOqpEbKi67GMIFJbM8v8KVFZWoU09p7Ze/Q3uZ9d8xM+7utJXQhQOrd9venEZ+O3+J0Y6cHjs173FkJp15Y3mTmWWhrMiFBqSpvzfPTgYyUsp2njElarq2xty/ET7jDnp6mRrgxlTtnl3nAWyPKfzJqPIf+fK/vsIF/ELCam5hKeT3qqcJsKRAcFzP/AlCaUYEGn9nIE6/W/2ciFmRQgfAmPuYKBWexWLso7vDdSw6KqkXJwxDjleoy+mjxvFO7ZhTI2kRbv8TKSH8phRaug9l9SIMQznFd4Q8+D59W+oUtbMRfZMDVPJ7e6rCF5MIfCzNB2LabCVeL/a3p/OfScBhPQYXYPSyMvRyaNn/J7UmUWVKv3wEno1TCWCaj0YfZ/fMPrGtfG9olaXdY5DTN/+n5QXf93MOLF3tcXIFDQj/ZvCeZF8VsAP+iFPLhuijQFTfz08o9gPIFdij20Yr8XkhOmSY=
