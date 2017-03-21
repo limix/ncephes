@@ -1,21 +1,23 @@
 from __future__ import unicode_literals
 
-import os
-from os.path import join
 import sys
-PY3 = sys.version_info > (3,)
-from setuptools import setup
-from setuptools import find_packages
+from os import chdir, getcwd
+from os.path import abspath, dirname, join
+
+from setuptools import find_packages, setup
+
+PY3 = sys.version_info > (3, )
 
 try:
     import pypandoc
     long_description = pypandoc.convert_file('README.md', 'rst')
-except(OSError, IOError, ImportError):
+except (OSError, IOError, ImportError):
     long_description = open('README.md').read()
 
+
 def get_sources(module):
-    from module_info import get_sources
-    sources = get_sources(module)
+    from module_info import get_sources as _get_sources
+    sources = _get_sources(module)
     sources += [join('ncephes', 'cephes', module + '_ffcall.c')]
     sources += [join('ncephes', 'cephes', 'const.c')]
     return sources
@@ -27,17 +29,17 @@ def get_include_dirs(module):
             [join('ncephes', 'cephes')])
 
 
-class GetApi(object):
-
+class GetApi(object):  # pylint: disable=R0903
     def __init__(self, module):
         self._module = module
 
     def __call__(self):
-        from build_capi import CApiLib
+        from build_capi import CApiLib  # pylint: disable=E0401
         module = self._module
-        return CApiLib(name='ncephes.lib.' + 'n' + module,
-                       sources=get_sources(module),
-                       include_dirs=get_include_dirs(module))
+        return CApiLib(
+            name='ncephes.lib.' + 'n' + module,
+            sources=get_sources(module),
+            include_dirs=get_include_dirs(module))
 
 
 def create_capi_libs():
@@ -46,16 +48,15 @@ def create_capi_libs():
 
 
 def setup_package():
-    src_path = os.path.dirname(os.path.abspath(sys.argv[0]))
-    old_path = os.getcwd()
-    os.chdir(src_path)
+    src_path = dirname(abspath(sys.argv[0]))
+    old_path = getcwd()
+    chdir(src_path)
     sys.path.insert(0, src_path)
 
     needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
     pytest_runner = ['pytest-runner'] if needs_pytest else []
 
-    setup_requires = ['build-capi', 'cffi>=1.7',
-                      'pycparser'] + pytest_runner
+    setup_requires = ['build-capi', 'cffi>=1.7', 'pycparser'] + pytest_runner
     install_requires = ['cffi>=1.7']
     tests_require = ['numpy', 'pytest>=3']
     recommended = {"numba": ["numba>=0.28"]}
@@ -67,13 +68,13 @@ def setup_package():
     hdr_files = [join(hdr_dir, m + '.h') for m in modules]
 
     if PY3:
-        package_data={'': [join('ncephes', 'lib', '*.*')]}
+        package_data = {'': [join('ncephes', 'lib', '*.*')]}
     else:
-        package_data={b'': [join(b'ncephes', b'lib', b'*.*')]}
+        package_data = {b'': [join(b'ncephes', b'lib', b'*.*')]}
 
     metadata = dict(
         name='ncephes',
-        version='1.0.19',
+        version='1.0.20',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         description="Python interface for the Cephes library.",
@@ -97,14 +98,14 @@ def setup_package():
         keywords=["cephes", "math", "numba"],
         include_package_data=True,
         data_files=[(hdr_dir, hdr_files)],
-        package_data=package_data,
-    )
+        package_data=package_data, )
 
     try:
         setup(**metadata)
     finally:
         del sys.path[0]
-        os.chdir(old_path)
+        chdir(old_path)
+
 
 if __name__ == '__main__':
     setup_package()

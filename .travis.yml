@@ -23,10 +23,10 @@ matrix:
 before_install:
   - >
     if [ "${NUMBA}" == "true" ]; then
-      travis/install_clang38.sh;
-      travis/install_llvmlite.sh;
+      travis_retry travis/install_clang38.sh;
+      travis_retry travis/install_llvmlite.sh;
     fi
-  - travis/install_pandoc.sh
+  - travis_retry travis/install_pandoc.sh
 script:
   - python setup.py sdist bdist_wheel
   - >
