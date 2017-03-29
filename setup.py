@@ -80,7 +80,7 @@ def setup_package():
         description="Python interface for the Cephes library.",
         long_description=long_description,
         license="MIT",
-        url='https://github.com/glimix/ncephes',
+        url='https://github.com/limix/ncephes',
         packages=find_packages(),
         zip_safe=False,
         cffi_modules=cffi_modules,
