@@ -39,7 +39,7 @@ script:
     pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`;
   fi
 - pushd /
-- python -c "import ncephes; ncephes.test()"
+- python -c "import sys; import ncephes; sys.exit(ncephes.test())"
 - popd
 notifications:
   email: false
