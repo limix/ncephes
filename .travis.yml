@@ -43,11 +43,3 @@ script:
 - popd
 notifications:
   email: false
-deploy:
-  provider: pypi
-  user: dhorta
-  password:
-    secure: l5wskb3nGaiZHVvHSTRUdniwYN998vWhv07sS3Kk/dA2mNsSMPyVzR+kjrEXDMnrlm4X03H590yH3rSb0v6TDDU+n7sdNhIuRa3h0CkgEHyFdIWGiQuKcMNKH2P6xWK/q4o/f9+C5cTo976KyXLkG7SFqPcHtvPWvWD7aa4MQxgt3tjLCFHATv9peK/FmUnJtcR1QOqiMjs3IM+qfeqcsBoYe1biqQtmdRzTGmbYWAtGBy1ftJKoUiCK58axYwGjkdBomDPV2iw75JqcXx18DehuzVE0ayyU3V+oCMyej9u+RIRmMDHjs0t0T7XsJoUey4EZYsrWwMJhXuPUnZqAhkpRRAddxwHMl8Be3Go8WXcEjvjszyyDDAIXTySXReomzWy1idHjTA8h3eFkyYCAQHsTl8ea3OCnlvn3DyfBAjJBOjTJN1Nk36Cu1P8f+N2Z0fquYjFZeh0Yk1c+VnV3dI1xJxtfHePNh8/DbC5zyRcoqmcS9F0h7zVcKSj9YtnsadhrpssdDGLPjKjq/fci60/j92UvfTjhe58xo714dlUTkvIr5ShgEZxkU6MNz3RwAfVCK1qP+HREpHuXRf0ZM+86NmIIT3Rg3SEP1ztlBxp+zLblbq7XYwNs+DeFG3xEDB+DrHbVyiCs0rMiWQRN6R4gXP6oav9+qCmhFjjW6rk=
-  on:
-    repo: limix/ncephes
-    branch: 1.0.x
