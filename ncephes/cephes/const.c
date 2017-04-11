@@ -70,7 +70,12 @@ double THPIO4 = 2.35619449019234492885;	/* 3*pi/4 */
 
 #include <math.h>
 #include <float.h>
+#ifndef NAN
+#include <bits/nan.h>
+#endif
+
 const double NCEPHES_INF = HUGE_VAL;
+
 const double NCEPHES_NAN = NAN;
 const double NCEPHES_MAXNUM = HUGE_VAL;
 const double NCEPHES_PI = 3.14159265358979323846;
