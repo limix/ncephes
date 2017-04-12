@@ -23,6 +23,6 @@ for PYBIN in /opt/python/*/bin/; do
         || [[ $PYBIN == *"p34"* ]]; then
         continue
     fi
-    "${PYBIN}/pip" install ncephes --no-index -f /io/wheelhouse
+    "${PYBIN}/pip" install ncephes -f /io/wheelhouse
     (cd "$HOME"; "${PYBIN}/nosetests" ncephes)
 done
