@@ -23,24 +23,18 @@ matrix:
     compiler: clang-3.8
     env: NUMBA="true" LLVM_VERSION="3.8" CXX="clang++-3.8" LLVM_CONFIG="llvm-config-3.8"
       "PATH=~/bin:$PATH"
+  - sudo: required
+    services:
+    - docker
+    env: DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64 NUMBA="true"
 before_install:
-- |
-  if [ "${NUMBA}" == "true" ]; then
-    travis_retry travis/install_clang38.sh;
-    travis_retry travis/install_llvmlite.sh;
-  fi
-- travis_retry travis/install_pandoc.sh
+- travis_retry travis/before_install_stage.sh
+install:
+- travis_retry travis/install_stage.sh
 script:
-- python setup.py sdist bdist_wheel
-- |
-  if [ "${NUMBA}" == "true" ]; then
-    pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`[numba];
-  else
-    pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`;
-  fi
-- pushd /
-- python -c "import sys; import ncephes; sys.exit(ncephes.test())"
-- popd
+- travis_retry travis/script_stage.sh
+after_success:
+- travis_retry travis/deploy_wheels.sh
 notifications:
   email: false
 deploy:
