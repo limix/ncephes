@@ -24,7 +24,7 @@ for PYBIN in /opt/python/*/bin/; do
         continue
     fi
     "${PYBIN}/pip" install ncephes -f /io/wheelhouse
-    "${PYBIN}/pip" install pytest
+    "${PYBIN}/pip" install pytest numpy
     cd "$HOME"
     "${PYBIN}/python" -c "import sys; import ncephes; sys.exit(ncephes.test())"
 done
