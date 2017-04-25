@@ -8,11 +8,8 @@ cache: pip
 matrix:
   include:
   - python: 2.7
-    env: NUMBA="false"
   - python: 3.5
-    env: NUMBA="false"
   - python: 3.6
-    env: NUMBA="false"
   - env: DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64
   - os: osx
     env: PYENV=py27
