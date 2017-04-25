@@ -1,45 +1,47 @@
 language: python
 sudo: required
 dist: trusty
+services: docker
 git:
   depth: 5
+cache: pip
 matrix:
   include:
   - python: 2.7
-    env: NUMBA="false" "PATH=~/bin:$PATH"
+    env: NUMBA="false"
   - python: 3.5
-    env: NUMBA="false" "PATH=~/bin:$PATH"
+    env: NUMBA="false"
   - python: 3.6
-    env: NUMBA="false" "PATH=~/bin:$PATH"
-  - python: 2.7
-    compiler: clang-3.8
-    env: NUMBA="true" LLVM_VERSION="3.8" CXX="clang++-3.8" LLVM_CONFIG="llvm-config-3.8"
-      "PATH=~/bin:$PATH"
-  - python: 3.5
-    compiler: clang-3.8
-    env: NUMBA="true" LLVM_VERSION="3.8" CXX="clang++-3.8" LLVM_CONFIG="llvm-config-3.8"
-      "PATH=~/bin:$PATH"
+    env: NUMBA="false"
   - python: 3.6
-    compiler: clang-3.8
-    env: NUMBA="true" LLVM_VERSION="3.8" CXX="clang++-3.8" LLVM_CONFIG="llvm-config-3.8"
-      "PATH=~/bin:$PATH"
+    env: NUMBA="true"
+  - env: DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64
+  - os: osx
+    env: PYENV=py27
+  - os: osx
+    env: PYENV=py35
+  - os: osx
+    env: PYENV=py36
 before_install:
-- |
-  if [ "${NUMBA}" == "true" ]; then
-    travis_retry travis/install_clang38.sh;
-    travis_retry travis/install_llvmlite.sh;
-  fi
-- travis_retry travis/install_pandoc.sh
+- travis_retry bash <(curl -s https://raw.githubusercontent.com/limix/travis-tools/master/get-travis-tools.sh)
+- travis_retry travis/before-install.sh
 script:
-- python setup.py sdist bdist_wheel
-- |
-  if [ "${NUMBA}" == "true" ]; then
-    pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`[numba];
-  else
-    pip install dist/`ls dist | grep -i -E '\.(gz)$' | head -1`;
-  fi
-- pushd /
-- python -c "import sys; import ncephes; sys.exit(ncephes.test())"
-- popd
+- travis_retry travis/script.sh
+after_success:
+- travis_retry travis/after-success.sh
 notifications:
   email: false
+deploy:
+  provider: pypi
+  user: dhorta
+  password:
+    secure: l5wskb3nGaiZHVvHSTRUdniwYN998vWhv07sS3Kk/dA2mNsSMPyVzR+kjrEXDMnrlm4X03H590yH3rSb0v6TDDU+n7sdNhIuRa3h0CkgEHyFdIWGiQuKcMNKH2P6xWK/q4o/f9+C5cTo976KyXLkG7SFqPcHtvPWvWD7aa4MQxgt3tjLCFHATv9peK/FmUnJtcR1QOqiMjs3IM+qfeqcsBoYe1biqQtmdRzTGmbYWAtGBy1ftJKoUiCK58axYwGjkdBomDPV2iw75JqcXx18DehuzVE0ayyU3V+oCMyej9u+RIRmMDHjs0t0T7XsJoUey4EZYsrWwMJhXuPUnZqAhkpRRAddxwHMl8Be3Go8WXcEjvjszyyDDAIXTySXReomzWy1idHjTA8h3eFkyYCAQHsTl8ea3OCnlvn3DyfBAjJBOjTJN1Nk36Cu1P8f+N2Z0fquYjFZeh0Yk1c+VnV3dI1xJxtfHePNh8/DbC5zyRcoqmcS9F0h7zVcKSj9YtnsadhrpssdDGLPjKjq/fci60/j92UvfTjhe58xo714dlUTkvIr5ShgEZxkU6MNz3RwAfVCK1qP+HREpHuXRf0ZM+86NmIIT3Rg3SEP1ztlBxp+zLblbq7XYwNs+DeFG3xEDB+DrHbVyiCs0rMiWQRN6R4gXP6oav9+qCmhFjjW6rk=
+  on:
+    repo: limix/ncephes
+    branch: master
+    tags: true
+
+env:
+  global:
+    - secure: owCfm9AyRjHJJDwvG4jIoYD+7cxntbRRMRPPvvgY7f66FFsVHQkl8kHhcW9F7UTONzIPs1Ij+xzaY27mxQpQHX4Kt4I6NteAjv8eKmi2RUN5MVoddc7m05DbKfBufJ+EtpSFaTufsXxRb2m7/5nXQRDH0y6yOWrg6PCrSmrqR80UQdQBBqnuFj92dV4e1wgJjKF7BXdjIqZ8u+yOFkwb0Q0u9CsTh5pnsYeW8UYMgkQ7HgekUpuYMvjRXm0CNxICHSe8VuhzHCCGvdlGr7URdEhrWAUIq1Km0R0KV7vwS2WSO1bX0C369wozWD59K/mdx3nhK2TJF29PGE03/jTsdmqREyRhbprwoKZGF9vTjj4EX4oKnrTd7E1Yh7FWZtv+5uCwAFq0QoCU/FuTWo2jMcwkPVAmXDEzJ4523vk5lIo2Ulk6X9R5jbapxYyMHP6RXhKjgSfEpBkOXX4YcRu8Ywd8tKUGbLLF1KnFWYZXsu+QjWwFnK+NB/gM+aSWKMsfShfWazThAK0PYPp/E4NW8EnyEqIVOVAQxtRtmuOdfCP6AjKRh7ys5qOvjHcXkrW+BcnWh7w3Pc2YxDknvtqncNF7eDSNyfRkRHPRB/kwVtwfTaXpbfRbheeQyy/AWLcz1D/HnvroA5yJkC4nlpC7AF0wa7GgJaIIfoyhzjHgItA=
+    - PKG_NAME=ncephes
