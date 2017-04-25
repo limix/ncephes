@@ -5,6 +5,8 @@ services: docker
 git:
   depth: 5
 cache: pip
+  directories:
+  - $HOME/Library/Caches/Homebrew
 matrix:
   include:
   - python: 2.7
