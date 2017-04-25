@@ -4,7 +4,8 @@ dist: trusty
 services: docker
 git:
   depth: 5
-cache: pip
+cache:
+  pip: true
   directories:
   - $HOME/Library/Caches/Homebrew
 matrix:
