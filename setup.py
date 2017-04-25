@@ -74,7 +74,7 @@ def setup_package():
 
     metadata = dict(
         name='ncephes',
-        version='1.0.22',
+        version='1.0.23',
         maintainer="Danilo Horta",
         maintainer_email="danilo.horta@gmail.com",
         description="Python interface for the Cephes library.",
