@@ -13,8 +13,6 @@ matrix:
     env: NUMBA="false"
   - python: 3.6
     env: NUMBA="false"
-  - python: 3.6
-    env: NUMBA="true"
   - env: DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64
   - os: osx
     env: PYENV=py27
