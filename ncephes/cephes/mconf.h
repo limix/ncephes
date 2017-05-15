@@ -65,10 +65,10 @@
 
 
 #define DOMAIN		1	/* argument domain error */
-#ifndef _MSC_VER
-#define SING		2	/* argument singularity */
 #define OVERFLOW	3	/* overflow range error */
 #define UNDERFLOW	4	/* underflow range error */
+#ifndef _MSC_VER
+#define SING		2	/* argument singularity */
 #define TLOSS		5	/* total loss of precision */
 #define PLOSS		6	/* partial loss of precision */
 #endif
