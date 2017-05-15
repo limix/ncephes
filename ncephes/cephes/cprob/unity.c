@@ -68,6 +68,10 @@ z = -0.5 * z + x * ( z * polevl( x, LP, 6 ) / p1evl( x, LQ, 6 ) );
 return (x + z);
 }
 
+#else
+
+#include <math.h>
+
 #endif
 
 /* expm1(x) = exp(x) - 1  */
