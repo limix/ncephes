@@ -78,14 +78,9 @@ double THPIO4 = 2.35619449019234492885;	/* 3*pi/4 */
 #endif
 #endif
 
-/*const double NCEPHES_INF = HUGE_VAL;*/
-#define NCEPHES_INF HUGE_VAL
-
-/*const double NCEPHES_NAN = NAN;
-const double NCEPHES_MAXNUM = HUGE_VAL;*/
-#define NCEPHES_NAN NAN
-#define NCEPHES_MAXNUM HUGE_VAL
-
+const double NCEPHES_INF = HUGE_VAL;
+const double NCEPHES_NAN = NAN;
+const double NCEPHES_MAXNUM = HUGE_VAL;
 const double NCEPHES_PI = 3.14159265358979323846;
 const double NCEPHES_PIO2 = 3.14159265358979323846/2;
 const double NCEPHES_PIO4 = 3.14159265358979323846/4;
