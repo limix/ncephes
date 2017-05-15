@@ -71,7 +71,11 @@ double THPIO4 = 2.35619449019234492885;	/* 3*pi/4 */
 #include <math.h>
 #include <float.h>
 #ifndef NAN
+#if _MSC_VER == 1500
+#define NAN sqrt(-1)
+#else
 #include <bits/nan.h>
+#endif
 #endif
 
 const double NCEPHES_INF = HUGE_VAL;
