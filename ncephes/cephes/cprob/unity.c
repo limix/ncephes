@@ -53,7 +53,7 @@ static double LQ[] = {
 #define SQRTH 0.70710678118654752440
 #define SQRT2 1.41421356237309504880
 
-#ifndef _MSC_BUILD
+// #ifndef _MSC_BUILD
 
 double
 log1p (double x)
@@ -68,11 +68,11 @@ z = -0.5 * z + x * ( z * polevl( x, LP, 6 ) / p1evl( x, LQ, 6 ) );
 return (x + z);
 }
 
-#else
+// #else
 
-#include <math.h>
+// #include <math.h>
 
-#endif
+// #endif
 
 /* expm1(x) = exp(x) - 1  */
 
