@@ -57,25 +57,21 @@ Copyright 1999 by Stephen L. Moshier
 */
 
 #include "mconf.h"
-#ifdef ANSIPROT
+
 extern double polylog (int, double);
 extern double exp (double);
-extern double log1p (double); /* log(1+x) */
-extern double expm1 (double); /* exp(x) - 1 */
+extern double ncephes_log1p (double); /* log(1+x) */
+extern double ncephes_expm1 (double); /* exp(x) - 1 */
 double planckc(double, double);
 double plancki(double, double);
-#else
-double polylog(), exp(), log1p(), expm1();
-double planckc(), plancki();
-#endif
 
-/*  NIST value (1999): 2 pi h c^2 = 3.741 7749(22) Å◊ 10-16 W m2  */
+/*  NIST value (1999): 2 pi h c^2 = 3.741 7749(22) ÔøΩÔøΩ 10-16 W m2  */
 double planck_c1 = 3.7417749e-16;
 /*  NIST value (1999):  h c / k  = 0.014 387 69 m K */
 double planck_c2 = 0.01438769;
 
 
-double 
+double
 plancki (double w, double T)
 {
   double b, h, y, bw;
@@ -98,7 +94,7 @@ plancki (double w, double T)
   y =      6. * polylog (4, h)  * bw;
   y = (y + 6. * polylog (3, h)) * bw;
   y = (y + 3. * polylog (2, h)) * bw;
-  y = (y          - log1p (-h)) * bw;
+  y = (y          - ncephes_log1p (-h)) * bw;
   h = w * w;
   h = h * h;
   y = y * (planck_c1 / h);
@@ -136,7 +132,7 @@ plancki (double w, double T)
  *
  */
 
-double 
+double
 planckc (double w, double T)
 {
   double b, d, p, u, y;
@@ -158,7 +154,7 @@ planckc (double w, double T)
   y = ((y + 3617./1081289781411840000.)*p - 1./5928123801600.)*p;
   y = ((y + 691./78460462080000.)*p - 1./2075673600.)*p;
   y = ((((y + 1./35481600.)*p - 1.0/544320.)*p + 1.0/6720.)*p -  1./40.)*p;
-  y = y + log(d * expm1(u));
+  y = y + log(d * ncephes_expm1(u));
   y = y - 5.*u/8. + 1./3.;
 #else
   y = -236364091.*p/45733251691757079075225600000.;
@@ -200,7 +196,7 @@ planckc (double w, double T)
  *
  */
 
-double 
+double
 planckd (double w, double T)
 {
    return (planck_c2 / ((w*w*w*w*w) * (exp(planck_c2/(w*T)) - 1.0)));
@@ -211,7 +207,7 @@ planckd (double w, double T)
    c2/wT = constant
    Wein displacement law.
   */
-double 
+double
 planckw (double T)
 {
   return (planck_c2 / (4.96511423174427630 * T));
