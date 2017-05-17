@@ -148,3 +148,31 @@ def forward_call(decl):
     call_expr += ')'
     ndecl += " { return %s; }" % call_expr
     return ndecl
+
+def backward_call(decl):
+    parser = CParser()
+    decl = parser.parse(decl, filename='<stdin>').ext[0]
+    name = decl.name
+    args = decl.type.args
+    nargs = len(args.params)
+    if len(decl.type.type.type.names) > 1:
+        assert False
+    else:
+        rtype = decl.type.type.type.names[0]
+
+    ndecl = rtype + ' ' + name[len('cephes_ '):] + '('
+
+    call_expr = name + '('
+    for param in args.params:
+        if len(param.type.type.names) > 1:
+            assert False
+        typ = param.type.type.names[0]
+        ndecl += typ + ' ' + param.name + ', '
+        call_expr += param.name + ', '
+    if nargs > 0:
+        ndecl = ndecl[:-2]
+        call_expr = call_expr[:-2]
+    ndecl += ')'
+    call_expr += ')'
+    ndecl += " { return %s; }" % call_expr
+    return ndecl
