@@ -36,6 +36,9 @@ def get_fdecls(module):
         modname = splitext(basename(fp))[0]
         if modname in export_table:
             fnames = export_table[modname]
+            if modname == 'unity' and module == 'cprob':
+                fnames = ['ncephes_' + fn for fn in fnames]
+                # import pdb; pdb.set_trace()
             for fd in fetch_func_decl(fp):
                 fdname = regex.match(fd).group(1)
                 for fn in fnames:

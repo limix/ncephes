@@ -36,9 +36,9 @@ double pdtr(int k, double m);
 double pdtri(int k, double y);
 double stdtr(int k, double t);
 double stdtri(int k, double p);
-double log1p(double x);
-double expm1(double x);
-double cosm1(double x);
+double ncephes_log1p(double x);
+double ncephes_expm1(double x);
+double ncephes_cosm1(double x);
 
 double ncephes_bdtrc(int k, int n, double p) { return bdtrc(k, n, p); }
 double ncephes_bdtr(int k, int n, double p) { return bdtr(k, n, p); }
@@ -76,7 +76,6 @@ double ncephes_pdtr(int k, double m) { return pdtr(k, m); }
 double ncephes_pdtri(int k, double y) { return pdtri(k, y); }
 double ncephes_stdtr(int k, double t) { return stdtr(k, t); }
 double ncephes_stdtri(int k, double p) { return stdtri(k, p); }
-double ncephes_log1p(double x) { return log1p(x); }
-double ncephes_expm1(double x) { return expm1(x); }
-double ncephes_cosm1(double x) { return cosm1(x); }
-
+// double ncephes_log1p(double x) { return log1p(x); }
+// double ncephes_expm1(double x) { return expm1(x); }
+// double ncephes_cosm1(double x) { return cosm1(x); }

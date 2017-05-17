@@ -115,14 +115,11 @@ Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
 */
 
 #include "mconf.h"
-#ifdef ANSIPROT
+
 extern double incbet ( double, double, double );
 extern double incbi ( double, double, double );
-#else
-double incbet(), incbi();
-#endif
 
-double 
+double
 nbdtrc (int k, int n, double p)
 {
 double dk, dn;
@@ -143,7 +140,7 @@ return( incbet( dk, dn, 1.0 - p ) );
 
 
 
-double 
+double
 nbdtr (int k, int n, double p)
 {
 double dk, dn;
@@ -163,7 +160,7 @@ return( incbet( dn, dk, p ) );
 
 
 
-double 
+double
 nbdtri (int k, int n, double p)
 {
 double dk, dn, w;

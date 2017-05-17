@@ -147,17 +147,14 @@ Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
 */
 
 #include "mconf.h"
-#ifdef ANSIPROT
+
 extern double incbet ( double, double, double );
 extern double incbi ( double, double, double );
 extern double pow ( double, double );
-extern double log1p ( double );
-extern double expm1 ( double );
-#else
-double incbet(), incbi(), pow(), log1p(), expm1();
-#endif
+extern double ncephes_log1p ( double );
+extern double ncephes_expm1 ( double );
 
-double 
+double
 bdtrc (int k, int n, double p)
 {
 double dk, dn;
@@ -180,7 +177,7 @@ dn = n - k;
 if( k == 0 )
 	{
 	if( p < .01 )
-		dk = -expm1( dn * log1p(-p) );
+		dk = -ncephes_expm1( dn * ncephes_log1p(-p) );
 	else
 		dk = 1.0 - pow( 1.0-p, dn );
 	}
@@ -194,7 +191,7 @@ return( dk );
 
 
 
-double 
+double
 bdtr (int k, int n, double p)
 {
 double dk, dn;
@@ -225,7 +222,7 @@ return( dk );
 }
 
 
-double 
+double
 bdtri (int k, int n, double y)
 {
 double dk, dn, p;
@@ -243,7 +240,7 @@ dn = n - k;
 if( k == 0 )
 	{
 	if( y > 0.8 )
-		p = -expm1( log1p(y-1.0) / dn );
+		p = -ncephes_expm1( ncephes_log1p(y-1.0) / dn );
 	else
 		p = 1.0 - pow( y, 1.0/dn );
 	}

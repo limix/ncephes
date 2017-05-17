@@ -63,7 +63,7 @@
  *
  * The integral is
  *
- *                           x 
+ *                           x
  *                            -
  *                 2         | |          2
  *   erf(x)  =  --------     |    exp( - t  ) dt.
@@ -106,7 +106,7 @@
  *
  *  1 - erf(x) =
  *
- *                           inf. 
+ *                           inf.
  *                             -
  *                  2         | |          2
  *   erfc(x)  =  --------     |    exp( - t  ) dt
@@ -384,7 +384,6 @@ static unsigned short U[] = {
 #define UTHRESH 37.519379347
 #endif
 
-#ifdef ANSIPROT
 extern double polevl ( double, void *, int );
 extern double p1evl ( double, void *, int );
 extern double exp ( double );
@@ -395,13 +394,8 @@ extern double expx2 ( double, int );
 double erf ( double );
 double erfc ( double );
 static double erfce ( double );
-#else
-double polevl(), p1evl(), exp(), log(), fabs();
-double erf(), erfc(), expx2(), sqrt();
-static double erfce();
-#endif
 
-double 
+double
 ndtr (double a)
 {
 double x, y, z;
@@ -432,7 +426,7 @@ return(y);
 }
 
 
-double 
+double
 erfc (double a)
 {
 double p,q,x,y,z;
@@ -490,7 +484,7 @@ return(y);
    exp(x^2) erfc(x)
    valid for x > 1.
    Use with ndtr and expx2.  */
-static double 
+static double
 erfce (double x)
 {
 double p,q;
@@ -510,7 +504,7 @@ return (p/q);
 
 
 
-double 
+double
 erf (double x)
 {
 double y, z;

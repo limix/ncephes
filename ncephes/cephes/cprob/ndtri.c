@@ -360,16 +360,12 @@ static unsigned short Q2[32] = {
 };
 #endif
 
-#ifdef ANSIPROT
 extern double polevl ( double, void *, int );
 extern double p1evl ( double, void *, int );
 extern double log ( double );
 extern double sqrt ( double );
-#else
-double polevl(), p1evl(), log(), sqrt();
-#endif
 
-double 
+double
 ndtri (double y0)
 {
 double x, y, z, y2, x0, x1;
@@ -398,7 +394,7 @@ if( y > 0.13533528323661269189 )
 	y = y - 0.5;
 	y2 = y * y;
 	x = y + y * (y2 * polevl( y2, P0, 4)/p1evl( y2, Q0, 8 ));
-	x = x * s2pi; 
+	x = x * s2pi;
 	return(x);
 	}
 
