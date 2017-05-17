@@ -25,7 +25,7 @@
  * approximated by a rational function of degree 6/7 in the
  * interval (2,3).  Large arguments are handled by Stirling's
  * formula. Large negative arguments are made positive using
- * a reflection formula.  
+ * a reflection formula.
  *
  *
  * ACCURACY:
@@ -182,7 +182,7 @@ static unsigned short LNCEPHES_PI[4] = {
 0xa1bd,0x48e7,0x50d0,0x3ff2,
 };
 #define LOGNCEPHES_PI *(double *)LNCEPHES_PI
-#endif 
+#endif
 
 #ifdef MIEEE
 static unsigned short P[] = {
@@ -209,7 +209,7 @@ static unsigned short LNCEPHES_PI[4] = {
 0x3ff2,0x50d0,0x48e7,0xa1bd,
 };
 #define LOGNCEPHES_PI *(double *)LNCEPHES_PI
-#endif 
+#endif
 
 /* Stirling's formula for the gamma function */
 #if UNK
@@ -267,7 +267,7 @@ static unsigned short SQT[4] = {
 #endif
 
 extern double MAXLOG, NCEPHES_MAXNUM, NCEPHES_PI;
-#ifdef ANSIPROT
+
 extern double pow ( double, double );
 extern double log ( double );
 extern double exp ( double );
@@ -281,13 +281,7 @@ extern int isfinite ( double );
 static double stirf ( double );
 double lgam ( double );
 double lgam_sgn ( double, int* );
-#else
-double pow(), log(), exp(), sin(), polevl(), p1evl(), floor(), fabs();
-int isnan(), isfinite();
-static double stirf();
-double lgam();
-double lgam_sgn();
-#endif
+
 #ifdef INFINITIES
 extern double NCEPHES_INF;
 #endif
@@ -298,7 +292,7 @@ extern double NCEPHES_NAN;
 /* Gamma function computed by Stirling's formula.
  * The polynomial STIR is valid for 33 <= x <= 172.
  */
-static double 
+static double
 stirf (double x)
 {
 double y, w, v;
@@ -321,7 +315,7 @@ return( y );
 
 
 
-double 
+double
 cephes_gamma (double x)
 {
 double p, q, z;
@@ -579,7 +573,7 @@ double lgam(double x)
 }
 
 
-double 
+double
 lgam_sgn (double x, int *sign)
 {
 double p, q, u, w, z;

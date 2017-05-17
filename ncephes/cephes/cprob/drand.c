@@ -47,11 +47,8 @@
  */
 
 #include "mconf.h"
-#ifdef ANSIPROT
+
 static int ranwh ( void );
-#else
-static int ranwh();
-#endif
 
 static int sx = 1;
 static int sy = 10000;
@@ -65,8 +62,8 @@ static union {
 /* This function implements the three
  * congruential generators.
  */
- 
-static int 
+
+static int
 ranwh (void)
 {
 int r, s;
@@ -104,7 +101,7 @@ return 0;
  *	drand( &x );
  */
 
-int 
+int
 drand (double *a)
 {
 unsigned short r;

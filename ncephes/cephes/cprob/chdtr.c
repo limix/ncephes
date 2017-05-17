@@ -148,15 +148,12 @@ Copyright 1984, 1987, 2000 by Stephen L. Moshier
 */
 
 #include "mconf.h"
-#ifdef ANSIPROT
+
 extern double igamc ( double, double );
 extern double igam ( double, double );
 extern double igami ( double, double );
-#else
-double igamc(), igam(), igami();
-#endif
 
-double 
+double
 chdtrc (double df, double x)
 {
 
@@ -170,7 +167,7 @@ return( igamc( df/2.0, x/2.0 ) );
 
 
 
-double 
+double
 chdtr (double df, double x)
 {
 
@@ -184,7 +181,7 @@ return( igam( df/2.0, x/2.0 ) );
 
 
 
-double 
+double
 chdtri (double df, double y)
 {
 double x;

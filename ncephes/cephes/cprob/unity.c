@@ -11,7 +11,6 @@
 
 #include "mconf.h"
 
-#ifdef ANSIPROT
 extern int isnan (double);
 extern int isfinite (double);
 extern double log ( double );
@@ -19,10 +18,7 @@ extern double polevl ( double, void *, int );
 extern double p1evl ( double, void *, int );
 extern double exp ( double );
 extern double cos ( double );
-#else
-double log(), polevl(), p1evl(), exp(), cos();
-int isnan(), isfinite();
-#endif
+
 extern double NCEPHES_INF;
 
 /* log1p(x) = log(1 + x)  */
@@ -54,7 +50,7 @@ static double LQ[] = {
 #define SQRT2 1.41421356237309504880
 
 double
-log1p (double x)
+ncephes_log1p (double x)
 {
 double z;
 
@@ -85,7 +81,7 @@ static double EQ[4] = {
 };
 
 double
-expm1 (double x)
+ncephes_expm1 (double x)
 {
 double r, xx;
 
@@ -124,7 +120,7 @@ static double coscof[7] = {
 extern double NCEPHES_PIO4;
 
 double
-cosm1 (double x)
+ncephes_cosm1 (double x)
 {
 double xx;
 
