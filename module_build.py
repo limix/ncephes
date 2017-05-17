@@ -31,6 +31,9 @@ def _make(module):
     cconst = join('ncephes', 'cephes', 'const.c')
     sources = get_sources(module) + [cconst]
 
+    if module == 'misc':
+        sources += [join('ncephes', 'cephes', 'cprob', 'unity.c')]
+
     if not PY3:
         fdecl_extern = fdecl_extern.encode('ascii', 'ignore')
         fdecl_intern = fdecl_intern.encode('ascii', 'ignore')
