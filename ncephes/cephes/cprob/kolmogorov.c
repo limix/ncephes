@@ -20,7 +20,7 @@
 
 
 #include "mconf.h"
-#ifdef ANSIPROT
+
 extern double pow ( double, double );
 extern double floor ( double );
 extern double lgam ( double );
@@ -30,14 +30,11 @@ extern double log ( double );
 extern double fabs ( double );
 double smirnov ( int, double );
 double kolmogorov ( double );
-#else
-double pow (), floor (), lgam (), exp (), sqrt (), log (), fabs ();
-double smirnov (), kolmogorov ();
-#endif
+
 extern double MAXLOG;
 
 /* Exact Smirnov statistic, for one-sided test.  */
-double 
+double
 smirnov (int n, double e)
 {
   int v, nn;
@@ -87,7 +84,7 @@ smirnov (int n, double e)
    or that max deviation > y/sqrt(n).
    The approximation is useful for the tail of the distribution
    when n is large.  */
-double 
+double
 kolmogorov (double y)
 {
   double p, t, r, sign, x;
@@ -111,7 +108,7 @@ kolmogorov (double y)
 
 /* Functional inverse of Smirnov distribution
    finds e such that smirnov(n,e) = p.  */
-double 
+double
 smirnovi (int n, double p)
 {
   double e, t, dpde;
@@ -151,7 +148,7 @@ smirnovi (int n, double p)
    Finds y such that kolmogorov(y) = p.
    If e = smirnovi (n,p), then kolmogi(2 * p) / sqrt(n) should
    be close to e.  */
-double 
+double
 kolmogi (double p)
 {
   double y, t, dpdy;
@@ -184,7 +181,7 @@ kolmogi (double p)
 
 #ifdef SALONE
 /* Type in a number.  */
-void 
+void
 getnum (char *s, double *px)
 {
   char str[30];
@@ -198,7 +195,7 @@ getnum (char *s, double *px)
 }
 
 /* Type in values, get answers.  */
-void 
+void
 main (void)
 {
   int n;

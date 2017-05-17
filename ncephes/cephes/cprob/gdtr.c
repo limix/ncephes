@@ -96,14 +96,11 @@ Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
 */
 
 #include "mconf.h"
-#ifdef ANSIPROT
+
 extern double igam ( double, double );
 extern double igamc ( double, double );
-#else
-double igam(), igamc();
-#endif
 
-double 
+double
 gdtr (double a, double b, double x)
 {
 
@@ -117,7 +114,7 @@ return(  igam( b, a * x )  );
 
 
 
-double 
+double
 gdtrc (double a, double b, double x)
 {
 

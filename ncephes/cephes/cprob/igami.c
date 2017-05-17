@@ -24,7 +24,7 @@
  *  where
  *
  *  t = 1 - d - ndtri(p) sqrt(d)
- * 
+ *
  * and
  *
  *  d = 1/9a,
@@ -51,7 +51,7 @@ Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
 #include "mconf.h"
 
 extern double MACHEP, NCEPHES_MAXNUM, MAXLOG, MINLOG;
-#ifdef ANSIPROT
+
 extern double igamc ( double, double );
 extern double ndtri ( double );
 extern double exp ( double );
@@ -59,11 +59,8 @@ extern double fabs ( double );
 extern double log ( double );
 extern double sqrt ( double );
 extern double lgam ( double );
-#else
-double igamc(), ndtri(), exp(), fabs(), log(), sqrt(), lgam();
-#endif
 
-double 
+double
 igami (double a, double y0)
 {
 double x0, x1, x, yl, yh, y, d, lgm, dithresh;
@@ -158,7 +155,7 @@ for( i=0; i<400; i++ )
 			d = 0.5;
 			}
 		else if( dir > 1 )
-			d = 0.5 * d + 0.5; 
+			d = 0.5 * d + 0.5;
 		else
 			d = (y0 - yl)/(yh - yl);
 		dir += 1;

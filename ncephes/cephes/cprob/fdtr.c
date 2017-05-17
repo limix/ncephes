@@ -161,14 +161,11 @@ Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
 
 
 #include "mconf.h"
-#ifdef ANSIPROT
+
 extern double incbet ( double, double, double );
 extern double incbi ( double, double, double );
-#else
-double incbet(), incbi();
-#endif
 
-double 
+double
 fdtrc (int ia, int ib, double x)
 {
 double a, b, w;
@@ -186,7 +183,7 @@ return( incbet( 0.5*b, 0.5*a, w ) );
 
 
 
-double 
+double
 fdtr (int ia, int ib, double x)
 {
 double a, b, w;
@@ -204,7 +201,7 @@ return( incbet(0.5*a, 0.5*b, w) );
 }
 
 
-double 
+double
 fdtri (int ia, int ib, double y)
 {
 double a, b, w, x;

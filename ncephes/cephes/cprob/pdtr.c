@@ -126,15 +126,12 @@ Copyright 1984, 1987, 1995, 2000 by Stephen L. Moshier
 */
 
 #include "mconf.h"
-#ifdef ANSIPROT
+
 extern double igam ( double, double );
 extern double igamc ( double, double );
 extern double igami ( double, double );
-#else
-double igam(), igamc(), igami();
-#endif
 
-double 
+double
 pdtrc (int k, double m)
 {
 double v;
@@ -150,7 +147,7 @@ return( igam( v, m ) );
 
 
 
-double 
+double
 pdtr (int k, double m)
 {
 double v;
@@ -165,7 +162,7 @@ return( igamc( v, m ) );
 }
 
 
-double 
+double
 pdtri (int k, double y)
 {
 double v;

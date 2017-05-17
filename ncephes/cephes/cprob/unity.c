@@ -11,7 +11,6 @@
 
 #include "mconf.h"
 
-#ifdef ANSIPROT
 extern int isnan (double);
 extern int isfinite (double);
 extern double log ( double );
@@ -19,10 +18,7 @@ extern double polevl ( double, void *, int );
 extern double p1evl ( double, void *, int );
 extern double exp ( double );
 extern double cos ( double );
-#else
-double log(), polevl(), p1evl(), exp(), cos();
-int isnan(), isfinite();
-#endif
+
 extern double NCEPHES_INF;
 
 /* log1p(x) = log(1 + x)  */
