@@ -56,7 +56,7 @@ def setup_package():
     needs_pytest = {'pytest', 'test', 'ptr'}.intersection(sys.argv)
     pytest_runner = ['pytest-runner'] if needs_pytest else []
 
-    setup_requires = ['build-capi', 'cffi>=1.7'] + pytest_runner
+    setup_requires = ['build-capi', 'cffi>=1.7', 'pycparser'] + pytest_runner
     install_requires = ['cffi>=1.7']
     tests_require = ['numpy', 'pytest>=3']
     recommended = {"numba": ["numba>=0.30"]}

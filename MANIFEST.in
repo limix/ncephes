@@ -1,6 +1,11 @@
 include README.md
 include LICENSE
 include setup.cfg
+include build_helpers.py
+include module_build.py
+include module_info.py
+include update_source.py
+include supported_modules.txt
 
 recursive-include ncephes *.c
 recursive-include ncephes *.h
