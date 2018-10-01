@@ -1,6 +1,6 @@
 # nCephes
 
-[![PyPI-License](https://img.shields.io/pypi/l/ncephes.svg?style=flat-square)](https://pypi.python.org/pypi/ncephes/) [![PyPI-Version](https://img.shields.io/pypi/v/ncephes.svg?style=flat-square)](https://pypi.python.org/pypi/ncephes/) [![Anaconda-Version](https://anaconda.org/conda-forge/ncephes/badges/version.svg)](https://anaconda.org/conda-forge/ncephes) [![Anaconda-Downloads Badge](https://anaconda.org/conda-forge/ncephes/badges/downloads.svg)](https://anaconda.org/conda-forge/ncephes) [![Documentation Status](https://readthedocs.org/projects/ncephes/badge/?style=flat-square&version=latest)](https://ncephes.readthedocs.io/)
+ [![Travis](https://img.shields.io/travis/limix/ncephes.svg?style=flat-square&label=linux%20%2F%20macos%20build)](https://travis-ci.org/limix/ncephes) [![AppVeyor](https://img.shields.io/appveyor/ci/Horta/ncephes.svg?style=flat-square&label=windows%20build)](https://ci.appveyor.com/project/Horta/ncephes) [![Documentation Status](https://readthedocs.org/projects/ncephes/badge/?style=flat-square&version=latest)](https://ncephes.readthedocs.io/)
 
 This package provides a python interface for the
 [Cephes](http://www.netlib.org/cephes/) library.
@@ -12,9 +12,11 @@ It also supports [Numba](http://numba.pydata.org) and its ``nopython`` mode.
 from ncephes import cprob
 print(cprob.incbet(1., 3., 0.3))
 ```
+
 prints ``0.657``.
 
 You can also call them inside a numba function
+
 ```python
 from ncephes import cprob
 from numba import jit
@@ -25,7 +27,9 @@ def numba_incbet(a, b, x):
 
 print(numba_incbet(1., 3., 0.3))
 ```
+
 and with nopython mode and nogil enabled
+
 ```python
 from ncephes import cprob
 from numba import jit
@@ -47,11 +51,13 @@ example.
 
 The recommended way of installing it is via
 [conda](http://conda.pydata.org/docs/index.html)
+
 ```bash
 conda install -c conda-forge ncephes
 ```
 
 An alternative way would be via pip
+
 ```bash
 pip install ncephes
 ```
@@ -59,9 +65,11 @@ pip install ncephes
 ## Running the tests
 
 After installation, you can test it
-```
+
+```python
 python -c "import ncephes; ncephes.test()"
 ```
+
 as long as you have [pytest](http://docs.pytest.org/en/latest/).
 
 ## Authors

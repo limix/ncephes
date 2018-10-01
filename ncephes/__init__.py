@@ -4,6 +4,8 @@ from ._testit import test
 
 try:
     from . import _ffi
+
+    ffi = _ffi.ffi
 except Exception as e:
     msg = "\nIt is likely caused by a broken installation of this package."
     msg += "\nPlease, make sure you have a C compiler and try to uninstall"
