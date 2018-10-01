@@ -119,7 +119,6 @@ int hcephes_polrt(double xcof[], double cof[], int m, cmplx root[]);
 int hcephes_shichi(double x, double *si, double *ci);
 int hcephes_sici(double x, double *si, double *ci);
 void hcephes_cadd(cmplx *, cmplx *, cmplx *);
-void hcephes_cadd(cmplx *a, cmplx *b, cmplx *c);
 void hcephes_cdiv(cmplx *, cmplx *, cmplx *);
 void hcephes_cmov(void *a, void *b);
 void hcephes_cmul(cmplx *a, cmplx *b, cmplx *c);

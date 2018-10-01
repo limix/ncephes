@@ -2,9 +2,8 @@ from __future__ import unicode_literals
 
 from numpy.testing import assert_almost_equal
 
-from ncephes import misc
+from ncephes import lbeta
 
 
 def test_lbeta():
-    print(misc.lbeta(10, 3))
-    assert_almost_equal(misc.lbeta(10, 3), -6.4922398350204711)
+    assert_almost_equal(lbeta(10, 3), -6.4922398350204711)
