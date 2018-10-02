@@ -1,48 +1,61 @@
+python: 3.6
 language: python
-sudo: required
-dist: trusty
-services: docker
-git:
-  depth: 5
-cache:
-  pip: true
-  directories:
-  - $HOME/Library/Caches/Homebrew
+env:
+  global:
+  - PKG_NAME=ncephes
+  - CIBW_SKIP="cp34-* cp35-* *i686*"
+  - CIBW_BEFORE_BUILD_LINUX=ci/before-build-linux
+  - CIBW_BEFORE_BUILD_MACOS=ci/before-build-macos
+  - CIBW_TEST_COMMAND="python -c \"import $PKG_NAME; import sys; sys.exit($PKG_NAME.test())\""
 matrix:
   include:
-  - python: 2.7
-  - python: 3.5
-  - python: 3.6
-  - env: DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64
+  - sudo: required
+    services:
+    - docker
   - os: osx
     language: generic
-    env: PYENV=py27
-  - os: osx
-    language: generic
-    env: PYENV=py35
-  - os: osx
-    language: generic
-    env: PYENV=py36
-before_install:
-- travis_retry bash <(curl -s https://raw.githubusercontent.com/limix/travis-tools/master/get-travis-tools.sh)
-- travis_retry travis/before-install.sh
+    before_install:
+    - brew update
+    - brew outdated python || brew upgrade python
+    - brew unlink python && brew link python
+    - export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+    - hash -r
+    - python -m pip install --upgrade pip setuptools wheel
+addons:
+  apt:
+    packages:
+    - libffi-dev
+    - libffi6
+    - cmake
+install:
+- bash <(curl -fsSL https://raw.githubusercontent.com/limix/hcephes/master/install)
 script:
-- travis_retry travis/script.sh
-after_success:
-- travis_retry travis/after-success.sh
+- |
+  if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
+    sudo mkdir -p /usr/local/man
+    sudo chown -R "${USER}:admin" /usr/local/man
+  fi
+- bash <(curl -fsSL https://raw.githubusercontent.com/horta/ci/master/travis.sh)
+- python -m pip install cibuildwheel>=0.9.2
+- cibuildwheel --output-dir wheelhouse
+- |
+  if [ "${TRAVIS_TAG:-}" != "" ]; then
+    python -m pip install twine
+    python -m twine upload --skip-existing wheelhouse/*
+  fi
 notifications:
-  email: false
+  email:
+    recipients:
+    - danilo.horta@gmail.com
+    on_success: never
+    on_failure: always
 deploy:
   provider: pypi
   user: dhorta
   password:
-    secure: l5wskb3nGaiZHVvHSTRUdniwYN998vWhv07sS3Kk/dA2mNsSMPyVzR+kjrEXDMnrlm4X03H590yH3rSb0v6TDDU+n7sdNhIuRa3h0CkgEHyFdIWGiQuKcMNKH2P6xWK/q4o/f9+C5cTo976KyXLkG7SFqPcHtvPWvWD7aa4MQxgt3tjLCFHATv9peK/FmUnJtcR1QOqiMjs3IM+qfeqcsBoYe1biqQtmdRzTGmbYWAtGBy1ftJKoUiCK58axYwGjkdBomDPV2iw75JqcXx18DehuzVE0ayyU3V+oCMyej9u+RIRmMDHjs0t0T7XsJoUey4EZYsrWwMJhXuPUnZqAhkpRRAddxwHMl8Be3Go8WXcEjvjszyyDDAIXTySXReomzWy1idHjTA8h3eFkyYCAQHsTl8ea3OCnlvn3DyfBAjJBOjTJN1Nk36Cu1P8f+N2Z0fquYjFZeh0Yk1c+VnV3dI1xJxtfHePNh8/DbC5zyRcoqmcS9F0h7zVcKSj9YtnsadhrpssdDGLPjKjq/fci60/j92UvfTjhe58xo714dlUTkvIr5ShgEZxkU6MNz3RwAfVCK1qP+HREpHuXRf0ZM+86NmIIT3Rg3SEP1ztlBxp+zLblbq7XYwNs+DeFG3xEDB+DrHbVyiCs0rMiWQRN6R4gXP6oav9+qCmhFjjW6rk=
+    secure: DJKRU7OwO19VcR37FkuaeVLGzEte9DrqIHirNIlDcyGPQau4GSkBsMzadl7V1xjWqe4snxDPkNNRDfuZHgt6KpJKScn+V7jwaUiHK4s2vJIV/i6Vq+KVc1MklBvgiS8R87QkD8bfXK9OSI5Zk8p/P0g1oD183a4lDpP2/hAtmbrdQbi9/wwW4lHSyrnUvpyiOCejML7jHlTVSqhKxG8s8ITnohbF+8KkZ7786U1msutpSP4DSOYaldlBmIOL5yJDlxw9vgKpPwyIolV72OTkXgaQHHO/nqufEMQuY8xqEAJ2E1hL+hd0dCBWK1QDOppYK8TUcnTyxcW5eG2spWVXcver8lJGSsZUukfQPKIksHSpQnghuk1kKd1KYdsiFYEhgakQp33M59VOJS2gvnHo9/PnsU2GufmVoT5EIEgY1V8bsc4KFf51xbzSFfuzlZoT+SWtCIkXTE+F9YdcgVYPVAAw7dKKteNahO9PJQxyUQX21tC45RvwCMO4bC7GFqRG060IaCu0Rb5FmBtVnhmMoKylmqYy2VRL1D3Zd4HeslvFV09Rfe1cDs8iwmV93rjK74NKctGnbj35NJcPT/cYgw3yYUowj05zwBJvZMPYfFU7Ud55YFKZEhrJbUxiq/HaI3/qb//qu8TXTTjZ9slyzPVmvtaGOGjK06Mq35T1iVE=
   on:
+    tags: true
     repo: limix/ncephes
     branch: master
-    tags: true
-env:
-  global:
-    - secure: owCfm9AyRjHJJDwvG4jIoYD+7cxntbRRMRPPvvgY7f66FFsVHQkl8kHhcW9F7UTONzIPs1Ij+xzaY27mxQpQHX4Kt4I6NteAjv8eKmi2RUN5MVoddc7m05DbKfBufJ+EtpSFaTufsXxRb2m7/5nXQRDH0y6yOWrg6PCrSmrqR80UQdQBBqnuFj92dV4e1wgJjKF7BXdjIqZ8u+yOFkwb0Q0u9CsTh5pnsYeW8UYMgkQ7HgekUpuYMvjRXm0CNxICHSe8VuhzHCCGvdlGr7URdEhrWAUIq1Km0R0KV7vwS2WSO1bX0C369wozWD59K/mdx3nhK2TJF29PGE03/jTsdmqREyRhbprwoKZGF9vTjj4EX4oKnrTd7E1Yh7FWZtv+5uCwAFq0QoCU/FuTWo2jMcwkPVAmXDEzJ4523vk5lIo2Ulk6X9R5jbapxYyMHP6RXhKjgSfEpBkOXX4YcRu8Ywd8tKUGbLLF1KnFWYZXsu+QjWwFnK+NB/gM+aSWKMsfShfWazThAK0PYPp/E4NW8EnyEqIVOVAQxtRtmuOdfCP6AjKRh7ys5qOvjHcXkrW+BcnWh7w3Pc2YxDknvtqncNF7eDSNyfRkRHPRB/kwVtwfTaXpbfRbheeQyy/AWLcz1D/HnvroA5yJkC4nlpC7AF0wa7GgJaIIfoyhzjHgItA=
-    - PKG_NAME=ncephes
-    - PY_DEPS="pycparser six"
+    python: 3.6

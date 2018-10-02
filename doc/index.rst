@@ -1,4 +1,4 @@
-nCephes's documentation
+Ncephes's documentation
 =======================
 
 .. toctree::

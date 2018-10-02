@@ -1,14 +1,6 @@
-include README.md
+include build_ext.py
+include libpath.py
 include LICENSE
-include setup.cfg
-include build_helpers.py
-include module_build.py
-include module_info.py
-include update_source.py
-include supported_modules.txt
-
-recursive-include ncephes *.c
-recursive-include ncephes *.h
-recursive-include ncephes *.py
-recursive-include ncephes *.txt
-recursive-include ncephes *.patch
+include ncephes/interface.h
+include README.md
+include version.py
