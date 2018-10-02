@@ -9,18 +9,18 @@ env:
   - CIBW_TEST_COMMAND="python -c \"import $PKG_NAME; import sys; sys.exit($PKG_NAME.test())\""
 matrix:
   include:
-    - sudo: required
-      services:
-        - docker
-    - os: osx
-      language: generic
-      before_install:
-        - brew update
-        - brew outdated python || brew upgrade python
-        - brew unlink python && brew link python
-        - export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-        - hash -r
-        - python -m pip install --upgrade pip setuptools wheel
+  - sudo: required
+    services:
+    - docker
+  - os: osx
+    language: generic
+    before_install:
+    - brew update
+    - brew outdated python || brew upgrade python
+    - brew unlink python && brew link python
+    - export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+    - hash -r
+    - python -m pip install --upgrade pip setuptools wheel
 addons:
   apt:
     packages:
@@ -53,7 +53,7 @@ deploy:
   provider: pypi
   user: dhorta
   password:
-    secure: FQibXjKOCq3lzPn9QLTZ0GMZXOkq3A35G8PSLrbFjOtd7BlkX0nJ9kuMg4NMP2OaAVirv3L4Kd8cceWifx1F/LAn1u+ABiVfMrM4xV3rA8xHL8Yr4zyesEPsDXoZBAymJPBd3RMeib3sCjtPQl2o9reUeycTyTAwDC010PnR29rTH6WLutpS8WcjKMxkfh2+h6Ks85o6DWLu+sVRnrxZq/y+xdbwHzZiSUwjGA8rF88Iw/EBfFNDR9DDiQyYY+dmvi7efoYPol07ZRVAmKdxK9TXPlye/x+M0mu9jeMyxhdUQc1x4YhK5CXJEI3R1bo8yEpKCskCOVpYOxkbOeDM1cu3rptROhbzQs+02j4Moqk5vC+4Gl6NwuB2fbnzijWpq17Kg5oQppMBMP8f7y85ws75owMFdYGdw49tR2pyL8BYsIqxBFq/SYhYwuZ7wnGNgKN4DKxwc+lRv/zICAipt04tMQsyPXq071wjZt44gZgoJ3rYbfbYNShDQOI+nbKhwHRV5/PmkBDT/KD3KVapjmT1q2wY7gGN8/2dIrPjmqveBgKho3QAmc0UV8SBVLw4rZxGJRGzRR6y58sCd0ynzB0tggUksrGO/gT1QnzgABPQ2Of137HfDEXXaSKdc4HCw9W0D0gltLaHV5b8iU4gQf1VsAt/I9mmp5Thrtvf9cc=
+    secure: DJKRU7OwO19VcR37FkuaeVLGzEte9DrqIHirNIlDcyGPQau4GSkBsMzadl7V1xjWqe4snxDPkNNRDfuZHgt6KpJKScn+V7jwaUiHK4s2vJIV/i6Vq+KVc1MklBvgiS8R87QkD8bfXK9OSI5Zk8p/P0g1oD183a4lDpP2/hAtmbrdQbi9/wwW4lHSyrnUvpyiOCejML7jHlTVSqhKxG8s8ITnohbF+8KkZ7786U1msutpSP4DSOYaldlBmIOL5yJDlxw9vgKpPwyIolV72OTkXgaQHHO/nqufEMQuY8xqEAJ2E1hL+hd0dCBWK1QDOppYK8TUcnTyxcW5eG2spWVXcver8lJGSsZUukfQPKIksHSpQnghuk1kKd1KYdsiFYEhgakQp33M59VOJS2gvnHo9/PnsU2GufmVoT5EIEgY1V8bsc4KFf51xbzSFfuzlZoT+SWtCIkXTE+F9YdcgVYPVAAw7dKKteNahO9PJQxyUQX21tC45RvwCMO4bC7GFqRG060IaCu0Rb5FmBtVnhmMoKylmqYy2VRL1D3Zd4HeslvFV09Rfe1cDs8iwmV93rjK74NKctGnbj35NJcPT/cYgw3yYUowj05zwBJvZMPYfFU7Ud55YFKZEhrJbUxiq/HaI3/qb//qu8TXTTjZ9slyzPVmvtaGOGjK06Mq35T1iVE=
   on:
     tags: true
     repo: limix/ncephes
