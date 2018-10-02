@@ -10,9 +10,9 @@ sys.path.insert(0, os.path.abspath(".."))
 
 
 def get_version():
-    import ncephes
+    import version
 
-    return ncephes.__version__
+    return version.get()
 
 
 extensions = [
