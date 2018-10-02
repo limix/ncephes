@@ -1,5 +1,6 @@
-include LICENSE
 include build_ext.py
 include libpath.py
+include LICENSE
+include ncephes/interface.h
 include README.md
 include version.py
