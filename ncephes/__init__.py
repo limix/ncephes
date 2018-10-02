@@ -133,9 +133,13 @@ from ._ffi.lib import hcephes_revers as revers
 from ._ffi.lib import hcephes_rmul as rmul
 from ._ffi.lib import hcephes_rsub as rsub
 
-from numba.cffi_support import register_module as _register_module
+try:
+    from numba.cffi_support import register_module as _register_module
 
-_register_module(_ffi)
+    _register_module(_ffi)
+except ImportError:
+    pass
+
 
 __version__ = "1.1.0"
 
