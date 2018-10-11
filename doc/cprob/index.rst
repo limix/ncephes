@@ -1,5 +1,5 @@
-cprob module
-============
+Probability functions
+=====================
 
 Probability integrals and their inverses.
 
