@@ -8,6 +8,3 @@ Ncephes's documentation
 
     README
     cprob/index
-  
-
-.. _on Github.: https://github.com/limix/ncephes

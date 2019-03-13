@@ -1,6 +1,6 @@
 # NCephes
 
-[![Travis](https://img.shields.io/travis/limix/ncephes.svg?style=flat-square&label=linux%20%2F%20macos%20build)](https://travis-ci.org/limix/ncephes)
+[![Travis](https://img.shields.io/travis/com/limix/ncephes.svg?style=flat-square&label=linux%20%2F%20macos%20build)](https://travis-ci.com/limix/ncephes)
 [![AppVeyor](https://img.shields.io/appveyor/ci/Horta/ncephes.svg?style=flat-square&label=windows%20build)](https://ci.appveyor.com/project/Horta/ncephes)
 [![Documentation
 Status](https://readthedocs.org/projects/ncephes/badge/?style=flat-square&version=latest)](https://ncephes.readthedocs.io/)
@@ -68,7 +68,7 @@ pip install ncephes
 
 After installation, you can test it
 
-```python
+```bash
 python -c "import ncephes; ncephes.test()"
 ```
 

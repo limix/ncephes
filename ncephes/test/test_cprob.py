@@ -86,11 +86,11 @@ def test_igam():
 
 
 def test_incbet():
-    assert_almost_equal(incbet(1., 3., 0.3), 0.657)
+    assert_almost_equal(incbet(1.0, 3.0, 0.3), 0.657)
 
 
 def test_incbi():
-    assert_almost_equal(incbi(1., 3., 0.3), 0.1120959982573993)
+    assert_almost_equal(incbi(1.0, 3.0, 0.3), 0.1120959982573993)
 
 
 def test_kolmogorov():
