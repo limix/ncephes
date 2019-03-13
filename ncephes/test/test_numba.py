@@ -15,7 +15,7 @@ try:
         return erf(x)
 
     def test_incbet():
-        assert_almost_equal(_incbet(1., 3., 0.3), 0.657)
+        assert_almost_equal(_incbet(1.0, 3.0, 0.3), 0.657)
 
     def test_erf():
         assert_almost_equal(_erf(1.3), 0.9340079449406524)

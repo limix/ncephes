@@ -69,7 +69,7 @@ Running the tests
 
 After installation, you can test it
 
-.. code:: python
+.. code:: bash
 
     python -c "import ncephes; ncephes.test()"
 
